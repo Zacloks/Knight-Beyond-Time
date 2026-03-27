@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,8 @@ public class PlayerCtrl : MonoBehaviour
     public int maxEnergy = 100;
     public int currentEnergy;
 
+    public int coins = 0;
+
     //Referencias:
     private Vector2 direccionMov;
     public InputActionReference mover;
@@ -20,8 +23,9 @@ public class PlayerCtrl : MonoBehaviour
 
     public HealthBar healthBar;
     public EnergyBar energyBar;
+    public Coin coin;
 
-    int count = 0;
+    int count;
   
     void Start()
     {
@@ -30,6 +34,7 @@ public class PlayerCtrl : MonoBehaviour
         healthBar.setMaxHealth(maxHealth);
         currentEnergy = maxEnergy;
         energyBar.setMaxEnergy(maxEnergy);
+        coin.setCoins(0);
     }
 
     // Update is called once per frame
@@ -44,6 +49,9 @@ public class PlayerCtrl : MonoBehaviour
             currentHealth -= 1;
             healthBar.setHealth(currentHealth);
         }
+
+        coin.setCoins(currentHealth);
+
     }
 
     void FixedUpdate()
