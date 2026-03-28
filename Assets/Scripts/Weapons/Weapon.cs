@@ -1,73 +1,33 @@
 using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-    [Header("Atributos del Arma")]
-    public string weaponName = "Espada Medieval";
+    [Header("Atributos Base")]
+    public string weaponName = "Arma Genérica";
     public int damage = 10;
-    public float attackRate = 0.5f; 
-    public bool isMelee = true; 
+    public float attackRate = 0.5f;
 
-    [Header("Referencias")]
-    public GameObject projectilePrefab; 
+    // Este método lo definirá cada hijo (Melee, Rango, Magia)
+    public abstract void Atacar();
 
-    private bool isAttacking = false;
-    private Quaternion originalRotation;
-
-    void Start()
-    {
-        originalRotation = transform.localRotation;
-    }
-
-    public void Swing()
-    {
-        if (!isAttacking)
-        {
-            StartCoroutine(SwingRoutine());
-        }
-    }
-
-    IEnumerator SwingRoutine()
-    {
-        isAttacking = true;
-
-        transform.localRotation = Quaternion.Euler(0, 0, -45f);
-        
-        yield return new WaitForSeconds(0.15f);
-
-        transform.localRotation = originalRotation;
-        
-        yield return new WaitForSeconds(0.1f);
-        isAttacking = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (isAttacking && other.CompareTag("Enemy"))
-        {
-            Debug.Log("<color=red>¡IMPACTO!</color> Golpeaste a " + other.name + " infligiendo " + damage + " de daño.");
-
-            SpriteRenderer enemySprite = other.GetComponent<SpriteRenderer>();
-            if (enemySprite != null)
-            {
-                StartCoroutine(FlashRed(enemySprite));
-            }
-
-            Rigidbody2D enemyRb = other.GetComponent<Rigidbody2D>();
-            if (enemyRb != null)
-            {
-                Vector2 direction = (other.transform.position - transform.position).normalized;
-                enemyRb.AddForce(direction * 5f, ForceMode2D.Impulse);
-            }
-        }
-    }
-
-    IEnumerator FlashRed(SpriteRenderer sprite)
+    // Esto es común para todas las armas, así que se queda en el padre
+    protected IEnumerator FlashRed(SpriteRenderer sprite)
     {
         Color originalColor = sprite.color;
         sprite.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        sprite.color = originalColor;
+        if (sprite != null) sprite.color = originalColor;
+    }
+
+    // Lógica de empuje común
+    protected void ApplyKnockback(Collider2D enemy, float force)
+    {
+        Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
+        if (enemyRb != null)
+        {
+            Vector2 direction = (enemy.transform.position - transform.position).normalized;
+            enemyRb.AddForce(direction * force, ForceMode2D.Impulse);
+        }
     }
 }

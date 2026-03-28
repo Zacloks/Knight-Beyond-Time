@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2475865654617642869}
   - component: {fileID: 6225818160062723805}
   m_Layer: 0
-  m_Name: arma (1)
+  m_Name: arma_meele
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 8257727169654118809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.24, y: -0.03, z: 1}
+  m_LocalPosition: {x: 3.69, y: 0.14, z: 1}
   m_LocalScale: {x: 0.46438903, y: 1.0699434, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -139,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   weaponName: arma prueba arco
   damage: 10
-  attackRange: 1.5
   attackRate: 0.5
   isMelee: 0
   projectilePrefab: {fileID: 4582277519740372724, guid: 55593b5bbdc56e5488cf5198c406122f, type: 3}
