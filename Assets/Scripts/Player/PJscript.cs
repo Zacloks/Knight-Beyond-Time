@@ -13,16 +13,17 @@ public class PlayerCtrl : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public int maxEnergy = 100;
-    public int currentEnergy;
-
+    private int currentEnergy;
+    public float immuneTime = 2f;
+    private float curInmuneTime;
     public int coins = 0;
 
+   
     //Referencias:
     private Vector2 direccionMov;
     public PlayerInput playerInput;
     public Weapon equippedWeapon; 
     public Rigidbody2D entidad;
-
     public HealthBar healthBar;
     public EnergyBar energyBar;
     public Coin coin;
@@ -38,6 +39,7 @@ public class PlayerCtrl : MonoBehaviour
         currentEnergy = maxEnergy;
         energyBar.setMaxEnergy(maxEnergy);
         coin.setCoins(0);
+        curInmuneTime = 0;
     }
 
     // Update is called once per frame
@@ -54,6 +56,9 @@ public class PlayerCtrl : MonoBehaviour
 
         coin.setCoins(currentHealth);
 
+        if (curInmuneTime > 0){
+            curInmuneTime -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate()
@@ -103,5 +108,16 @@ public class PlayerCtrl : MonoBehaviour
             return;
         }
         equippedWeapon=null;
+    }
+
+    public void TakeDamage(int amount){
+    if (curInmuneTime > 0) return;
+
+    currentHealth -= amount;
+    currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    healthBar.setHealth(currentHealth);
+
+    curInmuneTime = immuneTime; // activar inmunidad
+
     }
 }
