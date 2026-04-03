@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -60,6 +61,14 @@ public class PlayerCtrl : MonoBehaviour
         entidad.linearVelocity = new Vector2(direccionMov.x * velocidadMov,direccionMov.y * velocidadMov);
     }
   
+    public void Dash() 
+    {
+        currentEnergy -= 60;
+        energyBar.setEnergy(currentEnergy);
+        Debug.LogWarning("Dash");
+
+    }
+
     public void Attack()
     {
         if (equippedWeapon == null) 
