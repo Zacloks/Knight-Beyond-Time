@@ -13,6 +13,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     //Atributos: 
     public float velocidadMov = 10;
+
     public int maxHealth = 100;
     public int currentHealth;
     public int maxEnergy = 100;
@@ -22,13 +23,14 @@ public class PlayerCtrl : MonoBehaviour
 
     public int coins = 0;
 
-    //Referencias:
-    private Vector2 direccionMov;
+    //Referencias
+    public Vector2 direccionMov;
     private Vector2 lastDirection = Vector2.right;
     public PlayerInput playerInput;
     public Weapon equippedWeapon; 
     public Rigidbody2D entidad;
     public bool isDashing = false;
+    public Animator anim;
 
     public HealthBar healthBar;
     public EnergyBar energyBar;
@@ -40,118 +42,61 @@ public class PlayerCtrl : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         entidad = GetComponent<Rigidbody2D>();
+
+        anim = GetComponent<Animator>();
+        if (anim == null) {
+        anim = GetComponentInChildren<Animator>();
+        }
         currentHealth = maxHealth;
-        healthBar.setMaxHealth(maxHealth);
+        if(healthBar != null) healthBar.setMaxHealth(maxHealth);
         currentEnergy = maxEnergy;
-        energyBar.setMaxEnergy(maxEnergy);
-        coin.setCoins(0);
+        if(energyBar != null) energyBar.setMaxEnergy(maxEnergy);
+        if(coin != null) coin.setCoins(coins);
     }
 
     // Update is called once per frame
-    void Update()
-    {   
-        if (!isDashing) direccionMov = playerInput.actions["MOVE"].ReadValue<Vector2>();
-        count++;
+   void Update()
+{
+    // 1. LEER EL TECLADO
+    direccionMov = mover.action.ReadValue<Vector2>();
 
-        if (count % 100 == 0 && currentEnergy < 100)
-        {
-            currentEnergy += 1;
-            energyBar.setEnergy(currentEnergy);
-        }
-
-    }
-
-    void FixedUpdate()
+    // 2. ENVIAR AL ANIMATOR (Solo si existe)
+    if (anim != null)
     {
-
-        coin.setCoins(currentHealth);
+        // Calculamos la fuerza del movimiento (va de 0 a 1)
+        float fuerza = direccionMov.magnitude;
         
-        entidad.linearVelocity = new Vector2(direccionMov.x * velocidadMov,direccionMov.y * velocidadMov);
-       
-        if (isDashing && direccionMov.x == 0 && direccionMov.y == 0) {
-
-            entidad.linearVelocity = new Vector2(lastDirection.x * velocidadMov, lastDirection.y * velocidadMov);
-
-        } else if (!isDashing && (direccionMov.x != 0 || direccionMov.y != 0)) {
-
-            if (direccionMov.x < 0) lastDirection = Vector2.left;
-            else if (direccionMov.x > 0) lastDirection = Vector2.right;
-             
-        }
-
-    }
-  
-    public void Dash(InputAction.CallbackContext context) 
-    {   
-        if (context.performed && !isDashing) {
-            
-            if (currentEnergy >= 60) {
-                currentEnergy -= 60;
-                energyBar.setEnergy(currentEnergy);
-
-                Debug.Log("Dash activado, energía: " + currentEnergy);
-                StartCoroutine(DashCoroutine());                
-                
-                Debug.LogWarning("Dash");
-                
-            }
+        // Enviamos el dato al parámetro "Speed" del Animator
+        anim.SetFloat("Speed", fuerza);
+        
+        // Debug para confirmar en consola que el número NO es cero
+        if(fuerza > 0.01f) {
+            Debug.Log("¡Movimiento detectado! Enviando Speed: " + fuerza);
         }
     }
 
-    private IEnumerator DashCoroutine()
+    // --- Lógica de salud (Count) ---
+    count++;
+    if (count % 1000 == 0) {
+        currentHealth -= 1;
+        if(healthBar != null) healthBar.setHealth(currentHealth);
+    }
+}
+    void FixedUpdate(){
+        if (direccionMov.sqrMagnitude < 0.01f) 
+        {
+        entidad.linearVelocity = Vector2.zero;
+        entidad.angularVelocity = 0f; // Evita que rote solo
+        }
+    else 
     {
-        float originalVelocidad = velocidadMov;
-        velocidadMov = dashSpeed;
-        isDashing = true;
-
-        yield return new WaitForSeconds((float)0.5);  
-
-        velocidadMov = originalVelocidad;  
-        isDashing = false;
-
-        Debug.LogWarning("Dash terminado");
+        // 2. APLICAR MOVIMIENTO
+        entidad.linearVelocity = direccionMov * velocidadMov;
     }
 
-
-    public void Attack(InputAction.CallbackContext context)
-    {   
-        if (context.performed) {
-            if (equippedWeapon == null) 
-            {
-                Debug.LogWarning("¡No tienes un arma equipada!");
-                return;
-            }
-
-            equippedWeapon.Atacar();
-            
-            Debug.Log("Atacando con " + equippedWeapon.weaponName);
-        }
-    }
-
-    public void MagicAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed) {
-            if (equippedWeapon == null) 
-            {
-                Debug.LogWarning("¡No tienes un arma equipada!");
-                return;
-            }
-
-            equippedWeapon.Atacar();
-            
-            Debug.Log("Ataque mágico con " + equippedWeapon.weaponName);
-        }
-    }
-
-    public void Drop(InputAction.CallbackContext context)
-    {
-        if (context.performed) {
-            if (equippedWeapon == null) 
-            {
-                Debug.LogWarning("¡No tienes un arma equipada!");
-                return;
-            }
-            equippedWeapon=null;
-        }
+    // 3. LÍMITES DE PANTALLA (Clamping)
+    float clampedX = Mathf.Clamp(entidad.position.x, -8.4f, 8.39f);
+    float clampedY = Mathf.Clamp(entidad.position.y, -4.94f, 3.49f);
+    entidad.position = new Vector2(clampedX, clampedY);
     }
 }
