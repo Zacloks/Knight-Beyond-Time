@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using System.Data;
+using System.Threading.Tasks;
+using NUnit.Framework;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,13 +18,17 @@ public class PlayerCtrl : MonoBehaviour
     public int maxEnergy = 100;
     public int currentEnergy;
 
+    public float dashSpeed = 15;
+
     public int coins = 0;
 
     //Referencias:
     private Vector2 direccionMov;
+    private Vector2 lastDirection = Vector2.right;
     public PlayerInput playerInput;
     public Weapon equippedWeapon; 
     public Rigidbody2D entidad;
+    public bool isDashing = false;
 
     public HealthBar healthBar;
     public EnergyBar energyBar;
@@ -42,66 +49,109 @@ public class PlayerCtrl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        direccionMov = playerInput.actions["MOVE"].ReadValue<Vector2>();
+    {   
+        if (!isDashing) direccionMov = playerInput.actions["MOVE"].ReadValue<Vector2>();
         count++;
 
-        if (count % 1000 == 0)
+        if (count % 100 == 0 && currentEnergy < 100)
         {
-            currentHealth -= 1;
-            healthBar.setHealth(currentHealth);
+            currentEnergy += 1;
+            energyBar.setEnergy(currentEnergy);
         }
-
-        coin.setCoins(currentHealth);
 
     }
 
     void FixedUpdate()
     {
+
+        coin.setCoins(currentHealth);
+        
         entidad.linearVelocity = new Vector2(direccionMov.x * velocidadMov,direccionMov.y * velocidadMov);
+       
+        if (isDashing && direccionMov.x == 0 && direccionMov.y == 0) {
+
+            entidad.linearVelocity = new Vector2(lastDirection.x * velocidadMov, lastDirection.y * velocidadMov);
+
+        } else if (!isDashing && (direccionMov.x != 0 || direccionMov.y != 0)) {
+
+            if (direccionMov.x < 0) lastDirection = Vector2.left;
+            else if (direccionMov.x > 0) lastDirection = Vector2.right;
+             
+        }
+
     }
   
-    public void Dash() 
-    {
-        currentEnergy -= 60;
-        energyBar.setEnergy(currentEnergy);
-        Debug.LogWarning("Dash");
+    public void Dash(InputAction.CallbackContext context) 
+    {   
+        if (context.performed && !isDashing) {
+            
+            if (currentEnergy >= 60) {
+                currentEnergy -= 60;
+                energyBar.setEnergy(currentEnergy);
 
+                Debug.Log("Dash activado, energía: " + currentEnergy);
+                StartCoroutine(DashCoroutine());                
+                
+                Debug.LogWarning("Dash");
+                
+            }
+        }
     }
 
-    public void Attack()
+    private IEnumerator DashCoroutine()
     {
-        if (equippedWeapon == null) 
-        {
-            Debug.LogWarning("¡No tienes un arma equipada!");
-            return;
-        }
+        float originalVelocidad = velocidadMov;
+        velocidadMov = dashSpeed;
+        isDashing = true;
 
-        equippedWeapon.Atacar();
-        
-        Debug.Log("Atacando con " + equippedWeapon.weaponName);
+        yield return new WaitForSeconds((float)0.5);  
+
+        velocidadMov = originalVelocidad;  
+        isDashing = false;
+
+        Debug.LogWarning("Dash terminado");
     }
 
-    public void MagicAttack()
-    {
-        if (equippedWeapon == null) 
-        {
-            Debug.LogWarning("¡No tienes un arma equipada!");
-            return;
-        }
 
-        equippedWeapon.Atacar();
-        
-        Debug.Log("Ataque mágico con " + equippedWeapon.weaponName);
+    public void Attack(InputAction.CallbackContext context)
+    {   
+        if (context.performed) {
+            if (equippedWeapon == null) 
+            {
+                Debug.LogWarning("¡No tienes un arma equipada!");
+                return;
+            }
+
+            equippedWeapon.Atacar();
+            
+            Debug.Log("Atacando con " + equippedWeapon.weaponName);
+        }
     }
 
-    public void Drop()
+    public void MagicAttack(InputAction.CallbackContext context)
     {
-        if (equippedWeapon == null) 
-        {
-            Debug.LogWarning("¡No tienes un arma equipada!");
-            return;
+        if (context.performed) {
+            if (equippedWeapon == null) 
+            {
+                Debug.LogWarning("¡No tienes un arma equipada!");
+                return;
+            }
+
+            equippedWeapon.Atacar();
+            
+            Debug.Log("Ataque mágico con " + equippedWeapon.weaponName);
         }
-        equippedWeapon=null;
+    }
+
+    public void Drop(InputAction.CallbackContext context)
+    {
+        if (context.performed) {
+            if (equippedWeapon == null) 
+            {
+                Debug.LogWarning("¡No tienes un arma equipada!");
+                return;
+            }
+            equippedWeapon=null;
+        }
     }
 }
