@@ -87,6 +87,7 @@ public class Enemy : MonoBehaviour
     {
         if (currentState == EnemyState.Dead) return;
         currentHealth -= amount;
+        Debug.Log($"El enemigo recibió {amount} de daño. Vida restante: {currentHealth}");
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
         hurtTimer = hurtDuration;
