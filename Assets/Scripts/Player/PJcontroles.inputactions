@@ -187,7 +187,11 @@
                 },
                 {
                     "name": "",
+<<<<<<< Updated upstream:Assets/Scripts/Player/PJcontroles.inputactions
                     "id": "3b7c5019-5f7a-4e62-894d-93a9f89cd0a1",
+=======
+                    "id": "40b95a5e-c2ec-4d95-9913-0db3cc0e1c7f",
+>>>>>>> Stashed changes:Assets/Scripts/PJcontroles.inputactions
                     "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
