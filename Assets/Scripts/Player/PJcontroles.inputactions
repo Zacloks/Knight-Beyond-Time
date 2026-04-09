@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DASH",
+                    "type": "Button",
+                    "id": "37f71fa4-e2d6-4b23-85bb-54db728aeaf1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -178,12 +187,27 @@
                 },
                 {
                     "name": "",
+<<<<<<< Updated upstream:Assets/Scripts/Player/PJcontroles.inputactions
                     "id": "3b7c5019-5f7a-4e62-894d-93a9f89cd0a1",
-                    "path": "<Keyboard>/k",
+=======
+                    "id": "40b95a5e-c2ec-4d95-9913-0db3cc0e1c7f",
+>>>>>>> Stashed changes:Assets/Scripts/PJcontroles.inputactions
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DROP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c5229e6-9e00-48e1-95e4-217db70f53da",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "DASH",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
