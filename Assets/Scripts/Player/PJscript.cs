@@ -17,6 +17,8 @@ public class PlayerCtrl : MonoBehaviour
     public float immuneTime = 2f;
     private float curInmuneTime;
     public int coins = 0;
+    public Weapon[] inventory = new Weapon[5];
+    public int indexInventory;
 
    
     //Referencias:
@@ -40,6 +42,10 @@ public class PlayerCtrl : MonoBehaviour
         energyBar.setMaxEnergy(maxEnergy);
         coin.setCoins(0);
         curInmuneTime = 0;
+
+        //Manipulacion de Inventairo
+        indexInventory = 0;
+        inventory[0] = equippedWeapon;
     }
 
     // Update is called once per frame
