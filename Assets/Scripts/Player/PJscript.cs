@@ -12,34 +12,33 @@ using UnityEngine.Rendering.Universal;
 public class PJscript : MonoBehaviour
 {
     //Atributos: 
-    public float velocidadMov = 10;
+    public float velocidadMov = 10; //check
+    public int maxHealth = 100; //check
+    public int currentHealth; //check
+    public int maxEnergy = 100; //check 
+    public int currentEnergy; //check 
+    public int immuneTime = 2; //check 
+    public int curInmuneTime; //checl
+    public float dashSpeed = 15; //check
 
-    public int maxHealth = 100;
-    public int currentHealth;
-    public int maxEnergy = 100;
-    public int currentEnergy;
-    public int immuneTime = 2;
-    public int curInmuneTime;
-    public float dashSpeed = 15;
-
-    public int coins = 0;
+    public int coins = 0; //check
 
     //Referencias:
-    private Vector2 direccionMov;
-    private Vector2 lastDirection = Vector2.right;
-    public PlayerInput playerInput;
-    public Weapon equippedWeapon; 
-    public Rigidbody2D entidad;
-    public bool isDashing = false;
+    private Vector2 direccionMov; //check
+    private Vector2 lastDirection = Vector2.right; //check
+    public PlayerInput playerInput; //mhhhhhhhhhhhhhhhh
+    public Weapon equippedWeapon; //check 
+    public Rigidbody2D entidad; //check
+    public bool isDashing = false; //check
     //Referencias
-    public InputActionReference mover;
-    public Animator anim;
+    public InputActionReference mover; //check
+    public Animator anim; //check
 
-    public HealthBar healthBar;
-    public EnergyBar energyBar;
-    public Coin coin;
+    public HealthBar healthBar; //check
+    public EnergyBar energyBar; //check
+    public Coin coin; //check
 
-    int count;
+    int count; //check
   
     void Start()
     {
@@ -58,7 +57,7 @@ public class PJscript : MonoBehaviour
     }
 
     // Update is called once per frame
-   void Update()
+   void Update() //check
 {
     // 1. LEER EL TECLADO
     if (!isDashing) direccionMov = mover.action.ReadValue<Vector2>();

@@ -146,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 53172415}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -233.8, y: 93.8, z: 0}
+  m_LocalPosition: {x: -207.09999, y: 83.700005, z: 0}
   m_LocalScale: {x: 64.815994, y: 59.62553, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1034,6 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a333e5faaaa1954c8adb6ea43240e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyNormal
+  attackDamage: 10
 --- !u!114 &449413950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,7 +1096,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203.1, y: 98.6}
+  m_AnchoredPosition: {x: -176.4, y: 88.5}
   m_SizeDelta: {x: 84.1955, y: 10.4761}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462528623
@@ -1402,7 +1403,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -318.6, y: 223.00998}
+  m_AnchoredPosition: {x: -211.79996, y: 182.60999}
   m_SizeDelta: {x: 104.39, y: 12.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &924255585
@@ -1631,13 +1632,20 @@ MonoBehaviour:
   mover: {fileID: -3819753190812026520, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   atacar: {fileID: 434898793832103627, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   attackMagic: {fileID: -6198884845702736641, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  dash: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
+  maxEnergy: 100
+  currentEnergy: 0
   coins: 12
+  dashSpeed: 15
+  isDashing: 0
   entidad: {fileID: 1080725596}
   anim: {fileID: 1080725592}
   healthBar: {fileID: 924255586}
+  energyBar: {fileID: 0}
   coin: {fileID: 462528623}
+  equippedWeapon: {fileID: 0}
   immuneTime: 2
 --- !u!70 &1080725594
 CapsuleCollider2D:
@@ -1859,7 +1867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -108, y: -60}
+  m_AnchoredPosition: {x: -10, y: -85}
   m_SizeDelta: {x: 800, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193397820
@@ -1894,6 +1902,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9038337291015549840, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e9358c226bb09e24da9c5f7064768810, type: 2}
     - target: {fileID: 4004237092546147958, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
       propertyPath: _anim
       value: 
@@ -1952,7 +1964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4120355534205100656, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.8358747
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4120355534205100656, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1972,11 +1984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4120355534205100656, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.0662953
+      value: -1.05
       objectReference: {fileID: 0}
     - target: {fileID: 4120355534205100656, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000000051711417
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 4120355534205100656, guid: b7dae6e4263c87f4ab441806f974a788, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2134,13 +2146,20 @@ MonoBehaviour:
   mover: {fileID: -3819753190812026520, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   atacar: {fileID: 434898793832103627, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   attackMagic: {fileID: -6198884845702736641, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  dash: {fileID: -7449098556809104598, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   maxHealth: 100
   currentHealth: 0
+  maxEnergy: 100
+  currentEnergy: 0
   coins: 12
+  dashSpeed: 15
+  isDashing: 0
   entidad: {fileID: 1554395642}
   anim: {fileID: 718635010}
   healthBar: {fileID: 924255586}
+  energyBar: {fileID: 1633834744}
   coin: {fileID: 462528623}
+  equippedWeapon: {fileID: 0}
   immuneTime: 2
 --- !u!1 &1602726014
 GameObject:
@@ -2254,7 +2273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -288.58728, y: 92.33}
+  m_AnchoredPosition: {x: -181.78723, y: 51.930008}
   m_SizeDelta: {x: 120.1948, y: 13.2309}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1633834744
@@ -2269,7 +2288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016fa72a7e24f49e3ad362c0a0d198a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnergyBar
-  slider: {fileID: 0}
+  slider: {fileID: 1633834745}
 --- !u!114 &1633834745
 MonoBehaviour:
   m_ObjectHideFlags: 0
