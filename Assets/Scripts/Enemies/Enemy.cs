@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>();
         player = GameObject.FindWithTag("Player").transform;
         ChangeState(EnemyState.Chase);
     }
@@ -116,6 +116,15 @@ public class Enemy : MonoBehaviour
         if (dirX > 0 && !facingRight || dirX < 0 && facingRight){
             facingRight = !facingRight;
             spriteRenderer.flipX = !facingRight;
+        }
+    }
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+        PlayerScript playerScript = collision.gameObject.GetComponent<PlayerScript>();
+        if (playerScript != null)
+            playerScript.TakeDamage((int)attackDamage);
         }
     }
 }
