@@ -117,7 +117,7 @@ public class PlayerCtrl : MonoBehaviour
     currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     healthBar.setHealth(currentHealth);
 
-    curInmuneTime = immuneTime; // activar inmunidad
+    curInmuneTime = immuneTime;
 
     }
 }

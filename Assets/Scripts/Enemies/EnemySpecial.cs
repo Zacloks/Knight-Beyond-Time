@@ -1,4 +1,6 @@
-public class NormalEnemy : Enemy
+using UnityEngine;
+
+public class EnemySpecial : Enemy
 {
     protected override void Start()
     {
