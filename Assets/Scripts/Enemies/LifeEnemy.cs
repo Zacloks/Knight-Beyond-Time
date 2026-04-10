@@ -3,18 +3,14 @@ using UnityEngine;
 
 public class LifeEnemy : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Referencias")]
     private Rigidbody2D rb2D;
     private Animator animator;
     private MovementEnemy movementEnemy;
 
-    [Header("Life")]
+    [Header("Estadisticas Vida")]
     [SerializeField] private int maxLife;
     private int currentLife;
-
-    [Header("Knockback")]
-    [SerializeField] private Vector2 knockbackForce;
-    [SerializeField] private float minKnockbackTime;
 
     private void Start()
     {
@@ -24,7 +20,7 @@ public class LifeEnemy : MonoBehaviour
         currentLife = maxLife;
     }
 
-    public void TakeDamage(int damageAmount, Transform sender)
+    public void TakeDamage(int damageAmount, Vector2 sender)
     {
         int tempLife = currentLife - damageAmount;
         tempLife = Mathf.Clamp(tempLife, 0, maxLife);
@@ -35,16 +31,7 @@ public class LifeEnemy : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        Knockback(sender);
-    }
-
-    private void Knockback(Transform sender)
-    {
-        Vector2 direction = (transform.position - sender.position).normalized;
-        Vector2 force = new(Mathf.Sign(direction.x) * knockbackForce.x, knockbackForce.y);
-        rb2D.linearVelocity = Vector2.zero;
-        rb2D.AddForce(force, ForceMode2D.Impulse);
-        animator.SetTrigger("Hit");
+        movementEnemy.currentState = EnemyState.Hurt;
+        movementEnemy.Knockback(sender);
     }
 }

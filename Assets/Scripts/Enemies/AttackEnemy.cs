@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class AttackEnemy : MonoBehaviour
 {
+    [Header("Referencias")]
     private Animator animator;
 
-    private MovementEnemy movementEnemy;
-    private void Awake()
+    [Header("Estadisticas Ataque")]
+    public int cantDamage;
+
+    void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
+        {
             animator.SetTrigger("Attack");
-            
+        }
     }
 }

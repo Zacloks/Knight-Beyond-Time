@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class MovementEnemy : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Referencias")]
     private Rigidbody2D rb;
     private Transform player;
     private Vector2 moveDirection;
     private Animator animator;
-    [SerializeField] public EnemyState currentState;
+    public EnemyState currentState;
 
-    [Header("Movimiento")]
+    [Header("Estadisticas Movimiento")]
     public float movementSpeedBase;
+
+    [Header("Estadisticas Retroceso")]
+    [SerializeField] private Vector2 knockbackForce;
+    [SerializeField] private float minKnockbackTime;
 
     [Header("Animator")]
     public bool chasing = true;
@@ -39,6 +43,7 @@ public class MovementEnemy : MonoBehaviour
             case EnemyState.Attack:
                 break;
             case EnemyState.Hurt:
+                moveDirection = Vector2.zero;
                 break;
             case EnemyState.Dead:
                 break;
@@ -71,5 +76,14 @@ public class MovementEnemy : MonoBehaviour
 
     private bool LookingRight(){
         return transform.localScale.x == -1;
+    }
+
+    public void Knockback(Vector2 sender)
+    {
+        Vector2 direction = ((Vector2)transform.position - sender).normalized;
+        Vector2 force = new(Mathf.Sign(direction.x) * knockbackForce.x, knockbackForce.y);
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(force, ForceMode2D.Impulse);
+        animator.SetTrigger("Hit");
     }
 }

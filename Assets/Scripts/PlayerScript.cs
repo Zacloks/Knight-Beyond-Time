@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,8 +66,8 @@ public class PlayerScript : MonoBehaviour
             anim.SetFloat("Speed", fuerza);
 
             // Flip: Girar el personaje según dirección
-            if (direccionMov.x > 0.1f) transform.localScale = new Vector3(1, 1, 1);
-            else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(-1, 1, 1);
+            if (direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
+        else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
         }
 
         // 4. Lógica de salud pasiva
@@ -126,6 +127,19 @@ public class PlayerScript : MonoBehaviour
 
         curInmuneTime = immuneTime; 
         Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
+        anim.SetTrigger("5_Debuff");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                TakeDamage(enemy.GetDamage());
+            }
+        }
     }
 
 }
