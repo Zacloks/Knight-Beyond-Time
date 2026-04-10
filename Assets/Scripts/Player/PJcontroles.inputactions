@@ -8,12 +8,12 @@
             "actions": [
                 {
                     "name": "MOVE",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "de5c4f98-f85a-4cc0-96c1-f5071ace70e4",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "ATTACK",
@@ -39,7 +39,7 @@
                     "id": "25548555-3105-4dea-9dc0-e0c62ff46d1d",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -109,61 +109,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "db79d929-e619-4658-9a6f-8d890ef5ce47",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MOVE",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "e61195be-7f72-4662-883e-c08dff5ecb4c",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MOVE",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "1ce0cd40-011b-41c8-a676-844e7c63b21a",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MOVE",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e0fd3247-e1ac-4a3b-ac69-fbe3812b07a1",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MOVE",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "144c3b72-f556-4cf9-a586-c402b3749144",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MOVE",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "666f2bb3-b782-4ef5-abcf-560dd95fbeb3",
                     "path": "<Keyboard>/j",
@@ -187,11 +132,7 @@
                 },
                 {
                     "name": "",
-<<<<<<< Updated upstream:Assets/Scripts/Player/PJcontroles.inputactions
                     "id": "3b7c5019-5f7a-4e62-894d-93a9f89cd0a1",
-=======
-                    "id": "40b95a5e-c2ec-4d95-9913-0db3cc0e1c7f",
->>>>>>> Stashed changes:Assets/Scripts/PJcontroles.inputactions
                     "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",

@@ -8,10 +8,8 @@ public abstract class Weapon : MonoBehaviour
     public int damage = 10;
     public float attackRate = 0.5f;
 
-    // Este método lo definirá cada hijo (Melee, Rango, Magia)
     public abstract void Atacar();
 
-    // Esto es común para todas las armas, así que se queda en el padre
     protected IEnumerator FlashRed(SpriteRenderer sprite)
     {
         Color originalColor = sprite.color;
@@ -20,13 +18,20 @@ public abstract class Weapon : MonoBehaviour
         if (sprite != null) sprite.color = originalColor;
     }
 
-    // Lógica de empuje común
-    protected void ApplyKnockback(Collider2D enemy, float force)
+    protected void ApplyKnockback(Collider2D enemyCollider, float force)
     {
-        Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
+        Enemy enemy = enemyCollider.GetComponent<Enemy>();
+        Rigidbody2D enemyRb = enemyCollider.GetComponent<Rigidbody2D>();
+
+        if (enemy != null)
+        {
+            Vector2 direction = (enemyCollider.transform.position - transform.position).normalized;
+            enemy.TakeDamage(damage, direction); 
+        }
+
         if (enemyRb != null)
         {
-            Vector2 direction = (enemy.transform.position - transform.position).normalized;
+            Vector2 direction = (enemyCollider.transform.position - transform.position).normalized;
             enemyRb.AddForce(direction * force, ForceMode2D.Impulse);
         }
     }
