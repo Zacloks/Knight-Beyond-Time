@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public enum EnemyState
 {
-    Chase, Attack, Hurt, Dead
+    Idle, Chase, Attack, Hurt, Dead
 }

@@ -18,7 +18,8 @@ public class PlayerCtrl : MonoBehaviour
     public int currentHealth;
     public int maxEnergy = 100;
     public int currentEnergy;
-
+    public int immuneTime = 2;
+    public int curInmuneTime;
     public float dashSpeed = 15;
 
     public int coins = 0;
@@ -186,5 +187,16 @@ public class PlayerCtrl : MonoBehaviour
             }
             equippedWeapon=null;
         }
+    }
+    public void TakeDamage(int amount)
+    {
+        if (curInmuneTime > 0) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        healthBar.setHealth(currentHealth);
+
+        curInmuneTime = immuneTime;
+
     }
 }
