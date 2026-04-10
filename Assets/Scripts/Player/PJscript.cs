@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerCtrl : MonoBehaviour
+public class PJscript : MonoBehaviour
 {
     //Atributos: 
     public float velocidadMov = 10;
