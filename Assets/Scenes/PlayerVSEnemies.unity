@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29e9448bf3b144448f77a7254886190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
-  velocidadMov: 10
+  velocidadMov: 7
   minX: -8.4
   maxX: 8.39
   minY: -4.94
@@ -2152,7 +2152,7 @@ MonoBehaviour:
   maxEnergy: 100
   currentEnergy: 0
   coins: 12
-  dashSpeed: 15
+  dashSpeed: 12
   isDashing: 0
   entidad: {fileID: 1554395642}
   anim: {fileID: 718635010}

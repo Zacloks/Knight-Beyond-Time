@@ -194,5 +194,9 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Salió la colisión");
+    }
 
 }
