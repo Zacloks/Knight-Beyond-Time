@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-        PlayerCtrl playerCtrl = collision.gameObject.GetComponent<PlayerCtrl>();
+        PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
         if (playerCtrl != null)
             playerCtrl.TakeDamage((int)attackDamage);
         }
