@@ -2,32 +2,43 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
-    [HideInInspector] public int damage; 
-    public float lifeTime = 2f; 
+    private float speed;
+    private int damage;
+    private float knockbackForce;
+    private Weapon parentWeapon; 
+    public float lifeTime;
 
-    void Start()
+    public void Setup(int dmg, float spd, float kb, Weapon weapon)
     {
-        Destroy(gameObject, lifeTime);
-    }
-
-    public void Setup(int weaponDamage)
-    {
-        damage = weaponDamage;
+        damage = dmg;
+        speed = spd;
+        knockbackForce = kb;
+        parentWeapon = weapon;
     }
 
     void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
-           
-            Debug.Log("Impacto en: " + other.name + " con daño: " + damage);
-            Destroy(gameObject); 
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Vector2 knockbackDir = (other.transform.position - transform.position).normalized;
+                enemy.TakeDamage(damage, knockbackDir * knockbackForce);
+                SpriteRenderer enemySprite = other.GetComponent<SpriteRenderer>();
+                if (enemySprite != null && parentWeapon != null)
+                {
+                    parentWeapon.StartCoroutine("FlashRed", enemySprite);
+                }
+            }else if (other.CompareTag("Escenario")) {
+                Destroy(gameObject);
+            }   
+
+            Destroy(gameObject);
         }
     }
 }
