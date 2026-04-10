@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     public InputActionReference atacar; 
     public InputActionReference attackMagic; 
 
-    [Header("Atributos")]
+    [Header("Atributos RPG")]
     public int maxHealth = 100;
     public int currentHealth;
     public int coins = 0;
@@ -51,6 +51,8 @@ public class PlayerScript : MonoBehaviour
         {
             EjecutarAtaque();
         }
+        
+        // Lógica de Ataque Mágico (Tecla K)
         if(attackMagic != null && attackMagic.action.triggered)
         {
             EjecutarAtaqueMagic();
@@ -79,10 +81,12 @@ public class PlayerScript : MonoBehaviour
     {
         if (anim != null)
         {
+            // "2_Attack" es el nombre estándar del Trigger en SPUM
             anim.SetTrigger("2_Attack");
             Debug.Log("¡Ataque ejecutado con J!");
         }
     }
+
     void EjecutarAtaqueMagic()
     {
         if (anim != null)
@@ -101,8 +105,27 @@ public class PlayerScript : MonoBehaviour
             entidad.linearVelocity = direccionMov * velocidadMov;
         }
 
+        // Clamping (Límites)
         float clampedX = Mathf.Clamp(entidad.position.x, minX, maxX);
         float clampedY = Mathf.Clamp(entidad.position.y, minY, maxY);
         entidad.position = new Vector2(clampedX, clampedY);
     }
+
+    [Header("Inmunidad")]
+    public float immuneTime = 2f;
+    private float curInmuneTime;
+
+    public void TakeDamage(int amount)
+    {
+        if (curInmuneTime > 0) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        
+        if(healthBar != null) healthBar.setHealth(currentHealth);
+
+        curInmuneTime = immuneTime; 
+        Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
+    }
+
 }
