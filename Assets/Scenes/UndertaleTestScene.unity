@@ -1580,7 +1580,7 @@ MonoBehaviour:
   coins: 0
   inventory: []
   indexInventory: 0
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 720611873}
   equippedWeapon: {fileID: 1173311367}
   entidad: {fileID: 720611869}
   healthBar: {fileID: 593775686}
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 65631613}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1771,7 +1771,7 @@ MonoBehaviour:
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: PJ
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
 --- !u!114 &720611874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1779,7 +1779,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720611868}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ed43fc596eaa543a43279b9a72ea7e, type: 3}
   m_Name: 
