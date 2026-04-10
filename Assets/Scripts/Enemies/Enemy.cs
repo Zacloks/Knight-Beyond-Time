@@ -117,4 +117,13 @@ public class Enemy : MonoBehaviour
             spriteRenderer.flipX = !facingRight;
         }
     }
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+        PlayerScript playerScript = collision.gameObject.GetComponent<PlayerScript>();
+        if (playerScript != null)
+            playerScript.TakeDamage((int)attackDamage);
+        }
+    }
 }
