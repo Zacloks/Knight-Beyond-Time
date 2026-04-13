@@ -2047,13 +2047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdc9e530525ca24e9dc00725dfd9da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalEnemy
-  maxHealth: 100
-  moveSpeed: 3
-  attackDamage: 0.1
-  attackRange: 1.2
-  attackCooldown: 1
-  knockbackForce: 5
-  hurtDuration: 0.3
 --- !u!212 &1152376028
 SpriteRenderer:
   serializedVersion: 2

@@ -8,6 +8,7 @@ public abstract class Weapon : MonoBehaviour
     public int damage = 10;
     public float attackRate = 0.5f;
 
+    public Sprite sprite;
     public abstract void Atacar();
 
     protected IEnumerator FlashRed(SpriteRenderer sprite)

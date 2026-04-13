@@ -24,6 +24,10 @@ public class PlayerScript : MonoBehaviour
     public InputActionReference atacar; 
     public InputActionReference attackMagic; 
     public InputActionReference dash;
+    public InputActionReference dropearItem;
+    public InputActionReference cambiarItemLeft;
+    public InputActionReference cambiarItemRight;
+
 
     [Header("Atributos RPG")]
     public int maxHealth = 100;
@@ -40,10 +44,21 @@ public class PlayerScript : MonoBehaviour
     public HealthBar healthBar;
     public EnergyBar energyBar; 
     public Coin coin;
-    public Weapon equippedWeapon;
+    
     private Vector2 direccionMov;
     private Vector2 lastDirection = Vector2.right; 
     private int count;
+    
+    [Header("Sistema inventario")]
+    private int indexInventario = 0;
+    public Weapon[] inventario = new Weapon[5];
+    //public Weapon equippedWeapon = inventario[indexInventario];
+
+    [Header("SPUM Integration")]
+    public bool useSPUM = false; // Ponerlo como true si se usará un SPUM.
+    public SPUMPlayerBridge spumBridge;
+    public SPUMEquipmentManager spumEquipment;
+
 
     void Start()
     {
@@ -59,6 +74,10 @@ public class PlayerScript : MonoBehaviour
         if(energyBar != null) energyBar.setMaxEnergy(maxEnergy);
 
         if(coin != null) coin.setCoins(coins);
+
+        //SetSpriteArma(equippedWeapon.sprite);
+        updateEquippedWeapon();
+
     }
 
     void Update()
@@ -92,7 +111,21 @@ public class PlayerScript : MonoBehaviour
         if (count % 100 == 0 && currentEnergy < 100) {
             currentEnergy += 1;
             if (energyBar != null) energyBar.setEnergy(currentEnergy);
-    }
+        }
+
+        if (dropearItem != null && dropearItem.action.triggered)
+        {
+            dropSpriteArma();
+        }
+
+        if (cambiarItemLeft != null && cambiarItemLeft.action.triggered)
+        {
+            swapLeft();
+        }
+        if (cambiarItemRight != null && cambiarItemRight.action.triggered)
+        {
+            swapRight();
+        }
     }
 
     void EjecutarAtaque()
@@ -163,6 +196,50 @@ public class PlayerScript : MonoBehaviour
         float clampedX = Mathf.Clamp(entidad.position.x, minX, maxX);
         float clampedY = Mathf.Clamp(entidad.position.y, minY, maxY);
         entidad.position = new Vector2(clampedX, clampedY);
+    }
+
+    private void swapLeft()
+    {
+        if (indexInventario>0)
+        {
+            indexInventario--;
+        } else
+        {
+            indexInventario = 4;
+        }
+        Debug.Log(indexInventario);
+        updateEquippedWeapon();
+    }
+
+    private void swapRight()
+    {
+        if (indexInventario < 4)
+        {
+            indexInventario++;
+        } else
+        {
+            indexInventario = 0;
+        }
+        Debug.Log(indexInventario);
+        updateEquippedWeapon();
+    }
+
+    private void updateEquippedWeapon()
+    {
+        Weapon w = inventario[indexInventario];
+        if (w == null) spumEquipment.UnequipWeapon();
+        else if (useSPUM && spumEquipment != null) {
+            spumEquipment.EquipWeapon(w.sprite);
+        } 
+    }
+
+    private void dropSpriteArma()
+    {
+        if (useSPUM && spumEquipment != null && inventario[indexInventario] != null) {
+            spumEquipment.UnequipWeapon();
+            inventario[indexInventario] = null;
+            Debug.Log("Botaste el item!");
+        }
     }
 
     [Header("Inmunidad")]

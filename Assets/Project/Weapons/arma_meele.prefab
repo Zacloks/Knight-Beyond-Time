@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7670187224323257244}
   - component: {fileID: 6530053879162039356}
-  - component: {fileID: 2475865654617642869}
   - component: {fileID: 6225818160062723805}
+  - component: {fileID: 1324587623003840237}
   m_Layer: 0
   m_Name: arma_meele
   m_TagString: Untagged
@@ -125,23 +125,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2475865654617642869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8257727169654118809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d985ccc012697e045ba2cbdf8c55e86f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponName: arma prueba arco
-  damage: 10
-  attackRate: 0.5
-  isMelee: 0
-  projectilePrefab: {fileID: 4582277519740372724, guid: 55593b5bbdc56e5488cf5198c406122f, type: 3}
 --- !u!61 &6225818160062723805
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,3 +171,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1324587623003840237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8257727169654118809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32c4b28d0998ce4d882201608a329d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponMelee
+  weaponName: "Arma Gen\xE9rica"
+  damage: 10
+  attackRate: 0.5
+  sprite: {fileID: 21300000, guid: 59a7f0c391e16bb4d98b4be022f6d461, type: 3}
+  attackRadius: 1.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
