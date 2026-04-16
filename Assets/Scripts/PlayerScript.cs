@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using JetBrains.Annotations;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     public InputActionReference dropearItem;
     public InputActionReference cambiarItemLeft;
     public InputActionReference cambiarItemRight;
+    public InputActionReference pick;
 
 
     [Header("Atributos RPG")]
@@ -53,6 +55,7 @@ public class PlayerScript : MonoBehaviour
     private int indexInventario = 0;
     public Weapon[] inventario = new Weapon[5];
     //public Weapon equippedWeapon = inventario[indexInventario];
+    private Consumible alcanzable;
 
     [Header("SPUM Integration")]
     public bool useSPUM = false; // Ponerlo como true si se usará un SPUM.
@@ -94,6 +97,8 @@ public class PlayerScript : MonoBehaviour
         
 
         if (dash != null && dash.action.triggered && !isDashing) EjecutarDash();
+
+        if (pick != null && pick.action.triggered) Debug.Log("Picked");
 
         // 3. Animación de Movimiento y Giro
         if (anim != null)
@@ -274,6 +279,25 @@ public class PlayerScript : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("Salió la colisión");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("En alcance");
+        if (collision.gameObject.CompareTag("Consumible"))
+        {
+            Consumible item = collision.gameObject.GetComponent<Consumible>();
+            if (item != null)
+            {
+                alcanzable = item;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        alcanzable = null;
+        Debug.Log("Fuera de alcance");
     }
 
 }
