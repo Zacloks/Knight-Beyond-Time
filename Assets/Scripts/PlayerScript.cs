@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using JetBrains.Annotations;
+using System.Net.Http.Headers;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -70,8 +71,9 @@ public class PlayerScript : MonoBehaviour
         // Localizar el Animator en el hijo para compatibilidad con SPUM
         if (anim == null) anim = GetComponentInChildren<Animator>();
 
-        currentHealth = maxHealth;
+        currentHealth = 50;
         if (healthBar != null) healthBar.setMaxHealth(maxHealth);
+        healthBar.setHealth(currentHealth);
 
         currentEnergy = maxEnergy;
         if(energyBar != null) energyBar.setMaxEnergy(maxEnergy);
@@ -98,7 +100,7 @@ public class PlayerScript : MonoBehaviour
 
         if (dash != null && dash.action.triggered && !isDashing) EjecutarDash();
 
-        if (pick != null && pick.action.triggered) Debug.Log("Picked");
+        if (pick != null && pick.action.triggered && alcanzable != null) Pick();
 
         // 3. Animación de Movimiento y Giro
         if (anim != null)
@@ -281,6 +283,12 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Salió la colisión");
     }
 
+    private void Pick()
+    {
+        alcanzable.Pick(this);
+        Debug.Log("Destruido??");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("En alcance");
@@ -298,6 +306,14 @@ public class PlayerScript : MonoBehaviour
     {
         alcanzable = null;
         Debug.Log("Fuera de alcance");
+    }
+
+    public void testVida(int vida)
+    {
+        currentHealth += vida;
+
+        if (currentHealth > 100) currentHealth = 100;
+        healthBar.setHealth(currentHealth);
     }
 
 }

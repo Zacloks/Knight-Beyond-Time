@@ -13,9 +13,14 @@ public class Consumible : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Pick(PlayerScript player)
+    {
+        Destroy(gameObject);
+        player.testVida(10);
     }
 }
