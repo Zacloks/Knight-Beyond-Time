@@ -259,6 +259,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: spinning coin_6
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 9
+        width: 24
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0744a016c5864d038d411d55542dc86
+      internalID: -1267809045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -279,6 +301,7 @@ TextureImporter:
       spinning coin_3: 3756172864441349012
       spinning coin_4: 3403564149457866676
       spinning coin_5: -1885781093302298215
+      spinning coin_6: -1267809045
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

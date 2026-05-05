@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
     public Animator anim;
     public HealthBar healthBar;
     public EnergyBar energyBar; 
-    public Coin coin;
+    public Coin coinCounter;
     
     private Vector2 direccionMov;
     private Vector2 lastDirection = Vector2.right; 
@@ -78,7 +78,7 @@ public class PlayerScript : MonoBehaviour
         currentEnergy = maxEnergy;
         if(energyBar != null) energyBar.setMaxEnergy(maxEnergy);
 
-        if(coin != null) coin.setCoins(coins);
+        if(coinCounter != null) coinCounter.setCoins(coins);
 
         //SetSpriteArma(equippedWeapon.sprite);
         updateEquippedWeapon();
@@ -298,6 +298,17 @@ public class PlayerScript : MonoBehaviour
             if (item != null)
             {
                 alcanzable = item;
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Moneda"))
+        {
+            Moneda coin = collision.gameObject.GetComponent<Moneda>();
+            if (coin != null)
+            {
+                coins += coin.value;
+                coinCounter.setCoins(coins);
+                Destroy(collision.gameObject);
             }
         }
     }
