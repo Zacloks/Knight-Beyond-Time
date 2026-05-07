@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   cameraSpeed: 2
-  player: {fileID: 0}
+  player: {fileID: 10353962}
 --- !u!114 &18695292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: PJ
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 18695289}
 --- !u!114 &1231494497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1631,11 +1631,12 @@ MonoBehaviour:
   coins: 12
   dashSpeed: 12
   isDashing: 0
+  isAtacking: 0
   entidad: {fileID: 1231494495}
   anim: {fileID: 1024518304}
   healthBar: {fileID: 1971115652}
   energyBar: {fileID: 818324043}
-  coin: {fileID: 1377173113}
+  coinCounter: {fileID: 1377173113}
   inventario:
   - {fileID: 0}
   - {fileID: 0}
@@ -1773,7 +1774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884361fdf6689ce42855db8175ba9fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemy
-  attackController: {fileID: 0}
+  attackController: {fileID: 1261745184}
   hittableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1808,6 +1809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dd9bc8df29caf4799c6e995ceac473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLife
+  monedaPrefab: {fileID: 0}
+  cantidadMonedas: 2
   maxLife: 200
   knockbackForce: {x: 0, y: 0}
   minKnockbackTime: 0

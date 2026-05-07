@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
     public int coins = 0;
     public float dashSpeed = 12;
     public bool isDashing = false;
+    public bool isAtacking = false;
 
     [Header("Componentes")]
     public Rigidbody2D entidad;
@@ -91,14 +92,12 @@ public class PlayerScript : MonoBehaviour
         if (!isDashing) direccionMov = mover.action.ReadValue<Vector2>();
 
         // 2. Lógica de Ataque (Tecla J)
-        if (atacar != null && atacar.action.triggered) EjecutarAtaque();
-        
+        if (!isDashing && atacar != null && atacar.action.triggered) EjecutarAtaque();
         
         // Lógica de Ataque Mágico (Tecla K)
-        if(attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
-        
+        if(!isDashing && attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
 
-        if (dash != null && dash.action.triggered && !isDashing) EjecutarDash();
+        if (!isAtacking && dash != null && dash.action.triggered && !isDashing) EjecutarDash();
 
         if (pick != null && pick.action.triggered && alcanzable != null) Pick();
 
@@ -109,8 +108,8 @@ public class PlayerScript : MonoBehaviour
             anim.SetFloat("Speed", fuerza);
 
             // Flip: Girar el personaje según dirección
-            if (direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
-            else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
+            if (!isAtacking && direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
+            else if (!isAtacking && direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
         }
 
         // 4. Lógica de energía pasiva
@@ -142,7 +141,18 @@ public class PlayerScript : MonoBehaviour
             // "2_Attack" es el nombre estándar del Trigger en SPUM
             anim.SetTrigger("2_Attack");
             Debug.Log("¡Ataque ejecutado con J!");
+
+            StartCoroutine(AtackCoroutine());        
         }
+    }
+
+    private IEnumerator AtackCoroutine()
+    {
+        isAtacking = true;
+
+        yield return new WaitForSeconds(1);
+
+        isAtacking = false;
     }
 
     void EjecutarAtaqueMagic()
@@ -151,6 +161,8 @@ public class PlayerScript : MonoBehaviour
         {
             anim.SetTrigger("attackMagic");
             Debug.Log("¡Ataque ejecutado con K!");
+
+            StartCoroutine(AtackCoroutine());       
         }
     }
 
