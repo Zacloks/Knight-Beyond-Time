@@ -21,6 +21,8 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Ajustes de Ataque")]
     public float attackDamage = 10f;
+    private float lastContactDamageTime;
+    private float contactDamageCooldown = 0.5f;
 
     protected virtual void Start()
     {
@@ -34,26 +36,25 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (Time.time < lastContactDamageTime + contactDamageCooldown) return;
+
+        PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
+        if (playerCtrl != null)
         {
-            PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
-            
-            if (playerCtrl != null)
-            {
-                playerCtrl.TakeDamage((int)attackDamage);
-                Debug.Log("Enemigo dañó al jugador");
-            }
+            lastContactDamageTime = Time.time;
+            playerCtrl.TakeDamage((int)attackDamage);
         }
     }
 
-    public void TakeDamage(int amount, Vector2 sender)
+    public virtual void TakeDamage(int amount, Vector2 sender)
     {
         lifeEnemy.TakeDamage(amount, sender);
     }
 
-  public int GetDamage()
+    public int GetDamage()
     {
         return attackEnemy.attackDamage;
     }

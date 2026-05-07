@@ -13,7 +13,7 @@ public class AttackEnemy : MonoBehaviour
     [SerializeField] private float circleRadius;
     [SerializeField] public int attackDamage;
     [SerializeField] private float timeBetweenAttacks;
-    [SerializeField] private float lastAttackTime;
+    private float lastAttackTime;
     [SerializeField] private float attackDuration;
     [SerializeField] private float timeToWaitAfterAttack;
 

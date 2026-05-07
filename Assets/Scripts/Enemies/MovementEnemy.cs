@@ -22,6 +22,7 @@ public class MovementEnemy : MonoBehaviour
     [Header("Ataque")]
     public float attackRange = 1.5f;
     public float attackCooldown = 1f;
+    private float attackEndTime;
 
     private void Start()
     {
@@ -90,19 +91,16 @@ public class MovementEnemy : MonoBehaviour
     // ATTACK
     private void AttackBehavior()
     {
-        moveDirection = Vector2.zero;
-
-        if (Time.time > hurtEndTime)
-        {
+         moveDirection = Vector2.zero;
+        if (Time.time > attackEndTime)
             ChangeToStateChase();
-        }
     }
 
     public void ChangeToStateAttack(float duration)
     {
         animator.SetBool("Chasing", false);
         rb.linearVelocity = Vector2.zero;
-        hurtEndTime = Time.time + duration;
+        attackEndTime = Time.time + duration; 
         currentState = EnemyState.Attack;
     }
 

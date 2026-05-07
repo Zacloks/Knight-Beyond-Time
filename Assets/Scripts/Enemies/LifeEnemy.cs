@@ -9,7 +9,7 @@ public class LifeEnemy : MonoBehaviour
 
     [Header("Estadisticas Vida")]
     [SerializeField] private int maxLife;
-    private int currentLife;
+    public int currentLife;
 
     [Header("Estadisticas Retroceso")]
     [SerializeField] private Vector2 knockbackForce;
