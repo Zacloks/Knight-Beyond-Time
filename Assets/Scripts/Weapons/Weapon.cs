@@ -9,7 +9,8 @@ public abstract class Weapon : MonoBehaviour
     public float attackRate = 0.5f;
 
     public Sprite sprite;
-    public abstract void Atacar();
+    public bool usaAnimacionJugador = true;
+    public abstract bool Atacar();
 
     protected IEnumerator FlashRed(SpriteRenderer sprite)
     {
@@ -27,7 +28,7 @@ public abstract class Weapon : MonoBehaviour
         if (enemy != null)
         {
             Vector2 direction = (enemyCollider.transform.position - transform.position).normalized;
-            enemy.TakeDamage(damage, direction); 
+            enemy.TakeDamage(damage, transform.position); 
         }
 
         if (enemyRb != null)

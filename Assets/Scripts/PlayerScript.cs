@@ -130,11 +130,30 @@ public class PlayerScript : MonoBehaviour
 
     void EjecutarAtaque()
     {
-        if (anim != null)
+        Weapon armaActual = inventario[indexInventario];
+
+        if (armaActual != null)
         {
-            // "2_Attack" es el nombre estándar del Trigger en SPUM
-            anim.SetTrigger("2_Attack");
-            Debug.Log("¡Ataque ejecutado con J!");
+            bool ataqueExitoso = armaActual.Atacar(); 
+
+            if (ataqueExitoso) 
+            {
+                string tipo = armaActual.GetType().Name;
+                Debug.Log("Ataque confirmado. Arma: " + tipo);
+
+                if (tipo == "WeaponMelee" && anim != null)
+                {
+                    anim.SetTrigger("2_Attack");
+                }
+            }
+            else 
+            {
+                Debug.Log("Ataque ignorado por Cooldown.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay arma equipada.");
         }
     }
 
