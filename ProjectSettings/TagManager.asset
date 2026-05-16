@@ -41,12 +41,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Fondo
+    locked: 1
+  - name: Background
     uniqueID: 129437527
     locked: 0
-  - name: Entidad
+  - name: Level
+    uniqueID: 964619205
+    locked: 0
+  - name: Player
     uniqueID: 2478440381
+    locked: 0
+  - name: UI
+    uniqueID: 3090525353
     locked: 0
   m_RenderingLayers:
   - Default

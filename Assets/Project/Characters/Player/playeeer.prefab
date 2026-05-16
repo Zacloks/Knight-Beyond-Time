@@ -6989,13 +6989,22 @@ MonoBehaviour:
   maxY: 3.49
   mover: {fileID: -3819753190812026520, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   atacar: {fileID: 434898793832103627, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  attackMagic: {fileID: 0}
+  dash: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
+  maxEnergy: 100
+  currentEnergy: 0
   coins: 0
+  dashSpeed: 12
+  isDashing: 0
   entidad: {fileID: 488956374230918424}
   anim: {fileID: 791689188537171265}
   healthBar: {fileID: 0}
+  energyBar: {fileID: 0}
   coin: {fileID: 0}
+  equippedWeapon: {fileID: 0}
+  immuneTime: 2
 --- !u!1 &7597118076614456975
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,8 +7673,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8799118913418856679}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1816526915
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0

@@ -16,8 +16,11 @@ public class PlayerScript : MonoBehaviour
 {
     [Header("Movimiento y Límites")]
     public float velocidadMov = 7;
-    public float minX = -8.4f, maxX = 8.39f;
+   /* public float minX = -8.4f, maxX = 8.39f;
     public float minY = -4.94f, maxY = 4.2f;
+*/
+    public float minX = -100000f, maxX = 10000f;
+    public float minY = -100000f, maxY = 46.49283f;
 
     [Header("Referencias de Input")]
     public InputActionReference mover;
