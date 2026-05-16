@@ -11,6 +11,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using JetBrains.Annotations;
+using System.Net.Http.Headers;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -27,6 +29,11 @@ public class PlayerScript : MonoBehaviour
     public InputActionReference atacar; 
     public InputActionReference attackMagic; 
     public InputActionReference dash;
+    public InputActionReference dropearItem;
+    public InputActionReference cambiarItemLeft;
+    public InputActionReference cambiarItemRight;
+    public InputActionReference pick;
+
 
     [Header("Atributos RPG")]
     public int maxHealth = 100;
@@ -36,17 +43,30 @@ public class PlayerScript : MonoBehaviour
     public int coins = 0;
     public float dashSpeed = 12;
     public bool isDashing = false;
+    public bool isAtacking = false;
 
     [Header("Componentes")]
     public Rigidbody2D entidad;
     public Animator anim;
     public HealthBar healthBar;
     public EnergyBar energyBar; 
-    public Coin coin;
-    public Weapon equippedWeapon;
+    public Coin coinCounter;
+    
     private Vector2 direccionMov;
     private Vector2 lastDirection = Vector2.right; 
     private int count;
+    
+    [Header("Sistema inventario")]
+    private int indexInventario = 0;
+    public Weapon[] inventario = new Weapon[5];
+    //public Weapon equippedWeapon = inventario[indexInventario];
+    private Consumible alcanzable;
+
+    [Header("SPUM Integration")]
+    public bool useSPUM = false; // Ponerlo como true si se usará un SPUM.
+    public SPUMPlayerBridge spumBridge;
+    public SPUMEquipmentManager spumEquipment;
+
 
     void Start()
     {
@@ -55,13 +75,18 @@ public class PlayerScript : MonoBehaviour
         // Localizar el Animator en el hijo para compatibilidad con SPUM
         if (anim == null) anim = GetComponentInChildren<Animator>();
 
-        currentHealth = maxHealth;
+        currentHealth = 50;
         if (healthBar != null) healthBar.setMaxHealth(maxHealth);
+        healthBar.setHealth(currentHealth);
 
         currentEnergy = maxEnergy;
         if(energyBar != null) energyBar.setMaxEnergy(maxEnergy);
 
-        if(coin != null) coin.setCoins(coins);
+        if(coinCounter != null) coinCounter.setCoins(coins);
+
+        //SetSpriteArma(equippedWeapon.sprite);
+        updateEquippedWeapon();
+
     }
 
     void Update()
@@ -70,14 +95,14 @@ public class PlayerScript : MonoBehaviour
         if (!isDashing) direccionMov = mover.action.ReadValue<Vector2>();
 
         // 2. Lógica de Ataque (Tecla J)
-        if (atacar != null && atacar.action.triggered) EjecutarAtaque();
-        
+        if (!isDashing && atacar != null && atacar.action.triggered) EjecutarAtaque();
         
         // Lógica de Ataque Mágico (Tecla K)
-        if(attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
-        
+        if(!isDashing && attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
 
-        if (dash != null && dash.action.triggered && !isDashing) EjecutarDash();
+        if (!isAtacking && dash != null && dash.action.triggered && !isDashing) EjecutarDash();
+
+        if (pick != null && pick.action.triggered && alcanzable != null) Pick();
 
         // 3. Animación de Movimiento y Giro
         if (anim != null)
@@ -86,8 +111,8 @@ public class PlayerScript : MonoBehaviour
             anim.SetFloat("Speed", fuerza);
 
             // Flip: Girar el personaje según dirección
-            if (direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
-            else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
+            if (!isAtacking && direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
+            else if (!isAtacking && direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
         }
 
         // 4. Lógica de energía pasiva
@@ -95,7 +120,21 @@ public class PlayerScript : MonoBehaviour
         if (count % 100 == 0 && currentEnergy < 100) {
             currentEnergy += 1;
             if (energyBar != null) energyBar.setEnergy(currentEnergy);
-    }
+        }
+
+        if (dropearItem != null && dropearItem.action.triggered)
+        {
+            dropSpriteArma();
+        }
+
+        if (cambiarItemLeft != null && cambiarItemLeft.action.triggered)
+        {
+            swapLeft();
+        }
+        if (cambiarItemRight != null && cambiarItemRight.action.triggered)
+        {
+            swapRight();
+        }
     }
 
     void EjecutarAtaque()
@@ -105,7 +144,18 @@ public class PlayerScript : MonoBehaviour
             // "2_Attack" es el nombre estándar del Trigger en SPUM
             anim.SetTrigger("2_Attack");
             Debug.Log("¡Ataque ejecutado con J!");
+
+            StartCoroutine(AtackCoroutine());        
         }
+    }
+
+    private IEnumerator AtackCoroutine()
+    {
+        isAtacking = true;
+
+        yield return new WaitForSeconds(1);
+
+        isAtacking = false;
     }
 
     void EjecutarAtaqueMagic()
@@ -114,6 +164,8 @@ public class PlayerScript : MonoBehaviour
         {
             anim.SetTrigger("attackMagic");
             Debug.Log("¡Ataque ejecutado con K!");
+
+            StartCoroutine(AtackCoroutine());       
         }
     }
 
@@ -168,6 +220,50 @@ public class PlayerScript : MonoBehaviour
         entidad.position = new Vector2(clampedX, clampedY);
     }
 
+    private void swapLeft()
+    {
+        if (indexInventario>0)
+        {
+            indexInventario--;
+        } else
+        {
+            indexInventario = 4;
+        }
+        Debug.Log(indexInventario);
+        updateEquippedWeapon();
+    }
+
+    private void swapRight()
+    {
+        if (indexInventario < 4)
+        {
+            indexInventario++;
+        } else
+        {
+            indexInventario = 0;
+        }
+        Debug.Log(indexInventario);
+        updateEquippedWeapon();
+    }
+
+    private void updateEquippedWeapon()
+    {
+        Weapon w = inventario[indexInventario];
+        if (w == null) spumEquipment.UnequipWeapon();
+        else if (useSPUM && spumEquipment != null) {
+            spumEquipment.EquipWeapon(w.sprite);
+        } 
+    }
+
+    private void dropSpriteArma()
+    {
+        if (useSPUM && spumEquipment != null && inventario[indexInventario] != null) {
+            spumEquipment.UnequipWeapon();
+            inventario[indexInventario] = null;
+            Debug.Log("Botaste el item!");
+        }
+    }
+
     [Header("Inmunidad")]
     public float immuneTime = 2f;
     private float curInmuneTime;
@@ -196,6 +292,54 @@ public class PlayerScript : MonoBehaviour
                 TakeDamage(enemy.GetDamage());
             }
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Salió la colisión");
+    }
+
+    private void Pick()
+    {
+        alcanzable.Pick(this);
+        Debug.Log("Destruido??");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("En alcance");
+        if (collision.gameObject.CompareTag("Consumible"))
+        {
+            Consumible item = collision.gameObject.GetComponent<Consumible>();
+            if (item != null)
+            {
+                alcanzable = item;
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Moneda"))
+        {
+            Moneda coin = collision.gameObject.GetComponent<Moneda>();
+            if (coin != null)
+            {
+                coins += coin.value;
+                coinCounter.setCoins(coins);
+                Destroy(collision.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        alcanzable = null;
+        Debug.Log("Fuera de alcance");
+    }
+
+    public void testVida(int vida)
+    {
+        currentHealth += vida;
+
+        if (currentHealth > 100) currentHealth = 100;
+        healthBar.setHealth(currentHealth);
     }
 
 }

@@ -6,19 +6,23 @@ public class MovementEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     private Vector2 moveDirection;
-    private Animator animator;
     public EnemyState currentState;
 
     [Header("Estadisticas Movimiento")]
     public float movementSpeedBase;
 
-    [Header("Estadisticas Retroceso")]
-    [SerializeField] private Vector2 knockbackForce;
-    [SerializeField] private float minKnockbackTime;
-
     [Header("Animator")]
-    public bool chasing = true;
-    
+    private Animator animator;
+    public bool chasing = false;
+
+    [Header("Hurt")]
+    private float hurtEndTime;
+    public float hurtDuration = 0.5f;
+
+    [Header("Ataque")]
+    public float attackRange = 1.5f;
+    public float attackCooldown = 1f;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,21 +41,44 @@ public class MovementEnemy : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Chase:
-                Chase();
-                animator.SetBool("Chasing",chasing);
+                ChaseBehavior();
                 break;
             case EnemyState.Attack:
+                AttackBehavior();
                 break;
             case EnemyState.Hurt:
-                moveDirection = Vector2.zero;
+                HurtBehavior();
                 break;
             case EnemyState.Dead:
+                DeadBehavior();
                 break;
             case EnemyState.Idle:
+                moveDirection = Vector2.zero;
                 break;
-
         }
-        rb.linearVelocity = moveDirection * movementSpeedBase * 1.6f;
+
+        if (currentState != EnemyState.Hurt)
+        {
+            rb.linearVelocity = moveDirection * movementSpeedBase * 1.6f;
+        }
+    }
+
+    // CHASE
+    private void ChaseBehavior()
+    {
+        animator.SetBool("Chasing", true);
+
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= attackRange)
+        {
+            moveDirection = Vector2.zero;
+            ChangeToStateAttack();
+        }
+        else
+        {
+            Chase();
+        }
     }
 
     private void Chase()
@@ -60,10 +87,76 @@ public class MovementEnemy : MonoBehaviour
         moveDirection = dir;
     }
 
+    // ATTACK
+    private void AttackBehavior()
+    {
+        moveDirection = Vector2.zero;
+
+        if (Time.time > hurtEndTime)
+        {
+            ChangeToStateChase();
+        }
+    }
+
+    public void ChangeToStateAttack(float duration)
+    {
+        animator.SetBool("Chasing", false);
+        rb.linearVelocity = Vector2.zero;
+        hurtEndTime = Time.time + duration;
+        currentState = EnemyState.Attack;
+    }
+
+    private void ChangeToStateAttack()
+    {
+        ChangeToStateAttack(0f);
+    }
+
+    public void ChangeToStateChase()
+    {
+        currentState = EnemyState.Chase;
+        chasing = true;
+    }
+
+    // HURT
+    private void HurtBehavior()
+    {
+        moveDirection = Vector2.zero;
+
+        if (Time.time > hurtEndTime)
+        {
+            ChangeToStateChase();
+        }
+    }
+
+    public void ChangeToStateHurt(float timeToWait, Vector2 knockbackForce)
+    {
+        animator.SetBool("Chasing", false);
+        currentState = EnemyState.Hurt;
+        hurtEndTime = Time.time + timeToWait;
+        
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+    }
+
+    // DEAD
+    private void DeadBehavior()
+    {
+        moveDirection = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
+        animator.SetBool("Chasing", false);
+        animator.SetBool("Dead", true);
+    }
+
+    public void ChangeToStateDead()
+    {
+        currentState = EnemyState.Dead;
+    }
+
+    // MOVEMENT
     private void LookDirectionMovement()
     {
         if ((moveDirection.x < 0 && !LookingRight()) ||
-            (moveDirection.x > 0 &&  LookingRight()))
+            (moveDirection.x > 0 && LookingRight()))
             Spin();
     }
 
@@ -74,16 +167,8 @@ public class MovementEnemy : MonoBehaviour
         transform.localScale = scale;
     }
 
-    private bool LookingRight(){
-        return transform.localScale.x == -1;
-    }
-
-    public void Knockback(Vector2 sender)
+    private bool LookingRight()
     {
-        Vector2 direction = ((Vector2)transform.position - sender).normalized;
-        Vector2 force = new(Mathf.Sign(direction.x) * knockbackForce.x, knockbackForce.y);
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(force, ForceMode2D.Impulse);
-        animator.SetTrigger("Hit");
+        return transform.localScale.x == -1;
     }
 }

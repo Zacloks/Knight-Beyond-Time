@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - Consumible
+  - Moneda
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Item
   - 
   - 
   - 
@@ -53,6 +55,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3090525353
+    locked: 0
+  - name: Item
+    uniqueID: 2082590135
     locked: 0
   m_RenderingLayers:
   - Default
