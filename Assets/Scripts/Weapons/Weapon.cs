@@ -9,7 +9,46 @@ public abstract class Weapon : MonoBehaviour
     public float attackRate = 0.5f;
 
     public Sprite sprite;
-    public abstract void Atacar();
+    public bool usaAnimacionJugador = true;
+
+    [Header("Críticos")]
+    [Range(0f, 100f)] public float probabilidadCritico = 5f;
+    public float multiplicadorCritico = 2f;
+
+    [Header("Durabilidad")]
+    public int maxDurabilidad = 20;
+    public int durabilidadActual;
+
+    public abstract bool Atacar();
+
+    public virtual bool AtaqueEspecial()
+    {
+        return false;
+    }
+    protected virtual void durabilidadCheck()
+    {
+        durabilidadActual = maxDurabilidad;
+    }
+    public int CalcularDañoCritico(int dañoBase)
+    {
+        float random = Random.Range(0f, 100f);
+        if (random <= probabilidadCritico)
+        {
+            Debug.Log($"¡CRÍTICO con {weaponName}!");
+            return Mathf.RoundToInt(dañoBase * multiplicadorCritico);
+        }
+        return dañoBase; 
+    }
+
+    public void GastarDurabilidad(int cantidad = 1)
+    {
+        durabilidadActual -= cantidad;
+        if (durabilidadActual <= 0)
+        {
+            durabilidadActual = 0;
+            Debug.Log($"¡El arma {weaponName} se ha roto!");
+        }
+    }
 
     protected IEnumerator FlashRed(SpriteRenderer sprite)
     {
@@ -27,7 +66,7 @@ public abstract class Weapon : MonoBehaviour
         if (enemy != null)
         {
             Vector2 direction = (enemyCollider.transform.position - transform.position).normalized;
-            enemy.TakeDamage(damage, direction); 
+            enemy.TakeDamage(damage, transform.position); 
         }
 
         if (enemyRb != null)

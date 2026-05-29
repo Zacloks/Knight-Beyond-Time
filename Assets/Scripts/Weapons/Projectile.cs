@@ -6,7 +6,6 @@ public class Projectile : MonoBehaviour
     private int damage;
     private float knockbackForce;
     private Weapon parentWeapon; 
-    public float lifeTime;
 
     public void Setup(int dmg, float spd, float kb, Weapon weapon)
     {
@@ -20,6 +19,7 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -27,17 +27,18 @@ public class Projectile : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
-                Vector2 knockbackDir = (other.transform.position - transform.position).normalized;
-                enemy.TakeDamage(damage, knockbackDir * knockbackForce);
+                enemy.TakeDamage(damage, transform.position);
+                
                 SpriteRenderer enemySprite = other.GetComponent<SpriteRenderer>();
                 if (enemySprite != null && parentWeapon != null)
                 {
                     parentWeapon.StartCoroutine("FlashRed", enemySprite);
                 }
-            }else if (other.CompareTag("Escenario")) {
-                Destroy(gameObject);
-            }   
-
+            }
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Escenario"))
+        {
             Destroy(gameObject);
         }
     }

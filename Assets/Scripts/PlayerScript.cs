@@ -136,13 +136,31 @@ public class PlayerScript : MonoBehaviour
 
     void EjecutarAtaque()
     {
-        if (anim != null)
-        {
-            // "2_Attack" es el nombre estándar del Trigger en SPUM
-            anim.SetTrigger("2_Attack");
-            Debug.Log("¡Ataque ejecutado con J!");
+        Weapon armaActual = inventario[indexInventario];
 
-            StartCoroutine(AtackCoroutine());        
+        if (armaActual != null)
+        {
+            bool ataqueExitoso = armaActual.Atacar(); 
+
+            if (ataqueExitoso) 
+            {
+                string tipo = armaActual.GetType().Name;
+                Debug.Log("Ataque confirmado. Arma: " + tipo);
+
+                if (tipo == "WeaponMelee" && anim != null)
+                {
+                    anim.SetTrigger("2_Attack");
+                }
+                StartCoroutine(AtackCoroutine());
+            }
+            else 
+            {
+                Debug.Log("Ataque ignorado por Cooldown.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay arma equipada.");
         }
     }
 
@@ -156,13 +174,22 @@ public class PlayerScript : MonoBehaviour
     }
 
     void EjecutarAtaqueMagic()
-    {
-        if (anim != null)
+    {   
+        Weapon armaActual = inventario[indexInventario];
+        if (armaActual != null)
         {
-            anim.SetTrigger("attackMagic");
-            Debug.Log("¡Ataque ejecutado con K!");
+            bool exitoMagia = armaActual.AtaqueEspecial();
 
-            StartCoroutine(AtackCoroutine());       
+            if (exitoMagia && anim != null)
+            {
+                anim.SetTrigger("attackMagic");
+                Debug.Log("¡Ataque Especial / Mágico ejecutado con K!");
+                StartCoroutine(AtackCoroutine());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay arma equipada para usar magia.");
         }
     }
 
