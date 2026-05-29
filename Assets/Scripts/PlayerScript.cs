@@ -158,11 +158,21 @@ public class PlayerScript : MonoBehaviour
     }
 
     void EjecutarAtaqueMagic()
-    {
-        if (anim != null)
+    {   
+        Weapon armaActual = inventario[indexInventario];
+        if (armaActual != null)
         {
-            anim.SetTrigger("attackMagic");
-            Debug.Log("¡Ataque ejecutado con K!");
+            bool exitoMagia = armaActual.AtaqueEspecial();
+
+            if (exitoMagia && anim != null)
+            {
+                anim.SetTrigger("attackMagic");
+                Debug.Log("¡Ataque Especial / Mágico ejecutado con K!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay arma equipada para usar magia.");
         }
     }
 

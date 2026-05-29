@@ -9,22 +9,36 @@ public class WeaponDistance : Weapon
     public float maxChargeTime = 1.5f;
     public float minProjectileSpeed = 8f;
     public float maxProjectileSpeed = 25f;
-    public float maxRange = 15f; // Nueva: Distancia máxima a plena carga
+    public float maxRange = 15f; 
+
+
+    [Header("Animación Visual de Carga")]
+    public SpriteRenderer weaponRenderer; 
+    public Sprite[] spritesDeCarga;    
+    private Sprite spriteOriginal;
+
 
     private float chargeTimer;
     private bool isCharging;
-    private float nextAttackTime; // Nueva: Control de cooldown
+    private float nextAttackTime; 
 
     [Header("Referencia del Teclado")]
     public InputActionReference attackActionRef;
 
     public override bool Atacar()
     {
+
+        if (durabilidadActual <= 0) {
+            Debug.LogWarning("Esta arma está rota.");
+            return false; 
+        }
+        
         if (!isCharging && Time.time >= nextAttackTime)
         {
             isCharging = true;
             chargeTimer = 0;
-            Debug.Log("Cargando arco...");
+            if (weaponRenderer != null) spriteOriginal = weaponRenderer.sprite;
+            Debug.Log("Cargando ataque...");
             return true; 
         }
         return false; 
@@ -38,6 +52,14 @@ public class WeaponDistance : Weapon
             {
                 chargeTimer += Time.deltaTime;
                 chargeTimer = Mathf.Min(chargeTimer, maxChargeTime);
+
+                if (weaponRenderer != null && spritesDeCarga.Length > 0)
+                {
+                    float chargePercent = chargeTimer / maxChargeTime;
+                    
+                    int indiceSprite = Mathf.FloorToInt(chargePercent * (spritesDeCarga.Length - 1));
+                    weaponRenderer.sprite = spritesDeCarga[indiceSprite];
+                }
             }
             else 
             {
@@ -49,10 +71,17 @@ public class WeaponDistance : Weapon
     private void Disparar()
     {
         isCharging = false;
-        nextAttackTime = Time.time + attackRate; 
+        nextAttackTime = Time.time + attackRate;
+        GastarDurabilidad(1); 
 
+        if (weaponRenderer != null && spriteOriginal != null)
+        {
+            weaponRenderer.sprite = spriteOriginal;
+        }
+        
         float chargePercent = Mathf.Clamp01(chargeTimer / maxChargeTime);
-        int finalDamage = Mathf.RoundToInt(damage * Mathf.Lerp(0.5f, 1.5f, chargePercent));
+        int dañoCarga = Mathf.RoundToInt(damage * Mathf.Lerp(0.5f, 1f, chargePercent));
+        int finalDamage = CalcularDañoCritico(dañoCarga);
         float finalSpeed = Mathf.Lerp(minProjectileSpeed, maxProjectileSpeed, chargePercent);
 
         if (projectilePrefab != null && shootPoint != null)

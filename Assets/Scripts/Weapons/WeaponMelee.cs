@@ -17,7 +17,13 @@ public class WeaponMelee : Weapon
         originalRotation = transform.localRotation;
     }
 
-    public override bool Atacar() {
+    public override bool Atacar() 
+    {
+        if (durabilidadActual <= 0) {
+            Debug.LogWarning("Esta arma está rota.");
+            return false; 
+        }
+
         if (!isAttacking) {
             StartCoroutine(SwingRoutine());
             return true; 
@@ -28,6 +34,8 @@ public class WeaponMelee : Weapon
     IEnumerator SwingRoutine()
     {
         isAttacking = true;
+        GastarDurabilidad(1);
+
         Vector2 facingDir = transform.lossyScale.x < 0 ? Vector2.right : Vector2.left;
         facingDir = Quaternion.AngleAxis(coneOffset, Vector3.forward) * facingDir;
 
@@ -46,7 +54,8 @@ public class WeaponMelee : Weapon
                 Enemy enemy = col.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage, transform.position);
+                    int dañoFinal = CalcularDañoCritico(damage);
+                    enemy.TakeDamage(dañoFinal, transform.position);
                     SpriteRenderer enemySprite = col.GetComponent<SpriteRenderer>();
                     if (enemySprite != null) StartCoroutine(FlashRed(enemySprite));
                 }
