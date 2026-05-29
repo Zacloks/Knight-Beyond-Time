@@ -17,6 +17,7 @@ public class LifeEnemy : MonoBehaviour
     [Header("Estadisticas Retroceso")]
     [SerializeField] private Vector2 knockbackForce;
     [SerializeField] private float minKnockbackTime;
+    private WaveManager waveManager;
 
     private void Start()
     {
@@ -31,18 +32,15 @@ public class LifeEnemy : MonoBehaviour
         int tempLife = currentLife - damageAmount;
         tempLife = Mathf.Clamp(tempLife, 0, maxLife);
         currentLife = tempLife;
-        if (currentLife <= 0) return;
 
-        if (currentLife == 0)
+        if (currentLife <= 0)
         {
             movementEnemy.ChangeToStateDead();
-            Destroy(gameObject, 1f);
-
+            waveManager?.NotifyEnemyDied();
             soltarMonedas();
-
+            Destroy(gameObject, 1f);
             return;
         }
-
             Knockback(sender);
         }
 
@@ -72,5 +70,10 @@ public class LifeEnemy : MonoBehaviour
         
         movementEnemy.ChangeToStateHurt(minKnockbackTime, force);
         animator.SetTrigger("Hit");
+    }
+
+    public void RegisterWaveManager(WaveManager manager)
+    {
+        waveManager = manager;
     }
 }
