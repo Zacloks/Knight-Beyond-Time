@@ -8683,6 +8683,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c3bba30827318c498c8ceca0953d06c, type: 3}
+--- !u!114 &1548752040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3433401114218977872, guid: 0c3bba30827318c498c8ceca0953d06c, type: 3}
+  m_PrefabInstance: {fileID: 1423156323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63edd86425c174c38847677bb89ee6b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Coin
 --- !u!1 &1561558912
 GameObject:
   m_ObjectHideFlags: 0
@@ -9255,6 +9266,10 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
+      propertyPath: dash
+      value: 
+      objectReference: {fileID: -7449098556809104598, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+    - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
       propertyPath: maxX
       value: 100000
       objectReference: {fileID: 0}
@@ -9262,6 +9277,22 @@ PrefabInstance:
       propertyPath: maxY
       value: 8.58
       objectReference: {fileID: 0}
+    - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
+      propertyPath: pick
+      value: 
+      objectReference: {fileID: -6664091815133272671, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+    - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
+      propertyPath: energyBar
+      value: 
+      objectReference: {fileID: 631159613668269110}
+    - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1879829770}
+    - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
+      propertyPath: coinCounter
+      value: 
+      objectReference: {fileID: 1548752040}
     - target: {fileID: 6328194494753898224, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -9714,6 +9745,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 802768423}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1879829770 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5567331905115673854, guid: 34ff4b8581a226e42879380c850f63ea, type: 3}
+  m_PrefabInstance: {fileID: 1768097194}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d861e2f86df540d9980dc58d8152d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1885629509
 GameObject:
   m_ObjectHideFlags: 0
@@ -10070,7 +10112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -3}
+  m_AnchoredPosition: {x: 0, y: -3.0000076}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1957672982
@@ -10745,6 +10787,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2554361405099210444, guid: 4bca6a3fc3e92904bab00e6a2080e980, type: 3}
   m_PrefabInstance: {fileID: 631159613668269108}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &631159613668269110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 912870135119211586, guid: 4bca6a3fc3e92904bab00e6a2080e980, type: 3}
+  m_PrefabInstance: {fileID: 631159613668269108}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016fa72a7e24f49e3ad362c0a0d198a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnergyBar
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
