@@ -9,8 +9,8 @@ public class SPUMEquipmentManager : MonoBehaviour
     // These will be auto-found based on naming conventions
     public Transform helmetTransform;
     public Transform armorTransform;
-    public Transform leftWeaponTransform;
-    public Transform rightWeaponTransform;
+    public Transform leftItemTransform;
+    public Transform rightItemTransform;
     public Transform shieldTransform;
     public Transform backTransform;
     
@@ -25,47 +25,45 @@ public class SPUMEquipmentManager : MonoBehaviour
 
     private SpriteRenderer helmetRenderer;
     private SpriteRenderer armorRenderer;
-    private SpriteRenderer leftWeaponRenderer;
-    private SpriteRenderer rightWeaponRenderer;
+    private SpriteRenderer leftItemRenderer;
+    private SpriteRenderer rightItemRenderer;
     private SpriteRenderer shieldRenderer;
     private SpriteRenderer backRenderer;
 
-    public void EquipWeapon(Sprite weaponSprite)
+    public void EquipItem(Sprite itemSprite)
     {
-        if (weaponSprite == null)
+        if (itemSprite == null)
         {
-            UnequipWeapon();
+            UnequipItem();
             return;
         }
         
-        if (rightWeaponRenderer != null)
+        if (rightItemRenderer != null)
         {
-            rightWeaponRenderer.sprite = weaponSprite;
-            rightWeaponRenderer.enabled = true;
+            rightItemRenderer.sprite = itemSprite;
+            rightItemRenderer.enabled = true;
         }
-        else if (rightWeaponTransform != null)
+        else if (rightItemTransform != null)
         {
-            SpriteRenderer sr = rightWeaponTransform.GetComponent<SpriteRenderer>();
+            SpriteRenderer sr = rightItemTransform.GetComponent<SpriteRenderer>();
             if (sr != null)
             {
-                sr.sprite = weaponSprite;
+                sr.sprite = itemSprite;
                 sr.enabled = true;
             }
         }
-        
-        Debug.Log($"Equipped weapon: {weaponSprite.name}");
     }
 
-    public void UnequipWeapon()
+    public void UnequipItem()
     {
-        if (rightWeaponRenderer != null)
+        if (rightItemRenderer != null)
         {
-            rightWeaponRenderer.sprite = null;
-            rightWeaponRenderer.enabled = false;
+            rightItemRenderer.sprite = null;
+            rightItemRenderer.enabled = false;
         }
-        else if (rightWeaponTransform != null)
+        else if (rightItemTransform != null)
         {
-            SpriteRenderer sr = rightWeaponTransform.GetComponent<SpriteRenderer>();
+            SpriteRenderer sr = rightItemTransform.GetComponent<SpriteRenderer>();
             if (sr != null)
             {
                 sr.sprite = null;
@@ -73,13 +71,13 @@ public class SPUMEquipmentManager : MonoBehaviour
             }
         }
         
-        if (leftWeaponRenderer != null)
+        if (leftItemRenderer != null)
         {
-            leftWeaponRenderer.enabled = false;
+            leftItemRenderer.enabled = false;
         }
-        else if (leftWeaponTransform != null)
+        else if (leftItemTransform != null)
         {
-            SpriteRenderer sr = leftWeaponTransform.GetComponent<SpriteRenderer>();
+            SpriteRenderer sr = leftItemTransform.GetComponent<SpriteRenderer>();
             if (sr != null)
             {
                 sr.enabled = false;

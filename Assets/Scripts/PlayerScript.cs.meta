@@ -1,2 +1,26 @@
 fileFormatVersion: 2
 guid: a29e9448bf3b144448f77a7254886190
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mover: {fileID: -3819753190812026520, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - atacar: {fileID: 434898793832103627, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - attackMagic: {fileID: -6198884845702736641, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - dash: {fileID: -7449098556809104598, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - dropearItem: {fileID: -6750844556082582177, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - cambiarItemLeft: {fileID: -280953274002633430, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - cambiarItemRight: {fileID: 8962515486156404428, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - pick: {fileID: -6664091815133272671, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
+  - entidad: {instanceID: 0}
+  - anim: {instanceID: 0}
+  - healthBar: {instanceID: 0}
+  - energyBar: {instanceID: 0}
+  - coinCounter: {instanceID: 0}
+  - spumBridge: {instanceID: 0}
+  - spumEquipment: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
