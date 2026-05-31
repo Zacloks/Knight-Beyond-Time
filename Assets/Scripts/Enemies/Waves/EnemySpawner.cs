@@ -7,6 +7,9 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("Vacío = usa los hijos de este GameObject automáticamente")]
     [SerializeField] private List<Transform> spawnPoints = new();
 
+    [Tooltip("Radio aleatorio alrededor del punto para que los enemigos no nazcan encimados")]
+    [SerializeField] private float spawnScatter = 0.6f;
+
     private void Awake()
     {
         if (spawnPoints.Count == 0)
@@ -25,18 +28,20 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < entry.count; i++)
             {
                 Transform point = GetSpawnPoint(entry.spawnPointIndex);
-                GameObject go = Instantiate(entry.enemyPrefab, point.position, point.rotation);
+                Vector3 scatter = (Vector3)(Random.insideUnitCircle * spawnScatter);
+                GameObject go = Instantiate(entry.enemyPrefab, point.position + scatter, point.rotation);
 
                 if (go.TryGetComponent<LifeEnemy>(out var lifeEnemy))
                 {
                     lifeEnemy.RegisterWaveManager(manager);
+                    // Solo contamos enemigos que pueden notificar su muerte;
+                    // de lo contrario la oleada nunca terminaría.
+                    total++;
                 }
                 else
                 {
-                    Debug.LogWarning($"[EnemySpawner] {go.name} no tiene LifeEnemy. No podrá notificar su muerte.");
+                    Debug.LogWarning($"[EnemySpawner] {go.name} no tiene LifeEnemy. No se contará para la oleada (no podría notificar su muerte).");
                 }
-
-                total++;
             }
         }
 

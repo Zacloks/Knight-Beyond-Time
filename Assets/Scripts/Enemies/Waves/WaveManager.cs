@@ -24,8 +24,21 @@ public class WaveManager : MonoBehaviour
     public void ActivateZone()
     {
         if (zoneActive) return;
+
+        if (spawner == null)
+        {
+            Debug.LogError("[WaveManager] No hay EnemySpawner asignado. No se puede activar la zona.");
+            return;
+        }
+        if (waves.Count == 0)
+        {
+            Debug.LogWarning("[WaveManager] No hay oleadas configuradas. Se desbloquea la zona directamente.");
+            zoneBlocker?.Unblock();
+            return;
+        }
+
         zoneActive = true;
-        zoneBlocker.Block();
+        zoneBlocker?.Block();
         StartCoroutine(RunWaves());
     }
 
@@ -39,7 +52,10 @@ public class WaveManager : MonoBehaviour
     {
         for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
         {
-            yield return new WaitForSeconds(timeBetweenWaves);
+            // La primera oleada aparece de inmediato al entrar a la zona;
+            // solo se espera entre oleada y oleada.
+            if (currentWaveIndex > 0)
+                yield return new WaitForSeconds(timeBetweenWaves);
 
             int spawned = spawner.SpawnWave(waves[currentWaveIndex], this);
             enemiesAlive += spawned;
@@ -51,7 +67,7 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("[WaveManager] ¡Zona completada!");
-        zoneBlocker.Unblock();
+        zoneBlocker?.Unblock();
         OnAllWavesCleared?.Invoke();
     }
 }

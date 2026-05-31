@@ -13,6 +13,7 @@ public class LifeEnemy : MonoBehaviour
     [Header("Estadisticas Vida")]
     [SerializeField] private int maxLife;
     private int currentLife;
+    private bool isDead = false;
 
     [Header("Estadisticas Retroceso")]
     [SerializeField] private Vector2 knockbackForce;
@@ -29,12 +30,17 @@ public class LifeEnemy : MonoBehaviour
 
     public void TakeDamage(int damageAmount, Vector2 sender)
     {
+        // Si ya está muriendo, ignoramos golpes extra. Evita que la lógica de
+        // muerte (y NotifyEnemyDied) se ejecute varias veces y descuadre la oleada.
+        if (isDead) return;
+
         int tempLife = currentLife - damageAmount;
         tempLife = Mathf.Clamp(tempLife, 0, maxLife);
         currentLife = tempLife;
 
         if (currentLife <= 0)
         {
+            isDead = true;
             movementEnemy.ChangeToStateDead();
             waveManager?.NotifyEnemyDied();
             soltarMonedas();
@@ -44,8 +50,17 @@ public class LifeEnemy : MonoBehaviour
             Knockback(sender);
         }
 
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
     private void soltarMonedas()
     {
+        // Sin prefab de moneda asignado no soltamos nada (evita Instantiate(null),
+        // que lanzaría excepción en cada muerte e impediría destruir al enemigo).
+        if (monedaPrefab == null) return;
+
         for (int i = 0; i < cantidadMonedas; i++)
         {
             Vector2 v = new Vector2(Random.Range(-1f, 1f), Random.Range(0f, 1f));
@@ -66,8 +81,13 @@ public class LifeEnemy : MonoBehaviour
     public void Knockback(Vector2 sender)
     {
         Vector2 direction = ((Vector2)transform.position - sender).normalized;
-        Vector2 force = new Vector2(Mathf.Sign(direction.x) * knockbackForce.x, 0f); // ← Y siempre 0
-        
+        // Si el atacante está justo encima del enemigo (misma posición), empujamos
+        // a la derecha por defecto para evitar un empuje nulo o errático.
+        if (direction == Vector2.zero) direction = Vector2.right;
+
+        // Empuje contrario al golpe, escalado por knockbackForce (x = horizontal, y = vertical).
+        Vector2 force = new Vector2(direction.x * knockbackForce.x, direction.y * knockbackForce.y);
+
         movementEnemy.ChangeToStateHurt(minKnockbackTime, force);
         animator.SetTrigger("Hit");
     }
