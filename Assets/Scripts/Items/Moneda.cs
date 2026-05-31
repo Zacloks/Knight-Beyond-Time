@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 
-public class Moneda : MonoBehaviour
+public class Moneda : Item
 {
     public int value = 10;
     private SpriteRenderer spriteRenderer;

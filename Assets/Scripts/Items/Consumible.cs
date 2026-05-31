@@ -2,12 +2,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 
-public class Consumible : MonoBehaviour
+public class Consumible : Item
 {
-    [Header("Atributos")]
-    public string name;
-    
-    
     void Start()
     {
         

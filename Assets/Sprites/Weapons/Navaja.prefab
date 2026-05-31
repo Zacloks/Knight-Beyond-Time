@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6225818160062723805}
   - component: {fileID: 1324587623003840237}
   m_Layer: 0
-  m_Name: arma_meele
+  m_Name: Navaja
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,10 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32c4b28d0998ce4d882201608a329d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponMelee
+  itemName: 
+  sprite: {fileID: 21300000, guid: 01c22b6d497e0484db647e3d384dfe67, type: 3}
   weaponName: "Arma Gen\xE9rica"
   damage: 10
   attackRate: 0.5
-  sprite: {fileID: 21300000, guid: 59a7f0c391e16bb4d98b4be022f6d461, type: 3}
   attackRadius: 1.5
   enemyLayer:
     serializedVersion: 2

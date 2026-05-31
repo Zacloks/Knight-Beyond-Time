@@ -13,7 +13,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using JetBrains.Annotations;
 using System.Net.Http.Headers;
-
 public class PlayerScript : MonoBehaviour
 {
     [Header("Movimiento y Límites")]
@@ -51,23 +50,17 @@ public class PlayerScript : MonoBehaviour
     public HealthBar healthBar;
     public EnergyBar energyBar; 
     public Coin coinCounter;
-    
     private Vector2 direccionMov;
     private Vector2 lastDirection = Vector2.right; 
     private int count;
     
     [Header("Sistema inventario")]
-    private int indexInventario = 0;
-    public Weapon[] inventario = new Weapon[5];
-    //public Weapon equippedWeapon = inventario[indexInventario];
+    public Inventory inventario;
     private Consumible alcanzable;
-
     [Header("SPUM Integration")]
-    public bool useSPUM = false; // Ponerlo como true si se usará un SPUM.
-    public SPUMPlayerBridge spumBridge;
+    public bool useSPUM = true; // Ponerlo como true si se usará un SPUM.
     public SPUMEquipmentManager spumEquipment;
-
-
+    public SPUMPlayerBridge spumBridge;
     void Start()
     {
         entidad = GetComponent<Rigidbody2D>();
@@ -84,9 +77,7 @@ public class PlayerScript : MonoBehaviour
 
         if(coinCounter != null) coinCounter.setCoins(coins);
 
-        //SetSpriteArma(equippedWeapon.sprite);
-        updateEquippedWeapon();
-
+        updateItem(inventario.getEquippedItem());
     }
 
     void Update()
@@ -124,16 +115,16 @@ public class PlayerScript : MonoBehaviour
 
         if (dropearItem != null && dropearItem.action.triggered)
         {
-            dropSpriteArma();
+            dropItem();
         }
 
         if (cambiarItemLeft != null && cambiarItemLeft.action.triggered)
         {
-            swapLeft();
+            swapLeftItem();
         }
         if (cambiarItemRight != null && cambiarItemRight.action.triggered)
         {
-            swapRight();
+            swapRightItem();
         }
     }
 
@@ -219,51 +210,29 @@ public class PlayerScript : MonoBehaviour
         float clampedY = Mathf.Clamp(entidad.position.y, minY, maxY);
         entidad.position = new Vector2(clampedX, clampedY);
     }
-
-    private void swapLeft()
+    private void swapLeftItem()
     {
-        if (indexInventario>0)
-        {
-            indexInventario--;
-        } else
-        {
-            indexInventario = 4;
-        }
-        Debug.Log(indexInventario);
-        updateEquippedWeapon();
+        updateItem(inventario.swapLeft());
     }
-
-    private void swapRight()
+    private void swapRightItem()
     {
-        if (indexInventario < 4)
-        {
-            indexInventario++;
-        } else
-        {
-            indexInventario = 0;
-        }
-        Debug.Log(indexInventario);
-        updateEquippedWeapon();
+        updateItem(inventario.swapRight());
     }
-
-    private void updateEquippedWeapon()
+    
+    private void updateItem(Item i)
     {
-        Weapon w = inventario[indexInventario];
-        if (w == null) spumEquipment.UnequipWeapon();
+        if (i == null) spumEquipment.UnequipItem();
         else if (useSPUM && spumEquipment != null) {
-            spumEquipment.EquipWeapon(w.sprite);
+            spumEquipment.EquipItem(i.sprite);
         } 
     }
-
-    private void dropSpriteArma()
+    private void dropItem()
     {
-        if (useSPUM && spumEquipment != null && inventario[indexInventario] != null) {
-            spumEquipment.UnequipWeapon();
-            inventario[indexInventario] = null;
-            Debug.Log("Botaste el item!");
+        inventario.dropItem();
+        if (useSPUM && spumEquipment != null) {
+            spumEquipment.UnequipItem();
         }
     }
-
     [Header("Inmunidad")]
     public float immuneTime = 2f;
     private float curInmuneTime;

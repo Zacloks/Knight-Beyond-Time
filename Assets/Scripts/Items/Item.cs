@@ -1,6 +1,7 @@
 using UnityEngine;
-
-public class dataItems
+public class Item : MonoBehaviour
 {
-    
+    [Header("Atributos")]
+    public string itemName;
+    public Sprite sprite;
 }
