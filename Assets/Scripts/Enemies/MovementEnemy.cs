@@ -8,13 +8,15 @@ public class MovementEnemy : MonoBehaviour
     private Vector2 moveDirection;
     public EnemyState currentState;
 
+    public Transform PlayerTransform => player;
+
     [Header("Estadisticas Movimiento")]
     public float movementSpeedBase;
 
     [Header("Animator")]
     private Animator animator;
     public bool chasing = false;
-    private AttackEnemy attackEnemy;
+    private IEnemyAttack attackEnemy;
 
     [Header("Hurt")]
     private float hurtEndTime;
@@ -38,7 +40,7 @@ public class MovementEnemy : MonoBehaviour
         GameObject playerObj = GameObject.FindWithTag("Player");
         player = playerObj.transform;
         animator = GetComponent<Animator>();
-        attackEnemy = GetComponent<AttackEnemy>();
+        attackEnemy = GetComponent<IEnemyAttack>();
     }
 
     private void Update()
@@ -67,13 +69,10 @@ public class MovementEnemy : MonoBehaviour
                 break;
         }
 
-        // Hurt maneja su propia velocidad (el frenado del empujón) y Dead queda quieto.
         if (currentState == EnemyState.Hurt || currentState == EnemyState.Dead) return;
 
         Vector2 desired = moveDirection * movementSpeedBase * 1.6f;
-        // Separación CONTINUA: se aplica también mientras atacan o están quietos, no
-        // solo al perseguir. Así los enemigos no se amontonan en una bola cuando uno
-        // se detiene a atacar. Se limita para que no domine sobre el movimiento.
+
         Vector2 separation = Vector2.ClampMagnitude(GetSeparation(), 1f) * separationStrength * movementSpeedBase;
         rb.linearVelocity = desired + separation;
     }
@@ -85,8 +84,6 @@ public class MovementEnemy : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // Se detiene al alcance real de su ataque (círculo del attackController),
-        // así mantiene la distancia justa en vez de pegarse al jugador.
         float stopDistance = attackEnemy != null ? attackEnemy.AttackReach : attackRange;
 
         if (distanceToPlayer <= stopDistance)
@@ -105,10 +102,6 @@ public class MovementEnemy : MonoBehaviour
         Vector2 enemyPos = transform.position;
         Vector2 playerPos = player.position;
 
-        // En vez de ir al centro exacto del jugador (lo que hace que todos se
-        // apilen en una bola), apuntamos a un punto del "anillo" alrededor del
-        // jugador en el ángulo donde ya estamos. Así cada enemigo se aproxima
-        // desde su propio lado y entre todos lo rodean.
         Vector2 fromPlayer = enemyPos - playerPos;
         if (fromPlayer.sqrMagnitude < 0.0001f) fromPlayer = Random.insideUnitCircle;
 
@@ -116,13 +109,8 @@ public class MovementEnemy : MonoBehaviour
         Vector2 ringPoint = playerPos + fromPlayer.normalized * ringRadius;
 
         moveDirection = (ringPoint - enemyPos).normalized;
-        // La separación se aplica de forma continua en FixedUpdate, no aquí.
     }
 
-    /*
-    Devuelve un vector que apunta lejos de los enemigos cercanos.
-    Los vecinos más pegados empujan más fuerte (peso 1 al tocarse, 0 al borde del radio).
-    */
     private Vector2 GetSeparation()
     {
         Vector2 separation = Vector2.zero;
@@ -136,10 +124,9 @@ public class MovementEnemy : MonoBehaviour
             float dist = away.magnitude;
             if (dist > 0.0001f)
                 separation += away.normalized * (1f - Mathf.Clamp01(dist / separationRadius));
-            else
-                // Dos enemigos exactamente encimados (ej. mismo punto de spawn):
-                // los empujamos en una dirección aleatoria para que se despeguen.
+            else{
                 separation += Random.insideUnitCircle.normalized;
+            }
         }
 
         return separation;
@@ -180,8 +167,6 @@ public class MovementEnemy : MonoBehaviour
     {
         moveDirection = Vector2.zero;
 
-        // El Rigidbody no tiene linearDamping, así que frenamos el empujón a mano
-        // para que el enemigo no patine de forma rara durante el aturdimiento.
         rb.linearVelocity *= knockbackDamping;
 
         if (Time.time > hurtEndTime)
@@ -195,8 +180,8 @@ public class MovementEnemy : MonoBehaviour
     {
         animator.SetBool("Chasing", false);
         currentState = EnemyState.Hurt;
-        hurtEndTime = Time.time + timeToWait;
-        
+        hurtEndTime = Time.time + Mathf.Max(timeToWait, 0.2f);
+
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(knockbackForce, ForceMode2D.Impulse);
     }
@@ -232,8 +217,6 @@ public class MovementEnemy : MonoBehaviour
 
     private bool LookingRight()
     {
-        // Comparamos por signo (no por igualdad exacta) para que el volteo
-        // funcione aunque el enemigo tenga una escala distinta de ±1.
         return transform.localScale.x < 0;
     }
 }

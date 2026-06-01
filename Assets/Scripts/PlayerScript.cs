@@ -88,8 +88,7 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        // 0. Contador de inmunidad: baja con el tiempo para que el jugador
-        //    vuelva a ser vulnerable tras immuneTime segundos.
+
         if (curInmuneTime > 0) curInmuneTime -= Time.deltaTime;
 
         // 1. Leer Inputs
@@ -226,8 +225,6 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Mientras dura el retroceso por daño no controlamos el movimiento:
-        // dejamos que la velocidad del empujón lleve al jugador hacia atrás.
         if (!isHurt)
         {
             // Movimiento físico
@@ -247,7 +244,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        // Clamping (Límites) — siempre, también durante el retroceso.
+        // Clamping (Límites)
         float clampedX = Mathf.Clamp(entidad.position.x, minX, maxX);
         float clampedY = Mathf.Clamp(entidad.position.y, minY, maxY);
         entidad.position = new Vector2(clampedX, clampedY);
@@ -282,8 +279,6 @@ public class PlayerScript : MonoBehaviour
     private void updateEquippedWeapon()
     {
         Weapon w = inventario[indexInventario];
-        // Guardas null: sin SPUM o sin equipo asignado no hacemos nada (antes
-        // lanzaba NullReferenceException al no tener arma ni spumEquipment).
         if (!useSPUM || spumEquipment == null) return;
 
         if (w == null) spumEquipment.UnequipWeapon();
@@ -308,7 +303,6 @@ public class PlayerScript : MonoBehaviour
     public float hurtDuration = 0.3f;
     private bool isHurt = false;
 
-    // Sobrecarga sin fuente: retrocede hacia atrás según la última dirección de avance.
     public void TakeDamage(int amount)
     {
         TakeDamage(amount, (Vector2)transform.position + lastDirection);
@@ -327,8 +321,6 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
         anim.SetTrigger("5_Debuff");
 
-        // Retroceso: empujar en dirección contraria a la fuente del daño y
-        // bloquear el control un instante mientras corre la animación de hurt.
         Vector2 dir = ((Vector2)transform.position - sourcePosition).normalized;
         if (dir == Vector2.zero) dir = -lastDirection;
         StartCoroutine(HurtRoutine(dir));
@@ -343,12 +335,6 @@ public class PlayerScript : MonoBehaviour
         isHurt = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // El daño por contacto con enemigos lo aplica el propio enemigo en
-        // Enemy.OnCollisionEnter2D (con crítico y sin dañar si está muriendo).
-        // No lo duplicamos aquí para que el daño por contacto sea consistente.
-    }
     private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("Salió la colisión");

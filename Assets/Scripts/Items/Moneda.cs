@@ -6,27 +6,31 @@ public class Moneda : MonoBehaviour
 {
     public int value = 10;
     private SpriteRenderer spriteRenderer;
-    
-    
-    public void Start()
+
+
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        spriteRenderer.color = new Color(0.2f, 0.6f, 1f); //Para probar
     }
 
     public void crearMoneda(int v)
     {
         value = v;
 
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+
         switch (value)
         {
+            case 1:
+                spriteRenderer.color = new Color(0.75f, 0.45f, 0.2f); // bronce
+                break;
+
             case 5:
-                spriteRenderer.color = new Color(1f, 0.85f, 0f);
+                spriteRenderer.color = new Color(1f, 0.85f, 0f); // oro
                 break;
 
             case 10:
-                spriteRenderer.color = new Color(0.2f, 0.6f, 1f); 
+                spriteRenderer.color = new Color(0.2f, 0.6f, 1f); // azul
                 break;
         }
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackEnemy : MonoBehaviour
+public class AttackEnemy : MonoBehaviour, IEnemyAttack
 {
     [Header("Referencias")]
     private Rigidbody2D rb;
@@ -43,8 +43,6 @@ public class AttackEnemy : MonoBehaviour
         movementEnemy.ChangeToStateAttack(attackDuration);
         rb.linearVelocity = Vector2.zero;
         animator.SetTrigger("Attack");
-        // La animación de ataque no tiene animation event, así que aplicamos
-        // el daño por código a mitad del swing (damageDelay).
         Invoke(nameof(Attack), damageDelay);
         }
     }
@@ -65,9 +63,6 @@ public class AttackEnemy : MonoBehaviour
             }
         }
     }
-
-    // Alcance efectivo del ataque: del enemigo hasta el borde del círculo del
-    // attackController. MovementEnemy lo usa para detenerse a la distancia justa.
     public float AttackReach
     {
         get
@@ -76,6 +71,8 @@ public class AttackEnemy : MonoBehaviour
             return Vector2.Distance(transform.position, attackController.position) + circleRadius;
         }
     }
+
+    public int AttackDamage => attackDamage;
 
     public void AttackFinished()
     {

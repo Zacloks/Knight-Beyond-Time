@@ -21,8 +21,6 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Awake()
     {
-        // Red de seguridad: si la durabilidad no se configuró en el Inspector
-        // (queda en 0), el arma nacería "rota" y no podría atacar. La llenamos.
         if (durabilidadActual <= 0)
             durabilidadActual = maxDurabilidad;
     }

@@ -52,8 +52,6 @@ public class WaveManager : MonoBehaviour
     {
         for (currentWaveIndex = 0; currentWaveIndex < waves.Count; currentWaveIndex++)
         {
-            // La primera oleada aparece de inmediato al entrar a la zona;
-            // solo se espera entre oleada y oleada.
             if (currentWaveIndex > 0)
                 yield return new WaitForSeconds(timeBetweenWaves);
 

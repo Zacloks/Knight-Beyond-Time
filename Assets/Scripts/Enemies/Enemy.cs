@@ -1,15 +1,19 @@
 using UnityEngine;
 
 /*
-Con solo añadir el script de EnemyNormal, EnemySpecial
-o Enemy Boss gracias a los RequireComponent automaticamente
-se le añaden los demas scripts
+Al añadir EnemyNormal, EnemySpecial o EnemyBoss, los RequireComponent agregan
+automaticamente Rigidbody2D, Animator, MovementEnemy y LifeEnemy.
+
+El TIPO (Normal/Special/Boss) es independiente del ESTILO DE ATAQUE: hay que
+añadir manualmente UNO de los dos componentes de ataque:
+  - AttackEnemy        -> cuerpo a cuerpo
+  - AttackEnemyRanged  -> a distancia
+Asi cualquier tipo puede ser melee o a distancia (ej. un boss a distancia).
 */
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(MovementEnemy))]
-[RequireComponent(typeof(AttackEnemy))]
 [RequireComponent(typeof(LifeEnemy))]
 
 public abstract class Enemy : MonoBehaviour
@@ -17,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Referencias")]
     protected MovementEnemy movementEnemy;
     protected LifeEnemy lifeEnemy;
-    protected AttackEnemy attackEnemy;
+    protected IEnemyAttack attackEnemy;
 
     [Header("Ajustes de Ataque")]
     public float attackDamage = 10f;
@@ -28,11 +32,16 @@ public abstract class Enemy : MonoBehaviour
     [Tooltip("Multiplicador de daño cuando el golpe es crítico")]
     public float multiplicadorCritico = 2f;
 
+    public virtual bool PuedeSoltarMonedas => false;
+
     protected virtual void Start()
     {
         movementEnemy = GetComponent<MovementEnemy>();
         lifeEnemy = GetComponent<LifeEnemy>();
-        attackEnemy = GetComponent<AttackEnemy>();
+        attackEnemy = GetComponent<IEnemyAttack>();
+
+        if (attackEnemy == null)
+            Debug.LogWarning($"{name}: falta un componente de ataque (AttackEnemy o AttackEnemyRanged).", this);
 
         if (movementEnemy != null)
         {
@@ -42,8 +51,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        // Un enemigo que ya está muriendo no debe seguir dañando al jugador
-        // durante su animación de muerte.
         if (lifeEnemy != null && lifeEnemy.IsDead()) return;
 
         if (collision.gameObject.CompareTag("Player"))
@@ -58,11 +65,6 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    /*
-    Calcula el daño final aplicando la probabilidad de crítico de este enemigo.
-    Si sale crítico, multiplica el daño y lo imprime por consola.
-    Usado tanto por el ataque (AttackEnemy) como por el daño de contacto.
-    */
     public int CalcularDanoConCritico(int danoBase)
     {
         if (Random.Range(0f, 100f) <= probabilidadCritico)
@@ -81,7 +83,7 @@ public abstract class Enemy : MonoBehaviour
 
   public int GetDamage()
     {
-        return attackEnemy.attackDamage;
+        return attackEnemy.AttackDamage;
     }
 
 }

@@ -6,9 +6,16 @@ public class LifeEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private MovementEnemy movementEnemy;
-    public GameObject monedaPrefab; 
-    public int cantidadMonedas = 2; 
-    private int[] posiblesValores = {1, 5, 10};
+    private Enemy enemy;
+
+    [Header("Monedas al morir")]
+    public GameObject monedaPrefab;
+    [Tooltip("Cantidad minima de monedas que suelta al morir")]
+    public int minMonedas = 2;
+    [Tooltip("Cantidad maxima de monedas que suelta al morir")]
+    public int maxMonedas = 4;
+    [Tooltip("Valores posibles de cada moneda (se elige uno al azar por moneda)")]
+    public int[] posiblesValores = {1, 5, 10};
 
     [Header("Estadisticas Vida")]
     [SerializeField] private int maxLife;
@@ -20,18 +27,33 @@ public class LifeEnemy : MonoBehaviour
     [SerializeField] private float minKnockbackTime;
     private WaveManager waveManager;
 
+    [Header("Debug (solo pruebas)")]
+    [Tooltip("Si esta activo, al pulsar la tecla debug este enemigo recibe dano")]
+    [SerializeField] private bool debugDanoActivo = true;
+    [SerializeField] private KeyCode debugTeclaDano = KeyCode.U;
+    [Tooltip("Dano que recibe al pulsar la tecla debug")]
+    [SerializeField] private int debugDano = 10;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         movementEnemy = GetComponent<MovementEnemy>();
+        enemy = GetComponent<Enemy>();
         currentLife = maxLife;
+    }
+
+    private void Update()
+    {
+        if (debugDanoActivo && !isDead && Input.GetKeyDown(debugTeclaDano))
+        {
+            TakeDamage(debugDano, transform.position);
+        }
     }
 
     public void TakeDamage(int damageAmount, Vector2 sender)
     {
-        // Si ya está muriendo, ignoramos golpes extra. Evita que la lógica de
-        // muerte (y NotifyEnemyDied) se ejecute varias veces y descuadre la oleada.
+
         if (isDead) return;
 
         int tempLife = currentLife - damageAmount;
@@ -57,11 +79,19 @@ public class LifeEnemy : MonoBehaviour
 
     private void soltarMonedas()
     {
-        // Sin prefab de moneda asignado no soltamos nada (evita Instantiate(null),
-        // que lanzaría excepción en cada muerte e impediría destruir al enemigo).
-        if (monedaPrefab == null) return;
+        if (enemy == null || !enemy.PuedeSoltarMonedas) return;
 
-        for (int i = 0; i < cantidadMonedas; i++)
+        if (monedaPrefab == null)
+        {
+            Debug.LogWarning($"{name}: deberia soltar monedas pero el campo 'monedaPrefab' del LifeEnemy esta vacio.", this);
+            return;
+        }
+        if (posiblesValores.Length == 0) return;
+
+        // Cantidad aleatoria entre min y max (ambos incluidos).
+        int cantidad = Random.Range(minMonedas, maxMonedas + 1);
+
+        for (int i = 0; i < cantidad; i++)
         {
             Vector2 v = new Vector2(Random.Range(-1f, 1f), Random.Range(0f, 1f));
             Vector2 posicionSpawn = (Vector2)transform.position + v;
@@ -69,24 +99,28 @@ public class LifeEnemy : MonoBehaviour
             GameObject nuevaMoneda = Instantiate(monedaPrefab, posicionSpawn, Quaternion.identity);
 
             Moneda scriptMoneda = nuevaMoneda.GetComponent<Moneda>();
-            
+
             if (scriptMoneda != null)
             {
-                int idx = Random.Range(0, 3);
+                int idx = Random.Range(0, posiblesValores.Length);
                 int valorElegido = posiblesValores[idx];
-                scriptMoneda.crearMoneda(valorElegido); 
+                scriptMoneda.crearMoneda(valorElegido);
             }
         }
     }
     public void Knockback(Vector2 sender)
     {
-        Vector2 direction = ((Vector2)transform.position - sender).normalized;
-        // Si el atacante está justo encima del enemigo (misma posición), empujamos
-        // a la derecha por defecto para evitar un empuje nulo o errático.
-        if (direction == Vector2.zero) direction = Vector2.right;
+        Vector2 origin = sender;
+        if (movementEnemy != null && movementEnemy.PlayerTransform != null)
+            origin = movementEnemy.PlayerTransform.position;
 
-        // Empuje contrario al golpe, escalado por knockbackForce (x = horizontal, y = vertical).
-        Vector2 force = new Vector2(direction.x * knockbackForce.x, direction.y * knockbackForce.y);
+        float dirX = transform.position.x - origin.x;
+
+        if (Mathf.Abs(dirX) < 0.01f) dirX = (transform.localScale.x < 0) ? -1f : 1f;
+        dirX = Mathf.Sign(dirX);
+
+        // Horizontal alejandose del jugador, con un pequeño pop vertical positivo.
+        Vector2 force = new Vector2(dirX * knockbackForce.x, knockbackForce.y);
 
         movementEnemy.ChangeToStateHurt(minKnockbackTime, force);
         animator.SetTrigger("Hit");

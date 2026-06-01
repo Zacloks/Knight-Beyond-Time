@@ -34,8 +34,6 @@ public class EnemySpawner : MonoBehaviour
                 if (go.TryGetComponent<LifeEnemy>(out var lifeEnemy))
                 {
                     lifeEnemy.RegisterWaveManager(manager);
-                    // Solo contamos enemigos que pueden notificar su muerte;
-                    // de lo contrario la oleada nunca terminaría.
                     total++;
                 }
                 else
