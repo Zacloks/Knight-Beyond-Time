@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,30 +19,35 @@ public class InventoryUI : MonoBehaviour
         ActualizarInterfaz();
     }
      public void ActualizarInterfaz()
- {
+    {
      int slotActivo = inventario.GetIndexSeleccionado();
     
      for (int i = 0; i < iconosSlots.Length; i++)
      {
+    
          // 1. Sincronizar el icono del ítem (tu lógica que ya funciona bien)
          if (i < inventario.slots.Length && inventario.slots[i] != null)
-         {
-             iconosSlots[i].sprite = inventario.slots[i].sprite;
-             iconosSlots[i].enabled = true; 
-         }
-         else
-         {
-             iconosSlots[i].sprite = slotVacioSprite;
+        {
+            iconosSlots[i].sprite = inventario.slots[i].sprite; 
+            iconosSlots[i].enabled = true; 
+        }
+        else
+        {
+           iconosSlots[i].sprite = slotVacioSprite;
+           iconosSlots[i].enabled = true; // Para que siempre se vea el fondo vacío
         }
 
        // 2. CORRECCIÓN: Manejo de los Marcos/Fondos
-       if (i == slotActivo)
-        {
-             fondosSlots[i].enabled = true;
-         }
-        else
+       if (i < fondosSlots.Length && fondosSlots[i] != null)
         { 
-           fondosSlots[i].enabled = false;
+            if (i == slotActivo)
+            {
+                fondosSlots[i].enabled = true;
+            }
+            else
+            { 
+                fondosSlots[i].enabled = false;
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using JetBrains.Annotations;
 using System.Net.Http.Headers;
+using UnityEngine.AI;
 public class PlayerScript : MonoBehaviour
 {
     [Header("Movimiento y Límites")]
@@ -56,7 +57,7 @@ public class PlayerScript : MonoBehaviour
     
     [Header("Sistema inventario")]
     public Inventory inventario;
-    private Consumible alcanzable;
+    private Item alcanzable;
     [Header("SPUM Integration")]
     public bool useSPUM = true; // Ponerlo como true si se usará un SPUM.
     public SPUMEquipmentManager spumEquipment;
@@ -130,13 +131,29 @@ public class PlayerScript : MonoBehaviour
 
     void EjecutarAtaque()
     {
-        if (anim != null)
+        ItemData item = inventario.getEquippedItem();
+
+        if (item != null)
+        {
+            item.Usar(this);
+        }
+
+        else if (anim != null)
         {
             // "2_Attack" es el nombre estándar del Trigger en SPUM
             anim.SetTrigger("2_Attack");
             Debug.Log("¡Ataque ejecutado con J!");
 
             StartCoroutine(AtackCoroutine());        
+        }
+    }
+
+    public void IniciarAnimacion(string nombreAnimacion)
+    {
+        if (anim != null)
+        {
+            anim.SetTrigger(nombreAnimacion);
+            StartCoroutine(AtackCoroutine());
         }
     }
 
@@ -219,7 +236,7 @@ public class PlayerScript : MonoBehaviour
         updateItem(inventario.swapRight());
     }
     
-    private void updateItem(Item i)
+    private void updateItem(ItemData i)
     {
         if (i == null) spumEquipment.UnequipItem();
         else if (useSPUM && spumEquipment != null) {
@@ -269,7 +286,21 @@ public class PlayerScript : MonoBehaviour
 
     private void Pick()
     {
-        alcanzable.Pick(this);
+        Item item;
+        if (inventario.full()) {
+            Debug.Log("Inventario Lleno");
+            return;
+        }
+        if (alcanzable.enVenta) item = alcanzable.Comprar(this);
+
+        else item = alcanzable;
+
+        if (item != null)
+        {
+            inventario.add(item.datos);
+            updateItem(inventario.getEquippedItem());
+            Destroy(item.gameObject);
+        }
         Debug.Log("Destruido??");
     }
 
@@ -278,7 +309,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("En alcance");
         if (collision.gameObject.CompareTag("Consumible"))
         {
-            Consumible item = collision.gameObject.GetComponent<Consumible>();
+            Item item = collision.gameObject.GetComponent<Item>();
             if (item != null)
             {
                 alcanzable = item;
@@ -303,12 +334,11 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Fuera de alcance");
     }
 
-    public void testVida(int vida)
+    public void buy(int price)
     {
-        currentHealth += vida;
+        coins -= price;
 
-        if (currentHealth > 100) currentHealth = 100;
-        healthBar.setHealth(currentHealth);
+        coinCounter.setCoins(coins);
     }
 
 }

@@ -17,6 +17,5 @@ public class Consumible : Item
     public void Pick(PlayerScript player)
     {
         Destroy(gameObject);
-        player.testVida(10);
     }
 }

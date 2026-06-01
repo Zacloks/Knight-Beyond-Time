@@ -1,0 +1,21 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "NuevaPocion", menuName = "Tienda/Pocion")]
+public class ConsumibleData : ItemData
+{
+    [Header("Atributos de Consumible")]
+    public int curacion = 20;
+    
+    public string triggerConsumir = "5_Debuff"; 
+
+    public override void Usar(PlayerScript jugador)
+    {
+        jugador.IniciarAnimacion(triggerConsumir);
+        
+        jugador.currentHealth += curacion; 
+        
+        jugador.inventario.dropItem();
+        
+        Debug.Log($"Bebiste {datos.nombreItem} y recuperaste salud.");
+    }
+}

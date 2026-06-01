@@ -1,11 +1,12 @@
+using System.Threading;
 using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     private int indexInventario = 0;
     public InventoryUI inventarioUI;
-    public Item[] slots = new Item[5];
+    public ItemData[] slots = new ItemData[5];
 
-    public Item swapRight()
+    public ItemData swapRight()
     {
         if (indexInventario < 4)
         {
@@ -18,7 +19,7 @@ public class Inventory : MonoBehaviour
         inventarioUI.ActualizarInterfaz();
         return slots[indexInventario];
     }
-    public Item swapLeft()
+    public ItemData swapLeft()
     {
         if (indexInventario>0)
         {
@@ -32,7 +33,7 @@ public class Inventory : MonoBehaviour
         return slots[indexInventario];
     }
 
-    public Item getEquippedItem()
+    public ItemData getEquippedItem()
     {
         return slots[indexInventario];
     }
@@ -47,4 +48,25 @@ public class Inventory : MonoBehaviour
     {
         return indexInventario;
     }
+
+    public bool full()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (slots[i] == null) return false;
+        }
+        return true;
+    }
+
+    public void add(ItemData item)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (slots[i] == null) {
+                slots[i] = item;
+                inventarioUI.ActualizarInterfaz();
+                return;
+            }
+        }
+    } 
 }
