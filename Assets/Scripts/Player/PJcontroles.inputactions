@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PICK",
+                    "type": "Button",
+                    "id": "a88b28a2-08e9-4eb3-86fe-60fd659f0225",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -165,7 +174,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard",
+                    "groups": "",
                     "action": "DASH",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -189,6 +198,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SWAP RIGHT ITEM",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8fce1d9a-71e8-4a2f-8a94-f93ac978dfff",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PICK",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -176,6 +176,14 @@ public class PJscript : MonoBehaviour
         }
     }
 
+    public void Pick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            
+        }
+    }
+
     public void Drop(InputAction.CallbackContext context)
     {
         if (context.performed) {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : Item
 {
     [Header("Atributos Base")]
     public string weaponName = "Arma Genérica";
@@ -50,12 +50,12 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    protected IEnumerator FlashRed(SpriteRenderer sprite)
+    protected IEnumerator FlashRed(SpriteRenderer spr)
     {
-        Color originalColor = sprite.color;
-        sprite.color = Color.red;
+        Color originalColor = spr.color;
+        spr.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        if (sprite != null) sprite.color = originalColor;
+        if (spr != null) spr.color = originalColor;
     }
 
     protected void ApplyKnockback(Collider2D enemyCollider, float force)
