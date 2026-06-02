@@ -124,7 +124,8 @@ public class MovementEnemy : MonoBehaviour
             float dist = away.magnitude;
             if (dist > 0.0001f)
                 separation += away.normalized * (1f - Mathf.Clamp01(dist / separationRadius));
-            else{
+            else
+            {
                 separation += Random.insideUnitCircle.normalized;
             }
         }

@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: f92bda7edea004d43821a98f682f8571
+guid: 8ec2662ec581cc94ab6c7fc143e3980a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4944230376442633554
-    second: Run_0
+      213: -2059313341184450652
+    second: spr_ArcherRun_strip_NoBkg_0
   - first:
-      213: -2274363484027164459
-    second: Run_1
+      213: 3298773136771543401
+    second: spr_ArcherRun_strip_NoBkg_1
   - first:
-      213: 8284087734974297348
-    second: Run_2
+      213: -2522910385747591830
+    second: spr_ArcherRun_strip_NoBkg_2
   - first:
-      213: 5304202850863732263
-    second: Run_3
+      213: 1517452464379883438
+    second: spr_ArcherRun_strip_NoBkg_3
   - first:
-      213: 2833043080597125133
-    second: Run_4
+      213: -4839675686180813581
+    second: spr_ArcherRun_strip_NoBkg_4
   - first:
-      213: -2217414122262695004
-    second: Run_5
+      213: 7017127527191711373
+    second: spr_ArcherRun_strip_NoBkg_5
   - first:
-      213: -4440497016933152808
-    second: Run_6
+      213: 2872329259373745873
+    second: spr_ArcherRun_strip_NoBkg_6
   - first:
-      213: 8676454946275842879
-    second: Run_7
+      213: -4445661109594356626
+    second: spr_ArcherRun_strip_NoBkg_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 23
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -134,13 +134,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_0
+      name: spr_ArcherRun_strip_NoBkg_0
       rect:
         serializedVersion: 2
-        x: 34
-        y: 32
-        width: 32
-        height: 38
+        x: 43
+        y: 51
+        width: 44
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,19 +149,129 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25d1f8be45f6d9440800000000000000
-      internalID: 4944230376442633554
+      spriteID: 4af5a794d69db63e0800000000000000
+      internalID: -2059313341184450652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_1
+      name: spr_ArcherRun_strip_NoBkg_1
       rect:
         serializedVersion: 2
-        x: 132
-        y: 33
-        width: 34
+        x: 171
+        y: 51
+        width: 44
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9617ed3b0b897cd20800000000000000
+      internalID: 3298773136771543401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherRun_strip_NoBkg_2
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 51
+        width: 45
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6dfe510f52dcfcd0800000000000000
+      internalID: -2522910385747591830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherRun_strip_NoBkg_3
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 51
+        width: 44
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaf67eef9f21f0510800000000000000
+      internalID: 1517452464379883438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherRun_strip_NoBkg_4
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 51
+        width: 42
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f40919ea9406dcb0800000000000000
+      internalID: -4839675686180813581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherRun_strip_NoBkg_5
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 51
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e80e1ce48d16160800000000000000
+      internalID: 7017127527191711373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_ArcherRun_strip_NoBkg_6
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 51
+        width: 35
         height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -171,20 +281,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d8e07c1676df60e0800000000000000
-      internalID: -2274363484027164459
+      spriteID: 1d6deee3e309cd720800000000000000
+      internalID: 2872329259373745873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_2
+      name: spr_ArcherRun_strip_NoBkg_7
       rect:
         serializedVersion: 2
-        x: 238
-        y: 32
-        width: 28
-        height: 37
+        x: 938
+        y: 51
+        width: 39
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,118 +303,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 405305b67edf6f270800000000000000
-      internalID: 8284087734974297348
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_3
-      rect:
-        serializedVersion: 2
-        x: 342
-        y: 32
-        width: 26
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 726d856d3605c9940800000000000000
-      internalID: 5304202850863732263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_4
-      rect:
-        serializedVersion: 2
-        x: 437
-        y: 32
-        width: 32
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d08be54fbadf05720800000000000000
-      internalID: 2833043080597125133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_5
-      rect:
-        serializedVersion: 2
-        x: 532
-        y: 34
-        width: 36
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4a3f89aaa992a31e0800000000000000
-      internalID: -2217414122262695004
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_6
-      rect:
-        serializedVersion: 2
-        x: 638
-        y: 32
-        width: 29
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8d784876d7f2062c0800000000000000
-      internalID: -4440497016933152808
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_7
-      rect:
-        serializedVersion: 2
-        x: 742
-        y: 32
-        width: 24
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f3bd376cdc5f86870800000000000000
-      internalID: 8676454946275842879
+      spriteID: e640cd266c6dd42c0800000000000000
+      internalID: -4445661109594356626
       vertices: []
       indices: 
       edges: []
@@ -323,14 +323,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Run_0: 4944230376442633554
-      Run_1: -2274363484027164459
-      Run_2: 8284087734974297348
-      Run_3: 5304202850863732263
-      Run_4: 2833043080597125133
-      Run_5: -2217414122262695004
-      Run_6: -4440497016933152808
-      Run_7: 8676454946275842879
+      spr_ArcherRun_strip_NoBkg_0: -2059313341184450652
+      spr_ArcherRun_strip_NoBkg_1: 3298773136771543401
+      spr_ArcherRun_strip_NoBkg_2: -2522910385747591830
+      spr_ArcherRun_strip_NoBkg_3: 1517452464379883438
+      spr_ArcherRun_strip_NoBkg_4: -4839675686180813581
+      spr_ArcherRun_strip_NoBkg_5: 7017127527191711373
+      spr_ArcherRun_strip_NoBkg_6: 2872329259373745873
+      spr_ArcherRun_strip_NoBkg_7: -4445661109594356626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

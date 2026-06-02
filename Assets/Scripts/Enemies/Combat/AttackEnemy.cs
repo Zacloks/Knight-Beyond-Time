@@ -39,24 +39,22 @@ public class AttackEnemy : MonoBehaviour, IEnemyAttack
 
         if (collider)
         {
-        lastAttackTime = Time.time;
-        movementEnemy.ChangeToStateAttack(attackDuration);
-        rb.linearVelocity = Vector2.zero;
-        animator.SetTrigger("Attack");
-        Invoke(nameof(Attack), damageDelay);
+            lastAttackTime = Time.time;
+            movementEnemy.ChangeToStateAttack(attackDuration);
+            rb.linearVelocity = Vector2.zero;
+            animator.SetTrigger("Attack");
+            Invoke(nameof(Attack), damageDelay);
         }
     }
 
     public void Attack()
     {
-        // Si el enemigo fue interrumpido (golpeado o muerto) antes de conectar el
-        // golpe, cancelamos el daño pendiente del Invoke.
         if (movementEnemy.currentState == EnemyState.Hurt || movementEnemy.currentState == EnemyState.Dead) return;
 
         Collider2D[] objectsHit = Physics2D.OverlapCircleAll(attackController.position, circleRadius, hittableLayers);
         foreach (Collider2D obj in objectsHit)
         {
-        if (obj.TryGetComponent(out PlayerScript playerScript))
+            if (obj.TryGetComponent(out PlayerScript playerScript))
             {
                 int danoFinal = enemy != null ? enemy.CalcularDanoConCritico(attackDamage) : attackDamage;
                 playerScript.TakeDamage(danoFinal, transform.position);

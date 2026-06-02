@@ -1,16 +1,5 @@
 using UnityEngine;
 
-/*
-Al añadir EnemyNormal, EnemySpecial o EnemyBoss, los RequireComponent agregan
-automaticamente Rigidbody2D, Animator, MovementEnemy y LifeEnemy.
-
-El TIPO (Normal/Special/Boss) es independiente del ESTILO DE ATAQUE: hay que
-añadir manualmente UNO de los dos componentes de ataque:
-  - AttackEnemy        -> cuerpo a cuerpo
-  - AttackEnemyRanged  -> a distancia
-Asi cualquier tipo puede ser melee o a distancia (ej. un boss a distancia).
-*/
-
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(MovementEnemy))]
@@ -81,7 +70,7 @@ public abstract class Enemy : MonoBehaviour
         lifeEnemy.TakeDamage(amount, sender);
     }
 
-  public int GetDamage()
+    public int GetDamage()
     {
         return attackEnemy.AttackDamage;
     }

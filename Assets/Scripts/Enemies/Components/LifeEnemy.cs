@@ -53,7 +53,6 @@ public class LifeEnemy : MonoBehaviour
 
     public void TakeDamage(int damageAmount, Vector2 sender)
     {
-
         if (isDead) return;
 
         int tempLife = currentLife - damageAmount;
@@ -69,8 +68,9 @@ public class LifeEnemy : MonoBehaviour
             Destroy(gameObject, 1f);
             return;
         }
-            Knockback(sender);
-        }
+
+        Knockback(sender);
+    }
 
     public bool IsDead()
     {
@@ -88,7 +88,6 @@ public class LifeEnemy : MonoBehaviour
         }
         if (posiblesValores.Length == 0) return;
 
-        // Cantidad aleatoria entre min y max (ambos incluidos).
         int cantidad = Random.Range(minMonedas, maxMonedas + 1);
 
         for (int i = 0; i < cantidad; i++)
@@ -119,7 +118,6 @@ public class LifeEnemy : MonoBehaviour
         if (Mathf.Abs(dirX) < 0.01f) dirX = (transform.localScale.x < 0) ? -1f : 1f;
         dirX = Mathf.Sign(dirX);
 
-        // Horizontal alejandose del jugador, con un pequeño pop vertical positivo.
         Vector2 force = new Vector2(dirX * knockbackForce.x, knockbackForce.y);
 
         movementEnemy.ChangeToStateHurt(minKnockbackTime, force);
