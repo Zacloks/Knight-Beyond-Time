@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4863024451338907397, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6239190279133019119, guid: 2c8b7b99dc1aeee4ba851af80080ffcd, type: 3}
       propertyPath: m_DefaultControlScheme
       value: Keyboard
@@ -147,6 +151,8 @@ MonoBehaviour:
   currentHealth: 0
   maxEnergy: 100
   currentEnergy: 0
+  immuneTime: 2
+  curInmuneTime: 0
   dashSpeed: 15
   coins: 0
   playerInput: {fileID: 6399124123843845771}

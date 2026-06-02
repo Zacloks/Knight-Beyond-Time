@@ -50,14 +50,14 @@ TagManager:
   - name: Level
     uniqueID: 964619205
     locked: 0
+  - name: Item
+    uniqueID: 2082590135
+    locked: 0
   - name: Player
     uniqueID: 2478440381
     locked: 0
   - name: UI
     uniqueID: 3090525353
-    locked: 0
-  - name: Item
-    uniqueID: 2082590135
     locked: 0
   m_RenderingLayers:
   - Default
