@@ -8,8 +8,10 @@ public class ItemData: ScriptableObject
         public string itemName;
         public int precio;
         public Sprite sprite;
+        public Item prefab;
+        public EfectoBase estrategiaEfecto;
 
-    public void Usar(PlayerScript player)
+    public virtual void Usar(PlayerScript player)
     {
         player.IniciarAnimacion("2_Attack");
     }

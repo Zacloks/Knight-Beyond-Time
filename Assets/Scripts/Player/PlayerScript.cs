@@ -44,6 +44,7 @@ public class PlayerScript : MonoBehaviour
     public float dashSpeed = 12;
     public bool isDashing = false;
     public bool isAtacking = false;
+    public bool isDrinking = false;
 
     [Header("Componentes")]
     public Rigidbody2D entidad;
@@ -54,6 +55,10 @@ public class PlayerScript : MonoBehaviour
     private Vector2 direccionMov;
     private Vector2 lastDirection = Vector2.right; 
     private int count;
+
+    [Header("Estados de pociones")]
+    public bool dashInfinito = false;
+    public float extraVelocidad = 1;
     
     [Header("Sistema inventario")]
     public Inventory inventario;
@@ -62,6 +67,7 @@ public class PlayerScript : MonoBehaviour
     public bool useSPUM = true; // Ponerlo como true si se usará un SPUM.
     public SPUMEquipmentManager spumEquipment;
     public SPUMPlayerBridge spumBridge;
+    private Item itemEnMano;
     void Start()
     {
         entidad = GetComponent<Rigidbody2D>();
@@ -99,12 +105,18 @@ public class PlayerScript : MonoBehaviour
         // 3. Animación de Movimiento y Giro
         if (anim != null)
         {
+            if (isAtacking || isDrinking)
+            {
+                if (anim != null) anim.SetFloat("Speed", 0);   
+                return;
+            }
+
             float fuerza = direccionMov.magnitude;
             anim.SetFloat("Speed", fuerza);
 
             // Flip: Girar el personaje según dirección
-            if (!isAtacking && direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
-            else if (!isAtacking && direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
+            if (direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
+            else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
         }
 
         // 4. Lógica de energía pasiva
@@ -135,12 +147,12 @@ public class PlayerScript : MonoBehaviour
 
         if (item != null)
         {
-            item.Usar(this);
+            itemEnMano.Usar(this);
+
         }
 
         else if (anim != null)
         {
-            // "2_Attack" es el nombre estándar del Trigger en SPUM
             anim.SetTrigger("2_Attack");
             Debug.Log("¡Ataque ejecutado con J!");
 
@@ -179,13 +191,18 @@ public class PlayerScript : MonoBehaviour
 
     void EjecutarDash()
     {
-        if (currentEnergy >= 60) {
-                currentEnergy -= 60;
-                energyBar.setEnergy(currentEnergy);
+        if (dashInfinito)
+        {
+            StartCoroutine(DashCoroutine());
+        }
+        else if (currentEnergy >= 60) 
+        {
+            currentEnergy -= 60;
+            energyBar.setEnergy(currentEnergy);
 
-                Debug.Log("Dash activado, energía: " + currentEnergy);
-                StartCoroutine(DashCoroutine());         
-            }
+            Debug.Log("Dash activado, energía: " + currentEnergy);
+            StartCoroutine(DashCoroutine());         
+        }
     }
 
     private IEnumerator DashCoroutine()
@@ -206,14 +223,20 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isDrinking)
+        {
+            entidad.linearVelocity = Vector2.zero;
+            return;
+        }
         // Movimiento físico
         if (direccionMov.sqrMagnitude < 0.01f) {
             entidad.linearVelocity = Vector2.zero;
+            // O entidad.linearVelocity = lastDirection * velocidadMov * 0.3f;
 
-            if (isDashing) entidad.linearVelocity = lastDirection * velocidadMov;
+            if (isDashing) entidad.linearVelocity = lastDirection * velocidadMov * extraVelocidad;
 
         } else {
-            entidad.linearVelocity = direccionMov * velocidadMov;
+            entidad.linearVelocity = direccionMov * velocidadMov * extraVelocidad;
 
             if (!isDashing)
             {
@@ -238,12 +261,34 @@ public class PlayerScript : MonoBehaviour
     
     private void updateItem(ItemData i)
     {
-        if (i == null) spumEquipment.UnequipItem();
-        else if (useSPUM && spumEquipment != null) {
+        if (itemEnMano != null)
+        {
+            Destroy(itemEnMano.gameObject);
+            itemEnMano = null;
+        }
+
+        if (i == null) 
+        {
+            if (useSPUM && spumEquipment != null) spumEquipment.UnequipItem();
+        } 
+        else if (useSPUM && spumEquipment != null) 
+        {
             spumEquipment.EquipItem(i.sprite);
         } 
+
+        if (i != null && i.prefab != null)
+        {
+            itemEnMano = Instantiate(i.prefab, transform);
+            itemEnMano.datos = i;
+            
+            SpriteRenderer sr = itemEnMano.GetComponent<SpriteRenderer>();
+            if (sr != null) sr.enabled = false;
+            
+            Collider2D col = itemEnMano.GetComponent<Collider2D>();
+            if (col != null) col.enabled = false;
+        }
     }
-    private void dropItem()
+    public void dropItem()
     {
         inventario.dropItem();
         if (useSPUM && spumEquipment != null) {
@@ -340,5 +385,55 @@ public class PlayerScript : MonoBehaviour
 
         coinCounter.setCoins(coins);
     }
+
+    public void IniciarAnimacionMitad(string nombreAnimacion)
+{
+    if (anim != null)
+    {
+        StartCoroutine(AnimacionMitadCoroutine(nombreAnimacion));
+    }
+}
+
+private IEnumerator AnimacionMitadCoroutine(string nombreAnimacion)
+{
+    anim.SetTrigger(nombreAnimacion);
+
+    yield return new WaitForEndOfFrame();
+
+    AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+    
+    float tiempoMitad = stateInfo.length / 2f;
+
+    yield return new WaitForSeconds(tiempoMitad);
+
+    anim.CrossFade("0_Idle", 0.05f); 
+}
+
+public void ActivarDashInfinito(float duracion)
+{
+    StartCoroutine(RutinaDashInfinito(duracion));
+}
+
+private IEnumerator RutinaDashInfinito(float duracion)
+{
+    dashInfinito = true;
+
+    yield return new WaitForSeconds(duracion);
+
+    dashInfinito = false;
+}
+
+    public void ActivarVelocidad(float aumento, float duracion)
+    {
+        StartCoroutine(RutinaVelocidad(aumento, duracion));
+    }
+    private IEnumerator RutinaVelocidad(float aumento, float duracion)
+{
+    extraVelocidad = aumento;
+
+        yield return new WaitForSeconds(duracion);
+
+        extraVelocidad = 1;
+}
 
 }

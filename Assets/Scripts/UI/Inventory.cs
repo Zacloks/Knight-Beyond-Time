@@ -60,6 +60,12 @@ public class Inventory : MonoBehaviour
 
     public void add(ItemData item)
     {
+        if (slots[indexInventario] == null)
+        {
+            slots[indexInventario] = item;
+            inventarioUI.ActualizarInterfaz();
+            return;
+        }
         for (int i = 0; i < 5; i++)
         {
             if (slots[i] == null) {

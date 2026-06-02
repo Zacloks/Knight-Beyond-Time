@@ -4,18 +4,15 @@ using UnityEngine;
 public class ConsumibleData : ItemData
 {
     [Header("Atributos de Consumible")]
-    public int curacion = 20;
     
-    public string triggerConsumir = "5_Debuff"; 
+    public string triggerConsumir = "2_Attack"; 
 
     public override void Usar(PlayerScript jugador)
     {
-        jugador.IniciarAnimacion(triggerConsumir);
-        
-        jugador.currentHealth += curacion; 
+        jugador.IniciarAnimacionMitad(triggerConsumir);
         
         jugador.inventario.dropItem();
         
-        Debug.Log($"Bebiste {datos.nombreItem} y recuperaste salud.");
+        Debug.Log($"Bebiste {itemName} y recuperaste salud.");
     }
 }

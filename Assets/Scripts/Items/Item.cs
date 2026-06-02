@@ -26,4 +26,9 @@ public class Item : MonoBehaviour
 
         return null;
     }
+
+    public virtual void Usar(PlayerScript jugador)
+    {
+        Debug.Log("Usando un item genérico.");
+    }
 }
