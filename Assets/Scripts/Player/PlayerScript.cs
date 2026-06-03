@@ -331,9 +331,17 @@ public class PlayerScript : MonoBehaviour
         
         if(healthBar != null) healthBar.setHealth(currentHealth);
 
-        curInmuneTime = immuneTime; 
+        curInmuneTime = immuneTime;
         Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
         anim.SetTrigger("5_Debuff");
+    }
+
+    // Sobrecarga de compatibilidad con el sistema de enemigos, que envía la
+    // posición del atacante (para knockback). Esta versión del player no usa
+    // knockback, así que la posición se ignora y aplica el daño normal.
+    public void TakeDamage(int amount, Vector2 sourcePosition)
+    {
+        TakeDamage(amount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
