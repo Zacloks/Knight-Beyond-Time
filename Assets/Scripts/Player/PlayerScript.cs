@@ -93,10 +93,10 @@ public class PlayerScript : MonoBehaviour
         if (!isDashing) direccionMov = mover.action.ReadValue<Vector2>();
 
         // 2. Lógica de Ataque (Tecla J)
-        if (!isDashing && atacar != null && atacar.action.triggered) EjecutarAtaque();
+        if (!isDashing && !isAtacking && atacar != null && atacar.action.triggered) EjecutarAtaque();
         
         // Lógica de Ataque Mágico (Tecla K)
-        if(!isDashing && attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
+        if(!isDashing && !isAtacking && attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
 
         if (!isAtacking && dash != null && dash.action.triggered && !isDashing) EjecutarDash();
 
@@ -147,8 +147,28 @@ public class PlayerScript : MonoBehaviour
 
         if (item != null)
         {
-            itemEnMano.Usar(this);
-
+            if (itemEnMano is Weapon armaActual)
+            {
+                bool ataqueExitoso = armaActual.Atacar(); 
+                if (ataqueExitoso) 
+                {
+                    string tipo = armaActual.GetType().Name;
+                    Debug.Log("Ataque confirmado. Arma: " + tipo);
+                    if (tipo == "WeaponMelee" && anim != null)
+                    {
+                        anim.SetTrigger("2_Attack");
+                    }
+                    StartCoroutine(AtackCoroutine());
+                }
+                else 
+                {
+                    Debug.Log("Ataque ignorado por Cooldown o falta de durabilidad.");
+                }
+            }
+            else
+            {
+                itemEnMano.Usar(this);
+            }
         }
 
         else if (anim != null)
@@ -180,12 +200,19 @@ public class PlayerScript : MonoBehaviour
 
     void EjecutarAtaqueMagic()
     {
-        if (anim != null)
+        if (itemEnMano != null && itemEnMano is Weapon armaActual)
         {
-            anim.SetTrigger("attackMagic");
-            Debug.Log("¡Ataque ejecutado con K!");
-
-            StartCoroutine(AtackCoroutine());       
+            bool exitoMagia = armaActual.AtaqueEspecial();
+            if (exitoMagia && anim != null)
+            {
+                anim.SetTrigger("attackMagic");
+                Debug.Log("¡Ataque Especial / Mágico ejecutado con K!");
+                StartCoroutine(AtackCoroutine());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay arma equipada para usar magia.");
         }
     }
 
