@@ -226,6 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dd9bc8df29caf4799c6e995ceac473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLife
+  monedaPrefab: {fileID: 0}
+  cantidadMonedas: 2
   maxLife: 40
   knockbackForce: {x: 2, y: 0}
   minKnockbackTime: 0.7
@@ -786,7 +788,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1816526915
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2806002409393085996, guid: 775a8b946740d18459addf19742a3945, type: 3}
@@ -797,7 +799,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &679043358
 PrefabInstance:
@@ -1030,7 +1032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257727169654118809, guid: 3e0dbfd9f162e0f49a3551ac94a9f259, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -1070,6 +1072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8a3f65dbdeedf4c81bfe08d7aca233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDistance
+  datos: {fileID: 0}
+  enVenta: 0
   weaponName: ' Arco Generico'
   damage: 10
   attackRate: 0.7
@@ -1423,17 +1427,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1944229902 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -6190891910962593590, guid: cfd91d130d523ec45bd51dd84be3260f, type: 3}
-  m_PrefabInstance: {fileID: 1854840194}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944229899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d04dc6b1f0de56e459dce1cfea5dbeb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponMagic
 --- !u!1001 &1950533260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2027,6 +2020,7 @@ MonoBehaviour:
   dropearItem: {fileID: 0}
   cambiarItemLeft: {fileID: 0}
   cambiarItemRight: {fileID: 0}
+  pick: {fileID: 0}
   maxHealth: 50
   currentHealth: 0
   maxEnergy: 100
@@ -2034,20 +2028,19 @@ MonoBehaviour:
   coins: 12
   dashSpeed: 12
   isDashing: 0
+  isAtacking: 0
+  isDrinking: 0
   entidad: {fileID: 1950533264}
   anim: {fileID: 1950533262}
   healthBar: {fileID: 0}
   energyBar: {fileID: 0}
-  coin: {fileID: 0}
-  inventario:
-  - {fileID: 1944229902}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  coinCounter: {fileID: 0}
+  dashInfinito: 0
+  extraVelocidad: 1
+  inventario: {fileID: 0}
   useSPUM: 0
-  spumBridge: {fileID: 0}
   spumEquipment: {fileID: 0}
+  spumBridge: {fileID: 0}
   immuneTime: 2
 --- !u!114 &1950533267
 MonoBehaviour:
