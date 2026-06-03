@@ -16,14 +16,6 @@ using System.Net.Http.Headers;
 using UnityEngine.AI;
 public class PlayerScript : MonoBehaviour
 {
-    [Header("Movimiento y Límites")]
-    public float velocidadMov = 7;
-   /* public float minX = -8.4f, maxX = 8.39f;
-    public float minY = -4.94f, maxY = 4.2f;
-*/
-    public float minX = -100000f, maxX = 10000f;
-    public float minY = -100000f, maxY = 46.49283f;
-
     [Header("Referencias de Input")]
     public InputActionReference mover;
     public InputActionReference atacar; 
@@ -34,6 +26,13 @@ public class PlayerScript : MonoBehaviour
     public InputActionReference cambiarItemRight;
     public InputActionReference pick;
 
+    [Header("Vectores de Movimiento")]
+    private Vector2 direccionMov;
+    private Vector2 lastDirection = Vector2.right; 
+
+    [Header("Límites")]
+    public float minX = -100000f, maxX = 10000f;
+    public float minY = -100000f, maxY = 46.49283f;
 
     [Header("Atributos RPG")]
     public int maxHealth = 100;
@@ -41,7 +40,11 @@ public class PlayerScript : MonoBehaviour
     public int maxEnergy = 100;
     public int currentEnergy;
     public int coins = 0;
-    public float dashSpeed = 12;
+    public float velocidadMov = 7f;
+    public float dashSpeed = 12f;
+    public float immuneTime = 2f;
+    
+    [Header("Estados")]
     public bool isDashing = false;
     public bool isAtacking = false;
     public bool isDrinking = false;
@@ -49,96 +52,91 @@ public class PlayerScript : MonoBehaviour
     [Header("Componentes")]
     public Rigidbody2D entidad;
     public Animator anim;
+
+    [Header("UI")]
     public HealthBar healthBar;
     public EnergyBar energyBar; 
     public Coin coinCounter;
-    private Vector2 direccionMov;
-    private Vector2 lastDirection = Vector2.right; 
-    private int count;
+    public Inventory inventario;
 
-    [Header("Estados de pociones")]
+    [Header("Estados de Pociones")]
     public bool dashInfinito = false;
     public float extraVelocidad = 1;
-    
-    [Header("Sistema inventario")]
-    public Inventory inventario;
-    private Item alcanzable;
+
     [Header("SPUM Integration")]
     public bool useSPUM = true; // Ponerlo como true si se usará un SPUM.
     public SPUMEquipmentManager spumEquipment;
     public SPUMPlayerBridge spumBridge;
     private Item itemEnMano;
+
+    [Header("Auxiliares")]
+    private int countTicks;
+    private Item alcanzable;
+    private float curInmuneTime;
+    
+
     void Start()
     {
         entidad = GetComponent<Rigidbody2D>();
 
-        // Localizar el Animator en el hijo para compatibilidad con SPUM
         if (anim == null) anim = GetComponentInChildren<Animator>();
 
         currentHealth = 50;
-        if (healthBar != null) healthBar.setMaxHealth(maxHealth);
-        healthBar.setHealth(currentHealth);
+        if (healthBar != null) 
+        {
+            healthBar.setMaxHealth(maxHealth);
+            healthBar.setHealth(currentHealth);
+        }
 
         currentEnergy = maxEnergy;
-        if(energyBar != null) energyBar.setMaxEnergy(maxEnergy);
+        if (energyBar != null) energyBar.setMaxEnergy(maxEnergy);
 
-        if(coinCounter != null) coinCounter.setCoins(coins);
+        if (coinCounter != null) coinCounter.setCoins(coins);
 
         updateItem(inventario.getEquippedItem());
     }
 
     void Update()
     {
-        // 1. Leer Inputs
-        if (!isDashing) direccionMov = mover.action.ReadValue<Vector2>();
+        if (!isDashing)
+        {
+            direccionMov = mover.action.ReadValue<Vector2>();
 
-        // 2. Lógica de Ataque (Tecla J)
-        if (!isDashing && !isAtacking && atacar != null && atacar.action.triggered) EjecutarAtaque();
-        
-        // Lógica de Ataque Mágico (Tecla K)
-        if(!isDashing && !isAtacking && attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
+            if (atacar != null && atacar.action.triggered) EjecutarAtaque();
 
-        if (!isAtacking && dash != null && dash.action.triggered && !isDashing) EjecutarDash();
+            if (attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
 
-        if (pick != null && pick.action.triggered && alcanzable != null) Pick();
+            if (!isAtacking && dash != null && dash.action.triggered) EjecutarDash();
 
-        // 3. Animación de Movimiento y Giro
+            if (pick != null && pick.action.triggered && alcanzable != null) Pick();
+        }
+
         if (anim != null)
         {
             if (isAtacking || isDrinking)
             {
-                if (anim != null) anim.SetFloat("Speed", 0);   
+                anim.SetFloat("Speed", 0);   
                 return;
             }
 
             float fuerza = direccionMov.magnitude;
             anim.SetFloat("Speed", fuerza);
 
-            // Flip: Girar el personaje según dirección
             if (direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
             else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
+
         }
 
-        // 4. Lógica de energía pasiva
-        count++;
-        if (count % 100 == 0 && currentEnergy < 100) {
+        countTicks++;
+        if (countTicks % 100 == 0 && currentEnergy < 100) {
             currentEnergy += 1;
             if (energyBar != null) energyBar.setEnergy(currentEnergy);
         }
 
-        if (dropearItem != null && dropearItem.action.triggered)
-        {
-            dropItem();
-        }
-
-        if (cambiarItemLeft != null && cambiarItemLeft.action.triggered)
-        {
-            swapLeftItem();
-        }
-        if (cambiarItemRight != null && cambiarItemRight.action.triggered)
-        {
-            swapRightItem();
-        }
+        if (dropearItem != null && dropearItem.action.triggered) dropItem();
+        if (cambiarItemLeft != null && cambiarItemLeft.action.triggered) swapLeftItem();
+        if (cambiarItemRight != null && cambiarItemRight.action.triggered)swapRightItem();
+        
     }
 
     void EjecutarAtaque()
@@ -322,9 +320,6 @@ public class PlayerScript : MonoBehaviour
             spumEquipment.UnequipItem();
         }
     }
-    [Header("Inmunidad")]
-    public float immuneTime = 2f;
-    private float curInmuneTime;
 
     public void TakeDamage(int amount)
     {
@@ -422,53 +417,53 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void IniciarAnimacionMitad(string nombreAnimacion)
-{
-    if (anim != null)
     {
-        StartCoroutine(AnimacionMitadCoroutine(nombreAnimacion));
+        if (anim != null)
+        {
+            StartCoroutine(AnimacionMitadCoroutine(nombreAnimacion));
+        }
     }
-}
 
-private IEnumerator AnimacionMitadCoroutine(string nombreAnimacion)
-{
-    anim.SetTrigger(nombreAnimacion);
-
-    yield return new WaitForEndOfFrame();
-
-    AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-    
-    float tiempoMitad = stateInfo.length / 2f;
-
-    yield return new WaitForSeconds(tiempoMitad);
-
-    anim.CrossFade("0_Idle", 0.05f); 
-}
-
-public void ActivarDashInfinito(float duracion)
-{
-    StartCoroutine(RutinaDashInfinito(duracion));
-}
-
-private IEnumerator RutinaDashInfinito(float duracion)
-{
-    dashInfinito = true;
-
-    yield return new WaitForSeconds(duracion);
-
-    dashInfinito = false;
-}
-
-    public void ActivarVelocidad(float aumento, float duracion)
+    private IEnumerator AnimacionMitadCoroutine(string nombreAnimacion)
     {
-        StartCoroutine(RutinaVelocidad(aumento, duracion));
+        anim.SetTrigger(nombreAnimacion);
+
+        yield return new WaitForEndOfFrame();
+
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        
+        float tiempoMitad = stateInfo.length / 2f;
+
+        yield return new WaitForSeconds(tiempoMitad);
+
+        anim.CrossFade("0_Idle", 0.05f); 
     }
-    private IEnumerator RutinaVelocidad(float aumento, float duracion)
-{
-    extraVelocidad = aumento;
+
+    public void ActivarDashInfinito(float duracion)
+    {
+        StartCoroutine(RutinaDashInfinito(duracion));
+    }
+
+    private IEnumerator RutinaDashInfinito(float duracion)
+    {
+        dashInfinito = true;
 
         yield return new WaitForSeconds(duracion);
 
-        extraVelocidad = 1;
-}
+        dashInfinito = false;
+    }
+
+        public void ActivarVelocidad(float aumento, float duracion)
+        {
+            StartCoroutine(RutinaVelocidad(aumento, duracion));
+        }
+        private IEnumerator RutinaVelocidad(float aumento, float duracion)
+    {
+        extraVelocidad = aumento;
+
+            yield return new WaitForSeconds(duracion);
+
+            extraVelocidad = 1;
+    }
 
 }
