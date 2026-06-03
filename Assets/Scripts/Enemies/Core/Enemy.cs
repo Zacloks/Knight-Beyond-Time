@@ -14,6 +14,8 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Ajustes de Ataque")]
     public float attackDamage = 10f;
+    private float lastContactDamageTime;
+    private float contactDamageCooldown = 0.5f;
 
     [Header("Ajustes de Crítico")]
     [Range(0f, 100f)] public float probabilidadCritico = 10f;
@@ -36,19 +38,18 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (lifeEnemy != null && lifeEnemy.IsDead()) return;
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (Time.time < lastContactDamageTime + contactDamageCooldown) return;
 
-        if (collision.gameObject.CompareTag("Player"))
+        PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
+        if (playerCtrl != null)
         {
-            PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
-            
-            if (playerCtrl != null)
-            {
-                playerCtrl.TakeDamage(CalcularDanoConCritico((int)attackDamage), transform.position);
-                Debug.Log("Enemigo dañó al jugador");
-            }
+            lastContactDamageTime = Time.time;
+            playerCtrl.TakeDamage(CalcularDanoConCritico((int)attackDamage), transform.position);
+            Debug.Log("Enemigo dañó al jugador");
         }
     }
 
@@ -63,7 +64,7 @@ public abstract class Enemy : MonoBehaviour
         return danoBase;
     }
 
-    public void TakeDamage(int amount, Vector2 sender)
+    public virtual void TakeDamage(int amount, Vector2 sender)
     {
         lifeEnemy.TakeDamage(amount, sender);
     }

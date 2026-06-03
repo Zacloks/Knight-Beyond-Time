@@ -16,7 +16,7 @@ public class LifeEnemy : MonoBehaviour
 
     [Header("Estadisticas Vida")]
     [SerializeField] private int maxLife;
-    private int currentLife;
+    public int currentLife { get; private set; }
     private bool isDead = false;
 
     [Header("Estadisticas Retroceso")]
