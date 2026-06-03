@@ -10,11 +10,8 @@ public class LifeEnemy : MonoBehaviour
 
     [Header("Monedas al morir")]
     public GameObject monedaPrefab;
-    [Tooltip("Cantidad minima de monedas que suelta al morir")]
     public int minMonedas = 2;
-    [Tooltip("Cantidad maxima de monedas que suelta al morir")]
     public int maxMonedas = 4;
-    [Tooltip("Valores posibles de cada moneda (se elige uno al azar por moneda)")]
     public int[] posiblesValores = {1, 5, 10};
 
     [Header("Estadisticas Vida")]
@@ -28,10 +25,8 @@ public class LifeEnemy : MonoBehaviour
     private WaveManager waveManager;
 
     [Header("Debug (solo pruebas)")]
-    [Tooltip("Si esta activo, al pulsar la tecla debug este enemigo recibe dano")]
     [SerializeField] private bool debugDanoActivo = true;
     [SerializeField] private KeyCode debugTeclaDano = KeyCode.U;
-    [Tooltip("Dano que recibe al pulsar la tecla debug")]
     [SerializeField] private int debugDano = 10;
 
     private void Start()
@@ -63,7 +58,7 @@ public class LifeEnemy : MonoBehaviour
         {
             isDead = true;
             movementEnemy.ChangeToStateDead();
-            waveManager?.NotifyEnemyDied();
+            waveManager?.NotifyEnemyDied(gameObject);
             soltarMonedas();
             Destroy(gameObject, 1f);
             return;

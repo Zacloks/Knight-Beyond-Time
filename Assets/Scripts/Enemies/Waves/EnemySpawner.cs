@@ -4,11 +4,12 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Puntos de spawn")]
-    [Tooltip("Vacío = usa los hijos de este GameObject automáticamente")]
     [SerializeField] private List<Transform> spawnPoints = new();
-
-    [Tooltip("Radio aleatorio alrededor del punto para que los enemigos no nazcan encimados")]
     [SerializeField] private float spawnScatter = 0.6f;
+    [SerializeField] private float minDistanceFromPlayer = 4f;
+
+    [SerializeField] private string playerTag = "Player";
+    private Transform player;
 
     private void Awake()
     {
@@ -17,33 +18,31 @@ public class EnemySpawner : MonoBehaviour
             foreach (Transform child in transform)
                 spawnPoints.Add(child);
         }
+
+        if (string.IsNullOrEmpty(playerTag)) playerTag = "Player";
+        GameObject playerObj = GameObject.FindWithTag(playerTag);
+        if (playerObj != null) player = playerObj.transform;
     }
 
-    public int SpawnWave(WaveData wave, WaveManager manager)
+    public GameObject SpawnEnemy(GameObject prefab, int spawnPointIndex, WaveManager manager)
     {
-        int total = 0;
-
-        foreach (var entry in wave.entries)
+        if (prefab == null)
         {
-            for (int i = 0; i < entry.count; i++)
-            {
-                Transform point = GetSpawnPoint(entry.spawnPointIndex);
-                Vector3 scatter = (Vector3)(Random.insideUnitCircle * spawnScatter);
-                GameObject go = Instantiate(entry.enemyPrefab, point.position + scatter, point.rotation);
-
-                if (go.TryGetComponent<LifeEnemy>(out var lifeEnemy))
-                {
-                    lifeEnemy.RegisterWaveManager(manager);
-                    total++;
-                }
-                else
-                {
-                    Debug.LogWarning($"[EnemySpawner] {go.name} no tiene LifeEnemy. No se contará para la oleada (no podría notificar su muerte).");
-                }
-            }
+            Debug.LogWarning("[EnemySpawner] Se pidió spawnear un prefab nulo.");
+            return null;
         }
 
-        return total;
+        Transform point = GetSpawnPoint(spawnPointIndex);
+        Vector3 scatter = (Vector3)(Random.insideUnitCircle * spawnScatter);
+        GameObject go = Instantiate(prefab, point.position + scatter, point.rotation);
+
+        if (go.TryGetComponent<LifeEnemy>(out var lifeEnemy))
+            lifeEnemy.RegisterWaveManager(manager);
+        else
+            Debug.LogWarning($"[EnemySpawner] {go.name} no tiene LifeEnemy; su muerte no se notificará a la oleada.");
+
+        manager.RegisterEnemy(go);
+        return go;
     }
 
     private Transform GetSpawnPoint(int index)
@@ -54,10 +53,34 @@ public class EnemySpawner : MonoBehaviour
             return transform;
         }
 
-        if (index < 0 || index >= spawnPoints.Count)
+        if (index >= 0 && index < spawnPoints.Count)
+            return spawnPoints[index];
+
+        return GetRandomPointAwayFromPlayer();
+    }
+
+    private Transform GetRandomPointAwayFromPlayer()
+    {
+        if (player == null || minDistanceFromPlayer <= 0f)
             return spawnPoints[Random.Range(0, spawnPoints.Count)];
 
-        return spawnPoints[index];
+        List<Transform> faraway = new();
+        foreach (Transform p in spawnPoints)
+            if (p != null && Vector2.Distance(p.position, player.position) >= minDistanceFromPlayer)
+                faraway.Add(p);
+
+        if (faraway.Count > 0)
+            return faraway[Random.Range(0, faraway.Count)];
+
+        Transform farthest = null;
+        float best = -1f;
+        foreach (Transform p in spawnPoints)
+        {
+            if (p == null) continue;
+            float d = Vector2.Distance(p.position, player.position);
+            if (d > best) { best = d; farthest = p; }
+        }
+        return farthest != null ? farthest : transform;
     }
 
     private void OnDrawGizmos()

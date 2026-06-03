@@ -21,7 +21,6 @@ public class MovementEnemy : MonoBehaviour
     [Header("Hurt")]
     private float hurtEndTime;
     public float hurtDuration = 0.5f;
-    [Tooltip("Cuánto conserva la velocidad del empujón cada FixedUpdate (0-1). Menor = frena más rápido.")]
     [Range(0f, 1f)] public float knockbackDamping = 0.85f;
 
     [Header("Ataque")]
@@ -29,9 +28,7 @@ public class MovementEnemy : MonoBehaviour
     public float attackCooldown = 1f;
 
     [Header("Separación (anti-amontonamiento)")]
-    [Tooltip("Radio en el que el enemigo detecta a otros enemigos para no encimarse")]
     public float separationRadius = 1.3f;
-    [Tooltip("Qué tanto pesa la separación frente a perseguir al jugador")]
     public float separationStrength = 1.8f;
 
     private void Start()
@@ -69,7 +66,7 @@ public class MovementEnemy : MonoBehaviour
                 break;
         }
 
-        if (currentState == EnemyState.Hurt || currentState == EnemyState.Dead) return;
+        if (currentState == EnemyState.Hurt || currentState == EnemyState.Dead || currentState == EnemyState.Attack) return;
 
         Vector2 desired = moveDirection * movementSpeedBase * 1.6f;
 
@@ -80,8 +77,6 @@ public class MovementEnemy : MonoBehaviour
     // CHASE
     private void ChaseBehavior()
     {
-        animator.SetBool("Chasing", true);
-
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         float stopDistance = attackEnemy != null ? attackEnemy.AttackReach : attackRange;
@@ -89,10 +84,11 @@ public class MovementEnemy : MonoBehaviour
         if (distanceToPlayer <= stopDistance)
         {
             moveDirection = Vector2.zero;
-            ChangeToStateAttack();
+            animator.SetBool("Chasing", false);
         }
         else
         {
+            animator.SetBool("Chasing", true);
             Chase();
         }
     }
@@ -150,11 +146,6 @@ public class MovementEnemy : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         hurtEndTime = Time.time + duration;
         currentState = EnemyState.Attack;
-    }
-
-    private void ChangeToStateAttack()
-    {
-        ChangeToStateAttack(0f);
     }
 
     public void ChangeToStateChase()

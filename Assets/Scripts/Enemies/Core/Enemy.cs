@@ -16,9 +16,7 @@ public abstract class Enemy : MonoBehaviour
     public float attackDamage = 10f;
 
     [Header("Ajustes de Crítico")]
-    [Tooltip("Probabilidad (0-100) de que este enemigo haga un golpe crítico")]
     [Range(0f, 100f)] public float probabilidadCritico = 10f;
-    [Tooltip("Multiplicador de daño cuando el golpe es crítico")]
     public float multiplicadorCritico = 2f;
 
     public virtual bool PuedeSoltarMonedas => false;

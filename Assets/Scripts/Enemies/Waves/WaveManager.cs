@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
     public UnityEvent<int, int> OnWaveStarted;
 
     private int currentWaveIndex = 0;
-    private int enemiesAlive = 0;
+    private readonly List<GameObject> liveEnemies = new();
     private bool zoneActive = false;
 
     public void ActivateZone()
@@ -42,10 +42,21 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(RunWaves());
     }
 
-    public void NotifyEnemyDied()
+    public void RegisterEnemy(GameObject enemy)
     {
-        enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
-        Debug.Log($"[WaveManager] Enemigos restantes: {enemiesAlive}");
+        if (enemy != null) liveEnemies.Add(enemy);
+    }
+
+    public void NotifyEnemyDied(GameObject enemy)
+    {
+        liveEnemies.Remove(enemy);
+        Debug.Log($"[WaveManager] Enemigos vivos: {AliveCount()}");
+    }
+
+    private int AliveCount()
+    {
+        liveEnemies.RemoveAll(e => e == null);
+        return liveEnemies.Count;
     }
 
     private IEnumerator RunWaves()
@@ -55,18 +66,66 @@ public class WaveManager : MonoBehaviour
             if (currentWaveIndex > 0)
                 yield return new WaitForSeconds(timeBetweenWaves);
 
-            int spawned = spawner.SpawnWave(waves[currentWaveIndex], this);
-            enemiesAlive += spawned;
+            WaveData wave = waves[currentWaveIndex];
+
+            List<EnemySpawnEntry> queue = BuildSpawnQueue(wave);
+            int cap = wave.maxConcurrent <= 0 ? int.MaxValue : wave.maxConcurrent;
 
             OnWaveStarted?.Invoke(currentWaveIndex + 1, waves.Count);
-            Debug.Log($"[WaveManager] Oleada {currentWaveIndex + 1}/{waves.Count} — {spawned} enemigos");
+            Debug.Log($"[WaveManager] Oleada {currentWaveIndex + 1}/{waves.Count} — {queue.Count} enemigos (máx en pantalla: {(cap == int.MaxValue ? "sin límite" : cap.ToString())})");
 
-            yield return new WaitUntil(() => enemiesAlive == 0);
+            int idx = 0;
+            while (idx < queue.Count)
+            {
+                if (AliveCount() < cap)
+                {
+                    EnemySpawnEntry unit = queue[idx];
+                    idx++;
+
+                    GameObject go = spawner.SpawnEnemy(unit.enemyPrefab, unit.spawnPointIndex, this);
+                    if (go == null) continue;
+
+                    if (wave.spawnInterval > 0f)
+                        yield return new WaitForSeconds(wave.spawnInterval);
+                    else
+                        yield return null;
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+
+            yield return new WaitUntil(() => AliveCount() == 0);
         }
 
         Debug.Log("[WaveManager] ¡Zona completada!");
         zoneBlocker?.Unblock();
         OnAllWavesCleared?.Invoke();
+    }
+
+    private List<EnemySpawnEntry> BuildSpawnQueue(WaveData wave)
+    {
+        List<EnemySpawnEntry> queue = new();
+
+        foreach (EnemySpawnEntry entry in wave.entries)
+        {
+            if (entry.enemyPrefab == null)
+            {
+                Debug.LogWarning("[WaveManager] Una entrada de oleada no tiene prefab asignado; se ignora.");
+                continue;
+            }
+            for (int i = 0; i < entry.count; i++)
+                queue.Add(entry);
+        }
+
+        for (int i = queue.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (queue[i], queue[j]) = (queue[j], queue[i]);
+        }
+
+        return queue;
     }
 }
 
@@ -75,6 +134,10 @@ public class WaveManager : MonoBehaviour
 public class WaveData
 {
     public List<EnemySpawnEntry> entries;
+
+    [Header("Ritmo (estilo Castle Crashers)")]
+    [Min(0)] public int maxConcurrent = 5;
+    [Min(0f)] public float spawnInterval = 0.5f;
 }
 
 [System.Serializable]

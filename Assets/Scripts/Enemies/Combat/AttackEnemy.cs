@@ -16,8 +16,6 @@ public class AttackEnemy : MonoBehaviour, IEnemyAttack
     [SerializeField] private float timeBetweenAttacks;
     private float lastAttackTime;
     [SerializeField] private float attackDuration;
-    [SerializeField] private float timeToWaitAfterAttack;
-    [Tooltip("Segundos tras iniciar el ataque en que conecta el golpe. Debe ser menor que attackDuration.")]
     [SerializeField] private float damageDelay = 0.2f;
 
     void Start()
@@ -34,6 +32,7 @@ public class AttackEnemy : MonoBehaviour, IEnemyAttack
         if (movementEnemy.currentState == EnemyState.Dead) return;
         if (movementEnemy.currentState == EnemyState.Attack) return;
         if (Time.time < lastAttackTime + timeBetweenAttacks) return;
+        if (attackController == null) return;
 
         Collider2D collider = Physics2D.OverlapCircle(attackController.position, circleRadius, hittableLayers);
 

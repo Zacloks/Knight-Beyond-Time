@@ -10,17 +10,13 @@ public class AttackEnemyRanged : MonoBehaviour, IEnemyAttack
     private Transform player;
 
     [Header("Ataque a distancia")]
-    [Tooltip("Prefab del proyectil (debe tener el script EnemyProjectile)")]
     [SerializeField] private GameObject projectilePrefab;
-    [Tooltip("Punto desde donde sale el proyectil. Si esta vacio se usa la posicion del enemigo")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private int attackDamage = 8;
-    [Tooltip("Distancia a la que dispara y a la que se mantiene del jugador")]
     [SerializeField] private float shootRange = 6f;
     [SerializeField] private float projectileSpeed = 9f;
     [SerializeField] private float timeBetweenAttacks = 1.5f;
     [SerializeField] private float attackDuration = 0.6f;
-    [Tooltip("Segundos tras iniciar el disparo en que sale el proyectil. Debe ser menor que attackDuration.")]
     [SerializeField] private float shootDelay = 0.25f;
 
     private float lastAttackTime;
