@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48031b5978914f08b60358e453aa504, type: 3}
   m_Name: PocionVida
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Pocion de Vida
+  itemName: "Poci\xF3n de Vida"
   precio: 5
   sprite: {fileID: 6327157400758192171, guid: 9f23b1164da3a4cecac54bb41de29101, type: 3}
   prefab: {fileID: 4475153802008187025, guid: e6d59e35e514a4e7386664d553188ed1, type: 3}

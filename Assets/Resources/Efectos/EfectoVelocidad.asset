@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d390e25fe99c44eff80708989d3bf65e, type: 3}
   m_Name: EfectoVelocidad
   m_EditorClassIdentifier: Assembly-CSharp::EfectoVelocidad
-  aumento: 1.5
+  aumento: 3
   duracion: 5

@@ -14,6 +14,7 @@ using UnityEngine.Rendering.Universal;
 using JetBrains.Annotations;
 using System.Net.Http.Headers;
 using UnityEngine.AI;
+using Cinemachine;
 public class PlayerScript : MonoBehaviour
 {
     [Header("Referencias de Input")]
@@ -445,17 +446,15 @@ public class PlayerScript : MonoBehaviour
         dashInfinito = false;
     }
 
-        public void ActivarVelocidad(float aumento, float duracion)
-        {
-            StartCoroutine(RutinaVelocidad(aumento, duracion));
-        }
-        private IEnumerator RutinaVelocidad(float aumento, float duracion)
+    public void ActivarVelocidad(float aumento, float duracion)
+    {
+        StartCoroutine(RutinaVelocidad(aumento, duracion));
+    }
+    private IEnumerator RutinaVelocidad(float aumento, float duracion)
     {
         extraVelocidad = aumento;
-
-            yield return new WaitForSeconds(duracion);
-
-            extraVelocidad = 1;
+        yield return new WaitForSeconds(duracion);
+        extraVelocidad = 1;
     }
 
 }
