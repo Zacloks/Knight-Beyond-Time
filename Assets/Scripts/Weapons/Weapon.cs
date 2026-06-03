@@ -19,6 +19,12 @@ public abstract class Weapon : Item
     public int maxDurabilidad = 20;
     public int durabilidadActual;
 
+    protected virtual void Awake()
+    {
+        if (durabilidadActual <= 0)
+            durabilidadActual = maxDurabilidad;
+    }
+
     public abstract bool Atacar();
 
     public virtual bool AtaqueEspecial()
