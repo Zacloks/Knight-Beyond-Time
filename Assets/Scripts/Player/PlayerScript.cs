@@ -145,8 +145,28 @@ public class PlayerScript : MonoBehaviour
 
         if (item != null)
         {
-            itemEnMano.Usar(this);
-
+            if (itemEnMano is Weapon armaActual)
+            {
+                bool ataqueExitoso = armaActual.Atacar(); 
+                if (ataqueExitoso) 
+                {
+                    string tipo = armaActual.GetType().Name;
+                    Debug.Log("Ataque confirmado. Arma: " + tipo);
+                    if (tipo == "WeaponMelee" && anim != null)
+                    {
+                        anim.SetTrigger("2_Attack");
+                    }
+                    StartCoroutine(AtackCoroutine());
+                }
+                else 
+                {
+                    Debug.Log("Ataque ignorado por Cooldown o falta de durabilidad.");
+                }
+            }
+            else
+            {
+                itemEnMano.Usar(this);
+            }
         }
 
         else if (anim != null)
@@ -178,12 +198,19 @@ public class PlayerScript : MonoBehaviour
 
     void EjecutarAtaqueMagic()
     {
-        if (anim != null)
+        if (itemEnMano != null && itemEnMano is Weapon armaActual)
         {
-            anim.SetTrigger("attackMagic");
-            Debug.Log("¡Ataque ejecutado con K!");
-
-            StartCoroutine(AtackCoroutine());       
+            bool exitoMagia = armaActual.AtaqueEspecial();
+            if (exitoMagia && anim != null)
+            {
+                anim.SetTrigger("attackMagic");
+                Debug.Log("¡Ataque Especial / Mágico ejecutado con K!");
+                StartCoroutine(AtackCoroutine());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay arma equipada para usar magia.");
         }
     }
 
