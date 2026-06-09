@@ -35,10 +35,19 @@ public class MovementEnemy : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        player = playerObj.transform;
         animator = GetComponent<Animator>();
         attackEnemy = GetComponent<IEnemyAttack>();
+        TryFindPlayer();
+    }
+
+    private bool TryFindPlayer()
+    {
+        if (player != null) return true;
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null) player = playerObj.transform;
+
+        return player != null;
     }
 
     private void Update()
@@ -78,6 +87,13 @@ public class MovementEnemy : MonoBehaviour
     // CHASE
     private void ChaseBehavior()
     {
+        if (!TryFindPlayer())
+        {
+            moveDirection = Vector2.zero;
+            animator.SetBool("Chasing", false);
+            return;
+        }
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         float stopDistance = attackEnemy != null ? attackEnemy.AttackReach : attackRange;

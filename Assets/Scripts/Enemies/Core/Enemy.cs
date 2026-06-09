@@ -71,7 +71,7 @@ public abstract class Enemy : MonoBehaviour
 
     public int GetDamage()
     {
-        return attackEnemy.AttackDamage;
+        return attackEnemy != null ? attackEnemy.AttackDamage : Mathf.RoundToInt(attackDamage);
     }
 
 }

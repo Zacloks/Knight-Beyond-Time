@@ -336,25 +336,11 @@ public class PlayerScript : MonoBehaviour
         anim.SetTrigger("5_Debuff");
     }
 
-    // Sobrecarga de compatibilidad con el sistema de enemigos, que envía la
-    // posición del atacante (para knockback). Esta versión del player no usa
-    // knockback, así que la posición se ignora y aplica el daño normal.
     public void TakeDamage(int amount, Vector2 sourcePosition)
     {
         TakeDamage(amount);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                TakeDamage(enemy.GetDamage());
-            }
-        }
-    }
     private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("Salió la colisión");
