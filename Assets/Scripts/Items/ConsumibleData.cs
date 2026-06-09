@@ -7,11 +7,11 @@ public class ConsumibleData : ItemData
     
     public string triggerConsumir = "2_Attack"; 
 
-    public override void Usar(PlayerScript jugador)
+    public void Usar(PlayerScript jugador, PlayerInventory inventory)
     {
         jugador.IniciarAnimacionMitad(triggerConsumir);
         
-        jugador.inventario.dropItem();
+        inventory.DropItem();
         
         Debug.Log($"Bebiste {itemName} y recuperaste salud.");
     }

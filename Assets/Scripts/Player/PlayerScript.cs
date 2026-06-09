@@ -1,468 +1,63 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using System;
-using System.Collections;
-using System.Data;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
-using JetBrains.Annotations;
-using System.Net.Http.Headers;
-using UnityEngine.AI;
-using Cinemachine;
 public class PlayerScript : MonoBehaviour
 {
-    [Header("Referencias de Input")]
-    public InputActionReference mover;
-    public InputActionReference atacar; 
-    public InputActionReference attackMagic; 
-    public InputActionReference dash;
-    public InputActionReference dropearItem;
-    public InputActionReference cambiarItemLeft;
-    public InputActionReference cambiarItemRight;
-    public InputActionReference pick;
+    //REFERENCIAS
+    public PlayerMovement   Movement;
+    public PlayerCombat     Combat;
+    public PlayerStats      Stats;
+    public PlayerInventory  Inventory;
+    public PlayerInteraction Interaction;
+    private PlayerAnimator Animator;
 
-    [Header("Vectores de Movimiento")]
-    private Vector2 direccionMov;
-    private Vector2 lastDirection = Vector2.right; 
-
-    [Header("Límites")]
-    public float minX = -100000f, maxX = 10000f;
-    public float minY = -100000f, maxY = 46.49283f;
-
-    [Header("Atributos RPG")]
-    public int maxHealth = 100;
-    public int currentHealth;
-    public int maxEnergy = 100;
-    public int currentEnergy;
-    public int coins = 0;
-    public float velocidadMov = 7f;
-    public float dashSpeed = 12f;
-    public float immuneTime = 2f;
-    
     [Header("Estados")]
-    public bool isDashing = false;
-    public bool isAtacking = false;
     public bool isDrinking = false;
 
-    [Header("Componentes")]
-    public Rigidbody2D entidad;
-    public Animator anim;
-
-    [Header("UI")]
-    public HealthBar healthBar;
-    public EnergyBar energyBar; 
-    public Coin coinCounter;
-    public Inventory inventario;
-
-    [Header("Estados de Pociones")]
-    public bool dashInfinito = false;
-    public float extraVelocidad = 1;
-
-    [Header("SPUM Integration")]
-    public bool useSPUM = true; // Ponerlo como true si se usará un SPUM.
-    public SPUMEquipmentManager spumEquipment;
-    public SPUMPlayerBridge spumBridge;
-    private Item itemEnMano;
-
-    [Header("Auxiliares")]
-    private int countTicks;
-    private Item alcanzable;
-    private float curInmuneTime;
-    
+    void Awake()
+    {
+        Movement    = GetComponent<PlayerMovement>();
+        Combat      = GetComponent<PlayerCombat>();
+        Stats       = GetComponent<PlayerStats>();
+        Inventory   = GetComponent<PlayerInventory>();
+        Interaction = GetComponent<PlayerInteraction>();
+        Animator    = GetComponent<PlayerAnimator>();
+    }
 
     void Start()
     {
-        entidad = GetComponent<Rigidbody2D>();
-
-        if (anim == null) anim = GetComponentInChildren<Animator>();
-
-        currentHealth = 50;
-        if (healthBar != null) 
-        {
-            healthBar.setMaxHealth(maxHealth);
-            healthBar.setHealth(currentHealth);
-        }
-
-        currentEnergy = maxEnergy;
-        if (energyBar != null) energyBar.setMaxEnergy(maxEnergy);
-
-        if (coinCounter != null) coinCounter.setCoins(coins);
-
-        updateItem(inventario.getEquippedItem());
     }
 
     void Update()
     {
-        if (!isDashing)
-        {
-            direccionMov = mover.action.ReadValue<Vector2>();
-
-            if (atacar != null && atacar.action.triggered) EjecutarAtaque();
-
-            if (attackMagic != null && attackMagic.action.triggered) EjecutarAtaqueMagic();
-
-            if (!isAtacking && dash != null && dash.action.triggered) EjecutarDash();
-
-            if (pick != null && pick.action.triggered && alcanzable != null) Pick();
-        }
-
-        if (anim != null)
-        {
-            if (isAtacking || isDrinking)
-            {
-                anim.SetFloat("Speed", 0);   
-                return;
-            }
-
-            float fuerza = direccionMov.magnitude;
-            anim.SetFloat("Speed", fuerza);
-
-            if (direccionMov.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
-            else if (direccionMov.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
-
-        }
-
-        countTicks++;
-        if (countTicks % 100 == 0 && currentEnergy < 100) {
-            currentEnergy += 1;
-            if (energyBar != null) energyBar.setEnergy(currentEnergy);
-        }
-
-        if (dropearItem != null && dropearItem.action.triggered) dropItem();
-        if (cambiarItemLeft != null && cambiarItemLeft.action.triggered) swapLeftItem();
-        if (cambiarItemRight != null && cambiarItemRight.action.triggered)swapRightItem();
-        
+        //SI EL JUGADOR ESTÁ BEBIENDO, NO PUEDE MOVERSE.
+        if (isDrinking && Movement != null)
+            Movement.CongelarMovimiento();
     }
 
-    void EjecutarAtaque()
-    {
-        ItemData item = inventario.getEquippedItem();
-
-        if (item != null)
-        {
-            if (itemEnMano is Weapon armaActual)
-            {
-                bool ataqueExitoso = armaActual.Atacar(); 
-                if (ataqueExitoso) 
-                {
-                    string tipo = armaActual.GetType().Name;
-                    Debug.Log("Ataque confirmado. Arma: " + tipo);
-                    if (tipo == "WeaponMelee" && anim != null)
-                    {
-                        anim.SetTrigger("2_Attack");
-                    }
-                    StartCoroutine(AtackCoroutine());
-                }
-                else 
-                {
-                    Debug.Log("Ataque ignorado por Cooldown o falta de durabilidad.");
-                }
-            }
-            else
-            {
-                itemEnMano.Usar(this);
-            }
-        }
-
-        else if (anim != null)
-        {
-            anim.SetTrigger("2_Attack");
-            Debug.Log("¡Ataque ejecutado con J!");
-
-            StartCoroutine(AtackCoroutine());        
-        }
+//------FUNCIONES PARA ITEMS/POCIONES-----
+    public void TakeDamage(int amount) {
+        Stats.TakeDamage(amount);
+        Animator.TriggerDebuff();
     }
-
-    public void IniciarAnimacion(string nombreAnimacion)
-    {
-        if (anim != null)
-        {
-            anim.SetTrigger(nombreAnimacion);
-            StartCoroutine(AtackCoroutine());
-        }
+    public void TakeDamage(int amount, Vector2 sourcePosition) {
+        Stats.TakeDamage(amount, sourcePosition);
+        Animator.TriggerDebuff();
     }
+    public void buy(int price) {Stats.TrySpendCoins(price);}
+    public void IniciarAnimacion(string nombre) {Combat.IniciarAnimacion(nombre);}
+    public void IniciarAnimacionMitad(string nombre) {Combat.IniciarAnimacionMitad(nombre);}
+    public void ActivarDashInfinito(float duracion) {Stats.ActivarDashInfinito(duracion);}
+    public void ActivarVelocidad(float aumento, float dur){Stats.ActivarVelocidad(aumento, dur);}
 
-    private IEnumerator AtackCoroutine()
+    public void SetDashInfinito(bool valor)
     {
-        isAtacking = true;
-
-        yield return new WaitForSeconds(1);
-
-        isAtacking = false;
+        if (Movement != null) Movement.dashInfinito = valor;
     }
-
-    void EjecutarAtaqueMagic()
+    public void SetExtraVelocidad(float valor)
     {
-        if (itemEnMano != null && itemEnMano is Weapon armaActual)
-        {
-            bool exitoMagia = armaActual.AtaqueEspecial();
-            if (exitoMagia && anim != null)
-            {
-                anim.SetTrigger("attackMagic");
-                Debug.Log("¡Ataque Especial / Mágico ejecutado con K!");
-                StartCoroutine(AtackCoroutine());
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No hay arma equipada para usar magia.");
-        }
-    }
-
-    void EjecutarDash()
-    {
-        if (dashInfinito)
-        {
-            StartCoroutine(DashCoroutine());
-        }
-        else if (currentEnergy >= 60) 
-        {
-            currentEnergy -= 60;
-            energyBar.setEnergy(currentEnergy);
-
-            Debug.Log("Dash activado, energía: " + currentEnergy);
-            StartCoroutine(DashCoroutine());         
-        }
-    }
-
-    private IEnumerator DashCoroutine()
-    {
-        float originalVelocidad = velocidadMov;
-        velocidadMov = dashSpeed;
-        isDashing = true;
-
-        anim.SetTrigger("7_Dash");
-
-        yield return new WaitForSeconds((float)0.5);  
-
-        velocidadMov = originalVelocidad;  
-        isDashing = false;
-
-        Debug.LogWarning("Dash terminado");
-    }
-
-    void FixedUpdate()
-    {
-        if (isDrinking)
-        {
-            entidad.linearVelocity = Vector2.zero;
-            return;
-        }
-        // Movimiento físico
-        if (direccionMov.sqrMagnitude < 0.01f) {
-            entidad.linearVelocity = Vector2.zero;
-            // O entidad.linearVelocity = lastDirection * velocidadMov * 0.3f;
-
-            if (isDashing) entidad.linearVelocity = lastDirection * velocidadMov * extraVelocidad;
-
-        } else {
-            entidad.linearVelocity = direccionMov * velocidadMov * extraVelocidad;
-
-            if (!isDashing)
-            {
-                if (direccionMov.x < 0) lastDirection = Vector2.left;
-                else lastDirection = Vector2.right;
-            }
-        }
-
-        // Clamping (Límites)
-        float clampedX = Mathf.Clamp(entidad.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(entidad.position.y, minY, maxY);
-        entidad.position = new Vector2(clampedX, clampedY);
-    }
-    private void swapLeftItem()
-    {
-        updateItem(inventario.swapLeft());
-    }
-    private void swapRightItem()
-    {
-        updateItem(inventario.swapRight());
+        if (Movement != null) Movement.extraVelocidad = valor;
     }
     
-    private void updateItem(ItemData i)
-    {
-        if (itemEnMano != null)
-        {
-            Destroy(itemEnMano.gameObject);
-            itemEnMano = null;
-        }
-
-        if (i == null) 
-        {
-            if (useSPUM && spumEquipment != null) spumEquipment.UnequipItem();
-        } 
-        else if (useSPUM && spumEquipment != null) 
-        {
-            spumEquipment.EquipItem(i.sprite);
-        } 
-
-        if (i != null && i.prefab != null)
-        {
-            itemEnMano = Instantiate(i.prefab, transform);
-            itemEnMano.datos = i;
-            
-            SpriteRenderer sr = itemEnMano.GetComponent<SpriteRenderer>();
-            if (sr != null) sr.enabled = false;
-            
-            Collider2D col = itemEnMano.GetComponent<Collider2D>();
-            if (col != null) col.enabled = false;
-        }
+    public Animator getPlayerAnimator(){
+        return Animator.anim;
     }
-    public void dropItem()
-    {
-        inventario.dropItem();
-        if (useSPUM && spumEquipment != null) {
-            spumEquipment.UnequipItem();
-        }
-    }
-
-    public void TakeDamage(int amount)
-    {
-        if (curInmuneTime > 0) return;
-
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        
-        if(healthBar != null) healthBar.setHealth(currentHealth);
-
-        curInmuneTime = immuneTime;
-        Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
-        anim.SetTrigger("5_Debuff");
-    }
-
-    // Sobrecarga de compatibilidad con el sistema de enemigos, que envía la
-    // posición del atacante (para knockback). Esta versión del player no usa
-    // knockback, así que la posición se ignora y aplica el daño normal.
-    public void TakeDamage(int amount, Vector2 sourcePosition)
-    {
-        TakeDamage(amount);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                TakeDamage(enemy.GetDamage());
-            }
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        Debug.Log("Salió la colisión");
-    }
-
-    private void Pick()
-    {
-        Item item;
-        if (inventario.full()) {
-            Debug.Log("Inventario Lleno");
-            return;
-        }
-        if (alcanzable.enVenta) item = alcanzable.Comprar(this);
-
-        else item = alcanzable;
-
-        if (item != null)
-        {
-            inventario.add(item.datos);
-            updateItem(inventario.getEquippedItem());
-            Destroy(item.gameObject);
-        }
-        Debug.Log("Destruido??");
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("En alcance");
-        if (collision.gameObject.CompareTag("Consumible"))
-        {
-            Item item = collision.gameObject.GetComponent<Item>();
-            if (item != null)
-            {
-                alcanzable = item;
-            }
-        }
-
-        if (collision.gameObject.CompareTag("Moneda"))
-        {
-            Moneda coin = collision.gameObject.GetComponent<Moneda>();
-            if (coin != null)
-            {
-                coins += coin.value;
-                coinCounter.setCoins(coins);
-                Destroy(collision.gameObject);
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        alcanzable = null;
-        Debug.Log("Fuera de alcance");
-    }
-
-    public void buy(int price)
-    {
-        coins -= price;
-
-        coinCounter.setCoins(coins);
-    }
-
-    public void IniciarAnimacionMitad(string nombreAnimacion)
-    {
-        if (anim != null)
-        {
-            StartCoroutine(AnimacionMitadCoroutine(nombreAnimacion));
-        }
-    }
-
-    private IEnumerator AnimacionMitadCoroutine(string nombreAnimacion)
-    {
-        anim.SetTrigger(nombreAnimacion);
-
-        yield return new WaitForEndOfFrame();
-
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        
-        float tiempoMitad = stateInfo.length / 2f;
-
-        yield return new WaitForSeconds(tiempoMitad);
-
-        anim.CrossFade("0_Idle", 0.05f); 
-    }
-
-    public void ActivarDashInfinito(float duracion)
-    {
-        StartCoroutine(RutinaDashInfinito(duracion));
-    }
-
-    private IEnumerator RutinaDashInfinito(float duracion)
-    {
-        dashInfinito = true;
-
-        yield return new WaitForSeconds(duracion);
-
-        dashInfinito = false;
-    }
-
-    public void ActivarVelocidad(float aumento, float duracion)
-    {
-        StartCoroutine(RutinaVelocidad(aumento, duracion));
-    }
-    private IEnumerator RutinaVelocidad(float aumento, float duracion)
-    {
-        extraVelocidad = aumento;
-        yield return new WaitForSeconds(duracion);
-        extraVelocidad = 1;
-    }
-
 }

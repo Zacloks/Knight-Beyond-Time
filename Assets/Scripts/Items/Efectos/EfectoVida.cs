@@ -5,12 +5,12 @@ public class EfectoVida : EfectoBase
 {
     public int cantidadCuracion = 20;
 
-    public override void AplicarEfecto(PlayerScript jugador)
+    public override void AplicarEfecto(PlayerStats stats)
     {
-        jugador.currentHealth += cantidadCuracion;
-        if (jugador.currentHealth > jugador.maxHealth) jugador.currentHealth = jugador.maxHealth;
-        if (jugador.healthBar != null) jugador.healthBar.setHealth(jugador.currentHealth);
-        
+        stats.Heal(cantidadCuracion);
+        //stats.currentHealth += cantidadCuracion;
+        //if (stats.currentHealth > stats.maxHealth) stats.currentHealth = stats.maxHealth;
+        //if (stats.healthBar != null) stats.healthBar.setHealth(stats.currentHealth);
         Debug.Log($"Estrategia ejecutada: Curados {cantidadCuracion} puntos.");
     }
 }

@@ -5,9 +5,9 @@ public class EfectoEnergia : EfectoBase
 {
     public float duracion = 5f;
 
-    public override void AplicarEfecto(PlayerScript jugador)
+    public override void AplicarEfecto(PlayerStats stats)
     {
-        jugador.ActivarDashInfinito(duracion);
-        Debug.Log("AAAA");
+        stats.ActivarDashInfinito(duracion);
+        Debug.Log("DASH INFINITO !!!");
     }
 }

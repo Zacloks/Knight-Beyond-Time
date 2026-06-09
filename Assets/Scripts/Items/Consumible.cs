@@ -28,7 +28,7 @@ public class Consumible : Item
 
     private IEnumerator RutinaConsumirConPausa(PlayerScript jugador)
     {
-        Animator anim = jugador.anim; 
+        Animator anim = jugador.getPlayerAnimator(); 
         jugador.isDrinking = true;
 
         jugador.IniciarAnimacion(triggerAnimacion);
@@ -55,7 +55,7 @@ public class Consumible : Item
 
         if (datos.estrategiaEfecto != null)
         {
-            datos.estrategiaEfecto.AplicarEfecto(jugador);
+            datos.estrategiaEfecto.AplicarEfecto(jugador.Stats);
         }
 
         yield return new WaitForSeconds(tiempoPausaBebida);
@@ -74,8 +74,7 @@ public class Consumible : Item
             spriteEnMano.sortingOrder = ordenOriginal;
         }
 
-        jugador.inventario.dropItem(); 
-        jugador.dropItem();
+        jugador.Inventory.DropItem(); 
         Destroy(gameObject);
         
         jugador.isDrinking = false;

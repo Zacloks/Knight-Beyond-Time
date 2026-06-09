@@ -6,9 +6,9 @@ public class EfectoVelocidad : EfectoBase
     public float aumento = 1.5f;
     public float duracion = 5f;
 
-    public override void AplicarEfecto(PlayerScript jugador)
+    public override void AplicarEfecto(PlayerStats stats)
     {
-        jugador.ActivarVelocidad(aumento, duracion);
-        Debug.Log("AAAA");
+        stats.ActivarVelocidad(aumento, duracion);
+        Debug.Log("VELOCIDAD ACTIVADA!");
     }
 }
