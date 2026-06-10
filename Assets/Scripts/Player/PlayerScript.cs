@@ -293,10 +293,14 @@ public class PlayerScript : MonoBehaviour
             itemEnMano = null;
         }
 
-        if (i == null) 
+        if (i == null)
         {
-            if (useSPUM && spumEquipment != null) spumEquipment.UnequipItem();
-        } 
+            if (useSPUM && spumEquipment != null)
+            {
+                spumEquipment.ResetRightItemRotation();
+                spumEquipment.UnequipItem();
+            }
+        }
         else if (useSPUM && spumEquipment != null) 
         {
             spumEquipment.EquipItem(i.sprite);
@@ -309,9 +313,26 @@ public class PlayerScript : MonoBehaviour
             
             SpriteRenderer sr = itemEnMano.GetComponent<SpriteRenderer>();
             if (sr != null) sr.enabled = false;
-            
+
             Collider2D col = itemEnMano.GetComponent<Collider2D>();
             if (col != null) col.enabled = false;
+
+            
+            if (useSPUM && spumEquipment != null)
+            {
+                if (itemEnMano is WeaponDistance armaDist)
+                {
+                    SpriteRenderer spumRenderer = spumEquipment.GetRightItemRenderer();
+                    if (spumRenderer != null) armaDist.weaponRenderer = spumRenderer;
+                    // Endereza el arco en la mano (el slot de SPUM viene en diagonal).
+                    spumEquipment.SetRightItemRotation(armaDist.anguloVisual);
+                }
+                else
+                {
+                    // Otras armas (espada, etc.) conservan la inclinación original del slot.
+                    spumEquipment.ResetRightItemRotation();
+                }
+            }
         }
     }
     public void dropItem()

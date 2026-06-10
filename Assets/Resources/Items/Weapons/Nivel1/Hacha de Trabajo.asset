@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48031b5978914f08b60358e453aa504, type: 3}
+  m_Name: Hacha de Trabajo
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Hacha de Trabajo
+  precio: 5
+  sprite: {fileID: 645586690464408388, guid: a15c0c98c928630449032581a53da30b, type: 3}
+  prefab: {fileID: 1324587623003840237, guid: fc8e28e9eaf864243893370ca0e124b5, type: 3}
+  estrategiaEfecto: {fileID: 0}

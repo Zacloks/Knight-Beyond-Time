@@ -13,9 +13,12 @@ public class WeaponDistance : Weapon
 
 
     [Header("Animación Visual de Carga")]
-    public SpriteRenderer weaponRenderer; 
-    public Sprite[] spritesDeCarga;    
+    public SpriteRenderer weaponRenderer;
+    public Sprite[] spritesDeCarga;
     private Sprite spriteOriginal;
+
+    [Tooltip("Ángulo (en grados) al que se endereza el arma en la mano de SPUM. 0 = horizontal.")]
+    public float anguloVisual = 0f;
 
 
     private float chargeTimer;

@@ -54,6 +54,38 @@ public class SPUMEquipmentManager : MonoBehaviour
         }
     }
 
+    public SpriteRenderer GetRightItemRenderer()
+    {
+        if (rightItemRenderer != null) return rightItemRenderer;
+        if (rightItemTransform != null) return rightItemTransform.GetComponent<SpriteRenderer>();
+        return null;
+    }
+    //enderezar agarre para armas a distancia 
+    private Quaternion rightItemBaseRotation;
+    private bool rightItemBaseRotationSaved;
+
+    public void SetRightItemRotation(float zAngle)
+    {
+        SpriteRenderer r = GetRightItemRenderer();
+        if (r == null) return;
+        if (!rightItemBaseRotationSaved)
+        {
+            rightItemBaseRotation = r.transform.localRotation;
+            rightItemBaseRotationSaved = true;
+        }
+        r.transform.localRotation = Quaternion.Euler(0f, 0f, zAngle);
+    }
+
+    public void ResetRightItemRotation()
+    {
+        SpriteRenderer r = GetRightItemRenderer();
+        if (r == null) return;
+        if (rightItemBaseRotationSaved)
+        {
+            r.transform.localRotation = rightItemBaseRotation;
+        }
+    }
+
     public void UnequipItem()
     {
         if (rightItemRenderer != null)
