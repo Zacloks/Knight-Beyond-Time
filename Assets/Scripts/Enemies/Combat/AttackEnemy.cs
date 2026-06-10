@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(MovementEnemy))]
 public class AttackEnemy : MonoBehaviour, IEnemyAttack
 {
     [Header("Referencias")]

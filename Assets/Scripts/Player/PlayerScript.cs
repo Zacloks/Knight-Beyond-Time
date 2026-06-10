@@ -56,7 +56,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Movement != null) Movement.extraVelocidad = valor;
     }
-    
+
     public Animator getPlayerAnimator(){
         return Animator.anim;
     }

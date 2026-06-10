@@ -24,11 +24,6 @@ public class LifeEnemy : MonoBehaviour
     [SerializeField] private float minKnockbackTime;
     private WaveManager waveManager;
 
-    [Header("Debug (solo pruebas)")]
-    [SerializeField] private bool debugDanoActivo = true;
-    [SerializeField] private KeyCode debugTeclaDano = KeyCode.U;
-    [SerializeField] private int debugDano = 10;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,14 +31,6 @@ public class LifeEnemy : MonoBehaviour
         movementEnemy = GetComponent<MovementEnemy>();
         enemy = GetComponent<Enemy>();
         currentLife = maxLife;
-    }
-
-    private void Update()
-    {
-        if (debugDanoActivo && !isDead && Input.GetKeyDown(debugTeclaDano))
-        {
-            TakeDamage(debugDano, transform.position);
-        }
     }
 
     public void TakeDamage(int damageAmount, Vector2 sender)
