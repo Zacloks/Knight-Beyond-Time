@@ -54,7 +54,10 @@ public class PlayerInventory : MonoBehaviour
         if (useSPUM && spumEquipment != null)
         {
             if (itemData == null)
+            {
+                spumEquipment.ResetRightItemRotation();
                 spumEquipment.UnequipItem();
+            }
             else
                 spumEquipment.EquipItem(itemData.sprite);
         }
@@ -69,6 +72,23 @@ public class PlayerInventory : MonoBehaviour
 
             Collider2D col = itemEnMano.GetComponent<Collider2D>();
             if (col != null) col.enabled = false;
+
+            // Ajuste visual del arma en la mano de SPUM (feature de la rama armas-uso).
+            if (useSPUM && spumEquipment != null)
+            {
+                if (itemEnMano is WeaponDistance armaDist)
+                {
+                    SpriteRenderer spumRenderer = spumEquipment.GetRightItemRenderer();
+                    if (spumRenderer != null) armaDist.weaponRenderer = spumRenderer;
+                    // Endereza el arma a distancia (el slot de SPUM viene en diagonal).
+                    spumEquipment.SetRightItemRotation(armaDist.anguloVisual);
+                }
+                else
+                {
+                    // Otras armas (espada, etc.) conservan la inclinación original del slot.
+                    spumEquipment.ResetRightItemRotation();
+                }
+            }
         }
     }
 
