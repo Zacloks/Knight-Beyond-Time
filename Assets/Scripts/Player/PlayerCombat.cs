@@ -31,8 +31,8 @@ public class PlayerCombat : MonoBehaviour
 //-----------ATAQUE----------
     private void EjecutarAtaque()
     {
-        ItemData itemData = playerInventory?.GetEquippedItemData();
-        Item itemEnMano   = playerInventory?.GetEquippedItemInstance();
+        ItemData itemData = playerInventory.GetEquippedItemData();
+        Item itemEnMano   = playerInventory.GetEquippedItemInstance();
 
         if (itemData != null)
         {
@@ -56,7 +56,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                itemEnMano.Usar(GetComponent<PlayerScript>());
+                itemData.Usar(GetComponent<PlayerScript>());
             }
         }
         else
@@ -108,7 +108,7 @@ public class PlayerCombat : MonoBehaviour
     {
         isAtacking = true;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1/2);
 
         isAtacking = false;
     }
