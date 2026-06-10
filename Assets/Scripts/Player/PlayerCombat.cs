@@ -56,6 +56,10 @@ public class PlayerCombat : MonoBehaviour
                     Debug.Log("Ataque ignorado por Cooldown o falta de durabilidad.");
                 }
             }
+            else if (itemEnMano != null)
+            {
+                itemEnMano.Usar(GetComponent<PlayerScript>());
+            }
             else
             {
                 itemData.Usar(GetComponent<PlayerScript>());
