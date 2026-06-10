@@ -34,8 +34,10 @@ public class Manager : MonoBehaviour
             itemsDisponibles.RemoveAt(indiceAleatorio);
 
             GameObject nuevoItemFisico = Instantiate(objetoTienda, puntosDeAparicion[i].position, Quaternion.identity);
-            
-            nuevoItemFisico.GetComponent<Item>().datos = itemElegido;
+
+            Item itemComponente = nuevoItemFisico.GetComponent<Item>();
+            itemComponente.datos = itemElegido;
+            itemComponente.enVenta = true; // Marca el item como comprable: descuenta monedas al recogerlo.
         }
     }
 }

@@ -116,8 +116,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1816526915
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4723107735738678597, guid: ad3c983489ca49e4c8405266cd806165, type: 3}
@@ -277,9 +277,6 @@ MonoBehaviour:
   maxLife: 200
   knockbackForce: {x: 2, y: 1}
   minKnockbackTime: 0.3
-  debugDanoActivo: 1
-  debugTeclaDano: 117
-  debugDano: 10
 --- !u!114 &228625255360721657
 MonoBehaviour:
   m_ObjectHideFlags: 0

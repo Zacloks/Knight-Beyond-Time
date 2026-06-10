@@ -48,10 +48,10 @@ MonoBehaviour:
   currentHealth: 100
   maxEnergy: 100
   currentEnergy: 100
-  coins: 15
+  coins: 1000
   inventorySlots:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ff9e6ae01c1607646bdc5a8f6a98c007, type: 2}
+  - {fileID: 11400000, guid: 5f9b25f395a074cae8679fa984c59e6c, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

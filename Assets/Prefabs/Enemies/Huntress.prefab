@@ -84,8 +84,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1816526915
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4723107735738678597, guid: f534b59373df49a46918d08f3745de0a, type: 3}
@@ -155,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 6815892981611197894}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5640b53e2ccd4b94c8cb4de77fd8b2da, type: 2}
+  m_Controller: {fileID: 22100000, guid: 299c42f280a1626409c40d4dee21fcb9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -207,9 +207,6 @@ MonoBehaviour:
   maxLife: 2
   knockbackForce: {x: 0, y: 0}
   minKnockbackTime: 0
-  debugDanoActivo: 1
-  debugTeclaDano: 117
-  debugDano: 10
 --- !u!114 &4068027952186723650
 MonoBehaviour:
   m_ObjectHideFlags: 0
