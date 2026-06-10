@@ -47,8 +47,10 @@ public class PlayerAnimator : MonoBehaviour
         if (movement == null) return;
 
         Vector2 input = movement.direccionMov;
-        if (input.x > 0.1f) transform.localScale = new Vector3(-1, 1, 1);
-            else if (input.x < -0.1f) transform.localScale = new Vector3(1, 1, 1);
+        Vector3 escala = transform.localScale;
+        float magnitud = Mathf.Abs(escala.x);
+        if (input.x > 0.1f) transform.localScale = new Vector3(-magnitud, escala.y, escala.z);
+            else if (input.x < -0.1f) transform.localScale = new Vector3(magnitud, escala.y, escala.z);
     }
 
 //--------TRIGGERS DE ANIMACIONES-------

@@ -1,55 +1,51 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [Header("Referencias del Inventario")]
-    public Inventory inventario; 
     [Header("Componentes de la UI")]
-    public Image[] iconosSlots; 
+    public Image[] iconosSlots;
     public Image[] fondosSlots;
     public Color selectedColor;
     public Sprite slotVacioSprite;
     public Sprite slotUsadoSprite; // Una imagen transparente o el fondo vacío
-    
-    void Start()
+
+    void OnEnable()
     {
-        // Al empezar, dibujamos el estado inicial del inventario
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged += ActualizarInterfaz;
         ActualizarInterfaz();
     }
-     public void ActualizarInterfaz()
-    {
-     int slotActivo = inventario.GetIndexSeleccionado();
-    
-     for (int i = 0; i < iconosSlots.Length; i++)
-     {
-    
-         // 1. Sincronizar el icono del ítem (tu lógica que ya funciona bien)
-         if (i < inventario.slots.Length && inventario.slots[i] != null)
-        {
-            iconosSlots[i].sprite = inventario.slots[i].sprite; 
-            iconosSlots[i].enabled = true; 
-        }
-        else
-        {
-           iconosSlots[i].sprite = slotVacioSprite;
-           iconosSlots[i].enabled = true; // Para que siempre se vea el fondo vacío
-        }
 
-       // 2. CORRECCIÓN: Manejo de los Marcos/Fondos
-       if (i < fondosSlots.Length && fondosSlots[i] != null)
-        { 
-            if (i == slotActivo)
+    void OnDisable()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnStateChanged -= ActualizarInterfaz;
+    }
+
+    public void ActualizarInterfaz()
+    {
+        GameManager gm = GameManager.Instance;
+        if (gm == null) return;
+
+        int slotActivo = gm.selectedSlot;
+
+        for (int i = 0; i < iconosSlots.Length; i++)
+        {
+            // 1. Icono del ítem
+            if (i < gm.inventorySlots.Length && gm.inventorySlots[i] != null)
             {
-                fondosSlots[i].enabled = true;
+                iconosSlots[i].sprite = gm.inventorySlots[i].sprite;
+                iconosSlots[i].enabled = true;
             }
             else
-            { 
-                fondosSlots[i].enabled = false;
+            {
+                iconosSlots[i].sprite = slotVacioSprite;
+                iconosSlots[i].enabled = true;
             }
+
+            if (i < fondosSlots.Length && fondosSlots[i] != null)
+                fondosSlots[i].enabled = (i == slotActivo);
         }
     }
-}
-
 }

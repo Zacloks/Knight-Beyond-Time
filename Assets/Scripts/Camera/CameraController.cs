@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+   [Tooltip("Opcional. Si se deja vacío, la cámara busca sola al objeto con tag 'Player' (que ahora se instancia en runtime).")]
    public Transform objetivo;
+   public string targetTag = "Player";
    public float smoothing = 0.125f; // Qué tan rápido te sigue (ej: 0.125)
    public Vector3 desplazamiento;
-   
+
    public float minX; // borde izquierdo
    public float maxX; //borde derecho
    public float minY; // borde inferior
    public float maxY; //borde superior
 
    private void LateUpdate(){
+      if (objetivo == null)
+      {
+         GameObject player = GameObject.FindGameObjectWithTag(targetTag);
+         if (player != null) objetivo = player.transform;
+      }
       if (objetivo == null) return;
 
         // 1. Calculamos la posición a la que desearía ir la cámara (incluyendo offset)
@@ -19,8 +26,20 @@ public class CameraController : MonoBehaviour
 
         // 2. Limitamos esa posición para que nunca se pase de los bordes del mapa
         // El Mathf.Clamp es lo que evita que se vea el vacío.
-        float xLimitada = Mathf.Clamp(posicionDeseada.x, minX, maxX);
-        float yLimitada = Mathf.Clamp(posicionDeseada.y, minY, maxY);
+        float camHeight = Camera.main.orthographicSize;
+        float camWidth = camHeight * Camera.main.aspect;
+
+        float xLimitada = Mathf.Clamp(
+            posicionDeseada.x,
+            minX + camWidth,
+            maxX - camWidth
+        );
+
+        float yLimitada = Mathf.Clamp(
+            posicionDeseada.y,
+            minY + camHeight,
+            maxY - camHeight
+        );
 
         // 3. Creamos el vector de destino final, manteniendo la profundidad Z original de la cámara (ej: -10)
         Vector3 posicionConLimites = new Vector3(xLimitada, yLimitada, transform.position.z);

@@ -12,12 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/OptionsMenu.unity
     guid: 67c8e284364348a40ad160eb68591b2d
   - enabled: 1
-    path: Assets/Scenes/intro.unity
+    path: Assets/Scenes/Nivel1-1.unity
     guid: a4474846d3fdb3c4a913aa538aa395b3
   - enabled: 1
-    path: Assets/Scenes/village.unity
+    path: Assets/Scenes/Nivel1-2.unity
     guid: 58da67efea2cbc944be16b6541b9cc18
   - enabled: 1
-    path: Assets/Scenes/Tienda.unity
+    path: Assets/Scenes/Tienda-1.unity
     guid: dd6fba2140cdd4a29a42ae26e14c9dc0
   m_configObjects: {}

@@ -50,16 +50,6 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-//-------------COLISIONES-----------
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null) stats.TakeDamage(enemy.GetDamage());
-        }
-    }
-
 //-------------TRIGGERS-----------
     private void OnTriggerEnter2D(Collider2D collision)
     {

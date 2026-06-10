@@ -1,35 +1,26 @@
-using System.Threading;
 using UnityEngine;
+
 public class Inventory : MonoBehaviour
 {
-    private int indexInventario = 0;
-    public InventoryUI inventarioUI;
-    public ItemData[] slots = new ItemData[5];
+    public ItemData[] slots => GameManager.Instance.inventorySlots;
+    private int indexInventario
+    {
+        get => GameManager.Instance.selectedSlot;
+        set => GameManager.Instance.selectedSlot = value;
+    }
+
+    private int LastIndex => slots.Length - 1;
 
     public ItemData swapRight()
     {
-        if (indexInventario < 4)
-        {
-            indexInventario++;
-        } else
-        {
-            indexInventario = 0;
-        }
-        Debug.Log(indexInventario);
-        inventarioUI.ActualizarInterfaz();
+        indexInventario = (indexInventario < LastIndex) ? indexInventario + 1 : 0;
+        GameManager.Instance.NotifyChanged();
         return slots[indexInventario];
     }
     public ItemData swapLeft()
     {
-        if (indexInventario>0)
-        {
-            indexInventario--;
-        } else
-        {
-            indexInventario = 4;
-        }
-        Debug.Log(indexInventario);
-        inventarioUI.ActualizarInterfaz();
+        indexInventario = (indexInventario > 0) ? indexInventario - 1 : LastIndex;
+        GameManager.Instance.NotifyChanged();
         return slots[indexInventario];
     }
 
@@ -41,7 +32,7 @@ public class Inventory : MonoBehaviour
     {
         slots[indexInventario] = null;
         Debug.Log("Botaste el item!");
-        inventarioUI.ActualizarInterfaz();
+        GameManager.Instance.NotifyChanged();
     }
 
     public int GetIndexSeleccionado()
@@ -51,7 +42,7 @@ public class Inventory : MonoBehaviour
 
     public bool full()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i] == null) return false;
         }
@@ -63,16 +54,17 @@ public class Inventory : MonoBehaviour
         if (slots[indexInventario] == null)
         {
             slots[indexInventario] = item;
-            inventarioUI.ActualizarInterfaz();
+            GameManager.Instance.NotifyChanged();
             return;
         }
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i] == null) {
+            if (slots[i] == null)
+            {
                 slots[i] = item;
-                inventarioUI.ActualizarInterfaz();
+                GameManager.Instance.NotifyChanged();
                 return;
             }
         }
-    } 
+    }
 }

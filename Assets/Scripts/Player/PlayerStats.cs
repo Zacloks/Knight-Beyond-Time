@@ -1,48 +1,51 @@
 using UnityEngine;
 using System.Collections;
+
 public class PlayerStats : MonoBehaviour
 {
+    [Header("Valores iniciales (solo se usan en la PRIMERA escena)")]
+    public int maxHealthInicial = 100;
+    public int maxEnergyInicial = 100;
+
     [Header("Vida")]
-    public int maxHealth = 100;
-    public int currentHealth;
     public float immuneTime = 2f;
-     public bool IsImmune => curImmuneTime > 0f;
+    public bool IsImmune => curImmuneTime > 0f;
 
     [Header("Energía")]
-    public int maxEnergy = 100;
-    public int currentEnergy;
     private const int energyRegen = 1;
-    private const int energyRegenInterval = 100; //ticks 
-
-    [Header("Coins")]
-    public int coins = 0;
-
-    [Header("UI")]
-    public HealthBar healthBar;
-    public EnergyBar energyBar;
-    public Coin coinCounter;
-    public Inventory inventario;
+    private const int energyRegenInterval = 100;
 
     [Header("Auxiliares")]
     private float curImmuneTime;
     private int countTicks;
 
+    private GameManager GM => GameManager.Instance;
+
+    public int maxHealth     { get => GM.maxHealth;     set => GM.maxHealth = value; }
+    public int currentHealth { get => GM.currentHealth; set => GM.currentHealth = value; }
+    public int maxEnergy     { get => GM.maxEnergy;     set => GM.maxEnergy = value; }
+    public int currentEnergy { get => GM.currentEnergy; set => GM.currentEnergy = value; }
+    public int coins         { get => GM.coins;         set => GM.coins = value; }
+
     void Start()
     {
-        currentHealth = maxHealth;
-        currentEnergy = maxEnergy;
-
-        if (healthBar != null)
+        if (GM == null)
         {
-            healthBar.setMaxHealth(maxHealth);
-            healthBar.setHealth(currentHealth);
+            Debug.LogError("[PlayerStats] No hay GameManager en la escena. " +
+                           "Asegúrate de que SceneSetup lo instancie en la primera escena.");
+            return;
         }
 
-        if (energyBar != null)
-            energyBar.setMaxEnergy(maxEnergy);
+        if (!GM.initialized)
+        {
+            GM.maxHealth = maxHealthInicial;
+            GM.maxEnergy = maxEnergyInicial;
+            GM.currentHealth = maxHealthInicial;
+            GM.currentEnergy = maxEnergyInicial;
+            GM.initialized = true;
+        }
 
-        if (coinCounter != null)
-            coinCounter.setCoins(coins);
+        GM.NotifyChanged();
     }
 
     void Update()
@@ -64,7 +67,7 @@ public class PlayerStats : MonoBehaviour
         if (countTicks % energyRegenInterval == 0 && currentEnergy < maxEnergy)
         {
             currentEnergy = Mathf.Min(currentEnergy + energyRegen, maxEnergy);
-            if (energyBar != null) energyBar.setEnergy(currentEnergy);
+            GM.NotifyChanged();
         }
     }
 //------------HEALTH-----------
@@ -72,12 +75,10 @@ public class PlayerStats : MonoBehaviour
     {
         if (IsImmune) return;
 
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
+        currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
         curImmuneTime = immuneTime;
 
-        if (healthBar != null) healthBar.setHealth(currentHealth);
+        GM.NotifyChanged();
         Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
     }
     public void TakeDamage(int amount, Vector2 sourcePosition)
@@ -88,7 +89,7 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        if (healthBar != null) healthBar.setHealth(currentHealth);
+        GM.NotifyChanged();
     }
 
 //------------ENERGY-----------
@@ -96,10 +97,8 @@ public class PlayerStats : MonoBehaviour
     {
         if (currentEnergy < amount) return false;
 
-        currentEnergy -= amount;
-        currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
-
-        if (energyBar != null) energyBar.setEnergy(currentEnergy);
+        currentEnergy = Mathf.Clamp(currentEnergy - amount, 0, maxEnergy);
+        GM.NotifyChanged();
         return true;
     }
 
@@ -107,13 +106,13 @@ public class PlayerStats : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
-        if (coinCounter != null) coinCounter.setCoins(coins);
+        GM.NotifyChanged();
     }
     public bool TrySpendCoins(int price)
     {
         if (coins < price) return false;
         coins -= price;
-        if (coinCounter != null) coinCounter.setCoins(coins);
+        GM.NotifyChanged();
         return true;
     }
 //---------EFECTOS POCIONES-----

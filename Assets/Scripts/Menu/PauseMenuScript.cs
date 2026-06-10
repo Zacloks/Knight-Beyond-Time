@@ -13,7 +13,7 @@ public class PauseMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pausar != null)
+        if (pausar != null && pausar.action.triggered)
         {
             if (pausado == false)
             {
