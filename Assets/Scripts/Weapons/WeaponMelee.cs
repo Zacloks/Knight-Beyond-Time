@@ -17,6 +17,11 @@ public class WeaponMelee : Weapon
         originalRotation = transform.localRotation;
     }
 
+    private Vector2 GetFacingDir()
+    {
+        return Quaternion.AngleAxis(coneOffset, Vector3.forward) * FacingDir();
+    }
+
     public override bool Atacar() 
     {
         if (durabilidadActual <= 0) {
@@ -36,8 +41,7 @@ public class WeaponMelee : Weapon
         isAttacking = true;
         GastarDurabilidad(1);
 
-        Vector2 facingDir = transform.lossyScale.x < 0 ? Vector2.right : Vector2.left;
-        facingDir = Quaternion.AngleAxis(coneOffset, Vector3.forward) * facingDir;
+        Vector2 facingDir = GetFacingDir();
 
         yield return new WaitForSeconds(damageDelay);
 

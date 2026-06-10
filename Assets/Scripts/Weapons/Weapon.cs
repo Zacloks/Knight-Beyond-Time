@@ -19,10 +19,23 @@ public abstract class Weapon : Item
     public int maxDurabilidad = 20;
     public int durabilidadActual;
 
+    protected PlayerMovement ownerMovement;
+
     protected virtual void Awake()
     {
         if (durabilidadActual <= 0)
             durabilidadActual = maxDurabilidad;
+
+        ownerMovement = GetComponentInParent<PlayerMovement>();
+    }
+
+
+    public Vector2 FacingDir()
+    {
+        if (ownerMovement != null)
+            return ownerMovement.LastDirection.x >= 0f ? Vector2.right : Vector2.left;
+
+        return transform.lossyScale.x < 0f ? Vector2.right : Vector2.left;
     }
 
     public abstract bool Atacar();

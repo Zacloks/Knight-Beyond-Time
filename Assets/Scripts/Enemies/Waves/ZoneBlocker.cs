@@ -1,47 +1,76 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ZoneBlocker : MonoBehaviour
 {
-    [Header("Colisión")]
-    [SerializeField] private Collider2D blockCollider;
-
-    [Header("Visual")]
-    [SerializeField] private GameObject visualBlocker;
-    [SerializeField] private SpriteRenderer visualRenderer;
+    [Header("Muros")]
+    [Tooltip("Cada muro debe tener un Collider2D. Si se deja vacío, se usan los hijos directos (ej: MuroEntrada, MuroSalida).")]
+    [SerializeField] private List<GameObject> muros = new();
 
     [Header("Animación de desbloqueo")]
     [SerializeField] private float fadeOutDuration = 0.8f;
 
+    private void Awake()
+    {
+        if (muros.Count == 0)
+            foreach (Transform child in transform)
+                muros.Add(child.gameObject);
+
+        SetMuros(false);
+    }
+
     public void Block()
     {
-        if (blockCollider) blockCollider.enabled = true;
-        if (visualBlocker) visualBlocker.SetActive(true);
+        SetMuros(true);
     }
 
     public void Unblock()
     {
-        if (blockCollider) blockCollider.enabled = false;
+        foreach (GameObject muro in muros)
+        {
+            if (muro == null) continue;
 
-        if (visualRenderer != null)
-            StartCoroutine(FadeOut());
-        else if (visualBlocker)
-            visualBlocker.SetActive(false);
+            if (muro.TryGetComponent<Collider2D>(out var col)) col.enabled = false;
+
+            if (muro.TryGetComponent<SpriteRenderer>(out var sr))
+                StartCoroutine(FadeOut(muro, sr));
+            else
+                muro.SetActive(false);
+        }
     }
 
-    private IEnumerator FadeOut()
+    private void SetMuros(bool cerrado)
+    {
+        foreach (GameObject muro in muros)
+        {
+            if (muro == null) continue;
+
+            muro.SetActive(cerrado);
+            if (muro.TryGetComponent<Collider2D>(out var col)) col.enabled = cerrado;
+
+            if (cerrado && muro.TryGetComponent<SpriteRenderer>(out var sr))
+            {
+                Color c = sr.color;
+                c.a = 1f;
+                sr.color = c;
+            }
+        }
+    }
+
+    private IEnumerator FadeOut(GameObject muro, SpriteRenderer sr)
     {
         float elapsed = 0f;
-        Color c = visualRenderer.color;
+        Color c = sr.color;
 
         while (elapsed < fadeOutDuration)
         {
             elapsed += Time.deltaTime;
             c.a = Mathf.Lerp(1f, 0f, elapsed / fadeOutDuration);
-            visualRenderer.color = c;
+            sr.color = c;
             yield return null;
         }
 
-        visualBlocker?.SetActive(false);
+        muro.SetActive(false);
     }
 }

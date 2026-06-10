@@ -37,10 +37,8 @@ public class WeaponMagic : WeaponDistance
 
         if (specialSpellPrefab != null && specialSpawnPoint != null)
         {
-            float escalaX = transform.lossyScale.x;
-            Quaternion rotacion = specialSpawnPoint.rotation;
-            
-            if (escalaX > 0) rotacion *= Quaternion.Euler(0, 0, 180f);
+            Vector2 dir = FacingDir();
+            Quaternion rotacion = (dir.x >= 0f) ? Quaternion.identity : Quaternion.Euler(0f, 0f, 180f);
 
             GameObject hechizo = Instantiate(specialSpellPrefab, specialSpawnPoint.position, rotacion);
             

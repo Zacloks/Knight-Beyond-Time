@@ -14,8 +14,6 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Ajustes de Ataque")]
     public float attackDamage = 10f;
-    private float lastContactDamageTime;
-    private float contactDamageCooldown = 0.5f;
 
     [Header("Ajustes de Crítico")]
     [Range(0f, 100f)] public float probabilidadCritico = 10f;
@@ -38,20 +36,20 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (lifeEnemy != null && lifeEnemy.IsDead()) return;
-        if (!collision.gameObject.CompareTag("Player")) return;
-        if (Time.time < lastContactDamageTime + contactDamageCooldown) return;
-
-        PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
-        if (playerCtrl != null)
-        {
-            lastContactDamageTime = Time.time;
-            playerCtrl.TakeDamage(CalcularDanoConCritico((int)attackDamage), transform.position);
-            Debug.Log("Enemigo dañó al jugador");
-        }
-    }
+    // public virtual void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (lifeEnemy != null && lifeEnemy.IsDead()) return;
+    //     if (!collision.gameObject.CompareTag("Player")) return;
+    //     if (Time.time < lastContactDamageTime + contactDamageCooldown) return;
+    //
+    //     PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
+    //     if (playerCtrl != null)
+    //     {
+    //         lastContactDamageTime = Time.time;
+    //         playerCtrl.TakeDamage(CalcularDanoConCritico((int)attackDamage), transform.position);
+    //         Debug.Log("Enemigo dañó al jugador");
+    //     }
+    // }
 
     public int CalcularDanoConCritico(int danoBase)
     {

@@ -9,6 +9,8 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Estado")]
     public bool isAtacking = false;
+    [Tooltip("Segundos que el player queda 'atacando' (congela anim. de movimiento).")]
+    [SerializeField] private float attackLockTime = 0.4f;
 
     //Referencias
     private PlayerAnimator playerAnimator;
@@ -108,7 +110,7 @@ public class PlayerCombat : MonoBehaviour
     {
         isAtacking = true;
 
-        yield return new WaitForSeconds(1/2);
+        yield return new WaitForSeconds(attackLockTime);
 
         isAtacking = false;
     }

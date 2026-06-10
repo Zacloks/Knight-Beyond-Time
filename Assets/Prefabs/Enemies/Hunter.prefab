@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 7056060862046810322}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalPosition: {x: 0.7, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 8780429033113255880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.38, y: -1.16, z: 0}
+  m_LocalPosition: {x: -1.42, y: -1.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,8 +191,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.36, y: 1.76}
+  m_Offset: {x: -0.06871593, y: -0.04372853}
+  m_Size: {x: 0.8227649, y: 1.3976787}
   m_Direction: 0
 --- !u!95 &3962752495500668348
 Animator:
@@ -287,7 +287,7 @@ MonoBehaviour:
   hittableLayers:
     serializedVersion: 2
     m_Bits: 8
-  circleRadius: 1
+  circleRadius: 0.7
   attackDamage: 2
   timeBetweenAttacks: 3
   attackDuration: 2

@@ -86,13 +86,8 @@ public class WeaponDistance : Weapon
 
         if (projectilePrefab != null && shootPoint != null)
         {
-            float escalaX = transform.lossyScale.x;
-            Quaternion rotacionFlecha = shootPoint.rotation;
-
-            if (escalaX > 0) 
-            {
-                rotacionFlecha *= Quaternion.Euler(0, 0, 180f);
-            }
+            Vector2 dir = FacingDir();
+            Quaternion rotacionFlecha = (dir.x >= 0f) ? Quaternion.identity : Quaternion.Euler(0f, 0f, 180f);
 
             GameObject newProjectile = Instantiate(projectilePrefab, shootPoint.position, rotacionFlecha);
             

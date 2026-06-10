@@ -64,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 8780429033113255880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.327091, y: -5.6972694, z: 0}
+  m_LocalPosition: {x: 11.41, y: -5.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,8 +191,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.36, y: 1.76}
+  m_Offset: {x: 0.019944668, y: -0.03218937}
+  m_Size: {x: 0.85373783, y: 1}
   m_Direction: 0
 --- !u!95 &3962752495500668348
 Animator:
@@ -253,7 +253,7 @@ MonoBehaviour:
   minMonedas: 2
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
-  maxLife: 200
+  maxLife: 11
   knockbackForce: {x: 2, y: 1}
   minKnockbackTime: 0.3
 --- !u!114 &5377633792362014178

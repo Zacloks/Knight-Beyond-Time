@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 3995787259466627644}
   m_Layer: 3
   m_Name: Root
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,7 +787,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5336146838825293280}
@@ -1737,7 +1737,6 @@ GameObject:
   - component: {fileID: 4206635758378602322}
   - component: {fileID: 803930800355770575}
   - component: {fileID: 1056571052992502046}
-  - component: {fileID: 2260920450282076656}
   - component: {fileID: 8331107048812425788}
   - component: {fileID: 1941830917964319609}
   - component: {fileID: 8967334179107747084}
@@ -4858,27 +4857,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.3}
   m_Size: {x: 0.8, y: 0.8}
   m_Direction: 0
---- !u!114 &2260920450282076656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3207113515523513146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec000725d2cbd04f85cdb694a0076ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  spumPrefabs: {fileID: 0}
-  spumAnimator: {fileID: 0}
-  idleAnimationIndex: 0
-  moveAnimationIndex: 0
-  attackAnimationIndex: 0
-  damagedAnimationIndex: 0
-  debuffAnimationIndex: 0
-  deathAnimationIndex: 0
-  skillAnimationIndices: 01000000010000000100000001000000
 --- !u!114 &8331107048812425788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4962,6 +4940,7 @@ MonoBehaviour:
   atacar: {fileID: 434898793832103627, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   attackMagic: {fileID: -6198884845702736641, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   isAtacking: 0
+  attackLockTime: 0.4
 --- !u!114 &1124284278540476235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5893,7 +5872,7 @@ GameObject:
   - component: {fileID: 2704816255067994337}
   m_Layer: 3
   m_Name: UnitRoot
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7434,7 +7413,7 @@ GameObject:
   - component: {fileID: 1876640003281553393}
   m_Layer: 3
   m_Name: Shadow
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

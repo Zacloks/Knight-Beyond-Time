@@ -71,8 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (!IsDashing)
             {
-                if (direccionMov.x < 0) LastDirection = Vector2.left;
-                else LastDirection = Vector2.right;
+                if (direccionMov.x < -0.1f) LastDirection = Vector2.left;
+                else if (direccionMov.x > 0.1f) LastDirection = Vector2.right;
             }
         }
     }
