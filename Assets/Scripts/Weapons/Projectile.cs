@@ -5,7 +5,8 @@ public class Projectile : MonoBehaviour
     private float speed;
     private int damage;
     private float knockbackForce;
-    private Weapon parentWeapon; 
+    private Weapon parentWeapon;
+    private float immobilizeDuration = 0f; // 0 = no inmoviliza
 
     public void Setup(int dmg, float spd, float kb, Weapon weapon)
     {
@@ -13,6 +14,12 @@ public class Projectile : MonoBehaviour
         speed = spd;
         knockbackForce = kb;
         parentWeapon = weapon;
+    }
+
+    // Opcional: hace que el proyectil inmovilice al enemigo al impactar (báculo).
+    public void SetInmovilizacion(float duracion)
+    {
+        immobilizeDuration = duracion;
     }
 
     void Update()
@@ -28,7 +35,9 @@ public class Projectile : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage, transform.position);
-                
+
+                if (immobilizeDuration > 0f) enemy.Inmovilizar(immobilizeDuration);
+
                 SpriteRenderer enemySprite = other.GetComponent<SpriteRenderer>();
                 if (enemySprite != null && parentWeapon != null)
                 {
