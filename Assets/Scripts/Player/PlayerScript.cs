@@ -42,11 +42,13 @@ public class PlayerScript : MonoBehaviour
 //------FUNCIONES PARA ITEMS/POCIONES-----
     public void TakeDamage(int amount) {
         Stats.TakeDamage(amount);
-        Animator.TriggerDebuff();
+        // Animación de aturdido desactivada temporalmente para pruebas.
+        // Animator.TriggerDebuff();
     }
     public void TakeDamage(int amount, Vector2 sourcePosition) {
         Stats.TakeDamage(amount, sourcePosition);
-        Animator.TriggerDebuff();
+        // Animación de aturdido desactivada temporalmente para pruebas.
+        // Animator.TriggerDebuff();
     }
     public void buy(int price) {Stats.TrySpendCoins(price);}
 

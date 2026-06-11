@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("Se pone a true tras sembrar el estado en la primera escena.")]
     public bool initialized = false;
 
+    [System.NonSerialized] public string nextSpawnId;
+
     public event Action OnStateChanged;
 
     void Awake()

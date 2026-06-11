@@ -186,18 +186,18 @@ MonoBehaviour:
   datos: {fileID: 0}
   enVenta: 0
   weaponName: Hacha de trabajo
-  damage: 10
+  damage: 5
   attackRate: 1
   sprite: {fileID: 8071925766829811541, guid: 47a3be5da382a414ab0e1d66f1da89b5, type: 3}
   usaAnimacionJugador: 1
   probabilidadCritico: 5
   multiplicadorCritico: 2
-  maxDurabilidad: 20
-  durabilidadActual: 20
+  maxDurabilidad: 200
+  durabilidadActual: 200
   attackRadius: 1.5
   attackAngle: 90
   coneOffset: 0
-  damageDelay: 0.15
+  damageDelay: 0.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -24,6 +24,22 @@ public class ZoneBlocker : MonoBehaviour
     {
         SetMuros(true);
     }
+    public bool TryGetHorizontalBounds(out float left, out float right)
+    {
+        left = float.MaxValue;
+        right = float.MinValue;
+        bool any = false;
+
+        foreach (GameObject muro in muros)
+        {
+            if (muro == null) continue;
+            float x = muro.transform.position.x;
+            left = Mathf.Min(left, x);
+            right = Mathf.Max(right, x);
+            any = true;
+        }
+        return any;
+    }
 
     public void Unblock()
     {

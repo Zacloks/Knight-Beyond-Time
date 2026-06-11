@@ -55,7 +55,12 @@ public class PlayerAnimator : MonoBehaviour
 
 //--------TRIGGERS DE ANIMACIONES-------
 
-    public void TriggerMeleeAttack() {Trigger(TRIGGER_ATTACK);}
+    public void TriggerMeleeAttack()
+    {
+        anim.ResetTrigger(TRIGGER_ATTACK);
+        anim.SetTrigger(TRIGGER_ATTACK);
+    }
+    public void ResetMeleeTrigger() {anim.ResetTrigger(TRIGGER_ATTACK);}
     public void TriggerMagicAttack() {Trigger(TRIGGER_MAGIC);}
     public void TriggerDash() {Trigger(TRIGGER_DASH);}
     public void TriggerDebuff() {Trigger(TRIGGER_DEBUFF);}

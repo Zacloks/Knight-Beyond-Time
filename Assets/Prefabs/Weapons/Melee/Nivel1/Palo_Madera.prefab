@@ -162,8 +162,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.17741255, y: 0.16128331}
-    oldSize: {x: 0.33, y: 0.33}
+    pivot: {x: 0.27727556, y: 0.2448132}
+    oldSize: {x: 0.58181816, y: 0.58181816}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -186,18 +186,18 @@ MonoBehaviour:
   datos: {fileID: 0}
   enVenta: 0
   weaponName: Palo de Madera
-  damage: 5
+  damage: 2
   attackRate: 1
   sprite: {fileID: -1498508099637772027, guid: 6a64c677283808444813115457e99d27, type: 3}
   usaAnimacionJugador: 1
   probabilidadCritico: 5
   multiplicadorCritico: 1.5
-  maxDurabilidad: 30
-  durabilidadActual: 30
+  maxDurabilidad: 200
+  durabilidadActual: 100
   attackRadius: 1.5
   attackAngle: 90
   coneOffset: 0
-  damageDelay: 0.15
+  damageDelay: 0.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

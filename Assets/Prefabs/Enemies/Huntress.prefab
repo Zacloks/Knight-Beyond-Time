@@ -113,7 +113,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4582277519740372724, guid: 1af1bd5a448c7dc4ca0af84327613a4f, type: 3}
   shootPoint: {fileID: 0}
   attackDamage: 20
-  shootRange: 5
+  shootRange: 4
   projectileSpeed: 9
   timeBetweenAttacks: 1.5
   attackDuration: 0.6

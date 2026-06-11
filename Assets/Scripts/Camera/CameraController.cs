@@ -13,6 +13,26 @@ public class CameraController : MonoBehaviour
    public float minY; // borde inferior
    public float maxY; //borde superior
 
+   private float baseMinX, baseMaxX;
+
+   private void Awake()
+   {
+      baseMinX = minX;
+      baseMaxX = maxX;
+   }
+
+   public void SetHorizontalLimits(float left, float right)
+   {
+      minX = left;
+      maxX = right;
+   }
+
+   public void ResetHorizontalLimits()
+   {
+      minX = baseMinX;
+      maxX = baseMaxX;
+   }
+
    private void LateUpdate(){
       if (objetivo == null)
       {
@@ -29,11 +49,11 @@ public class CameraController : MonoBehaviour
         float camHeight = Camera.main.orthographicSize;
         float camWidth = camHeight * Camera.main.aspect;
 
-        float xLimitada = Mathf.Clamp(
-            posicionDeseada.x,
-            minX + camWidth,
-            maxX - camWidth
-        );
+        float leftLim = minX + camWidth;
+        float rightLim = maxX - camWidth;
+        float xLimitada = (leftLim <= rightLim)
+            ? Mathf.Clamp(posicionDeseada.x, leftLim, rightLim)
+            : (minX + maxX) * 0.5f;
 
         float yLimitada = Mathf.Clamp(
             posicionDeseada.y,

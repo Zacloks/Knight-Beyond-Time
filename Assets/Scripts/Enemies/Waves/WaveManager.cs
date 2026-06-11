@@ -20,6 +20,7 @@ public class WaveManager : MonoBehaviour
     private int currentWaveIndex = 0;
     private readonly List<GameObject> liveEnemies = new();
     private bool zoneActive = false;
+    private CameraController camera2D;
 
     public void ActivateZone()
     {
@@ -39,7 +40,23 @@ public class WaveManager : MonoBehaviour
 
         zoneActive = true;
         zoneBlocker?.Block();
+        ConfinarCamara();
         StartCoroutine(RunWaves());
+    }
+
+    private void ConfinarCamara()
+    {
+        if (zoneBlocker == null) return;
+        if (camera2D == null) camera2D = FindFirstObjectByType<CameraController>();
+        if (camera2D == null) return;
+
+        if (zoneBlocker.TryGetHorizontalBounds(out float left, out float right))
+            camera2D.SetHorizontalLimits(left, right);
+    }
+
+    private void LiberarCamara()
+    {
+        if (camera2D != null) camera2D.ResetHorizontalLimits();
     }
 
     public void RegisterEnemy(GameObject enemy)
@@ -101,6 +118,7 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log("[WaveManager] ¡Zona completada!");
         zoneBlocker?.Unblock();
+        LiberarCamara();
         OnAllWavesCleared?.Invoke();
     }
 

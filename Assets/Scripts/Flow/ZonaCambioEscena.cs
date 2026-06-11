@@ -16,9 +16,14 @@ public class ZonaCambioEscena : MonoBehaviour
     [Header("Filtro")]
     public string tagJugador = "Player";
 
+    public string spawnIdDestino;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag(tagJugador)) return;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.nextSpawnId = spawnIdDestino;
 
         switch (modo)
         {

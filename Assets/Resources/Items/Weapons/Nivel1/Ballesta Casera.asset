@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Ballesta Casera
   precio: 5
   sprite: {fileID: -1201772774456808696, guid: a5c20dec4c1e0884c8837c933ce4f4a6, type: 3}
-  prefab: {fileID: 797344937575326492, guid: 31843d3868ea8ba439a4e4932b24724f, type: 3}
+  prefab: {fileID: 797344937575326492, guid: f67c5cfe6888e0742a27325b62e3f6c0, type: 3}
   estrategiaEfecto: {fileID: 0}
