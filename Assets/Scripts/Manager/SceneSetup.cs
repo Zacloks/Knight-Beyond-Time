@@ -25,6 +25,12 @@ public class SceneSetup : MonoBehaviour
              "el player aparece en el punto con ese id; si no, se usa el spawnPoint por defecto.")]
     public NamedSpawn[] entradas;
 
+    [Header("Ajustes visuales de esta escena")]
+    [Tooltip("Escala del player en esta escena (1 = normal). Súbelo para verlo más grande, ej. en la tienda.")]
+    public float playerScale = 1f;
+    [Tooltip("Tamaño ortográfico de la cámara en esta escena (0 = no cambiar). Más grande = la cámara abarca más.")]
+    public float cameraSize = 0f;
+
     void Awake()
     {
         if (GameManager.Instance == null && gameManagerPrefab != null)
@@ -37,9 +43,20 @@ public class SceneSetup : MonoBehaviour
         Vector3 pos = spawn != null ? spawn.position : transform.position;
 
         if (playerPrefab != null)
-            Instantiate(playerPrefab, pos, Quaternion.identity);
+        {
+            GameObject player = Instantiate(playerPrefab, pos, Quaternion.identity);
+
+            if (playerScale > 0f && !Mathf.Approximately(playerScale, 1f))
+            {
+                Vector3 s = player.transform.localScale;
+                player.transform.localScale = new Vector3(s.x * playerScale, s.y * playerScale, s.z);
+            }
+        }
         else
             Debug.LogWarning("[SceneSetup] Falta asignar playerPrefab.");
+
+        if (cameraSize > 0f && Camera.main != null)
+            Camera.main.orthographicSize = cameraSize;
 
         if (hudCanvasPrefab != null)
             Instantiate(hudCanvasPrefab);
