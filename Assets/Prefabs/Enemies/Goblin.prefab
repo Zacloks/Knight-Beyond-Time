@@ -230,11 +230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementEnemy
   currentState: 0
   movementSpeedBase: 2
-  chasing: 0
-  hurtDuration: 0.5
   knockbackDamping: 0.85
   attackRange: 1
-  attackCooldown: 2
   separationRadius: 1.3
   separationStrength: 1.8
 --- !u!114 &1561189685631507323
@@ -254,6 +251,7 @@ MonoBehaviour:
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
   maxLife: 11
+  tiempoHastaDestruir: 0.34
   knockbackForce: {x: 2, y: 1}
   minKnockbackTime: 0.3
 --- !u!114 &5377633792362014178

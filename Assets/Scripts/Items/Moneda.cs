@@ -22,15 +22,15 @@ public class Moneda : Item
         switch (value)
         {
             case 1:
-                spriteRenderer.color = new Color(0.75f, 0.45f, 0.2f); // bronce
+                spriteRenderer.color = Color.white; // amarilla (deja el sprite base tal cual)
                 break;
 
             case 5:
-                spriteRenderer.color = new Color(1f, 0.85f, 0f); // oro
+                spriteRenderer.color = new Color(0.3f, 0.55f, 1f); // azul (2º valor)
                 break;
 
             case 10:
-                spriteRenderer.color = new Color(0.2f, 0.6f, 1f); // azul
+                spriteRenderer.color = new Color(1f, 0.25f, 0.25f); // rojo (mayor valor)
                 break;
         }
     }

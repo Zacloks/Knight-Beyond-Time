@@ -15,17 +15,15 @@ public class MovementEnemy : MonoBehaviour
 
     [Header("Animator")]
     private Animator animator;
-    public bool chasing = false;
     private IEnemyAttack attackEnemy;
 
     [Header("Hurt")]
     private float hurtEndTime;
-    public float hurtDuration = 0.5f;
     [Range(0f, 1f)] public float knockbackDamping = 0.85f;
 
     [Header("Ataque")]
+    [Tooltip("Distancia de parada si el enemigo NO tiene componente de ataque (fallback).")]
     public float attackRange = 1.5f;
-    public float attackCooldown = 1f;
     private float attackEndTime;
 
     [Header("Separación (anti-amontonamiento)")]
@@ -165,7 +163,6 @@ public class MovementEnemy : MonoBehaviour
     public void ChangeToStateChase()
     {
         currentState = EnemyState.Chase;
-        chasing = true;
     }
 
     // HURT
