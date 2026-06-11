@@ -10,11 +10,12 @@ public class PlayerCombat : MonoBehaviour
     [Header("Estado")]
     public bool isAtacking = false;
     [Tooltip("Segundos que el player queda 'atacando' (congela anim. de movimiento).")]
-    [SerializeField] private float attackLockTime = 0.4f;
+    [SerializeField] private float attackLockTime = 1f;
 
     //Referencias
     private PlayerAnimator playerAnimator;
-    private PlayerInventory playerInventory; 
+    private PlayerInventory playerInventory;
+    private Coroutine attackLockRoutine;
     void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
@@ -33,6 +34,10 @@ public class PlayerCombat : MonoBehaviour
 //-----------ATAQUE----------
     private void EjecutarAtaque()
     {
+        // No permitir iniciar un nuevo ataque mientras el anterior sigue 
+        // en lock/animación
+        if (isAtacking) return;
+
         ItemData itemData = playerInventory.GetEquippedItemData();
         Item itemEnMano   = playerInventory.GetEquippedItemInstance();
 
@@ -43,13 +48,12 @@ public class PlayerCombat : MonoBehaviour
                 bool exito = arma.Atacar();
                 if (exito)
                 {
-                    string tipo = arma.GetType().Name;
-                    Debug.Log($"Ataque confirmado. Arma: {tipo}");
+                    Debug.Log($"Ataque confirmado. Arma: {arma.GetType().Name}");
 
-                    if (tipo == "WeaponMelee")
+                    if (arma is WeaponMelee)
                         playerAnimator.TriggerMeleeAttack();
 
-                    StartCoroutine(AtackCoroutine());
+                    StartAttackLock();
                 }
                 else
                 {
@@ -69,7 +73,7 @@ public class PlayerCombat : MonoBehaviour
         {
             playerAnimator.TriggerMeleeAttack();
             Debug.Log("¡Ataque SIN ARMA ejecutado con J!");
-            StartCoroutine(AtackCoroutine());
+            StartAttackLock();
         }
     }
 
@@ -84,7 +88,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 playerAnimator.TriggerMagicAttack();
                 Debug.Log("¡Ataque Especial / Mágico ejecutado con K!");
-                StartCoroutine(AtackCoroutine());
+                StartAttackLock();
             }
         }
         else
@@ -98,7 +102,7 @@ public class PlayerCombat : MonoBehaviour
         if (playerAnimator != null)
         {
             playerAnimator.Trigger(nombreAnimacion);
-            StartCoroutine(AtackCoroutine());
+            StartAttackLock();
         }
     }
     public void IniciarAnimacionMitad(string nombreAnimacion)
@@ -109,7 +113,13 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-//-----------COROUTINES--------
+//evitar errores en animacion ataque 
+    private void StartAttackLock()
+    {
+        if (attackLockRoutine != null) StopCoroutine(attackLockRoutine);
+        attackLockRoutine = StartCoroutine(AtackCoroutine());
+    }
+
     private IEnumerator AtackCoroutine()
     {
         isAtacking = true;
@@ -117,6 +127,9 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(attackLockTime);
 
         isAtacking = false;
+        attackLockRoutine = null;
+
+        if (playerAnimator != null) playerAnimator.ResetMeleeTrigger();
     }
     private IEnumerator AnimacionMitadCoroutine(string nombreAnimacion)
     {
