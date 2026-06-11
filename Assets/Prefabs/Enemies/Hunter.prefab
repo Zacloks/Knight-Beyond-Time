@@ -234,6 +234,7 @@ MonoBehaviour:
   attackRange: 1
   separationRadius: 1.3
   separationStrength: 1.8
+  spriteMiraDerecha: 1
 --- !u!114 &1561189685631507323
 MonoBehaviour:
   m_ObjectHideFlags: 0
