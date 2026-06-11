@@ -8,9 +8,11 @@ public class WeaponMelee : Weapon
     [Range(0, 360)] public float attackAngle = 90f;
     public float coneOffset = 0f;
     public float damageDelay = 0.15f;
+    [Tooltip("A esta distancia o menos, basta con que el enemigo esté un poco adelante")]
+    public float closeRange = 0.6f;
     public LayerMask enemyLayer;
 
-    private bool isSwinging = false;   // Hay un golpe en curso (durante damageDelay)
+    private bool isSwinging = false;   
     private float nextAttackTime = 0f; // Momento a partir del cual se puede volver a atacar
     private Quaternion originalRotation;
 
@@ -63,11 +65,24 @@ public class WeaponMelee : Weapon
 
         foreach (Collider2D col in enemigosEnRadio)
         {
-            Vector2 dirToEnemy = ((Vector2)col.transform.position - (Vector2)origen).normalized;
+            Vector2 toEnemy = (Vector2)col.transform.position - (Vector2)origen;
+            float dist = toEnemy.magnitude;
 
-            float angleToEnemy = Vector2.Angle(facingDir, dirToEnemy);
+            bool enRango;
+            if (dist <= closeRange)
+            {
+                // Muy cerca: basta con que el enemigo esté del lado hacia el que miras
+                // (un poco adelante). Misma posición -> dot ~0 -> no pega; atrás -> no pega.
+                enRango = Vector2.Dot(facingDir, toEnemy) > 0f;
+            }
+            else
+            {
+                // Distancia normal: cono estricto según attackAngle.
+                float angleToEnemy = Vector2.Angle(facingDir, toEnemy / dist);
+                enRango = angleToEnemy <= attackAngle / 2f;
+            }
 
-            if (angleToEnemy <= attackAngle / 2f)
+            if (enRango)
             {
                 Enemy enemy = col.GetComponent<Enemy>();
                 if (enemy != null)

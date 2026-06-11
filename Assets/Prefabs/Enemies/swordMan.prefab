@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpecial
   attackDamage: 10
-  probabilidadCritico: 50
+  probabilidadCritico: 20
   multiplicadorCritico: 2
 --- !u!114 &980462817604487691
 MonoBehaviour:
@@ -231,7 +231,7 @@ MonoBehaviour:
   minMonedas: 2
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
-  maxLife: 15
+  maxLife: 20
   tiempoHastaDestruir: 1
   knockbackForce: {x: 3, y: 1}
   minKnockbackTime: 1
@@ -253,7 +253,6 @@ MonoBehaviour:
   attackRange: 1.5
   separationRadius: 1.3
   separationStrength: 1.8
-  spriteMiraDerecha: 1
 --- !u!70 &7310685987548572482
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

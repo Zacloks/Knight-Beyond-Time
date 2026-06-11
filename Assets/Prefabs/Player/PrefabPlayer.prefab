@@ -4909,7 +4909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8ab7b0de1dc6c4282eb86347830f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHealthInicial: 20
+  maxHealthInicial: 100
   maxEnergyInicial: 100
   immuneTime: 2
 --- !u!114 &5455773034065575719

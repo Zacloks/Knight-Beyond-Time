@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Efectos/Vida")]
 public class EfectoVida : EfectoBase
 {
-    public int cantidadCuracion = 20;
+    public int cantidadCuracion = 200;
 
     public override void AplicarEfecto(PlayerStats stats)
     {

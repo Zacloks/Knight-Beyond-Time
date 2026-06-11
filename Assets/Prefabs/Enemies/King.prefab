@@ -271,7 +271,7 @@ MonoBehaviour:
   minMonedas: 2
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
-  maxLife: 10
+  maxLife: 20
   tiempoHastaDestruir: 1
   knockbackForce: {x: 2, y: 1}
   minKnockbackTime: 0.3

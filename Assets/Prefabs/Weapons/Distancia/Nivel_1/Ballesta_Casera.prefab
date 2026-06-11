@@ -190,10 +190,10 @@ MonoBehaviour:
   attackRate: 0.5
   sprite: {fileID: -1201772774456808696, guid: a5c20dec4c1e0884c8837c933ce4f4a6, type: 3}
   usaAnimacionJugador: 1
-  probabilidadCritico: 5
+  probabilidadCritico: 10
   multiplicadorCritico: 2
-  maxDurabilidad: 20
-  durabilidadActual: 20
+  maxDurabilidad: 30
+  durabilidadActual: 30
   projectilePrefab: {fileID: 4582277519740372724, guid: 275f609c643846546b6740ad72d80f3f, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

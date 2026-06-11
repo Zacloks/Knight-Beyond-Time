@@ -186,7 +186,7 @@ MonoBehaviour:
   datos: {fileID: 0}
   enVenta: 0
   weaponName: Palo de Madera
-  damage: 2
+  damage: 5
   attackRate: 1
   sprite: {fileID: -1498508099637772027, guid: 6a64c677283808444813115457e99d27, type: 3}
   usaAnimacionJugador: 1
@@ -194,10 +194,11 @@ MonoBehaviour:
   multiplicadorCritico: 1.5
   maxDurabilidad: 10
   durabilidadActual: 10
-  attackRadius: 1.5
+  attackRadius: 0.7
   attackAngle: 90
   coneOffset: 0
   damageDelay: 0.5
+  closeRange: 0.6
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
