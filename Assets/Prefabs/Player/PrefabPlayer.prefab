@@ -4909,7 +4909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8ab7b0de1dc6c4282eb86347830f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHealthInicial: 100
+  maxHealthInicial: 20
   maxEnergyInicial: 100
   immuneTime: 2
 --- !u!114 &5455773034065575719
@@ -4970,6 +4970,7 @@ MonoBehaviour:
   cambiarItemLeft: {fileID: -280953274002633430, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   cambiarItemRight: {fileID: 8962515486156404428, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   inventario: {fileID: 5891615528443705157}
+  dropDistance: 0.3
   useSPUM: 1
   spumEquipment: {fileID: 8331107048812425788}
 --- !u!114 &3733526711046011829

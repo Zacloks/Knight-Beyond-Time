@@ -69,6 +69,11 @@ public class SceneSetup : MonoBehaviour
             Instantiate(pauseMenuPrefab);
         else
             Debug.LogWarning("[SceneSetup] Falta asignar pauseMenuPrefab.");
+
+        if (GameOverMenuPrefab != null)
+            Instantiate(GameOverMenuPrefab);
+        else
+            Debug.LogWarning("[SceneSetup] Falta asignar GameOverMenuPrefab.");
     }
     private Transform ElegirSpawn()
     {

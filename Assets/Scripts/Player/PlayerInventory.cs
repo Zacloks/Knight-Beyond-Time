@@ -10,6 +10,10 @@ public class PlayerInventory : MonoBehaviour
     [Header("Inventario")]
     public Inventory inventario;
 
+    [Header("Drop")]
+    [Tooltip("Distancia a la que se suelta el item delante del jugador con L.")]
+    public float dropDistance = 0.3f;
+
     [Header("SPUM Integration")]
     public bool useSPUM = true;
     public SPUMEquipmentManager spumEquipment;
@@ -38,9 +42,71 @@ public class PlayerInventory : MonoBehaviour
 
     public void DropItem()
     {
+        ItemData data = inventario.getEquippedItem();
+        if (data == null) return;
+
+        SpawnItemEnSuelo(data);
+
         inventario.dropItem();
         if (useSPUM && spumEquipment != null)
             spumEquipment.UnequipItem();
+
+        // destruye la instancia equipada y equipa lo que quede 
+        UpdateEquippedItem(inventario.getEquippedItem());
+    }
+
+    // Suelta el item 
+    private void SpawnItemEnSuelo(ItemData data)
+    {
+        if (data.prefab == null) return;
+
+        Vector2 dir = Vector2.right;
+        PlayerMovement mov = GetComponent<PlayerMovement>();
+        if (mov != null) dir = mov.LastDirection;
+
+        Vector3 pos = transform.position + (Vector3)(dir.normalized * dropDistance);
+
+        Item soltado = Instantiate(data.prefab, pos, Quaternion.identity);
+        soltado.datos = data;
+        soltado.enVenta = false;
+        soltado.gameObject.tag = "Consumible";
+
+        SpriteRenderer sr = soltado.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.enabled = true;
+           
+            sr.sortingOrder = OrdenDebajoDelJugador();
+        }
+
+        Collider2D col = soltado.GetComponent<Collider2D>();
+        if (col != null) { col.enabled = true; col.isTrigger = true; }
+
+        // Sombra redonda + flotar para integrarlo con el mapa
+        soltado.gameObject.AddComponent<DroppedItem>();
+    }
+
+    // Devuelve un orden de sorting por debajo del sprite más bajo del jugador,
+    // para que el item soltado quede detrás 
+    private int OrdenDebajoDelJugador()
+    {
+        int min = int.MaxValue;
+        foreach (SpriteRenderer r in GetComponentsInChildren<SpriteRenderer>())
+            if (r.sortingOrder < min) min = r.sortingOrder;
+
+        if (min == int.MaxValue) min = 0;
+        return min - 1;
+    }
+
+    // Llamado por un arma cuando su durabilidad llega a 0: la quita del inventario
+    // y de la mano 
+    public void RomperItemEquipado(Item item)
+    {
+        if (item != itemEnMano) return;
+
+        Debug.Log($"El arma {(item.datos != null ? item.datos.itemName : "?")} se rompió y desaparece.");
+        inventario.dropItem();                          
+        UpdateEquippedItem(inventario.getEquippedItem()); 
     }
 
     private void UpdateEquippedItem(ItemData itemData)

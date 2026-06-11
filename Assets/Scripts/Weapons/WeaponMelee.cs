@@ -81,6 +81,8 @@ public class WeaponMelee : Weapon
         }
 
         isSwinging = false;
+
+        ComprobarRotura();
     }
 
     private void OnDrawGizmosSelected()

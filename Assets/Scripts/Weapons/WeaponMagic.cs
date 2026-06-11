@@ -111,6 +111,8 @@ public class WeaponMagic : WeaponDistance
 
         ataqueEspecial.EjecutarAtaque(this, shootPoint, jugador);
         isCastingSpecial = false;
+
+        ComprobarRotura();
     }
 
     private void ActualizarSpriteCarga(bool hayAnimacion, float timer)
