@@ -67,6 +67,13 @@ public abstract class Enemy : MonoBehaviour
         lifeEnemy.TakeDamage(amount, sender);
     }
 
+    // Congela al enemigo durante 'duracion' segundos (efecto del báculo).
+    public void Inmovilizar(float duracion)
+    {
+        if (lifeEnemy != null && lifeEnemy.IsDead()) return;
+        if (movementEnemy != null) movementEnemy.Inmovilizar(duracion);
+    }
+
     public int GetDamage()
     {
         return attackEnemy != null ? attackEnemy.AttackDamage : Mathf.RoundToInt(attackDamage);

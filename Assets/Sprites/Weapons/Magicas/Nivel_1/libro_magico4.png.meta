@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: f84f51d35e1c89c41bff9177638a906a
+guid: c3315c5ff6ebe6a4d8900c0ee9fc455b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2418268922932249284
-    second: magic book _32_0
+      213: 4939857365220692222
+    second: libro_magico4_0
+  - first:
+      213: 4759295726085573403
+    second: libro_magico4_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 90
+  spritePixelsToUnits: 650
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: magic book _32_0
+      name: libro_magico4_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 2
-        width: 54
-        height: 59
-      alignment: 9
-      pivot: {x: 0.7365115, y: 0.4131456}
+        x: 239
+        y: 448
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c24ebad5ca6f8120800000000000000
-      internalID: 2418268922932249284
+      spriteID: ef09317e916ed8440800000000000000
+      internalID: 4939857365220692222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: libro_magico4_1
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 56
+        width: 379
+        height: 391
+      alignment: 9
+      pivot: {x: 0.8607735, y: 0.39130867}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1b8d5e3f3a6c0240800000000000000
+      internalID: 4759295726085573403
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 005f7c55532c937409850f8ba8eda977
+    spriteID: 62c705f145ea1f6418bceacaba831b27
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      magic book _32_0: 2418268922932249284
+      libro_magico4_0: 4939857365220692222
+      libro_magico4_1: 4759295726085573403
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

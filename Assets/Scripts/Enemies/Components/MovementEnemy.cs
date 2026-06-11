@@ -30,6 +30,10 @@ public class MovementEnemy : MonoBehaviour
     public float separationRadius = 1.3f;
     public float separationStrength = 1.8f;
 
+    [Header("Inmovilización (efecto báculo)")]
+    private float immobilizeEndTime;
+    public bool IsImmobilized => Time.time < immobilizeEndTime;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,6 +59,15 @@ public class MovementEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Mientras esté inmovilizado, se queda totalmente quieto (no corre la
+        // máquina de estados ni la separación). Sigue pudiendo recibir daño.
+        if (IsImmobilized)
+        {
+            moveDirection = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         switch (currentState)
         {
             case EnemyState.Chase:
@@ -187,6 +200,14 @@ public class MovementEnemy : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+    }
+
+    // INMOVILIZACIÓN (efecto báculo)
+    public void Inmovilizar(float duracion)
+    {
+        immobilizeEndTime = Time.time + duracion;
+        rb.linearVelocity = Vector2.zero;
+        if (animator != null) animator.SetBool("Chasing", false);
     }
 
     // DEAD
