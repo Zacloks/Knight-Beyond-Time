@@ -43,4 +43,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void NotifyChanged() => OnStateChanged?.Invoke();
+
+    public void ResetState()
+{
+    currentHealth = maxHealth;
+    currentEnergy = maxEnergy;
+    NotifyChanged();
+}
 }

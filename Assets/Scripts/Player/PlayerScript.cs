@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 public class PlayerScript : MonoBehaviour
 {
     //REFERENCIAS
@@ -24,6 +25,11 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
+        // Suscribirse a eventos de Stats para reacciones cross-módulo
+        if (Stats != null)
+        {
+            Stats.PlayerMuerto += PlayerMatar;
+        }
     }
 
     void Update()
@@ -45,11 +51,14 @@ public class PlayerScript : MonoBehaviour
         // Animator.TriggerDebuff();
     }
     public void buy(int price) {Stats.TrySpendCoins(price);}
+
+//ACTIVAR ANIMACIONES
     public void IniciarAnimacion(string nombre) {Combat.IniciarAnimacion(nombre);}
     public void IniciarAnimacionMitad(string nombre) {Combat.IniciarAnimacionMitad(nombre);}
+//ACTIVAR STATS
     public void ActivarDashInfinito(float duracion) {Stats.ActivarDashInfinito(duracion);}
     public void ActivarVelocidad(float aumento, float dur){Stats.ActivarVelocidad(aumento, dur);}
-
+//SETTERS 
     public void SetDashInfinito(bool valor)
     {
         if (Movement != null) Movement.dashInfinito = valor;
@@ -61,5 +70,28 @@ public class PlayerScript : MonoBehaviour
 
     public Animator getPlayerAnimator(){
         return Animator.anim;
+    }
+
+//MUERTE DEL PERSONAJE ='(
+    void OnDestroy()
+    {
+        if (Stats != null)
+            Stats.PlayerMuerto -= PlayerMatar;
+    }
+
+    private void PlayerMatar()
+    {
+        Debug.Log("El jugador ha muerto.");
+        Movement.enabled = false;
+        Combat.enabled = false;
+        Animator.TriggerDeath(); 
+        StartCoroutine(MostrarGameOverConDelay());
+    }
+
+    private IEnumerator MostrarGameOverConDelay()
+    {
+        yield return new WaitForSecondsRealtime(1.5f); // RealTime ignora timeScale
+        GameOverScript.Instance.MostrarGameOver();
+        Destroy(gameObject);
     }
 }
