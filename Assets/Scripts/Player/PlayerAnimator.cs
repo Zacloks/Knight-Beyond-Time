@@ -9,7 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     private string TRIGGER_DASH       = "7_Dash";
     private string TRIGGER_DEBUFF     = "5_Debuff";
     private string STATE_IDLE         = "0_Idle";
-
+    private string PARAM_DEATH        = "isDeath";
     private PlayerMovement movement;
     private PlayerCombat combat;
     [Header("Animador de Sprite")]
@@ -59,7 +59,7 @@ public class PlayerAnimator : MonoBehaviour
     public void TriggerMagicAttack() {Trigger(TRIGGER_MAGIC);}
     public void TriggerDash() {Trigger(TRIGGER_DASH);}
     public void TriggerDebuff() {Trigger(TRIGGER_DEBUFF);}
-
+    public void TriggerDeath() {anim.SetBool(PARAM_DEATH, true);}
     public void Trigger(string nombreAnimacion) {anim.SetTrigger(nombreAnimacion);}
 
     public void CrossFadeToIdle(float transitionDuration = 0.05f)

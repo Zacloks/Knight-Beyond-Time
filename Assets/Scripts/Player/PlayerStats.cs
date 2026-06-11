@@ -27,6 +27,8 @@ public class PlayerStats : MonoBehaviour
     public int currentEnergy { get => GM.currentEnergy; set => GM.currentEnergy = value; }
     public int coins         { get => GM.coins;         set => GM.coins = value; }
 
+    //EVENTOS: NOTIFICAN ALGO A OTRO ARCHIVO/MODULO
+    public event System.Action PlayerMuerto;
     void Start()
     {
         if (GM == null)
@@ -80,6 +82,9 @@ public class PlayerStats : MonoBehaviour
 
         GM.NotifyChanged();
         Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
+
+        if (currentHealth <= 0)
+            PlayerMuerto.Invoke();
     }
     public void TakeDamage(int amount, Vector2 sourcePosition)
     {
