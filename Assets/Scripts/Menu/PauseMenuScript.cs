@@ -40,6 +40,7 @@ public class PauseMenuScript : MonoBehaviour
         menuPausa.SetActive(true);
         Time.timeScale = 0f;
         pausado=true;
+        Debug.Log("TimeScale: " + Time.timeScale);
     }
     public void despausarJuego()
     {

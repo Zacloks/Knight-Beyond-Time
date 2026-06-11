@@ -6,6 +6,8 @@ public class SceneSetup : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject hudCanvasPrefab;
     public GameObject pauseMenuPrefab;
+    public GameObject GameOverMenuPrefab;
+
 
     [Tooltip("Opcional: prefab del GameManager. Solo se instancia si aún no existe uno.")]
     public GameObject gameManagerPrefab;
