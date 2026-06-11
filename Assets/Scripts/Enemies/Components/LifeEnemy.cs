@@ -3,7 +3,6 @@ using UnityEngine;
 public class LifeEnemy : MonoBehaviour
 {
     [Header("Referencias")]
-    private Rigidbody2D rb;
     private Animator animator;
     private MovementEnemy movementEnemy;
     private Enemy enemy;
@@ -16,6 +15,8 @@ public class LifeEnemy : MonoBehaviour
 
     [Header("Estadisticas Vida")]
     [SerializeField] private int maxLife;
+    [Tooltip("Segundos antes de destruir el cuerpo al morir. Igualar a la duración del clip de muerte.")]
+    [SerializeField] private float tiempoHastaDestruir = 1f;
     public int currentLife { get; private set; }
     private bool isDead = false;
 
@@ -26,10 +27,13 @@ public class LifeEnemy : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         movementEnemy = GetComponent<MovementEnemy>();
         enemy = GetComponent<Enemy>();
+
+        if (maxLife <= 0)
+            Debug.LogWarning($"{name}: 'maxLife' es {maxLife} en LifeEnemy. El enemigo morirá de un solo golpe. Asígnalo en el Inspector del prefab.", this);
+
         currentLife = maxLife;
     }
 
@@ -47,7 +51,7 @@ public class LifeEnemy : MonoBehaviour
             movementEnemy.ChangeToStateDead();
             waveManager?.NotifyEnemyDied(gameObject);
             soltarMonedas();
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, tiempoHastaDestruir);
             return;
         }
 
