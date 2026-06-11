@@ -11,7 +11,19 @@ public class SceneSetup : MonoBehaviour
     public GameObject gameManagerPrefab;
 
     [Header("Punto de aparición del player")]
+    [Tooltip("Punto por defecto (primera entrada al nivel).")]
     public Transform spawnPoint;
+
+    [System.Serializable]
+    public class NamedSpawn
+    {
+        public string id;
+        public Transform point;
+    }
+
+    [Tooltip("Entradas por id. Si el GameManager pide un id (al volver por una puerta), " +
+             "el player aparece en el punto con ese id; si no, se usa el spawnPoint por defecto.")]
+    public NamedSpawn[] entradas;
 
     void Awake()
     {
@@ -21,7 +33,8 @@ public class SceneSetup : MonoBehaviour
 
     void Start()
     {
-        Vector3 pos = spawnPoint != null ? spawnPoint.position : transform.position;
+        Transform spawn = ElegirSpawn();
+        Vector3 pos = spawn != null ? spawn.position : transform.position;
 
         if (playerPrefab != null)
             Instantiate(playerPrefab, pos, Quaternion.identity);
@@ -37,5 +50,22 @@ public class SceneSetup : MonoBehaviour
             Instantiate(pauseMenuPrefab);
         else
             Debug.LogWarning("[SceneSetup] Falta asignar pauseMenuPrefab.");
+    }
+    private Transform ElegirSpawn()
+    {
+        string wanted = GameManager.Instance != null ? GameManager.Instance.nextSpawnId : null;
+
+        if (!string.IsNullOrEmpty(wanted) && entradas != null)
+        {
+            foreach (NamedSpawn e in entradas)
+                if (e != null && e.id == wanted && e.point != null)
+                {
+                    GameManager.Instance.nextSpawnId = null; // consumir
+                    return e.point;
+                }
+        }
+
+        if (GameManager.Instance != null) GameManager.Instance.nextSpawnId = null;
+        return spawnPoint;
     }
 }

@@ -655,6 +655,7 @@ MonoBehaviour:
   pauseMenuPrefab: {fileID: 2926439136243966901, guid: 1705c8fc7964b2c45b1fd012e0dcedf9, type: 3}
   gameManagerPrefab: {fileID: 8651955478696783801, guid: 980f54cf8f0515142829d56d86961b1e, type: 3}
   spawnPoint: {fileID: 1284020867}
+  entradas: []
 --- !u!1 &1143376416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,6 +1032,7 @@ MonoBehaviour:
   nombreEscena: Nivel1-2
   indiceEscena: 0
   tagJugador: Player
+  spawnIdDestino: SalirTienda
 --- !u!61 &1308651794
 BoxCollider2D:
   m_ObjectHideFlags: 0

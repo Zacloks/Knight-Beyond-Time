@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 14573ebf2facf490d92eeff301ba0cce
+guid: 1924b6607b68b2b478d91fe105e32261
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4724173402885922826
-    second: CoinBase_0
+      213: 6772775923325811741
+    second: FLYING_0
+  - first:
+      213: 5941632107932350943
+    second: FLYING_1
+  - first:
+      213: -2846053855543560624
+    second: FLYING_2
+  - first:
+      213: -6678637041112908962
+    second: FLYING_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 900
+  spritePixelsToUnits: 46
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CoinBase_0
+      name: FLYING_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 3
-        width: 389
-        height: 367
+        x: 0
+        y: 5
+        width: 80
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ffd2afd15d507eb0800000000000000
-      internalID: -4724173402885922826
+      spriteID: d1c372d81dbbdfd50800000000000000
+      internalID: 6772775923325811741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FLYING_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 1
+        width: 66
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9fc5b0ceae47250800000000000000
+      internalID: 5941632107932350943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FLYING_2
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 5
+        width: 70
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 056f1b0f819c088d0800000000000000
+      internalID: -2846053855543560624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FLYING_3
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 5
+        width: 69
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5bf2bcfef6b053a0800000000000000
+      internalID: -6678637041112908962
       vertices: []
       indices: 
       edges: []
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CoinBase_0: -4724173402885922826
+      FLYING_0: 6772775923325811741
+      FLYING_1: 5941632107932350943
+      FLYING_2: -2846053855543560624
+      FLYING_3: -6678637041112908962
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

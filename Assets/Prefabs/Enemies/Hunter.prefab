@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 7056060862046810322}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0.48, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64,7 +64,7 @@ Transform:
   m_GameObject: {fileID: 8780429033113255880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.42, y: -1.31, z: 0}
+  m_LocalPosition: {x: -1.46, y: -1.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -230,11 +230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementEnemy
   currentState: 0
   movementSpeedBase: 2
-  chasing: 0
-  hurtDuration: 0.5
   knockbackDamping: 0.85
   attackRange: 1
-  attackCooldown: 2
   separationRadius: 1.3
   separationStrength: 1.8
 --- !u!114 &1561189685631507323
@@ -253,7 +250,8 @@ MonoBehaviour:
   minMonedas: 2
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
-  maxLife: 200
+  maxLife: 2
+  tiempoHastaDestruir: 1
   knockbackForce: {x: 2, y: 1}
   minKnockbackTime: 0.3
 --- !u!114 &5377633792362014178
@@ -287,7 +285,7 @@ MonoBehaviour:
   hittableLayers:
     serializedVersion: 2
     m_Bits: 8
-  circleRadius: 0.7
+  circleRadius: 0.6
   attackDamage: 2
   timeBetweenAttacks: 3
   attackDuration: 2
