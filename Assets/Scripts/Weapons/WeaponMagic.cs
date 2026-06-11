@@ -11,18 +11,20 @@ public class WeaponMagic : WeaponDistance
 
     [Header("Referencia del Teclado (Especial / K) - OPCIONAL")]
     [Tooltip("Si se deja vacío, usa automáticamente la acción de ataque mágico del " +
-             "jugador (PlayerScript.attackMagic). Solo asignar para sobrescribirla.")]
+             "jugador (PlayerCombat.attackMagic). Solo asignar para sobrescribirla.")]
     public InputActionReference specialAttackActionRef;
 
     private float nextSpecialTime;
     private PlayerScript jugador;
+    private PlayerCombat playerCombat;
     private bool isCastingSpecial = false;
 
     protected override void Awake()
     {
         base.Awake();
-        // El arma se instancia como hijo del jugador (ver PlayerScript.updateItem).
+        // El arma se instancia como hijo del jugador.
         jugador = GetComponentInParent<PlayerScript>();
+        playerCombat = GetComponentInParent<PlayerCombat>();
     }
 
     // Bloquea el ataque básico mientras se está casteando el especial,
@@ -49,8 +51,9 @@ public class WeaponMagic : WeaponDistance
         }
         if (Time.time < nextSpecialTime) return false; // En cooldown
 
-        // Fallback perezoso por si el arma no encontró al jugador en Awake.
+        // Fallback perezoso por si el arma no encontró las referencias en Awake.
         if (jugador == null) jugador = GetComponentInParent<PlayerScript>();
+        if (playerCombat == null) playerCombat = GetComponentInParent<PlayerCombat>();
 
         nextSpecialTime = Time.time + ataqueEspecial.cooldown;
         GastarDurabilidad(ataqueEspecial.costoDurabilidad);
@@ -65,7 +68,7 @@ public class WeaponMagic : WeaponDistance
     private InputAction GetSpecialAction()
     {
         if (specialAttackActionRef != null) return specialAttackActionRef.action;
-        if (jugador != null && jugador.attackMagic != null) return jugador.attackMagic.action;
+        if (playerCombat != null && playerCombat.attackMagic != null) return playerCombat.attackMagic.action;
         return null;
     }
 

@@ -194,7 +194,7 @@ MonoBehaviour:
   multiplicadorCritico: 2
   maxDurabilidad: 20
   durabilidadActual: 20
-  projectilePrefab: {fileID: 4582277519740372724, guid: b61fb88788ef25b438114baf665eb46e, type: 3}
+  projectilePrefab: {fileID: 4582277519740372724, guid: 04c493d1b3d11e04e9e030819c638bd6, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1
   minProjectileSpeed: 4
