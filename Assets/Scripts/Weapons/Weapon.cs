@@ -69,6 +69,17 @@ public abstract class Weapon : Item
         }
     }
 
+    // Si el arma se quedó sin durabilidad, pide al inventario que la rompa
+    // (la quita del slot y de la mano). Llamar DESPUÉS de aplicar el efecto del
+    // ataque, para que el golpe que la rompe sí cuente.
+    protected void ComprobarRotura()
+    {
+        if (durabilidadActual > 0) return;
+
+        PlayerInventory inv = GetComponentInParent<PlayerInventory>();
+        if (inv != null) inv.RomperItemEquipado(this);
+    }
+
     protected IEnumerator FlashRed(SpriteRenderer spr)
     {
         Color originalColor = spr.color;

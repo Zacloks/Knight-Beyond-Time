@@ -91,7 +91,13 @@ public class PlayerScript : MonoBehaviour
     private IEnumerator MostrarGameOverConDelay()
     {
         yield return new WaitForSecondsRealtime(1.5f); // RealTime ignora timeScale
-        GameOverScript.Instance.MostrarGameOver();
+
+        if (GameOverScript.Instance != null)
+            GameOverScript.Instance.MostrarGameOver();
+        else
+            Debug.LogError("[PlayerScript] No hay GameOverScript en la escena. " +
+                           "Asegúrate de que SceneSetup instancie el GameOverMenuPrefab.");
+
         Destroy(gameObject);
     }
 }

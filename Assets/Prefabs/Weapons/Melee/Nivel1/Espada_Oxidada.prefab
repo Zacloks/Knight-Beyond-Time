@@ -186,7 +186,7 @@ MonoBehaviour:
   datos: {fileID: 0}
   enVenta: 0
   weaponName: Espada Oxidada
-  damage: 5
+  damage: 30
   attackRate: 0.5
   sprite: {fileID: -3753825769889500098, guid: 347999628938f5a4eb95549f660b7de4, type: 3}
   usaAnimacionJugador: 1

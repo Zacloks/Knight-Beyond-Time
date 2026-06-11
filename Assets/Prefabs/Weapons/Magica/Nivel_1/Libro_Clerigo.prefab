@@ -60,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3844930245959808967}
@@ -149,6 +149,7 @@ MonoBehaviour:
   anguloVisual: -80
   attackActionRef: {fileID: 434898793832103627, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   ataqueEspecial: {fileID: 11400000, guid: a2826c4b8d5b6dc40be5a2a2ec71392f, type: 2}
+  specialAttackActionRef: {fileID: 0}
 --- !u!212 &6487215024567405918
 SpriteRenderer:
   serializedVersion: 2

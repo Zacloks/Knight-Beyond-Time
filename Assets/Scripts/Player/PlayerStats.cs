@@ -84,7 +84,7 @@ public class PlayerStats : MonoBehaviour
         Debug.Log("Jugador recibió daño. Vida restante: " + currentHealth);
 
         if (currentHealth <= 0)
-            PlayerMuerto.Invoke();
+            PlayerMuerto?.Invoke();
     }
     public void TakeDamage(int amount, Vector2 sourcePosition)
     {

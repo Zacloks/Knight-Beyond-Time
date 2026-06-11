@@ -99,9 +99,11 @@ public class WeaponDistance : Weapon
             {
                 script.Setup(finalDamage, finalSpeed, 0, this);
                 float actualRange = maxRange * Mathf.Lerp(0.2f, 1f, chargePercent);
-                float lifeTime = actualRange / finalSpeed; 
-                Destroy(newProjectile, lifeTime); 
+                float lifeTime = actualRange / finalSpeed;
+                Destroy(newProjectile, lifeTime);
             }
         }
+
+        ComprobarRotura();
     }
 }
