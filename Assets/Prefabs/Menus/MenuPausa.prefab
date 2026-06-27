@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 7322133922436008263}
   - component: {fileID: 2068742802605547054}
   - component: {fileID: 5075689068337723688}
+  - component: {fileID: 3333333333333333333}
   m_Layer: 5
   m_Name: Salir
   m_TagString: Untagged
@@ -337,6 +338,7 @@ GameObject:
   - component: {fileID: 228390431077933272}
   - component: {fileID: 7165460346387333770}
   - component: {fileID: 6835612955477474215}
+  - component: {fileID: 1111111111111111111}
   m_Layer: 5
   m_Name: ReanudarJuego
   m_TagString: Untagged
@@ -469,6 +471,7 @@ GameObject:
   - component: {fileID: 3223572962509782201}
   - component: {fileID: 5439794390713497295}
   - component: {fileID: 1883739027306005091}
+  - component: {fileID: 2222222222222222222}
   m_Layer: 5
   m_Name: Opciones
   m_TagString: Untagged
@@ -577,6 +580,57 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1111111111111111111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4315288042728547036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3e9c2a4b6d4e8f9a1c2d3e4f5a6b7c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  colorBorde: {r: 1, g: 0.85, b: 0.3, a: 1}
+  grosor: 4
+  margen: 4
+  escalaHover: 1.05
+  velocidad: 12
+--- !u!114 &2222222222222222222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6088366018293953653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3e9c2a4b6d4e8f9a1c2d3e4f5a6b7c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  colorBorde: {r: 1, g: 0.85, b: 0.3, a: 1}
+  grosor: 4
+  margen: 4
+  escalaHover: 1.05
+  velocidad: 12
+--- !u!114 &3333333333333333333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087931215992226063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3e9c2a4b6d4e8f9a1c2d3e4f5a6b7c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  colorBorde: {r: 1, g: 0.85, b: 0.3, a: 1}
+  grosor: 4
+  margen: 4
+  escalaHover: 1.05
+  velocidad: 12
 --- !u!1 &7623839524638693198
 GameObject:
   m_ObjectHideFlags: 0

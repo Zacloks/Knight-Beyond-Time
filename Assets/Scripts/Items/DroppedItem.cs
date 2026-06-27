@@ -1,10 +1,7 @@
 using UnityEngine;
 
-// Hace que un item soltado en el suelo se vea integrado con el mapa:
-// - le pone una sombra redonda (achatada) debajo
-// - lo hace flotar suavemente (bobbing)
-// El orden de sorting (que quede por debajo del jugador) lo configura quien lo
-// instancia (PlayerInventory) antes de añadir este componente.
+// Hace que CUALQUIER item soltado en el suelo (arma, pocion, etc.) se integre con el mapa:
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class DroppedItem : MonoBehaviour
 {
@@ -13,14 +10,21 @@ public class DroppedItem : MonoBehaviour
     public float bobSpeed = 2.5f;
 
     [Header("Sombra")]
-    public float shadowSize = 0.45f;
+    [Tooltip("Tamano (ancho) de la sombra en unidades del mundo. Independiente de la escala del item.")]
+    public float shadowSize = 0.3f;
     public float shadowAlpha = 0.35f;
-    public float shadowYOffset = -0.05f;
+    [Tooltip("Ajuste fino de la altura de la sombra respecto a la base del item.")]
+    public float shadowYOffset = 0f;
+
+    [Header("Orden")]
+    [Tooltip("Cuantos ordenes de sorting por debajo del jugador queda el item.")]
+    public int ordenesDebajoDelJugador = 1;
 
     private SpriteRenderer itemSr;
     private SpriteRenderer shadowSr;
     private Transform shadowT;
-    private float baseY;
+    private float baseY;     // altura de reposo del item (sobre el suelo)
+    private float shadowY; 
     private float phase;
 
     private static Sprite _shadowSprite;
@@ -29,8 +33,9 @@ public class DroppedItem : MonoBehaviour
     {
         itemSr = GetComponent<SpriteRenderer>();
         baseY = transform.position.y;
-        // Fase inicial variada para que varios items no floten sincronizados.
         phase = (transform.position.x + transform.position.y) * 3f;
+
+        AjustarOrden();
         CrearSombra();
     }
 
@@ -39,30 +44,45 @@ public class DroppedItem : MonoBehaviour
         phase += Time.deltaTime * bobSpeed;
         float h = (Mathf.Sin(phase) + 1f) * 0.5f * bobAmplitude; // 0..amplitude
 
-        // El item flota por encima de su posición base (el suelo).
         Vector3 p = transform.position;
         p.y = baseY + h;
         transform.position = p;
 
         if (shadowT == null) return;
 
-        // La sombra se queda fija en el suelo y se achica/aclara al subir el item.
-        shadowT.position = new Vector3(transform.position.x, baseY + shadowYOffset, transform.position.z);
+        shadowT.position = new Vector3(transform.position.x, shadowY, transform.position.z);
 
         float t = h / Mathf.Max(bobAmplitude, 0.0001f);          // 0 abajo, 1 arriba
-        float escala = Mathf.Lerp(shadowSize, shadowSize * 0.75f, t);
-        shadowT.localScale = new Vector3(escala, escala * 0.4f, 1f); // elipse achatada
+        float ancho = Mathf.Lerp(shadowSize, shadowSize * 0.75f, t);
+        SetShadowWorldScale(ancho, ancho * 0.4f);               
         if (shadowSr != null)
             shadowSr.color = new Color(0f, 0f, 0f, Mathf.Lerp(shadowAlpha, shadowAlpha * 0.6f, t));
     }
 
+    private void AjustarOrden()
+    {
+        if (itemSr == null) return;
+
+        PlayerInventory jugador = FindObjectOfType<PlayerInventory>();
+        if (jugador == null) return;
+
+        int min = int.MaxValue;
+        foreach (SpriteRenderer r in jugador.GetComponentsInChildren<SpriteRenderer>())
+            if (r.sortingOrder < min) min = r.sortingOrder;
+
+        if (min != int.MaxValue)
+            itemSr.sortingOrder = min - ordenesDebajoDelJugador;
+    }
+
     private void CrearSombra()
     {
+        float baseSprite = (itemSr != null) ? itemSr.bounds.min.y : baseY;
+        shadowY = baseSprite + shadowYOffset;
+
         GameObject s = new GameObject("Sombra");
         shadowT = s.transform;
         shadowT.SetParent(transform);
-        shadowT.position = new Vector3(transform.position.x, baseY + shadowYOffset, transform.position.z);
-        shadowT.localScale = new Vector3(shadowSize, shadowSize * 0.4f, 1f);
+        shadowT.position = new Vector3(transform.position.x, shadowY, transform.position.z);
 
         shadowSr = s.AddComponent<SpriteRenderer>();
         shadowSr.sprite = ShadowSprite();
@@ -71,11 +91,22 @@ public class DroppedItem : MonoBehaviour
         if (itemSr != null)
         {
             shadowSr.sortingLayerID = itemSr.sortingLayerID;
-            shadowSr.sortingOrder = itemSr.sortingOrder - 1; // justo detrás del item
+            shadowSr.sortingOrder = itemSr.sortingOrder - 1; 
         }
+
+        SetShadowWorldScale(shadowSize, shadowSize * 0.4f);
     }
 
-    // Genera (una sola vez) un sprite circular suave para usar como sombra.
+    private void SetShadowWorldScale(float anchoMundo, float altoMundo)
+    {
+        if (shadowT == null) return;
+
+        Vector3 ls = transform.lossyScale;
+        float ix = (Mathf.Abs(ls.x) > 0.0001f) ? 1f / ls.x : 1f;
+        float iy = (Mathf.Abs(ls.y) > 0.0001f) ? 1f / ls.y : 1f;
+        shadowT.localScale = new Vector3(anchoMundo * ix, altoMundo * iy, 1f);
+    }
+
     private static Sprite ShadowSprite()
     {
         if (_shadowSprite != null) return _shadowSprite;

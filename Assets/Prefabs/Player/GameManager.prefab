@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f667ac818a200244ab90eed4f2b9acd0, type: 2}
   - {fileID: 11400000, guid: fa8405ae9dcb0064ca8f6e2c076cb3d6, type: 2}
   - {fileID: 11400000, guid: 6153cc93f007ef34ab6e9eb67ea17a20, type: 2}
-  - {fileID: 11400000, guid: cdbdb582033645a4593a9cd7976d4ac3, type: 2}
+  - {fileID: 11400000, guid: 2ab1c87115bcf8d4b8fd91ee8dae6bfc, type: 2}
   - {fileID: 11400000, guid: 73559a5631b3d4e91a9a5f4a74a19581, type: 2}
   selectedSlot: 0
   initialized: 0

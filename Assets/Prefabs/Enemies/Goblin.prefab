@@ -246,10 +246,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5dd9bc8df29caf4799c6e995ceac473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeEnemy
-  monedaPrefab: {fileID: 0}
+  monedaPrefab: {fileID: 8316493981599981485, guid: 0695ce1efc56f084eb473ce6bb8e8fcc, type: 3}
   minMonedas: 2
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
+  dropsDeArmas:
+  - arma: {fileID: 11400000, guid: f667ac818a200244ab90eed4f2b9acd0, type: 2}
+    probabilidad: 50
+  - arma: {fileID: 11400000, guid: ed0a3c405d999b34c844141510299646, type: 2}
+    probabilidad: 50
+  - arma: {fileID: 11400000, guid: fa8405ae9dcb0064ca8f6e2c076cb3d6, type: 2}
+    probabilidad: 50
+  maxArmasPorMuerte: 1
+  radioDropArmas: 0.6
+  tamanoSombraDrop: 2
   maxLife: 20
   tiempoHastaDestruir: 0.34
   knockbackForce: {x: 2, y: 1}
