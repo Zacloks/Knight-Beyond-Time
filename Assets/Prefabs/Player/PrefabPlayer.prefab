@@ -4987,7 +4987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   mover: {fileID: -3819753190812026520, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   dash: {fileID: -7449098556809104598, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
-  velocidadMov: 7
+  velocidadMov: 5
   dashSpeed: 12
   extraVelocidad: 1
   dashInfinito: 0
