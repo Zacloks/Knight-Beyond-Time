@@ -34,6 +34,8 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < iconosSlots.Length; i++)
         {
             // 1. Icono del ítem
+            iconosSlots[i].preserveAspect = true;
+
             if (i < gm.inventorySlots.Length && gm.inventorySlots[i] != null)
             {
                 iconosSlots[i].sprite = gm.inventorySlots[i].sprite;
