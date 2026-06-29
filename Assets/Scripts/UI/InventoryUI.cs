@@ -6,6 +6,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Componentes de la UI")]
     public Image[] iconosSlots;
     public Image[] fondosSlots;
+    public Image hotbar;
     public Color selectedColor;
     public Sprite slotVacioSprite;
     public Sprite slotUsadoSprite; // Una imagen transparente o el fondo vacío
