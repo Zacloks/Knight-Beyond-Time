@@ -16,7 +16,6 @@ public class EspecialBaculoInmovilizar : AtaqueEspecialMagico
     {
         if (prefabProyectil == null || shootPoint == null) return;
 
-        // Mismo flip que el ataque básico de distancia.
         float escalaX = arma.transform.lossyScale.x;
         Quaternion rot = shootPoint.rotation;
         if (escalaX > 0) rot *= Quaternion.Euler(0, 0, 180f);
@@ -27,7 +26,7 @@ public class EspecialBaculoInmovilizar : AtaqueEspecialMagico
         {
             int dañoFinal = arma.CalcularDañoCritico(daño);
             proj.Setup(dañoFinal, velocidad, 0, arma);
-            proj.SetInmovilizacion(duracionInmovilizar); // Congela al enemigo al impactar
+            proj.SetInmovilizacion(duracionInmovilizar); 
             Destroy(go, rango / velocidad);
         }
     }
