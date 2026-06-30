@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.12843156, y: -6.762951, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -183,6 +183,7 @@ MonoBehaviour:
   posiblesValores: 01000000050000000a000000
   maxLife: 20
   tiempoHastaDestruir: 0.4
+  superArmor: 0
   knockbackForce: {x: 2, y: 4}
   minKnockbackTime: 1
 --- !u!114 &5081982577104335419
@@ -212,14 +213,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9e6ca322c0ad14bb66818dd339fa94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemyRanged
-  projectilePrefab: {fileID: 2774232824920753406, guid: 81fa19df76e84c947891a9a61b32acdc, type: 3}
-  shootPoint: {fileID: 0}
   attackDamage: 8
-  shootRange: 6
-  projectileSpeed: 9
   timeBetweenAttacks: 1.5
   attackDuration: 0.6
-  shootDelay: 0.25
+  attackDelay: 0.25
+  projectilePrefab: {fileID: 2774232824920753406, guid: 81fa19df76e84c947891a9a61b32acdc, type: 3}
+  shootPoint: {fileID: 0}
+  shootRange: 6
+  projectileSpeed: 9
 --- !u!70 &1368790886707727921
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

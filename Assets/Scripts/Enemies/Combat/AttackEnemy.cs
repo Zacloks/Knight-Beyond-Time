@@ -1,83 +1,33 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MovementEnemy))]
-public class AttackEnemy : MonoBehaviour, IEnemyAttack
+/// <summary>Ataque cuerpo a cuerpo: golpea en un círculo alrededor del attackController.</summary>
+public class AttackEnemy : AttackEnemyBase
 {
-    [Header("Referencias")]
-    private Rigidbody2D rb;
-    private Animator animator;
-    private MovementEnemy movementEnemy;
-    private Enemy enemy;
-
-    [Header("Ataque")]
+    [Header("Melee")]
     [SerializeField] private Transform attackController;
     [SerializeField] private LayerMask hittableLayers;
-    [SerializeField] private float circleRadius;
-    [SerializeField] public int attackDamage;
-    [SerializeField] private float timeBetweenAttacks;
-    private float lastAttackTime;
-    [SerializeField] private float attackDuration;
-    [SerializeField] private float damageDelay = 0.2f;
+    [SerializeField] private float circleRadius = 0.5f;
 
-    void Start()
+    protected override bool TargetInRange()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        movementEnemy = GetComponent<MovementEnemy>();
-        enemy = GetComponent<Enemy>();
+        if (attackController == null) return false;
+        return Physics2D.OverlapCircle(attackController.position, circleRadius, hittableLayers);
     }
 
-    private void Update()
+    protected override void OnAttack()
     {
-        if (movementEnemy.currentState == EnemyState.Hurt) return;
-        if (movementEnemy.currentState == EnemyState.Dead) return;
-        if (movementEnemy.currentState == EnemyState.Attack) return;
-        if (Time.time < lastAttackTime + timeBetweenAttacks) return;
-        if (attackController == null) return;
-
-        Collider2D collider = Physics2D.OverlapCircle(attackController.position, circleRadius, hittableLayers);
-
-        if (collider)
-        {
-            lastAttackTime = Time.time;
-            movementEnemy.ChangeToStateAttack(attackDuration);
-            rb.linearVelocity = Vector2.zero;
-            animator.SetTrigger("Attack");
-            Invoke(nameof(Attack), damageDelay);
-        }
-    }
-
-    public void Attack()
-    {
-        if (movementEnemy.currentState == EnemyState.Hurt || movementEnemy.currentState == EnemyState.Dead) return;
-
         Collider2D[] objectsHit = Physics2D.OverlapCircleAll(attackController.position, circleRadius, hittableLayers);
         foreach (Collider2D obj in objectsHit)
-        {
             if (obj.TryGetComponent(out PlayerScript playerScript))
-            {
-                int danoFinal = enemy != null ? enemy.CalcularDanoConCritico(attackDamage) : attackDamage;
-                playerScript.TakeDamage(danoFinal, transform.position);
-            }
-        }
-    }
-    public float AttackReach
-    {
-        get
-        {
-            if (attackController == null) return circleRadius;
-            return Vector2.Distance(transform.position, attackController.position) + circleRadius;
-        }
+                playerScript.TakeDamage(ResolveDamage(), transform.position);
     }
 
-    public int AttackDamage => attackDamage;
+    public override float AttackReach =>
+        attackController == null
+            ? circleRadius
+            : Vector2.Distance(transform.position, attackController.position) + circleRadius;
 
-    public void AttackFinished()
-    {
-        movementEnemy.ChangeToStateChase();
-    }
-
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         if (attackController == null) return;
         Gizmos.color = Color.red;

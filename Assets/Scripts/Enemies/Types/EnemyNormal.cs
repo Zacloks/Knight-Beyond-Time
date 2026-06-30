@@ -1,9 +1,4 @@
-using UnityEngine;
-
+/// <summary>Enemigo común: sin comportamiento extra sobre la base Enemy.</summary>
 public class EnemyNormal : Enemy
 {
-    protected override void Start()
-    {
-        base.Start();
-    }
 }

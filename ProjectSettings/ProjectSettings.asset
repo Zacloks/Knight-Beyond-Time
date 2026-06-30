@@ -658,7 +658,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -680,11 +686,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 9cbf3b5c-b2a6-46ea-9a14-4d96109438cf
+  cloudProjectId: 9fb1680d-cc23-4f20-8a30-0b29786f14d4
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Knight-Beyond-Tim
-  organizationId: unity_6c8f30fbe0a4a17fd824
+  organizationId: rogervilla20051mmy1slcj
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
