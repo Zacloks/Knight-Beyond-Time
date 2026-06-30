@@ -1,10 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Golpe cuerpo a cuerpo: el jefe encara al jugador, anima el golpe y tras la
-/// anticipación hace daño en un círculo. Ataque corto y rápido.
-/// </summary>
 public class BossMeleeSlam : BossAbility
 {
     [Header("Slam")]

@@ -1,14 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Reproduce la música de pelea mientras el jefe está vivo. Se suscribe a
-/// BossEvents: al aparecer arranca el tema (en bucle) y al morir lo desvanece.
-///
-/// Pensado para vivir en un HIJO del prefab del jefe (un GameObject con AudioSource).
-/// Como el jefe se destruye al morir, este componente se DESprende del jefe en ese
-/// momento para poder terminar el fundido y luego se autodestruye.
-/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class BossMusic : MonoBehaviour
 {
@@ -31,7 +23,7 @@ public class BossMusic : MonoBehaviour
         source = GetComponent<AudioSource>();
         source.playOnAwake = false;
         source.loop = true;
-        source.spatialBlend = 0f; // música 2D, no depende de la posición
+        source.spatialBlend = 0f; 
     }
 
     private void OnEnable()
@@ -74,7 +66,6 @@ public class BossMusic : MonoBehaviour
 
     private void HandleDefeated()
     {
-        // Nos separamos del jefe: así sobrevivimos a su Destroy y el fade termina.
         transform.SetParent(null, true);
         StopAllCoroutines();
         StartCoroutine(FadeOutAndDie());

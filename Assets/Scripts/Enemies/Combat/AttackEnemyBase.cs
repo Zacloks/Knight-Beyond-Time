@@ -1,12 +1,6 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-/// <summary>
-/// Base común para los ataques de enemigos (melee y a distancia). Maneja todo el
-/// ciclo compartido: cachear referencias, esperar el cooldown, comprobar que el
-/// enemigo no esté ocupado, entrar en estado Attack, animar y aplicar el daño tras
-/// un retardo. Cada subclase solo define cómo detectar el rango y qué hace el golpe.
-/// </summary>
 [RequireComponent(typeof(MovementEnemy))]
 public abstract class AttackEnemyBase : MonoBehaviour, IEnemyAttack
 {

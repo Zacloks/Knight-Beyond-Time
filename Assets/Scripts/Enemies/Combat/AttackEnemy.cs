@@ -1,6 +1,5 @@
 using UnityEngine;
 
-/// <summary>Ataque cuerpo a cuerpo: golpea en un círculo alrededor del attackController.</summary>
 public class AttackEnemy : AttackEnemyBase
 {
     [Header("Melee")]

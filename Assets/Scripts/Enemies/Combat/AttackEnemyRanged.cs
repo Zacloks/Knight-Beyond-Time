@@ -1,6 +1,5 @@
 using UnityEngine;
 
-/// <summary>Ataque a distancia: instancia un EnemyProjectile hacia el jugador.</summary>
 public class AttackEnemyRanged : AttackEnemyBase
 {
     [Header("A distancia")]

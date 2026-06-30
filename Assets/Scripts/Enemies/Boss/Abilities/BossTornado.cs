@@ -1,11 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Giro tipo tornado: el jefe gira dañando alrededor durante unos segundos,
-/// opcionalmente avanzando hacia el jugador. El daño se aplica por "ticks" para
-/// no fulminar de golpe. Animaciones del asset: TornadoAtk Full (intro) + Loop.
-/// </summary>
 public class BossTornado : BossAbility
 {
     [Header("Tornado")]
@@ -44,7 +39,6 @@ public class BossTornado : BossAbility
         {
             elapsed += Time.fixedDeltaTime;
 
-            // Avance lento hacia el jugador mientras gira.
             if (ctx.rb != null && driftSpeed > 0f && ctx.player != null)
             {
                 Vector2 dir = ((Vector2)ctx.player.position - (Vector2)transform.position).normalized;
@@ -52,7 +46,6 @@ public class BossTornado : BossAbility
                 ctx.movement.FaceTowards(ctx.player.position.x);
             }
 
-            // Daño por ticks.
             if (elapsed >= nextTick)
             {
                 nextTick += tickInterval;

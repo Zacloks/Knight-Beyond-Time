@@ -1,11 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Onda de choque en área: telegrafía (indicador + anticipación larga para que
-/// sea justo), luego golpea en un radio grande alrededor del jefe. Obliga al
-/// jugador a alejarse.
-/// </summary>
 public class BossShockwaveAoE : BossAbility
 {
     [Header("Onda de choque")]
