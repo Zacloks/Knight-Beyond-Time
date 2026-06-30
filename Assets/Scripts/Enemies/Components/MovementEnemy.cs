@@ -25,6 +25,9 @@ public class MovementEnemy : MonoBehaviour
     [Tooltip("Distancia de parada si el enemigo NO tiene componente de ataque (fallback).")]
     public float attackRange = 1.5f;
     private float attackEndTime;
+    // Mientras está activo, el estado Attack se mantiene hasta que se llame a EndSustainedAttack
+    // (lo usa el cerebro del jefe para que sus ataques no se corten solos).
+    private bool attackHeld;
 
     [Header("Separación (anti-amontonamiento)")]
     public float separationRadius = 1.3f;
@@ -34,8 +37,16 @@ public class MovementEnemy : MonoBehaviour
     private float immobilizeEndTime;
     public bool IsImmobilized => Time.time < immobilizeEndTime;
 
-    private void Start()
+    // El enemigo está "ocupado" y no puede iniciar otra acción ni moverse libremente.
+    public bool IsBusy => currentState == EnemyState.Hurt
+                       || currentState == EnemyState.Dead
+                       || currentState == EnemyState.Attack;
+
+    private void Awake()
     {
+        // En Awake (no Start) para que las referencias estén listas antes de que
+        // otros componentes (p. ej. el cerebro del jefe en su Start) llamen a
+        // BeginSustainedAttack y demás durante la inicialización.
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         attackEnemy = GetComponent<IEnemyAttack>();
@@ -87,7 +98,7 @@ public class MovementEnemy : MonoBehaviour
                 break;
         }
 
-        if (currentState == EnemyState.Hurt || currentState == EnemyState.Dead || currentState == EnemyState.Attack) return;
+        if (IsBusy) return;
 
         Vector2 desired = moveDirection * movementSpeedBase * 1.6f;
 
@@ -161,6 +172,7 @@ public class MovementEnemy : MonoBehaviour
     private void AttackBehavior()
     {
          moveDirection = Vector2.zero;
+        if (attackHeld) return;
         if (Time.time > attackEndTime)
             ChangeToStateChase();
     }
@@ -169,8 +181,36 @@ public class MovementEnemy : MonoBehaviour
     {
         animator.SetBool("Chasing", false);
         rb.linearVelocity = Vector2.zero;
-        attackEndTime = Time.time + duration; 
+        attackEndTime = Time.time + duration;
         currentState = EnemyState.Attack;
+    }
+
+    // Mantiene el estado Attack indefinidamente (para corutinas de ataque del jefe).
+    public void BeginSustainedAttack()
+    {
+        animator.SetBool("Chasing", false);
+        rb.linearVelocity = Vector2.zero;
+        attackHeld = true;
+        currentState = EnemyState.Attack;
+    }
+
+    public void EndSustainedAttack()
+    {
+        attackHeld = false;
+        // No revivir si el enemigo murió mientras atacaba.
+        if (currentState == EnemyState.Attack)
+            ChangeToStateChase();
+    }
+
+    // Voltea el sprite para mirar hacia un punto en X (mismo criterio que el movimiento).
+    public void FaceTowards(float targetX)
+    {
+        float dx = targetX - transform.position.x;
+        if (Mathf.Abs(dx) < 0.01f) return;
+
+        bool targetRight = dx > 0;
+        bool currentlyRight = transform.localScale.x > 0;
+        if (targetRight != currentlyRight) Spin();
     }
 
     public void ChangeToStateChase()

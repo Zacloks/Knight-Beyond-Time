@@ -21,13 +21,16 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual bool PuedeSoltarMonedas => false;
 
+    // Los jefes atacan con BossAbility, no con IEnemyAttack: lo sobrescriben a false.
+    protected virtual bool RequiresAttackComponent => true;
+
     protected virtual void Start()
     {
         movementEnemy = GetComponent<MovementEnemy>();
         lifeEnemy = GetComponent<LifeEnemy>();
         attackEnemy = GetComponent<IEnemyAttack>();
 
-        if (attackEnemy == null)
+        if (attackEnemy == null && RequiresAttackComponent)
             Debug.LogWarning($"{name}: falta un componente de ataque (AttackEnemy o AttackEnemyRanged).", this);
 
         if (movementEnemy != null)

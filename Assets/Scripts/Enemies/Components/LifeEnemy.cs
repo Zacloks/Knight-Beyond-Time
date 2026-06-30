@@ -42,7 +42,10 @@ public class LifeEnemy : MonoBehaviour
     [SerializeField] private int maxLife;
     [Tooltip("Segundos antes de destruir el cuerpo al morir. Igualar a la duración del clip de muerte.")]
     [SerializeField] private float tiempoHastaDestruir = 1f;
+    [Tooltip("Si está activo, los golpes no letales NO provocan knockback ni estado Hurt (poise de jefe). Sigue recibiendo daño.")]
+    [SerializeField] private bool superArmor = false;
     public int currentLife { get; private set; }
+    public int MaxLife => maxLife;
     private bool isDead = false;
 
     [Header("Estadisticas Retroceso")]
@@ -80,6 +83,9 @@ public class LifeEnemy : MonoBehaviour
             Destroy(gameObject, tiempoHastaDestruir);
             return;
         }
+
+        // Con super armor (jefes) no se interrumpe el ataque en curso: nada de knockback/Hurt.
+        if (superArmor) return;
 
         Knockback(sender);
     }
