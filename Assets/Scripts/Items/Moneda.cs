@@ -7,10 +7,31 @@ public class Moneda : Item
     public int value = 10;
     private SpriteRenderer spriteRenderer;
 
+    [Header("Imán (atracción al jugador)")]
+    [Tooltip("Distancia a la que la moneda empieza a volar hacia el jugador.")]
+    public float radioIman = 2.5f;
+    [Tooltip("Velocidad con la que la moneda se acerca al jugador.")]
+    public float velocidadIman = 9f;
+    private Transform jugador;
+
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Update()
+    {
+        if (jugador == null)
+        {
+            PlayerInventory inv = FindObjectOfType<PlayerInventory>();
+            if (inv == null) return;
+            jugador = inv.transform;
+        }
+
+        if (Vector2.Distance(transform.position, jugador.position) <= radioIman)
+            transform.position = Vector2.MoveTowards(transform.position, jugador.position,
+                                                     velocidadIman * Time.deltaTime);
     }
 
     public void crearMoneda(int v)

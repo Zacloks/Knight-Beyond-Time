@@ -126,15 +126,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponMagic
   datos: {fileID: 0}
   enVenta: 1
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: Libro Clerigo
-  damage: 10
-  attackRate: 0.5
+  damage: 7
+  attackRate: 0.7
   sprite: {fileID: 2418268922932249284, guid: f84f51d35e1c89c41bff9177638a906a, type: 3}
   usaAnimacionJugador: 1
-  probabilidadCritico: 5
+  probabilidadCritico: 10
   multiplicadorCritico: 2
-  maxDurabilidad: 2000
-  durabilidadActual: 2000
+  maxDurabilidad: 25
+  durabilidadActual: 25
   projectilePrefab: {fileID: 4582277519740372724, guid: 0d2fd827ee1fb3f4e8725b9703d325fa, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

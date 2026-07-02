@@ -15,6 +15,15 @@ public class LifeEnemy : MonoBehaviour
         public float probabilidad = 25f;
     }
 
+    [System.Serializable]
+    public class MonedaPosible
+    {
+        [Tooltip("Valor de la moneda (1, 5, 10, ...).")]
+        public int valor = 1;
+        [Tooltip("Peso: mayor = sale más seguido. NO hace falta que sumen 100.")]
+        public float peso = 1f;
+    }
+
     [Header("Referencias")]
     private Animator animator;
     private MovementEnemy movementEnemy;
@@ -24,7 +33,13 @@ public class LifeEnemy : MonoBehaviour
     public GameObject monedaPrefab;
     public int minMonedas = 2;
     public int maxMonedas = 4;
-    public int[] posiblesValores = {1, 5, 10};
+    [Tooltip("Valores de moneda y su peso. Peso alto = sale más seguido (ej. 1=70, 5=25, 10=5).")]
+    public List<MonedaPosible> valoresMoneda = new List<MonedaPosible>()
+    {
+        new MonedaPosible { valor = 1,  peso = 70f },
+        new MonedaPosible { valor = 5,  peso = 25f },
+        new MonedaPosible { valor = 10, peso = 5f },
+    };
 
     [Header("Items que puede soltar al morir")]
     [FormerlySerializedAs("dropsDeArmas")]
@@ -120,13 +135,15 @@ public class LifeEnemy : MonoBehaviour
             Debug.LogWarning($"{name}: deberia soltar monedas pero el campo 'monedaPrefab' del LifeEnemy esta vacio.", this);
             return;
         }
-        if (posiblesValores.Length == 0) return;
+        if (valoresMoneda == null || valoresMoneda.Count == 0) return;
 
         int cantidad = Random.Range(minMonedas, maxMonedas + 1);
 
         for (int i = 0; i < cantidad; i++)
         {
-            Vector2 v = new Vector2(Random.Range(-1f, 1f), Random.Range(0f, 1f));
+            // Dispersión centrada alrededor del enemigo (antes salían siempre hacia
+            // arriba y quedaban fuera del camino cerca de los bordes).
+            Vector2 v = new Vector2(Random.Range(-0.6f, 0.6f), Random.Range(-0.35f, 0.35f));
             Vector2 posicionSpawn = (Vector2)transform.position + v;
 
             GameObject nuevaMoneda = Instantiate(monedaPrefab, posicionSpawn, Quaternion.identity);
@@ -134,12 +151,26 @@ public class LifeEnemy : MonoBehaviour
             Moneda scriptMoneda = nuevaMoneda.GetComponent<Moneda>();
 
             if (scriptMoneda != null)
-            {
-                int idx = Random.Range(0, posiblesValores.Length);
-                int valorElegido = posiblesValores[idx];
-                scriptMoneda.crearMoneda(valorElegido);
-            }
+                scriptMoneda.crearMoneda(ElegirValorMoneda());
         }
+    }
+
+    private int ElegirValorMoneda()
+    {
+        float total = 0f;
+        foreach (MonedaPosible m in valoresMoneda)
+            if (m != null && m.peso > 0f) total += m.peso;
+
+        if (total <= 0f) return valoresMoneda[0].valor;
+
+        float r = Random.Range(0f, total);
+        foreach (MonedaPosible m in valoresMoneda)
+        {
+            if (m == null || m.peso <= 0f) continue;
+            r -= m.peso;
+            if (r <= 0f) return m.valor;
+        }
+        return valoresMoneda[valoresMoneda.Count - 1].valor;
     }
     // Recorre la lista de items posibles, tira la probabilidad de cada uno de forma
     // independiente y suelta los que salgan.
