@@ -540,6 +540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lord
       objectReference: {fileID: 0}
+    - target: {fileID: 7474314269869382093, guid: c9c2e1282e5a2a341a5eafc84936d136, type: 3}
+      propertyPath: maxLife
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8794121520241053567, guid: c9c2e1282e5a2a341a5eafc84936d136, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.24156

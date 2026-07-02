@@ -183,10 +183,10 @@ TextureImporter:
       name: Props_Decor_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 437
-        width: 97
-        height: 43
+        x: 56
+        y: 382
+        width: 125
+        height: 50
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

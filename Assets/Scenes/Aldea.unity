@@ -2071,11 +2071,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[1].entries.Array.data[0].count
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[1].entries.Array.data[1].count
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[1].entries.Array.data[0].enemyPrefab
@@ -2084,7 +2084,15 @@ PrefabInstance:
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[1].entries.Array.data[1].enemyPrefab
       value: 
-      objectReference: {fileID: 2675701558258094312, guid: 706509dcd234a9a4d84c6261bfb226b6, type: 3}
+      objectReference: {fileID: 6815892981611197894, guid: 8a0ef40015279174b97aa46958cec1e8, type: 3}
+    - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
+      propertyPath: waves.Array.data[1].entries.Array.data[0].spawnPointIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
+      propertyPath: waves.Array.data[1].entries.Array.data[1].spawnPointIndex
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2336,9 +2344,13 @@ PrefabInstance:
       value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
+      propertyPath: waves.Array.data[0].entries.Array.data[0].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[0].entries.Array.data[1].enemyPrefab
       value: 
-      objectReference: {fileID: 2675701558258094312, guid: 706509dcd234a9a4d84c6261bfb226b6, type: 3}
+      objectReference: {fileID: 8780429033113255880, guid: 5b41abe20f29bed45870bcf7febff945, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
