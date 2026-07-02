@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Energía")]
     private const int energyRegen = 1;
-    private const int energyRegenInterval = 100;
+    private const int energyRegenInterval = 10;
 
     [Header("Auxiliares")]
     private float curImmuneTime;
