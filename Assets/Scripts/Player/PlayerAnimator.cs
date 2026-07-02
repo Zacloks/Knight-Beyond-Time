@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     //NOMBRES DE PARÁMETROS.
+    public AudioSource audioSource;
+    public AudioClip attackClip;
     private string PARAM_SPEED        = "Speed";
     private string TRIGGER_ATTACK     = "2_Attack";
     private string TRIGGER_MAGIC      = "attackMagic";
@@ -18,6 +20,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         movement = GetComponent<PlayerMovement>();
         combat   = GetComponent<PlayerCombat>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -59,6 +62,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         anim.ResetTrigger(TRIGGER_ATTACK);
         anim.SetTrigger(TRIGGER_ATTACK);
+        audioSource.PlayOneShot(attackClip);
     }
     public void ResetMeleeTrigger() {anim.ResetTrigger(TRIGGER_ATTACK);}
     public void TriggerMagicAttack() {Trigger(TRIGGER_MAGIC);}

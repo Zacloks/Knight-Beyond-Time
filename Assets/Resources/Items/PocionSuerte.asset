@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572eb54d1eb75405fb741897a322f2fc, type: 3}
   m_Name: PocionSuerte
   m_EditorClassIdentifier: Assembly-CSharp::ConsumibleData
-  itemName: 
-  descripcion: 
-  precio: 0
-  sprite: {fileID: 0}
-  prefab: {fileID: 0}
-  estrategiaEfecto: {fileID: 0}
+  itemName: "Poci\xF3n de Suerte"
+  descripcion: "Aumenta la probabilidad de ataque cr\xEDtico."
+  precio: 8
+  sprite: {fileID: -4705681268308351832, guid: 36fb89bbb1f8d4520b0bd84d1d180709, type: 3}
+  prefab: {fileID: 4475153802008187025, guid: e6d59e35e514a4e7386664d553188ed1, type: 3}
+  estrategiaEfecto: {fileID: 11400000, guid: 3791bc9686e9c4e0798969b0a03082bb, type: 2}
   triggerConsumir: 2_Attack
