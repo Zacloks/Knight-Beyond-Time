@@ -12,16 +12,12 @@ public abstract class Enemy : MonoBehaviour
     protected LifeEnemy lifeEnemy;
     protected IEnemyAttack attackEnemy;
 
-    [Header("Ajustes de Ataque")]
-    public float attackDamage = 10f;
-
     [Header("Ajustes de Crítico")]
     [Range(0f, 100f)] public float probabilidadCritico = 10f;
     public float multiplicadorCritico = 2f;
 
     public virtual bool PuedeSoltarMonedas => false;
 
-    // Los jefes atacan con BossAbility, no con IEnemyAttack: lo sobrescriben a false.
     protected virtual bool RequiresAttackComponent => true;
 
     protected virtual void Start()
@@ -39,21 +35,6 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    // public virtual void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (lifeEnemy != null && lifeEnemy.IsDead()) return;
-    //     if (!collision.gameObject.CompareTag("Player")) return;
-    //     if (Time.time < lastContactDamageTime + contactDamageCooldown) return;
-    //
-    //     PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
-    //     if (playerCtrl != null)
-    //     {
-    //         lastContactDamageTime = Time.time;
-    //         playerCtrl.TakeDamage(CalcularDanoConCritico((int)attackDamage), transform.position);
-    //         Debug.Log("Enemigo dañó al jugador");
-    //     }
-    // }
-
     public int CalcularDanoConCritico(int danoBase)
     {
         if (Random.Range(0f, 100f) <= probabilidadCritico)
@@ -70,16 +51,19 @@ public abstract class Enemy : MonoBehaviour
         lifeEnemy.TakeDamage(amount, sender);
     }
 
-    // Congela al enemigo durante 'duracion' segundos (efecto del báculo).
     public void Inmovilizar(float duracion)
     {
         if (lifeEnemy != null && lifeEnemy.IsDead()) return;
         if (movementEnemy != null) movementEnemy.Inmovilizar(duracion);
     }
 
-    public int GetDamage()
+    public virtual void Heal(int amount)
     {
-        return attackEnemy != null ? attackEnemy.AttackDamage : Mathf.RoundToInt(attackDamage);
+        if (lifeEnemy != null) lifeEnemy.Heal(amount);
     }
 
+    public void ApplyDamageReduction(float percent, float duration)
+    {
+        if (lifeEnemy != null) lifeEnemy.ApplyDamageReduction(percent, duration);
+    }
 }

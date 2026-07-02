@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class LifeEnemy : MonoBehaviour
 {
-    // Un item que este enemigo puede soltar, con su propia probabilidad.
     [System.Serializable]
     public class PosibleDrop
     {
@@ -47,6 +46,8 @@ public class LifeEnemy : MonoBehaviour
     public int currentLife { get; private set; }
     public int MaxLife => maxLife;
     private bool isDead = false;
+    private float damageReductionMult = 1f;
+    private float damageReductionUntil = 0f;
 
     [Header("Estadisticas Retroceso")]
     [SerializeField] private Vector2 knockbackForce;
@@ -68,6 +69,9 @@ public class LifeEnemy : MonoBehaviour
     public void TakeDamage(int damageAmount, Vector2 sender)
     {
         if (isDead) return;
+
+        if (Time.time < damageReductionUntil)
+            damageAmount = Mathf.Max(0, Mathf.RoundToInt(damageAmount * damageReductionMult));
 
         int tempLife = currentLife - damageAmount;
         tempLife = Mathf.Clamp(tempLife, 0, maxLife);
@@ -93,6 +97,18 @@ public class LifeEnemy : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
+    }
+
+    public void Heal(int amount)
+    {
+        if (isDead || amount <= 0) return;
+        currentLife = Mathf.Clamp(currentLife + amount, 0, maxLife);
+    }
+
+    public void ApplyDamageReduction(float percent, float duration)
+    {
+        damageReductionMult = 1f - Mathf.Clamp01(percent / 100f);
+        damageReductionUntil = Time.time + Mathf.Max(0f, duration);
     }
 
     private void soltarMonedas()

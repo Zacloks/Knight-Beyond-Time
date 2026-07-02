@@ -1,13 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Cerebro del jefe. Recolecta todas las BossAbility del prefab y, cuando está
-/// en rango y terminó el cooldown global, elige una usable (random ponderado por
-/// rango + cooldown propio) y la ejecuta manteniéndose quieto mientras dura.
-/// Incluye intro al aparecer (invulnerable) y un stun único al bajar de media vida.
-/// Avisa de su vida por BossEvents (la barra se suscribe).
-/// </summary>
 public class EnemyBoss : Enemy
 {
     public override bool PuedeSoltarMonedas => true;
@@ -95,7 +88,6 @@ public class EnemyBoss : Enemy
         if (choice != null) StartCoroutine(RunAbility(choice));
     }
 
-    // INTRO: entra haciendo su animación, quieto e invulnerable, y luego pelea.
     private IEnumerator IntroRoutine()
     {
         introPlaying = true;
@@ -122,7 +114,6 @@ public class EnemyBoss : Enemy
         isActing = false;
     }
 
-    // STUN: corta lo que esté haciendo, queda aturdido y vulnerable un tiempo.
     private IEnumerator StunRoutine()
     {
         isActing = true;
@@ -130,17 +121,12 @@ public class EnemyBoss : Enemy
         movementEnemy.BeginSustainedAttack();
         if (animator != null)
         {
-            // Trigger: entra una sola vez (no se re-dispara aunque siga aturdido).
             if (!string.IsNullOrEmpty(stunTrigger)) animator.SetTrigger(stunTrigger);
-            // Bool: mantiene el loop hasta que lo apaguemos para salir.
             if (!string.IsNullOrEmpty(stunBool)) animator.SetBool(stunBool, true);
         }
 
         yield return new WaitForSeconds(stunDuration);
 
-        // Apaga el bool -> dispara Stun[Out]. Seguimos "quietos" (sustained attack)
-        // mientras dura el Out, para que el movimiento (Chasing -> AnyState/Run) no
-        // lo interrumpa antes de tiempo.
         if (animator != null && !string.IsNullOrEmpty(stunBool))
             animator.SetBool(stunBool, false);
 
@@ -152,7 +138,6 @@ public class EnemyBoss : Enemy
         isActing = false;
     }
 
-    // Random ponderado entre las habilidades usables (rango + cooldown propio).
     private BossAbility ChooseAbility(float dist)
     {
         float totalWeight = 0f;
@@ -171,9 +156,14 @@ public class EnemyBoss : Enemy
         return null;
     }
 
+    public override void Heal(int amount)
+    {
+        base.Heal(amount);
+        if (lifeEnemy != null) BossEvents.RaiseHealthChanged(lifeEnemy.currentLife);
+    }
+
     public override void TakeDamage(int amount, Vector2 sender)
     {
-        // Invulnerable mientras hace su entrada.
         if (introPlaying) return;
 
         base.TakeDamage(amount, sender);
@@ -182,18 +172,17 @@ public class EnemyBoss : Enemy
 
         if (lifeEnemy.currentLife <= 0)
         {
-            StopAllCoroutines(); // corta cualquier ataque/stun en curso al morir
+            StopAllCoroutines();
             isActing = false;
             BossEvents.RaiseDefeated();
             return;
         }
 
-        // Stun único al cruzar el umbral de vida.
         if (useHalfHealthStun && !hasStunned &&
             lifeEnemy.currentLife <= lifeEnemy.MaxLife * stunHealthThreshold)
         {
             hasStunned = true;
-            StopAllCoroutines();   // interrumpe el ataque en curso
+            StopAllCoroutines();
             StartCoroutine(StunRoutine());
         }
     }
