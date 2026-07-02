@@ -19,3 +19,7 @@ MonoBehaviour:
   "da\xF1o": 7
   velocidad: 10
   rango: 12
+  "da\xF1oPorTick": 3
+  intervaloTick: 1
+  duracionQuemadura: 3
+  colorFuego: {r: 1, g: 0.55, b: 0.1, a: 1}

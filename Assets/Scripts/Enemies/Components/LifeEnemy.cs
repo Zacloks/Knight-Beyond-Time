@@ -83,6 +83,16 @@ public class LifeEnemy : MonoBehaviour
 
     public void TakeDamage(int damageAmount, Vector2 sender)
     {
+        AplicarDaño(damageAmount, sender, true);
+    }
+
+    public void TakeDamageSinKnockback(int damageAmount)
+    {
+        AplicarDaño(damageAmount, transform.position, false);
+    }
+
+    private void AplicarDaño(int damageAmount, Vector2 sender, bool conKnockback)
+    {
         if (isDead) return;
 
         if (Time.time < damageReductionUntil)
@@ -104,7 +114,7 @@ public class LifeEnemy : MonoBehaviour
         }
 
         // Con super armor (jefes) no se interrumpe el ataque en curso: nada de knockback/Hurt.
-        if (superArmor) return;
+        if (!conKnockback || superArmor) return;
 
         Knockback(sender);
     }

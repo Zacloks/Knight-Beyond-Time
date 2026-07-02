@@ -18,6 +18,11 @@ public class Projectile : MonoBehaviour
     private GameObject explosionEffectPrefab;
     private Color explosionColor = Color.white;
 
+    private float burnDuration = 0f;       // 0 = no quema
+    private int burnDamage = 0;
+    private float burnInterval = 1f;
+    private Color burnColor = new Color(1f, 0.55f, 0.1f, 1f);
+
     public void Setup(int dmg, float spd, float kb, Weapon weapon)
     {
         damage = dmg;
@@ -50,6 +55,14 @@ public class Projectile : MonoBehaviour
         explosionColor = color;
     }
 
+    public void SetQuemadura(int dañoPorTick, float intervalo, float duracion, Color color)
+    {
+        burnDamage = dañoPorTick;
+        burnInterval = intervalo;
+        burnDuration = duracion;
+        burnColor = color;
+    }
+
     void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -64,7 +77,16 @@ public class Projectile : MonoBehaviour
             {
                 enemy.TakeDamage(damage, transform.position);
 
-                if (immobilizeDuration > 0f) enemy.Inmovilizar(immobilizeDuration);
+                if (immobilizeDuration > 0f)
+                {
+                    enemy.Inmovilizar(immobilizeDuration);
+                    // Chispas azules tipo rayo mientras dura la inmovilizacion.
+                    EfectoInmovilizado.Aplicar(enemy, immobilizeDuration);
+                }
+
+                // Quemadura: sigue quitando vida por un tiempo tras el impacto.
+                if (burnDuration > 0f)
+                    Quemadura.Aplicar(enemy, burnDamage, burnInterval, burnDuration, burnColor);
 
                 // Robo de vida: cura al jugador solo si realmente golpeó a un enemigo.
                 if (lifestealPct > 0f && lifestealTarget != null && lifestealTarget.Stats != null)

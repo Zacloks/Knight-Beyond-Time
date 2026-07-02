@@ -19,4 +19,4 @@ MonoBehaviour:
   "da\xF1o": 7
   velocidad: 9
   rango: 12
-  duracionInmovilizar: 2
+  duracionInmovilizar: 2.5
