@@ -19,6 +19,7 @@ public class MenuScript : MonoBehaviour
     }
     public void jugar()
     {
+        if (GameManager.Instance != null) GameManager.Instance.NuevaPartida();
         SceneManager.LoadSceneAsync("Inicio");
     }
 

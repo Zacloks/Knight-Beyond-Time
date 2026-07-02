@@ -54,10 +54,26 @@ public class GameManager : MonoBehaviour
     public void NotifyChanged() => OnStateChanged?.Invoke();
 
     public void ResetState()
-{
-    currentHealth = maxHealth;
-    currentEnergy = maxEnergy;
-    zonasUsadas.Clear();
-    NotifyChanged();
-}
+    {
+        currentHealth = maxHealth;
+        currentEnergy = maxEnergy;
+        zonasUsadas.Clear();
+        nextSpawnId = null;
+        volviendoDeTienda = false;
+        escenaRetorno = null;
+        NotifyChanged();
+    }
+
+    public void NuevaPartida()
+    {
+        coins = 0;
+        inventorySlots = new ItemData[5];
+        selectedSlot = 0;
+        zonasUsadas.Clear();
+        nextSpawnId = null;
+        volviendoDeTienda = false;
+        escenaRetorno = null;
+        initialized = false;
+        NotifyChanged();
+    }
 }

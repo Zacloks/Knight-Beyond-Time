@@ -828,7 +828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988441261034097521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -928,7 +928,6 @@ MonoBehaviour:
   volumen: {fileID: 0}
   brillo: {fileID: 0}
   pantalla: {fileID: 0}
-  nombreEscenaMenu: MainMenu
 --- !u!1 &6243774681680316023
 GameObject:
   m_ObjectHideFlags: 0

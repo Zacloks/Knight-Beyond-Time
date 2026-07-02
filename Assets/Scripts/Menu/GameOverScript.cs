@@ -19,9 +19,15 @@ public class GameOverScript : MonoBehaviour
 
     public void Reintentar()
     {
-    Time.timeScale = 1f;
-    if (GameManager.Instance != null)
-        GameManager.Instance.ResetState(); // ← reset antes de recargar
-    LevelLoader.LoadScene(SceneManager.GetActiveScene().name);
-}
+        Time.timeScale = 1f;
+        if (GameManager.Instance != null)
+            GameManager.Instance.ResetState();
+        LevelLoader.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void VolverAlMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
 }

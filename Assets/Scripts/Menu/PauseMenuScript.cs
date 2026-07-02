@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
@@ -50,8 +51,9 @@ public class PauseMenuScript : MonoBehaviour
     }
     public void salirJuego()
     {
-        Debug.Log("Saliendo del juego");
-        Application.Quit();
+        Time.timeScale = 1f;
+        pausado = false;
+        SceneManager.LoadScene("MainMenu");
     }
 
     void OnEnable()
