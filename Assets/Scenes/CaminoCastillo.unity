@@ -649,8 +649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98973d2f89025b4ea3220d040e01e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMusicController
-  musicaEscena: {fileID: 0}
-  musicaCombate: {fileID: 0}
+  musicaEscena: {fileID: 8300000, guid: fa829b2ebac4f84458d94684bbb41c9e, type: 3}
+  musicaCombate: {fileID: 8300000, guid: 7f9c4e79a43f1e04da8e88d9f12b6b75, type: 3}
   intervaloChequeo: 0.5
 --- !u!1 &571895254
 GameObject:
