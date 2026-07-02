@@ -1653,7 +1653,7 @@ MonoBehaviour:
   nombreEscena: Tienda
   tagJugador: Player
   spawnIdDestino: EntradaTienda
-  id: entrada_castillo
+  id: tienda_castillo
   recordarEscenaActual: 1
 --- !u!61 &1450087371
 BoxCollider2D:
