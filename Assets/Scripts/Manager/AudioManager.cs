@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -7,46 +9,117 @@ public class AudioManager : MonoBehaviour
     [Header("Componentes de Audio")]
     [SerializeField] private AudioSource musicaSource;
 
-    [Header("Lista de Canciones (Opcional)")]
-    public AudioClip musicaFondoPrincipal;
+    [Header("Ajustes")]
+    [SerializeField] private float volumen = 1f;
+    [SerializeField] private float fadeDuration = 1f;
+
+    private AudioClip clipDeseado;
+    private bool suspendido;
+    private Coroutine fadeRoutine;
 
     void Awake()
     {
-        // Implementación del patrón Singleton para que solo exista UN AudioManager
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            // ¡Esto es la clave! Evita que el objeto se destruya al cambiar de escena
-            DontDestroyOnLoad(gameObject); 
-        }
-        else
-        {
-            // Si ya existe uno en la siguiente escena, destruye el duplicado
             Destroy(gameObject);
             return;
         }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (musicaSource == null) musicaSource = gameObject.AddComponent<AudioSource>();
+        musicaSource.playOnAwake = false;
+        musicaSource.loop = true;
+        musicaSource.volume = 0f;
+
+        AudioListener.volume = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
     }
 
-    void Start()
+    void OnEnable()
     {
-        // Reproducir la música inicial si está asignada
-        if (musicaSource != null && musicaFondoPrincipal != null)
+        BossEvents.OnBossSpawned += HandleBossSpawned;
+        BossEvents.OnBossDefeated += HandleBossDefeated;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        BossEvents.OnBossSpawned -= HandleBossSpawned;
+        BossEvents.OnBossDefeated -= HandleBossDefeated;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene escena, LoadSceneMode modo)
+    {
+        suspendido = false;
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        clipDeseado = clip;
+        if (suspendido) return;
+
+        if (clip == null)
         {
-            PlayMusica(musicaFondoPrincipal);
+            IniciarFade(FadeOut());
+            return;
         }
+        if (musicaSource.clip == clip && musicaSource.isPlaying) return;
+
+        IniciarFade(FadeSwap(clip));
     }
 
-    public void PlayMusica(AudioClip cancion)
+    private void HandleBossSpawned(string nombre, int maxLife)
     {
-        if (musicaSource.clip == cancion) return; // Ya se está reproduciendo
+        suspendido = true;
+        IniciarFade(FadeOut());
+    }
 
-        musicaSource.clip = cancion;
-        musicaSource.loop = true; // Para que no se detenga
+    private void HandleBossDefeated()
+    {
+        suspendido = false;
+        if (clipDeseado != null) IniciarFade(FadeSwap(clipDeseado));
+    }
+
+    private void IniciarFade(IEnumerator rutina)
+    {
+        if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+        fadeRoutine = StartCoroutine(rutina);
+    }
+
+    private IEnumerator FadeSwap(AudioClip clip)
+    {
+        yield return FadeVolumen(0f);
+        musicaSource.clip = clip;
+        musicaSource.loop = true;
         musicaSource.Play();
+        yield return FadeVolumen(volumen);
+        fadeRoutine = null;
     }
 
-    public void DetenerMusica()
+    private IEnumerator FadeOut()
     {
+        yield return FadeVolumen(0f);
         musicaSource.Stop();
+        fadeRoutine = null;
+    }
+
+    private IEnumerator FadeVolumen(float objetivo)
+    {
+        if (fadeDuration <= 0f)
+        {
+            musicaSource.volume = objetivo;
+            yield break;
+        }
+
+        float inicio = musicaSource.volume;
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            musicaSource.volume = Mathf.Lerp(inicio, objetivo, t / fadeDuration);
+            yield return null;
+        }
+        musicaSource.volume = objetivo;
     }
 }
