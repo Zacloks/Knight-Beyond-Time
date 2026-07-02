@@ -11,7 +11,6 @@ public class PlayerInventory : MonoBehaviour
     public Inventory inventario;
 
     [Header("Drop")]
-    [Tooltip("Distancia a la que se suelta el item delante del jugador con L.")]
     public float dropDistance = 0.3f;
 
     [Header("SPUM Integration")]
@@ -51,7 +50,18 @@ public class PlayerInventory : MonoBehaviour
         if (useSPUM && spumEquipment != null)
             spumEquipment.UnequipItem();
 
-        // destruye la instancia equipada y equipa lo que quede 
+        // destruye la instancia equipada y equipa lo que quede
+        UpdateEquippedItem(inventario.getEquippedItem());
+    }
+
+    public void ConsumeEquippedItem()
+    {
+        if (inventario.getEquippedItem() == null) return;
+
+        inventario.dropItem();
+        if (useSPUM && spumEquipment != null)
+            spumEquipment.UnequipItem();
+
         UpdateEquippedItem(inventario.getEquippedItem());
     }
 
@@ -86,8 +96,6 @@ public class PlayerInventory : MonoBehaviour
         soltado.gameObject.AddComponent<DroppedItem>();
     }
 
-    // Devuelve un orden de sorting por debajo del sprite más bajo del jugador,
-    // para que el item soltado quede detrás 
     private int OrdenDebajoDelJugador()
     {
         int min = int.MaxValue;
@@ -98,8 +106,6 @@ public class PlayerInventory : MonoBehaviour
         return min - 1;
     }
 
-    // Llamado por un arma cuando su durabilidad llega a 0: la quita del inventario
-    // y de la mano 
     public void RomperItemEquipado(Item item)
     {
         if (item != itemEnMano) return;

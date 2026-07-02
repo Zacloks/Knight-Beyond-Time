@@ -14,12 +14,18 @@ public abstract class AttackEnemyBase : MonoBehaviour, IEnemyAttack
     [SerializeField] protected int attackDamage = 10;
     [SerializeField] protected float timeBetweenAttacks = 1.5f;
     [SerializeField] protected float attackDuration = 0.6f;
-    [Tooltip("Segundos desde que inicia la animación hasta que se aplica el daño/disparo.")]
     [FormerlySerializedAs("damageDelay")]
     [FormerlySerializedAs("shootDelay")]
     [SerializeField] protected float attackDelay = 0.2f;
+    [SerializeField] protected float staggerAtaque = 0.25f;
+
+    [Header("Preparación primer ataque")]
+    [SerializeField] protected float tiempoPreparacionPrimerAtaque = 0.3f;
 
     private float lastAttackTime;
+    private float currentAttackCooldown;
+    private bool primerAtaqueRealizado;
+    private float tiempoEntradaRango = -1f;
 
     protected Transform Player => movementEnemy != null ? movementEnemy.PlayerTransform : null;
 
@@ -29,20 +35,37 @@ public abstract class AttackEnemyBase : MonoBehaviour, IEnemyAttack
         animator = GetComponent<Animator>();
         movementEnemy = GetComponent<MovementEnemy>();
         enemy = GetComponent<Enemy>();
+        currentAttackCooldown = NextCooldown();
     }
 
     protected virtual void Update()
     {
         if (movementEnemy.IsBusy) return;
-        if (Time.time < lastAttackTime + timeBetweenAttacks) return;
-        if (!TargetInRange()) return;
+        if (Time.time < lastAttackTime + currentAttackCooldown) return;
+
+        if (!TargetInRange())
+        {
+            if (!primerAtaqueRealizado) tiempoEntradaRango = -1f;
+            return;
+        }
+
+        if (!primerAtaqueRealizado)
+        {
+            if (tiempoEntradaRango < 0f) tiempoEntradaRango = Time.time;
+            if (Time.time < tiempoEntradaRango + tiempoPreparacionPrimerAtaque) return;
+            primerAtaqueRealizado = true;
+        }
 
         lastAttackTime = Time.time;
+        currentAttackCooldown = NextCooldown();
         movementEnemy.ChangeToStateAttack(attackDuration);
         if (rb != null) rb.linearVelocity = Vector2.zero;
         animator.SetTrigger("Attack");
         Invoke(nameof(ExecutePayload), attackDelay);
     }
+
+    private float NextCooldown() =>
+        timeBetweenAttacks + Random.Range(-staggerAtaque, staggerAtaque);
 
     private void ExecutePayload()
     {
@@ -50,17 +73,13 @@ public abstract class AttackEnemyBase : MonoBehaviour, IEnemyAttack
         OnAttack();
     }
 
-    /// <summary>Daño final ya con crítico aplicado (centraliza el patrón repetido).</summary>
     protected int ResolveDamage() =>
         enemy != null ? enemy.CalcularDanoConCritico(attackDamage) : attackDamage;
 
-    /// <summary>Llamado por animation event al terminar el clip de ataque (opcional).</summary>
     public void AttackFinished() => movementEnemy.ChangeToStateChase();
 
-    /// <summary>¿Hay un objetivo válido al alcance para iniciar el ataque?</summary>
     protected abstract bool TargetInRange();
 
-    /// <summary>Ejecuta el golpe/disparo (se llama tras attackDelay).</summary>
     protected abstract void OnAttack();
 
     public abstract float AttackReach { get; }

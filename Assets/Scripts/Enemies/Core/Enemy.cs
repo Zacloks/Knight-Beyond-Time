@@ -16,6 +16,9 @@ public abstract class Enemy : MonoBehaviour
     [Range(0f, 100f)] public float probabilidadCritico = 10f;
     public float multiplicadorCritico = 2f;
 
+    [Header("Multiplicador global de daño")]
+    public float multiplicadorDaño = 1.5f;
+
     public virtual bool PuedeSoltarMonedas => false;
 
     protected virtual bool RequiresAttackComponent => true;
@@ -37,13 +40,15 @@ public abstract class Enemy : MonoBehaviour
 
     public int CalcularDanoConCritico(int danoBase)
     {
+        int danoConMultiplicador = Mathf.RoundToInt(danoBase * multiplicadorDaño);
+
         if (Random.Range(0f, 100f) <= probabilidadCritico)
         {
-            int danoCritico = Mathf.RoundToInt(danoBase * multiplicadorCritico);
+            int danoCritico = Mathf.RoundToInt(danoConMultiplicador * multiplicadorCritico);
             Debug.Log($"<color=orange>¡CRÍTICO!</color> {gameObject.name} hizo {danoCritico} de daño (base {danoBase}).");
             return danoCritico;
         }
-        return danoBase;
+        return danoConMultiplicador;
     }
 
     public virtual void TakeDamage(int amount, Vector2 sender)

@@ -10,14 +10,20 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference dash;
 
     [Header("Velocidad")]
-    public float velocidadMov = 7f;
-    public float dashSpeed = 12f;
+    public float velocidadMov = 5.5f;
+    public float dashSpeed = 10f;
     public float extraVelocidad = 1;
 
     [Header("Dash")]
     private const float DASH_DURATION = 0.5f;
     private const int   DASH_ENERGY_COST = 60;
     public bool dashInfinito = false;
+
+    [Header("Knockback (empuje al recibir golpes/choques)")]
+    public float knockbackDuration = 0.22f;
+    [Range(0f, 1f)] public float knockbackDecay = 0.85f;
+    private Vector2 knockbackVel;
+    private float knockbackEndTime;
 
     [Header("Límites del mapa")]
     public float minX = -100000f;
@@ -54,8 +60,28 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Time.time < knockbackEndTime)
+        {
+            rb.linearVelocity = knockbackVel;
+            knockbackVel *= knockbackDecay;
+            ClampPosition();
+            return;
+        }
+
         ApplyMovement();
         ClampPosition();
+    }
+
+//-----------Knockback---------------
+    public void AplicarKnockback(Vector2 fromPosition, float fuerza)
+    {
+        Vector2 dir = (Vector2)transform.position - fromPosition;
+        if (dir.sqrMagnitude < 0.0001f) dir = LastDirection;
+        dir.Normalize();
+
+        knockbackVel = dir * fuerza;
+        knockbackEndTime = Time.time + knockbackDuration;
+        IsDashing = false; // cancela el dash si estaba en curso
     }
 
 //-----------Movimiento---------------
