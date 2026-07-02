@@ -4935,6 +4935,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
   audioSource: {fileID: 8272432253259703231}
   attackClip: {fileID: 8300000, guid: 67dd73a8fb8b99e4d8c8d793c86c4324, type: 3}
+  attackUnarmed: {fileID: 8300000, guid: 40cda279da2faea43ad6582184440a70, type: 3}
+  attackMagic: {fileID: 8300000, guid: 56d176135168e4788b212b0059fee63b, type: 3}
+  attackDistance: {fileID: 8300000, guid: d64e91cef03af304fa237225b23c5707, type: 3}
   anim: {fileID: 2704816255067994337}
 --- !u!114 &5208835327324855281
 MonoBehaviour:
