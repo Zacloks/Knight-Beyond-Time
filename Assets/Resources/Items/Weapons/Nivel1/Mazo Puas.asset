@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Mazo Puas
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Mazo Puas
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -4316654690567625744, guid: e20588a9244f7e240867607aba8ccd8e, type: 3}
   prefab: {fileID: 1324587623003840237, guid: 0a79771fa3690c344b907d5e1d88b54d, type: 3}
   estrategiaEfecto: {fileID: 0}

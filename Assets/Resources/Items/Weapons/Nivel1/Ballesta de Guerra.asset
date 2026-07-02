@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Ballesta de Guerra
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Ballesta de Guerra
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -4071245339518913313, guid: 3f5a4b9c2f34c19488241772194ae76d, type: 3}
   prefab: {fileID: 797344937575326492, guid: 4b3b6b90fa53c8c409924e57e9bcfe58, type: 3}
   estrategiaEfecto: {fileID: 0}

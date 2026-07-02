@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Arco Divino
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Arco Divino
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -6011662756469366020, guid: f5f590f6588ae864f8072e325d748a22, type: 3}
   prefab: {fileID: 797344937575326492, guid: 1b1f22188fd5fb04aae90b5056c09222, type: 3}
   estrategiaEfecto: {fileID: 0}

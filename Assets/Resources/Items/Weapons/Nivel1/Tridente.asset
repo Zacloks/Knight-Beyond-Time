@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Tridente
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Tridente
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -726972585027277575, guid: bcf55d4efa6f66f4796f1fa5e4ce7a89, type: 3}
   prefab: {fileID: 1324587623003840237, guid: ff3e12f261c079b4796f3db1cc1d9179, type: 3}
   estrategiaEfecto: {fileID: 0}

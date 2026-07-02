@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Espada Oxidada
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Espada Oxidada
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -3753825769889500098, guid: 347999628938f5a4eb95549f660b7de4, type: 3}
   prefab: {fileID: 1324587623003840237, guid: 15b21a174c4677e4b9119a00d1d11d44, type: 3}
   estrategiaEfecto: {fileID: 0}

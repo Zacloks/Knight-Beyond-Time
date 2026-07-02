@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c449cd64ef3d430086af06b839dc003, type: 3}
   m_Name: EfectoVida
   m_EditorClassIdentifier: Assembly-CSharp::EfectoVida
-  cantidadCuracion: 20
+  cantidadCuracion: 40

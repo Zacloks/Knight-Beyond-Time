@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: "Poci\xF3n de Crecimiento"
   descripcion: "Aumenta el tama\xF1o del personaje, aumentando el da\xF1o y la resistencia,
     pero disminuyendo la velocidad."
-  precio: 9
+  precio: 15
   sprite: {fileID: 6252099095515510314, guid: 8eb65c73eba1d4eaa98d22a31fc9e14b, type: 3}
   prefab: {fileID: 4475153802008187025, guid: e6d59e35e514a4e7386664d553188ed1, type: 3}
   estrategiaEfecto: {fileID: 11400000, guid: d2b5e8cfe9baa4c30bd92539c6e9b75f, type: 2}

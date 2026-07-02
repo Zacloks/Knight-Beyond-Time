@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Arco de Oscuridad
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Arco de Penumbra
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -55241011894624266, guid: f37a9968e7df2974e96f7a25dde75530, type: 3}
   prefab: {fileID: 797344937575326492, guid: 23e07ccc7602c5d4a94baa63da4c1562, type: 3}
   estrategiaEfecto: {fileID: 0}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Hacha de Guerrrero
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Hacha de Guerrrero
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: 6402028616941674033, guid: d924524cf73b96541a57d11cd610870e, type: 3}
   prefab: {fileID: 1324587623003840237, guid: 24cc6cfbbe2342146b138f254b71064a, type: 3}
   estrategiaEfecto: {fileID: 0}

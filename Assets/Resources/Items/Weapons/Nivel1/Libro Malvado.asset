@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48031b5978914f08b60358e453aa504, type: 3}
   m_Name: Libro Malvado
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: "Libro del cl\xE9rigo "
-  precio: 5
+  itemName: 'Libro Malvado '
+  descripcion: 
+  precio: 20
   sprite: {fileID: 2418268922932249284, guid: f84f51d35e1c89c41bff9177638a906a, type: 3}
   prefab: {fileID: -6190891910962593590, guid: a64f584d292bc114b821226c5dc9a050, type: 3}
   estrategiaEfecto: {fileID: 0}

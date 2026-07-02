@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Hacha de Trabajo
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Hacha de Trabajo
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: 645586690464408388, guid: a15c0c98c928630449032581a53da30b, type: 3}
   prefab: {fileID: 1324587623003840237, guid: fc8e28e9eaf864243893370ca0e124b5, type: 3}
   estrategiaEfecto: {fileID: 0}
