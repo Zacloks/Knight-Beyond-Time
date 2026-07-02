@@ -50,10 +50,10 @@ MonoBehaviour:
   currentEnergy: 100
   coins: 1000
   inventorySlots:
-  - {fileID: 11400000, guid: f667ac818a200244ab90eed4f2b9acd0, type: 2}
-  - {fileID: 11400000, guid: fa8405ae9dcb0064ca8f6e2c076cb3d6, type: 2}
-  - {fileID: 11400000, guid: 6153cc93f007ef34ab6e9eb67ea17a20, type: 2}
-  - {fileID: 11400000, guid: 2ab1c87115bcf8d4b8fd91ee8dae6bfc, type: 2}
-  - {fileID: 11400000, guid: 73559a5631b3d4e91a9a5f4a74a19581, type: 2}
+  - {fileID: 11400000, guid: 5ab7641ba3c278c4484f762b6054798e, type: 2}
+  - {fileID: 11400000, guid: baf6ac2a078dd0e40a738de7e0b0011a, type: 2}
+  - {fileID: 11400000, guid: 342ede37af7ff3a4787e8698a62f3800, type: 2}
+  - {fileID: 11400000, guid: a6925131e8732a646b52ff61864000a5, type: 2}
+  - {fileID: 11400000, guid: fd35ce2ab62777a44a1148a8cfeb8277, type: 2}
   selectedSlot: 0
   initialized: 0

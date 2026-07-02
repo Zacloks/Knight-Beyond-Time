@@ -12,14 +12,31 @@ public class PlayerCombat : MonoBehaviour
     [Tooltip("Segundos que el player queda 'atacando' (congela anim. de movimiento).")]
     [SerializeField] private float attackLockTime = 1f;
 
+    [Header("Golpe sin arma (puños)")]
+    [Tooltip("Daño del golpe con la mano cuando no hay arma equipada.")]
+    public int dañoPuño = 5;
+    [Tooltip("Radio de alcance del puñetazo.")]
+    public float radioPuño = 1f;
+    [Range(0, 360)]
+    [Tooltip("Ángulo del cono del puñetazo al frente del jugador.")]
+    public float anguloPuño = 90f;
+    [Tooltip("A esta distancia o menos, basta con que el enemigo esté un poco adelante.")]
+    public float closeRangePuño = 0.6f;
+    [Tooltip("Retraso antes de aplicar el daño (sincroniza con la animación de golpe).")]
+    public float delayPuño = 0.15f;
+    [Tooltip("Capa(s) de los enemigos a los que puede pegar el puño. Asignar la layer de los enemigos.")]
+    public LayerMask enemyLayer;
+
     //Referencias
     private PlayerAnimator playerAnimator;
     private PlayerInventory playerInventory;
+    private PlayerMovement playerMovement;
     private Coroutine attackLockRoutine;
     void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
         playerInventory = GetComponent<PlayerInventory>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
@@ -71,10 +88,55 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
+            // Sin arma: golpea con la mano (misma animación) y hace daño.
             playerAnimator.TriggerMeleeAttack();
-            Debug.Log("¡Ataque SIN ARMA ejecutado con J!");
+            StartCoroutine(GolpePuñoRoutine());
             StartAttackLock();
         }
+    }
+
+    // Golpe cuerpo a cuerpo cuando el jugador NO tiene arma (puñetazo).
+    // Replica la detección en cono de WeaponMelee, con sus propios parámetros.
+    private IEnumerator GolpePuñoRoutine()
+    {
+        yield return new WaitForSeconds(delayPuño);
+
+        Vector3 origen = transform.position;
+        Vector2 facingDir = Vector2.right;
+        if (playerMovement != null)
+            facingDir = playerMovement.LastDirection.x >= 0f ? Vector2.right : Vector2.left;
+
+        Collider2D[] enemigos = Physics2D.OverlapCircleAll(origen, radioPuño, enemyLayer);
+
+        foreach (Collider2D col in enemigos)
+        {
+            Vector2 toEnemy = (Vector2)col.transform.position - (Vector2)origen;
+            float dist = toEnemy.magnitude;
+
+            bool enRango;
+            if (dist <= closeRangePuño)
+                enRango = Vector2.Dot(facingDir, toEnemy) > 0f;       // muy cerca: basta con estar adelante
+            else
+                enRango = Vector2.Angle(facingDir, toEnemy / dist) <= anguloPuño / 2f; // cono al frente
+
+            if (!enRango) continue;
+
+            Enemy enemy = col.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(dañoPuño, origen);
+                SpriteRenderer sr = col.GetComponent<SpriteRenderer>();
+                if (sr != null) StartCoroutine(FlashRed(sr));
+            }
+        }
+    }
+
+    private IEnumerator FlashRed(SpriteRenderer spr)
+    {
+        Color original = spr.color;
+        spr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        if (spr != null) spr.color = original;
     }
 
     private void EjecutarAtaqueMagic()
