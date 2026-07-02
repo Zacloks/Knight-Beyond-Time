@@ -116,9 +116,9 @@ TextureImporter:
       name: image (1)_0
       rect:
         serializedVersion: 2
-        x: 458
+        x: 440
         y: 0
-        width: 1688
+        width: 1706
         height: 733
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
