@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 // Hace que CUALQUIER item soltado en el suelo (arma, pocion, etc.) se integre con el mapa:
 
@@ -8,6 +9,12 @@ public class DroppedItem : MonoBehaviour
     [Header("Flotar")]
     public float bobAmplitude = 0.08f;
     public float bobSpeed = 2.5f;
+
+    [Header("Desaparición")]
+    [Tooltip("Segundos antes de que el item soltado desaparezca. Los de la tienda (enVenta) NO usan esto.")]
+    public float tiempoDeVida = 25f;
+    [Tooltip("Segundos de parpadeo de aviso justo antes de desaparecer.")]
+    public float tiempoParpadeo = 4f;
 
     [Header("Sombra")]
     [Tooltip("Tamano (ancho) de la sombra en unidades del mundo. Independiente de la escala del item.")]
@@ -48,6 +55,32 @@ public class DroppedItem : MonoBehaviour
 
         AjustarOrden();
         CrearSombra();
+
+        // Los items soltados (por enemigos o por el jugador) desaparecen tras un
+        // tiempo. Los de la tienda (enVenta) NO: deben quedarse para comprarlos.
+        if (itemComp == null || !itemComp.enVenta)
+            StartCoroutine(RutinaDespawn());
+    }
+
+    private IEnumerator RutinaDespawn()
+    {
+        if (tiempoDeVida <= 0f) yield break;
+
+        yield return new WaitForSeconds(Mathf.Max(0f, tiempoDeVida - tiempoParpadeo));
+
+        // Parpadeo de aviso antes de desaparecer.
+        float t = 0f;
+        bool visible = true;
+        while (t < tiempoParpadeo)
+        {
+            visible = !visible;
+            if (itemSr != null)   itemSr.enabled = visible;
+            if (shadowSr != null) shadowSr.enabled = visible;
+            yield return new WaitForSeconds(0.2f);
+            t += 0.2f;
+        }
+
+        Destroy(gameObject);
     }
 
     void Update()

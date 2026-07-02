@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Input")]
-    public InputActionReference pick;   
+    public InputActionReference pick;
 
-
-    private Item alcanzable;
+    // Todos los items dentro del alcance a la vez (puede haber varios superpuestos).
+    private readonly List<Item> itemsEnRango = new List<Item>();
+    private Item alcanzable;               // item objetivo actual (el que se recoge)
     private Cofre cofreCercano;
 
     //Referencias
@@ -48,22 +50,22 @@ public class PlayerInteraction : MonoBehaviour
         bool recogido = inventory.TryPickUp(itemARecoger);
         if (recogido)
         {
+            itemsEnRango.Remove(itemARecoger);
             Destroy(itemARecoger.gameObject);
-            Debug.Log("Item recogido: {itemARecoger.datos.name}");
+            ActualizarCartel();           
         }
     }
 
 //-------------TRIGGERS-----------
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("En alcance");
         if (collision.gameObject.CompareTag("Consumible"))
         {
             Item item = collision.gameObject.GetComponent<Item>();
-            if (item != null)
+            if (item != null && !itemsEnRango.Contains(item))
             {
-                alcanzable = item;
-                alcanzable.MostrarInfo();
+                itemsEnRango.Add(item);
+                ActualizarCartel();
             }
         }
 
@@ -89,15 +91,32 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Consumible"))
         {
-            if (alcanzable != null) alcanzable.OcultarInfo();
-            alcanzable = null;
+            Item item = collision.gameObject.GetComponent<Item>();
+            if (item != null)
+            {
+                item.OcultarInfo();        
+                itemsEnRango.Remove(item);
+                ActualizarCartel();
+            }
         }
 
         if (collision.gameObject.CompareTag("Cofre"))
         {
             cofreCercano = null;
         }
+    }
 
-        Debug.Log("Fuera de alcance");
+    private void ActualizarCartel()
+    {
+        itemsEnRango.RemoveAll(i => i == null);
+
+        Item actual = itemsEnRango.Count > 0 ? itemsEnRango[itemsEnRango.Count - 1] : null;
+
+        foreach (Item i in itemsEnRango)
+            if (i != actual) i.OcultarInfo();
+
+        if (actual != null) actual.MostrarInfo();
+
+        alcanzable = actual;
     }
 }

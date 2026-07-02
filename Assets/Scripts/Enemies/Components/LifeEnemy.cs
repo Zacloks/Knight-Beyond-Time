@@ -142,31 +142,45 @@ public class LifeEnemy : MonoBehaviour
         }
     }
     // Recorre la lista de items posibles, tira la probabilidad de cada uno de forma
-    // independiente y suelta los que salgan
+    // independiente y suelta los que salgan.
+    // Si el nivel define una TablaDropsNivel (via DropsDelNivel en la escena), esa
+    // tabla MANDA: el mismo enemigo suelta loot distinto según el nivel. Si no hay
+    // tabla, usa la lista propia del prefab.
     private void soltarItems()
     {
-        if (dropsDeItems == null || dropsDeItems.Count == 0) return;
+        List<PosibleDrop> lista = dropsDeItems;
+        int maxItems = maxItemsPorMuerte;
+        float radio = radioDrop;
+
+        TablaDropsNivel tabla = DropsDelNivel.Instancia != null ? DropsDelNivel.Instancia.tabla : null;
+        if (tabla != null)
+        {
+            lista = tabla.drops;
+            maxItems = tabla.maxItemsPorMuerte;
+            radio = tabla.radioDrop;
+        }
+
+        if (lista == null || lista.Count == 0) return;
 
         List<ItemData> ganadores = new List<ItemData>();
-        foreach (PosibleDrop drop in dropsDeItems)
+        foreach (PosibleDrop drop in lista)
         {
             if (drop == null || drop.item == null) continue;
             if (Random.Range(0f, 100f) <= drop.probabilidad)
                 ganadores.Add(drop.item);
         }
 
-
-        if (maxItemsPorMuerte > 0)
+        if (maxItems > 0)
         {
-            while (ganadores.Count > maxItemsPorMuerte)
+            while (ganadores.Count > maxItems)
                 ganadores.RemoveAt(Random.Range(0, ganadores.Count));
         }
 
         foreach (ItemData item in ganadores)
-            SpawnItemEnSuelo(item);
+            SpawnItemEnSuelo(item, radio);
     }
 
-    private void SpawnItemEnSuelo(ItemData data)
+    private void SpawnItemEnSuelo(ItemData data, float radio)
     {
         if (data.prefab == null)
         {
@@ -175,7 +189,7 @@ public class LifeEnemy : MonoBehaviour
         }
 
         Vector2 offset = new Vector2(Random.Range(-1f, 1f), Random.Range(-0.3f, 1f)).normalized
-                         * Random.Range(0f, radioDrop);
+                         * Random.Range(0f, radio);
         Vector3 pos = (Vector3)((Vector2)transform.position + offset);
 
         Item soltado = Instantiate(data.prefab, pos, Quaternion.identity);

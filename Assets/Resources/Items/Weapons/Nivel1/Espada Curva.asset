@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Espada Curva
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Espada Curva
+  descripcion: 
   precio: 5
-  sprite: {fileID: 1376593623603376284, guid: 07aae6e9278b98447b0b6dc6ea6d5b2d, type: 3}
+  sprite: {fileID: -245592732129049292, guid: 4b6986dfcba338d4fa760cce95acdd07, type: 3}
   prefab: {fileID: 1324587623003840237, guid: 2001aec743a1c7f4fad383ab63b17716, type: 3}
   estrategiaEfecto: {fileID: 0}
