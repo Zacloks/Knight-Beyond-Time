@@ -15,9 +15,16 @@ public class AttackEnemy : MonoBehaviour, IEnemyAttack
     [SerializeField] private float circleRadius;
     [SerializeField] public int attackDamage;
     [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private float staggerAtaque = 0.25f;
     private float lastAttackTime;
+    private float currentAttackCooldown;
     [SerializeField] private float attackDuration;
     [SerializeField] private float damageDelay = 0.2f;
+
+    [Header("Preparación primer ataque")]
+    [SerializeField] private float tiempoPreparacionPrimerAtaque = 0.3f;
+    private bool primerAtaqueRealizado = false;
+    private float tiempoEntradaRango = -1f;
 
     void Start()
     {
@@ -25,6 +32,7 @@ public class AttackEnemy : MonoBehaviour, IEnemyAttack
         animator = GetComponent<Animator>();
         movementEnemy = GetComponent<MovementEnemy>();
         enemy = GetComponent<Enemy>();
+        currentAttackCooldown = timeBetweenAttacks + Random.Range(-staggerAtaque, staggerAtaque);
     }
 
     private void Update()
@@ -32,19 +40,30 @@ public class AttackEnemy : MonoBehaviour, IEnemyAttack
         if (movementEnemy.currentState == EnemyState.Hurt) return;
         if (movementEnemy.currentState == EnemyState.Dead) return;
         if (movementEnemy.currentState == EnemyState.Attack) return;
-        if (Time.time < lastAttackTime + timeBetweenAttacks) return;
+        if (Time.time < lastAttackTime + currentAttackCooldown) return;
         if (attackController == null) return;
 
         Collider2D collider = Physics2D.OverlapCircle(attackController.position, circleRadius, hittableLayers);
 
-        if (collider)
+        if (!collider)
         {
-            lastAttackTime = Time.time;
-            movementEnemy.ChangeToStateAttack(attackDuration);
-            rb.linearVelocity = Vector2.zero;
-            animator.SetTrigger("Attack");
-            Invoke(nameof(Attack), damageDelay);
+            if (!primerAtaqueRealizado) tiempoEntradaRango = -1f;
+            return;
         }
+
+        if (!primerAtaqueRealizado)
+        {
+            if (tiempoEntradaRango < 0f) tiempoEntradaRango = Time.time;
+            if (Time.time < tiempoEntradaRango + tiempoPreparacionPrimerAtaque) return;
+            primerAtaqueRealizado = true;
+        }
+
+        lastAttackTime = Time.time;
+        currentAttackCooldown = timeBetweenAttacks + Random.Range(-staggerAtaque, staggerAtaque);
+        movementEnemy.ChangeToStateAttack(attackDuration);
+        rb.linearVelocity = Vector2.zero;
+        animator.SetTrigger("Attack");
+        Invoke(nameof(Attack), damageDelay);
     }
 
     public void Attack()

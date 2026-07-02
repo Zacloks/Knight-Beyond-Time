@@ -1,10 +1,4 @@
 using UnityEngine;
-
-// Hace que un item soltado en el suelo se vea integrado con el mapa:
-// - le pone una sombra redonda (achatada) debajo
-// - lo hace flotar suavemente (bobbing)
-// El orden de sorting (que quede por debajo del jugador) lo configura quien lo
-// instancia (PlayerInventory) antes de añadir este componente.
 [RequireComponent(typeof(SpriteRenderer))]
 public class DroppedItem : MonoBehaviour
 {
@@ -25,33 +19,48 @@ public class DroppedItem : MonoBehaviour
 
     private static Sprite _shadowSprite;
 
+    private Transform globoTransform;
+    private float globoBaseLocalY;
+
     void Start()
     {
         itemSr = GetComponent<SpriteRenderer>();
         baseY = transform.position.y;
-        // Fase inicial variada para que varios items no floten sincronizados.
         phase = (transform.position.x + transform.position.y) * 3f;
+
+        Item itemComp = GetComponent<Item>();
+        if (itemComp != null && itemComp.globoInfo != null)
+        {
+            globoTransform = itemComp.globoInfo.transform;
+            globoBaseLocalY = globoTransform.localPosition.y;
+        }
+
         CrearSombra();
     }
 
     void Update()
     {
         phase += Time.deltaTime * bobSpeed;
-        float h = (Mathf.Sin(phase) + 1f) * 0.5f * bobAmplitude; // 0..amplitude
+        float h = (Mathf.Sin(phase) + 1f) * 0.5f * bobAmplitude; 
 
-        // El item flota por encima de su posición base (el suelo).
         Vector3 p = transform.position;
         p.y = baseY + h;
         transform.position = p;
 
+        if (globoTransform != null)
+        {
+            Vector3 gp = globoTransform.localPosition;
+            gp.y = globoBaseLocalY - h;
+            globoTransform.localPosition = gp;
+        }
+
         if (shadowT == null) return;
 
-        // La sombra se queda fija en el suelo y se achica/aclara al subir el item.
         shadowT.position = new Vector3(transform.position.x, baseY + shadowYOffset, transform.position.z);
 
-        float t = h / Mathf.Max(bobAmplitude, 0.0001f);          // 0 abajo, 1 arriba
+        float t = h / Mathf.Max(bobAmplitude, 0.0001f);          
         float escala = Mathf.Lerp(shadowSize, shadowSize * 0.75f, t);
-        shadowT.localScale = new Vector3(escala, escala * 0.4f, 1f); // elipse achatada
+        shadowT.localScale = new Vector3(escala, escala * 0.4f, 1f); 
         if (shadowSr != null)
             shadowSr.color = new Color(0f, 0f, 0f, Mathf.Lerp(shadowAlpha, shadowAlpha * 0.6f, t));
     }
@@ -71,11 +80,10 @@ public class DroppedItem : MonoBehaviour
         if (itemSr != null)
         {
             shadowSr.sortingLayerID = itemSr.sortingLayerID;
-            shadowSr.sortingOrder = itemSr.sortingOrder - 1; // justo detrás del item
+            shadowSr.sortingOrder = itemSr.sortingOrder - 1; 
         }
     }
 
-    // Genera (una sola vez) un sprite circular suave para usar como sombra.
     private static Sprite ShadowSprite()
     {
         if (_shadowSprite != null) return _shadowSprite;

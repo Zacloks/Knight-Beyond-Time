@@ -74,7 +74,7 @@ public class Consumible : Item
             spriteEnMano.sortingOrder = ordenOriginal;
         }
 
-        jugador.Inventory.DropItem(); 
+        jugador.Inventory.ConsumeEquippedItem();
         Destroy(gameObject);
         
         jugador.isDrinking = false;

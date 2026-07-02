@@ -6,6 +6,7 @@ public class ItemData: ScriptableObject
 {
     [Header("Atributos")]
         public string itemName;
+        [TextArea] public string descripcion;
         public int precio;
         public Sprite sprite;
         public Item prefab;

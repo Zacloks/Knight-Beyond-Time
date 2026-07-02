@@ -19,6 +19,9 @@ public abstract class Enemy : MonoBehaviour
     [Range(0f, 100f)] public float probabilidadCritico = 10f;
     public float multiplicadorCritico = 2f;
 
+    [Header("Multiplicador global de daño")]
+    public float multiplicadorDaño = 1.5f;
+
     public virtual bool PuedeSoltarMonedas => false;
 
     protected virtual void Start()
@@ -36,30 +39,17 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    // public virtual void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (lifeEnemy != null && lifeEnemy.IsDead()) return;
-    //     if (!collision.gameObject.CompareTag("Player")) return;
-    //     if (Time.time < lastContactDamageTime + contactDamageCooldown) return;
-    //
-    //     PlayerScript playerCtrl = collision.gameObject.GetComponent<PlayerScript>();
-    //     if (playerCtrl != null)
-    //     {
-    //         lastContactDamageTime = Time.time;
-    //         playerCtrl.TakeDamage(CalcularDanoConCritico((int)attackDamage), transform.position);
-    //         Debug.Log("Enemigo dañó al jugador");
-    //     }
-    // }
-
     public int CalcularDanoConCritico(int danoBase)
     {
+        int danoConMultiplicador = Mathf.RoundToInt(danoBase * multiplicadorDaño);
+
         if (Random.Range(0f, 100f) <= probabilidadCritico)
         {
-            int danoCritico = Mathf.RoundToInt(danoBase * multiplicadorCritico);
+            int danoCritico = Mathf.RoundToInt(danoConMultiplicador * multiplicadorCritico);
             Debug.Log($"<color=orange>¡CRÍTICO!</color> {gameObject.name} hizo {danoCritico} de daño (base {danoBase}).");
             return danoCritico;
         }
-        return danoBase;
+        return danoConMultiplicador;
     }
 
     public virtual void TakeDamage(int amount, Vector2 sender)
@@ -67,7 +57,6 @@ public abstract class Enemy : MonoBehaviour
         lifeEnemy.TakeDamage(amount, sender);
     }
 
-    // Congela al enemigo durante 'duracion' segundos (efecto del báculo).
     public void Inmovilizar(float duracion)
     {
         if (lifeEnemy != null && lifeEnemy.IsDead()) return;

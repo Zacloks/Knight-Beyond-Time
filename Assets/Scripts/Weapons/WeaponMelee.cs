@@ -45,7 +45,7 @@ public class WeaponMelee : Weapon
         // curso) NO se puede atacar ni hacer daño. Bloquea el spam de la tecla.
         if (isSwinging || Time.time < nextAttackTime) return false;
 
-        nextAttackTime = Time.time + attackRate;
+        nextAttackTime = Time.time + AttackRateActual();
         StartCoroutine(SwingRoutine());
         return true;
     }
@@ -61,7 +61,7 @@ public class WeaponMelee : Weapon
         Vector3 origen = AttackOrigin();
         Vector2 facingDir = GetFacingDir();
 
-        Collider2D[] enemigosEnRadio = Physics2D.OverlapCircleAll(origen, attackRadius, enemyLayer);
+        Collider2D[] enemigosEnRadio = Physics2D.OverlapCircleAll(origen, attackRadius * MultiplicadorAlcanceJugador(), enemyLayer);
 
         foreach (Collider2D col in enemigosEnRadio)
         {
