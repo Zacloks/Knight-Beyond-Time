@@ -50,7 +50,7 @@ MonoBehaviour:
   currentEnergy: 100
   coins: 1000
   inventorySlots:
-  - {fileID: 11400000, guid: 9900c44f919fca6469fe35d40b032d26, type: 2}
+  - {fileID: 11400000, guid: 21bd0273b3c5bd54a9c7c82546893e63, type: 2}
   - {fileID: 11400000, guid: b1fc6c31038510d4ebb2eb5841086ccd, type: 2}
   - {fileID: 11400000, guid: cfd0892b81199534ba5a8fc108b729f0, type: 2}
   - {fileID: 11400000, guid: 526042c88a39f8d4f85b03d25ba1f257, type: 2}

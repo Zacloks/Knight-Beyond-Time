@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c333ac9dce6cb4ab77058bb0fb3f4a, type: 3}
+  m_Name: TablaDropsNivel1
+  m_EditorClassIdentifier: Assembly-CSharp::TablaDropsNivel
+  drops:
+  - item: {fileID: 11400000, guid: ed0a3c405d999b34c844141510299646, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 2ab1c87115bcf8d4b8fd91ee8dae6bfc, type: 2}
+    probabilidad: 20
+  - item: {fileID: 11400000, guid: fa8405ae9dcb0064ca8f6e2c076cb3d6, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: d981bcbf8bf2b694bad8e41a5087ea82, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: cdbdb582033645a4593a9cd7976d4ac3, type: 2}
+    probabilidad: 20
+  - item: {fileID: 11400000, guid: f667ac818a200244ab90eed4f2b9acd0, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 6153cc93f007ef34ab6e9eb67ea17a20, type: 2}
+    probabilidad: 25
+  - item: {fileID: 11400000, guid: b36a044419f320545914ebccad89cd4d, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 5e57590af16404cf1915bb4c3413d1c6, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: c03fce8de7dd048f494b337f89ca6bb3, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 90af421643b51490b9de9e4982769854, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 45fbc06d2e6a343c083c293058330c1d, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 2467cd96cd70b48cf92c36a75a32a239, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 48f7fe9aa46a349cf8584b116c56ffe3, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 8992ec756d1fc4ca08209e3f0d49082d, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: ba99727fc2bd94b388e179683c699faa, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 00cfa8644328644148d0449f878e847d, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 10b01a39e23404924bb627ffcd5ac655, type: 2}
+    probabilidad: 20
+  - item: {fileID: 11400000, guid: 76ec86ea9d7584f68b6caccc18ee2275, type: 2}
+    probabilidad: 30
+  - item: {fileID: 11400000, guid: 73559a5631b3d4e91a9a5f4a74a19581, type: 2}
+    probabilidad: 30
+  maxItemsPorMuerte: 1
+  radioDrop: 0.6

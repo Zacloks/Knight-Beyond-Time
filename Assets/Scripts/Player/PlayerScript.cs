@@ -84,9 +84,11 @@ public class PlayerScript : MonoBehaviour
     private void PlayerMatar()
     {
         Debug.Log("El jugador ha muerto.");
-        Movement.enabled = false;
-        Combat.enabled = false;
-        Animator.TriggerDeath(); 
+
+        if (Movement != null) Movement.enabled = false;
+        if (Combat != null)   Combat.enabled = false;
+        if (Animator != null) Animator.TriggerDeath();
+
         StartCoroutine(MostrarGameOverConDelay());
     }
 
@@ -94,8 +96,11 @@ public class PlayerScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1.5f); // RealTime ignora timeScale
 
-        if (GameOverScript.Instance != null)
-            GameOverScript.Instance.MostrarGameOver();
+        GameOverScript menu = GameOverScript.Instance;
+        if (menu == null) menu = FindObjectOfType<GameOverScript>(true);
+
+        if (menu != null)
+            menu.MostrarGameOver();
         else
             Debug.LogError("[PlayerScript] No hay GameOverScript en la escena. " +
                            "Asegúrate de que SceneSetup instancie el GameOverMenuPrefab.");

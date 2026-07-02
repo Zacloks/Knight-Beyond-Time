@@ -4910,11 +4910,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8ab7b0de1dc6c4282eb86347830f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHealthInicial: 80
+  maxHealthInicial: 140
   maxEnergyInicial: 100
   immuneTime: 2
   damageFlashDuration: 0.1
   damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  "multiplicadorDa\xF1o": 1
+  "reduccionDa\xF1o": 0
+  multiplicadorVelocidadAtaque: 1
+  bonusCritico: 0
+  multiplicadorAlcance: 1
 --- !u!114 &5455773034065575719
 MonoBehaviour:
   m_ObjectHideFlags: 0
