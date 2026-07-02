@@ -550,8 +550,8 @@ Transform:
   m_GameObject: {fileID: 226902292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.57, y: 0.32, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1}
+  m_LocalPosition: {x: 19.62, y: 0.58, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1418077034}
@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 265773632}
   - component: {fileID: 265773631}
   m_Layer: 0
-  m_Name: EntrarBosque
+  m_Name: EntradaBosque
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -649,9 +649,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ZonaCambioEscena
   modo: 1
   nombreEscena: Nivel2
-  indiceEscena: 0
   tagJugador: Player
   spawnIdDestino: SalirTienda
+  id: 
+  recordarEscenaActual: 0
 --- !u!61 &265773632
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1147,84 +1148,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1944105870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &423677441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 423677442}
-  - component: {fileID: 423677443}
-  m_Layer: 0
-  m_Name: cielo (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &423677442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423677441}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.13, y: 0.32, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1418077034}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &423677443
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423677441}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 6.023097, y: 0.50097156}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 21.565825, y: 3.3226204}
-  m_EdgeRadius: 0
 --- !u!1 &437316111
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,11 +1793,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2357800774220402221, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.55
+      value: -4.05
       objectReference: {fileID: 0}
     - target: {fileID: 2357800774220402221, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.37
+      value: -3.53
       objectReference: {fileID: 0}
     - target: {fileID: 3118054166740882397, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1894,11 +1817,11 @@ PrefabInstance:
       objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 8851418964865390578, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.81
+      value: -3.98
       objectReference: {fileID: 0}
     - target: {fileID: 8851418964865390578, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[0].entries.Array.size
@@ -2397,7 +2320,7 @@ GameObject:
   - component: {fileID: 1040471372}
   - component: {fileID: 1040471375}
   m_Layer: 0
-  m_Name: EntrarTienda
+  m_Name: EntradaTienda
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2458,8 +2381,8 @@ Transform:
   m_GameObject: {fileID: 1040471370}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.9, y: -0.12, z: 0}
-  m_LocalScale: {x: 1.1510823, y: 1.490705, z: 1}
+  m_LocalPosition: {x: 2.99, y: -0.47, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 222343016}
@@ -2477,10 +2400,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZonaCambioEscena
   modo: 1
-  nombreEscena: Tienda-1
-  indiceEscena: 0
+  nombreEscena: Tienda
   tagJugador: Player
-  spawnIdDestino: SalirTienda
+  spawnIdDestino: EntradaTienda
+  id: entrada_aldea
+  recordarEscenaActual: 1
 --- !u!1 &1068187880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,7 +2935,6 @@ Transform:
   - {fileID: 446683097}
   - {fileID: 1459904181}
   - {fileID: 226902293}
-  - {fileID: 423677442}
   - {fileID: 801510446}
   - {fileID: 618807111}
   m_Father: {fileID: 1477849297}
@@ -3413,8 +3336,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492649239}
+  - component: {fileID: 1492649240}
   m_Layer: 0
-  m_Name: SalirTienda
+  m_Name: SalidaTienda
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3429,12 +3353,24 @@ Transform:
   m_GameObject: {fileID: 1492649238}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.82, y: -2.14, z: 0}
+  m_LocalPosition: {x: 3.07, y: -1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 222343016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1492649240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492649238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b034fa1acaab2a64fb5a62e674abc903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuntoSalidaTienda
 --- !u!1 &1527196378
 GameObject:
   m_ObjectHideFlags: 0

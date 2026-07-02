@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -26,7 +27,15 @@ public class GameManager : MonoBehaviour
 
     [System.NonSerialized] public string nextSpawnId;
 
+    [System.NonSerialized] public string escenaRetorno;
+    [System.NonSerialized] public bool volviendoDeTienda;
+
+    [System.NonSerialized] public HashSet<string> zonasUsadas = new HashSet<string>();
+
     public event Action OnStateChanged;
+
+    public bool ZonaUsada(string id) => !string.IsNullOrEmpty(id) && zonasUsadas.Contains(id);
+    public void MarcarZonaUsada(string id) { if (!string.IsNullOrEmpty(id)) zonasUsadas.Add(id); }
 
     void Awake()
     {
@@ -48,6 +57,7 @@ public class GameManager : MonoBehaviour
 {
     currentHealth = maxHealth;
     currentEnergy = maxEnergy;
+    zonasUsadas.Clear();
     NotifyChanged();
 }
 }

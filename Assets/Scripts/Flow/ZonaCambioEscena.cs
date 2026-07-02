@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ZonaCambioEscena : MonoBehaviour
 {
-    public enum Modo { SiguienteNivel, EscenaPorNombre, EscenaPorIndice }
+    public enum Modo { SiguienteNivel = 0, EscenaPorNombre = 1, VolverAEscenaAnterior = 3 }
 
     [Header("Destino")]
     public Modo modo = Modo.SiguienteNivel;
@@ -10,24 +11,42 @@ public class ZonaCambioEscena : MonoBehaviour
     [Tooltip("Solo si modo = EscenaPorNombre")]
     public string nombreEscena;
 
-    [Tooltip("Solo si modo = EscenaPorIndice (Build Settings)")]
-    public int indiceEscena;
-
     [Header("Filtro")]
     public string tagJugador = "Player";
 
     public string spawnIdDestino;
 
+    [Header("Entrada única")]
+    [Tooltip("Id único de esta zona. Si se deja vacío, la zona se puede usar siempre.")]
+    public string id;
+
+    [Header("Retorno (zona de ENTRADA a la tienda)")]
+    [Tooltip("Marcar en la zona que ENTRA a la tienda: recuerda esta escena para volver luego a su PuntoSalidaTienda.")]
+    public bool recordarEscenaActual = false;
+
+    private bool usada;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag(tagJugador)) return;
+        if (usada || !collision.CompareTag(tagJugador)) return;
 
-        if (GameManager.Instance != null)
-            GameManager.Instance.nextSpawnId = spawnIdDestino;
+        GameManager gm = GameManager.Instance;
+        if (gm != null && gm.ZonaUsada(id)) return;
+
+        usada = true;
+
+        if (gm != null)
+        {
+            gm.MarcarZonaUsada(id);
+
+            if (recordarEscenaActual)
+                gm.escenaRetorno = SceneManager.GetActiveScene().name;
+        }
 
         switch (modo)
         {
             case Modo.SiguienteNivel:
+                if (gm != null) gm.nextSpawnId = spawnIdDestino;
                 LevelLoader.LoadNextLevel();
                 break;
 
@@ -37,11 +56,18 @@ public class ZonaCambioEscena : MonoBehaviour
                     Debug.LogError($"[ZonaCambioEscena] {gameObject.name}: falta el nombre de la escena.");
                     return;
                 }
+                if (gm != null) gm.nextSpawnId = spawnIdDestino;
                 LevelLoader.LoadScene(nombreEscena);
                 break;
 
-            case Modo.EscenaPorIndice:
-                LevelLoader.LoadScene(indiceEscena);
+            case Modo.VolverAEscenaAnterior:
+                if (gm == null || string.IsNullOrEmpty(gm.escenaRetorno))
+                {
+                    Debug.LogError($"[ZonaCambioEscena] {gameObject.name}: no hay escena de retorno guardada.");
+                    return;
+                }
+                gm.volviendoDeTienda = true;
+                LevelLoader.LoadScene(gm.escenaRetorno);
                 break;
         }
     }

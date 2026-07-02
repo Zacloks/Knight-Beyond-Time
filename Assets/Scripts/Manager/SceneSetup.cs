@@ -77,19 +77,33 @@ public class SceneSetup : MonoBehaviour
     }
     private Transform ElegirSpawn()
     {
-        string wanted = GameManager.Instance != null ? GameManager.Instance.nextSpawnId : null;
+        GameManager gm = GameManager.Instance;
+
+        if (gm != null && gm.volviendoDeTienda)
+        {
+            gm.volviendoDeTienda = false;
+            gm.nextSpawnId = null;
+
+            PuntoSalidaTienda salida = FindFirstObjectByType<PuntoSalidaTienda>();
+            if (salida != null) return salida.transform;
+
+            Debug.LogWarning("[SceneSetup] Se volvió de la tienda pero la escena no tiene PuntoSalidaTienda.");
+            return spawnPoint;
+        }
+
+        string wanted = gm != null ? gm.nextSpawnId : null;
 
         if (!string.IsNullOrEmpty(wanted) && entradas != null)
         {
             foreach (NamedSpawn e in entradas)
                 if (e != null && e.id == wanted && e.point != null)
                 {
-                    GameManager.Instance.nextSpawnId = null; // consumir
+                    gm.nextSpawnId = null;
                     return e.point;
                 }
         }
 
-        if (GameManager.Instance != null) GameManager.Instance.nextSpawnId = null;
+        if (gm != null) gm.nextSpawnId = null;
         return spawnPoint;
     }
 }

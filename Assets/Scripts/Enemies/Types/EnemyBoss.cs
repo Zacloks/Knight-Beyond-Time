@@ -15,6 +15,12 @@ public class EnemyBoss : Enemy
     [Tooltip("Pausa entre el fin de un ataque y la elección del siguiente.")]
     public float globalCooldown = 1.3f;
 
+    [Header("Activación")]
+    [Tooltip("Si está activo, el jefe queda dormido (quieto, sin IA ni intro) hasta que un BossTrigger llame a Activate().")]
+    public bool startDormant = false;
+    [Tooltip("Mientras está dormido, ignora el daño (no se lo puede matar desde lejos antes de activarlo).")]
+    public bool invulnerableWhileDormant = true;
+
     [Header("Intro al aparecer")]
     [Tooltip("Reproduce una animación de entrada al spawnear (invulnerable y quieto).")]
     public bool playIntro = true;
@@ -45,6 +51,7 @@ public class EnemyBoss : Enemy
     private bool isActing;
     private bool introPlaying;
     private bool hasStunned;
+    private bool activated;
     private float nextDecisionTime;
 
     private Transform Player => movementEnemy != null ? movementEnemy.PlayerTransform : null;
@@ -70,13 +77,29 @@ public class EnemyBoss : Enemy
             hittableLayers = hittableLayers
         };
 
+        if (startDormant)
+        {
+            movementEnemy.BeginSustainedAttack();
+            return;
+        }
+
+        Activate();
+    }
+
+    public void Activate()
+    {
+        if (activated) return;
+        activated = true;
+
         BossEvents.RaiseSpawned(bossName, lifeEnemy.MaxLife);
 
         if (playIntro) StartCoroutine(IntroRoutine());
+        else movementEnemy.EndSustainedAttack();
     }
 
     private void Update()
     {
+        if (!activated) return;
         if (lifeEnemy == null || lifeEnemy.IsDead()) return;
         if (introPlaying || isActing) return;
         if (Time.time < nextDecisionTime) return;
@@ -164,6 +187,7 @@ public class EnemyBoss : Enemy
 
     public override void TakeDamage(int amount, Vector2 sender)
     {
+        if (!activated && invulnerableWhileDormant) return;
         if (introPlaying) return;
 
         base.TakeDamage(amount, sender);

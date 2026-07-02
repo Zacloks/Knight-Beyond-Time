@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.12843156, y: -6.762951, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -181,6 +181,9 @@ MonoBehaviour:
   minMonedas: 4
   maxMonedas: 5
   posiblesValores: 01000000050000000a000000
+  dropsDeItems: []
+  maxItemsPorMuerte: 1
+  radioDrop: 0.6
   maxLife: 20
   tiempoHastaDestruir: 0.4
   superArmor: 0
@@ -198,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08c37e81c399e94eb53b4bc1ee5e053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpecial
-  attackDamage: 10
   probabilidadCritico: 20
   multiplicadorCritico: 2
 --- !u!114 &2692863025154319124
