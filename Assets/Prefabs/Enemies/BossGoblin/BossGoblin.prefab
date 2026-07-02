@@ -240,7 +240,7 @@ MonoBehaviour:
   dropsDeItems: []
   maxItemsPorMuerte: 1
   radioDrop: 0.6
-  maxLife: 60
+  maxLife: 80
   tiempoHastaDestruir: 2.8
   superArmor: 1
   knockbackForce: {x: 2, y: 1}
@@ -273,7 +273,7 @@ MonoBehaviour:
   useHalfHealthStun: 1
   stunTrigger: StunStart
   stunBool: Stunned
-  stunDuration: 3.5
+  stunDuration: 2
   stunOutDuration: 0.5
   stunHealthThreshold: 0.5
 --- !u!114 &6341489341112123145
