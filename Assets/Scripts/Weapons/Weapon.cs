@@ -20,6 +20,7 @@ public abstract class Weapon : Item
     public int durabilidadActual;
 
     protected PlayerMovement ownerMovement;
+    protected PlayerStats ownerStats;
 
     protected virtual void Awake()
     {
@@ -27,6 +28,19 @@ public abstract class Weapon : Item
             durabilidadActual = maxDurabilidad;
 
         ownerMovement = GetComponentInParent<PlayerMovement>();
+        ownerStats = GetComponentInParent<PlayerStats>();
+    }
+
+    protected float AttackRateActual()
+    {
+        float mult = ownerStats != null ? ownerStats.multiplicadorVelocidadAtaque : 1f;
+        if (mult <= 0f) mult = 1f;
+        return attackRate / mult;
+    }
+
+    protected float MultiplicadorAlcanceJugador()
+    {
+        return ownerStats != null ? ownerStats.multiplicadorAlcance : 1f;
     }
 
 
@@ -50,13 +64,17 @@ public abstract class Weapon : Item
     }
     public int CalcularDañoCritico(int dañoBase)
     {
+        float mult = ownerStats != null ? ownerStats.multiplicadorDaño : 1f;
+        float critExtra = ownerStats != null ? ownerStats.bonusCritico : 0f;
+        int dañoConBuff = Mathf.RoundToInt(dañoBase * mult);
+
         float random = Random.Range(0f, 100f);
-        if (random <= probabilidadCritico)
+        if (random <= probabilidadCritico + critExtra)
         {
             Debug.Log($"¡CRÍTICO con {weaponName}!");
-            return Mathf.RoundToInt(dañoBase * multiplicadorCritico);
+            return Mathf.RoundToInt(dañoConBuff * multiplicadorCritico);
         }
-        return dañoBase; 
+        return dañoConBuff;
     }
 
     public void GastarDurabilidad(int cantidad = 1)

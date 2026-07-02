@@ -9,9 +9,10 @@ public class PlayerScript : MonoBehaviour
     public PlayerInventory  Inventory;
     public PlayerInteraction Interaction;
     private PlayerAnimator Animator;
-
     [Header("Estados")]
     public bool isDrinking = false;
+    [Header("Knockback al recibir ataques")]
+    public float knockbackAlRecibirAtaque = 8f;
 
     void Awake()
     {
@@ -25,7 +26,6 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        // Suscribirse a eventos de Stats para reacciones cross-módulo
         if (Stats != null)
         {
             Stats.PlayerMuerto += PlayerMatar;
@@ -42,12 +42,14 @@ public class PlayerScript : MonoBehaviour
 //------FUNCIONES PARA ITEMS/POCIONES-----
     public void TakeDamage(int amount) {
         Stats.TakeDamage(amount);
-        // Animación de aturdido desactivada temporalmente para pruebas.
-        // Animator.TriggerDebuff();
+
     }
     public void TakeDamage(int amount, Vector2 sourcePosition) {
+        
+        bool eraInmune = Stats != null && Stats.IsImmune;
         Stats.TakeDamage(amount, sourcePosition);
-        // Animación de aturdido desactivada temporalmente para pruebas.
+        if (!eraInmune && Movement != null)
+            Movement.AplicarKnockback(sourcePosition, knockbackAlRecibirAtaque);
         // Animator.TriggerDebuff();
     }
     public void buy(int price) {Stats.TrySpendCoins(price);}

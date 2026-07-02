@@ -74,8 +74,8 @@ public class WeaponDistance : Weapon
     private void Disparar()
     {
         isCharging = false;
-        nextAttackTime = Time.time + attackRate;
-        GastarDurabilidad(1); 
+        nextAttackTime = Time.time + AttackRateActual();
+        GastarDurabilidad(1);
 
         if (weaponRenderer != null && spriteOriginal != null)
         {

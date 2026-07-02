@@ -821,6 +821,7 @@ GameObject:
   - component: {fileID: 5981179694178746125}
   - component: {fileID: 3601232826798997024}
   - component: {fileID: 6509036129995310159}
+  - component: {fileID: 3883529473723234687}
   m_Layer: 5
   m_Name: CanvasPausa
   m_TagString: Untagged
@@ -912,6 +913,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3883529473723234687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071316227564390403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40bccfab4bdc454399d9d6c05f0928d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AplicarOpciones
+  volumen: {fileID: 0}
+  brillo: {fileID: 0}
+  pantalla: {fileID: 0}
+  nombreEscenaMenu: MainMenu
 --- !u!1 &6243774681680316023
 GameObject:
   m_ObjectHideFlags: 0

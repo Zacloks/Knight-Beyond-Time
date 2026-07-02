@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
     private Item alcanzable;
+    private Cofre cofreCercano;
 
     //Referencias
     private PlayerStats stats;
@@ -20,8 +21,10 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (pick != null && pick.action.triggered && alcanzable != null)
-            TryPickUp();
+        if (pick == null || !pick.action.triggered) return;
+
+        if (alcanzable != null) TryPickUp();
+        else if (cofreCercano != null) cofreCercano.Abrir();
     }
 
 //-------------PICK UP-----------
@@ -60,6 +63,7 @@ public class PlayerInteraction : MonoBehaviour
             if (item != null)
             {
                 alcanzable = item;
+                alcanzable.MostrarInfo();
             }
         }
 
@@ -72,11 +76,28 @@ public class PlayerInteraction : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+
+        if (collision.gameObject.CompareTag("Cofre"))
+        {
+            Cofre cofre = collision.gameObject.GetComponent<Cofre>();
+            if (cofre != null && !cofre.YaAbierto)
+                cofreCercano = cofre;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        alcanzable = null;
+        if (collision.gameObject.CompareTag("Consumible"))
+        {
+            if (alcanzable != null) alcanzable.OcultarInfo();
+            alcanzable = null;
+        }
+
+        if (collision.gameObject.CompareTag("Cofre"))
+        {
+            cofreCercano = null;
+        }
+
         Debug.Log("Fuera de alcance");
     }
 }

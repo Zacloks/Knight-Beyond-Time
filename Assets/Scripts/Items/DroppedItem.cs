@@ -29,11 +29,22 @@ public class DroppedItem : MonoBehaviour
 
     private static Sprite _shadowSprite;
 
+    private Transform globoTransform;
+    private float globoBaseLocalY;
+
     void Start()
     {
         itemSr = GetComponent<SpriteRenderer>();
         baseY = transform.position.y;
         phase = (transform.position.x + transform.position.y) * 3f;
+
+        Item itemComp = GetComponent<Item>();
+        if (itemComp != null && itemComp.globoInfo != null)
+        {
+            globoTransform = itemComp.globoInfo.transform;
+            globoBaseLocalY = globoTransform.localPosition.y;
+        }
+
 
         AjustarOrden();
         CrearSombra();
@@ -42,11 +53,18 @@ public class DroppedItem : MonoBehaviour
     void Update()
     {
         phase += Time.deltaTime * bobSpeed;
-        float h = (Mathf.Sin(phase) + 1f) * 0.5f * bobAmplitude; // 0..amplitude
+        float h = (Mathf.Sin(phase) + 1f) * 0.5f * bobAmplitude; 
 
         Vector3 p = transform.position;
         p.y = baseY + h;
         transform.position = p;
+
+        if (globoTransform != null)
+        {
+            Vector3 gp = globoTransform.localPosition;
+            gp.y = globoBaseLocalY - h;
+            globoTransform.localPosition = gp;
+        }
 
         if (shadowT == null) return;
 

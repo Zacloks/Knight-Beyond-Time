@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48031b5978914f08b60358e453aa504, type: 3}
+  m_Name: Espada Curva
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Espada Curva
+  precio: 5
+  sprite: {fileID: 1376593623603376284, guid: 07aae6e9278b98447b0b6dc6ea6d5b2d, type: 3}
+  prefab: {fileID: 1324587623003840237, guid: 2001aec743a1c7f4fad383ab63b17716, type: 3}
+  estrategiaEfecto: {fileID: 0}

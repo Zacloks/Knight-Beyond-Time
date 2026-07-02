@@ -4897,6 +4897,7 @@ MonoBehaviour:
   Inventory: {fileID: 4376048566641305353}
   Interaction: {fileID: 1124284278540476235}
   isDrinking: 0
+  knockbackAlRecibirAtaque: 8
 --- !u!114 &8967334179107747084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4912,6 +4913,8 @@ MonoBehaviour:
   maxHealthInicial: 80
   maxEnergyInicial: 100
   immuneTime: 2
+  damageFlashDuration: 0.1
+  damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &5455773034065575719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4941,6 +4944,11 @@ MonoBehaviour:
   attackMagic: {fileID: -6198884845702736641, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   isAtacking: 0
   attackLockTime: 0.4
+  unarmedDamage: 3
+  unarmedRadius: 1.1
+  unarmedAngle: 110
+  unarmedCloseRange: 0.6
+  unarmedDamageDelay: 0.12
 --- !u!114 &1124284278540476235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4987,10 +4995,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   mover: {fileID: -3819753190812026520, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
   dash: {fileID: -7449098556809104598, guid: 68ca9a2155ce5c74fb525af82289baef, type: 3}
-  velocidadMov: 5
-  dashSpeed: 12
+  velocidadMov: 4.5
+  dashSpeed: 10
   extraVelocidad: 1
   dashInfinito: 0
+  knockbackDuration: 0.22
+  knockbackDecay: 0.85
   minX: -100000
   maxX: 10000
   minY: -100000

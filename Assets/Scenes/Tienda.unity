@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3d7a01049c041bab785ea9307ebf86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Manager
-  objetoTienda: {fileID: 1255532388664723603, guid: 69958d12b5d2d49d8ad0bb17e26f027f, type: 3}
+  objetoTienda: {fileID: 7834558989033116749, guid: e6d59e35e514a4e7386664d553188ed1, type: 3}
   puntosDeAparicion:
   - {fileID: 1886208065}
   - {fileID: 13887903}

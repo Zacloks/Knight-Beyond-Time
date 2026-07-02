@@ -19,15 +19,21 @@ public class Manager : MonoBehaviour
     void cargarCatalogo()
     {
         ItemData[] itemsCargados = Resources.LoadAll<ItemData>("Items");
-        catalogoCompleto = new List<ItemData>(itemsCargados);
+        catalogoCompleto = new List<ItemData>();
+        foreach (ItemData item in itemsCargados)
+            if (item != null && item.EsValido())
+                catalogoCompleto.Add(item);
     }
 
     void generarTienda()
     {
         List<ItemData> itemsDisponibles = new List<ItemData>(catalogoCompleto);
 
-        for (int i = 0; i < 3; i++)
+        int total = Mathf.Min(3, puntosDeAparicion.Length);
+        for (int i = 0; i < total; i++)
         {
+            if (itemsDisponibles.Count == 0) break;
+
             int indiceAleatorio = Random.Range(0, itemsDisponibles.Count);
             ItemData itemElegido = itemsDisponibles[indiceAleatorio];
 

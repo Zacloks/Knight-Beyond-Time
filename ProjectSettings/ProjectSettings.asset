@@ -107,7 +107,7 @@ PlayerSettings:
   xboxEnableFitness: 0
   visibleInBackground: 1
   allowFullscreenSwitch: 1
-  fullscreenMode: 1
+  fullscreenMode: 0
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -686,11 +686,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 9fb1680d-cc23-4f20-8a30-0b29786f14d4
+  cloudProjectId: 9cbf3b5c-b2a6-46ea-9a14-4d96109438cf
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Knight-Beyond-Tim
-  organizationId: rogervilla20051mmy1slcj
+  organizationId: unity_6c8f30fbe0a4a17fd824
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
