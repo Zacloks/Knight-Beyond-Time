@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Espada Infernal
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Espada Infernal
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: 21300000, guid: 45480f705eada3a41990f7be40ca84f5, type: 3}
   prefab: {fileID: 1324587623003840237, guid: 7ab7ae90c179ec641bb1fb2f639bb7dc, type: 3}
   estrategiaEfecto: {fileID: 0}

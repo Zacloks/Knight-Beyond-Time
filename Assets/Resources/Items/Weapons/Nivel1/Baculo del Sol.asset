@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Baculo del Sol
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Baculo del Sol
-  precio: 5
+  descripcion: 
+  precio: 20
   sprite: {fileID: 2430470094959597431, guid: 17cee5f922583824ea3010f15cf75d93, type: 3}
   prefab: {fileID: -6190891910962593590, guid: 67cd206722f935a4fbb1ba0b4d951055, type: 3}
   estrategiaEfecto: {fileID: 0}

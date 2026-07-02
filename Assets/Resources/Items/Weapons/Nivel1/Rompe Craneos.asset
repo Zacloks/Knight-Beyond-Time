@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rompe Craneos
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Rompe Craneos
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -2936212373006283810, guid: b42154269289dfd4e9ed1176fafbe114, type: 3}
   prefab: {fileID: 1324587623003840237, guid: 7998762e02a8e21439056c9bb2dc55a6, type: 3}
   estrategiaEfecto: {fileID: 0}

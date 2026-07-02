@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f49ecf331cbd4c4381f560d80934eed, type: 3}
   m_Name: EfectoRegeneracion
   m_EditorClassIdentifier: Assembly-CSharp::EfectoRegeneracion
-  cantidadPorTick: 5
+  cantidadPorTick: 10
   intervalo: 1
   duracion: 5

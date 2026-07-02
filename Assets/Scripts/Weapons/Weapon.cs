@@ -85,6 +85,14 @@ public abstract class Weapon : Item
             durabilidadActual = 0;
             Debug.Log($"¡El arma {weaponName} se ha roto!");
         }
+
+       
+        if (ownerMovement != null)
+        {
+            GameManager gm = GameManager.Instance;
+            if (gm != null && gm.durabilidadSlots != null && gm.selectedSlot < gm.durabilidadSlots.Length)
+                gm.durabilidadSlots[gm.selectedSlot] = durabilidadActual;
+        }
     }
 
     // Si el arma se quedó sin durabilidad, pide al inventario que la rompa

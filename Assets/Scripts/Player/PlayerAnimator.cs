@@ -5,6 +5,9 @@ public class PlayerAnimator : MonoBehaviour
     //NOMBRES DE PARÁMETROS.
     public AudioSource audioSource;
     public AudioClip attackClip;
+    public AudioClip attackUnarmed;
+    public AudioClip attackMagic;
+    public AudioClip attackDistance;
     private string PARAM_SPEED        = "Speed";
     private string TRIGGER_ATTACK     = "2_Attack";
     private string TRIGGER_MAGIC      = "attackMagic";
@@ -58,14 +61,27 @@ public class PlayerAnimator : MonoBehaviour
 
 //--------TRIGGERS DE ANIMACIONES-------
 
-    public void TriggerMeleeAttack()
+    public void TriggerMeleeAttack(bool conArma)
     {
         anim.ResetTrigger(TRIGGER_ATTACK);
         anim.SetTrigger(TRIGGER_ATTACK);
-        audioSource.PlayOneShot(attackClip);
+        audioSource.clip = conArma ? attackClip : attackUnarmed;
+        audioSource.PlayDelayed(0.3f);
     }
     public void ResetMeleeTrigger() {anim.ResetTrigger(TRIGGER_ATTACK);}
-    public void TriggerMagicAttack() {Trigger(TRIGGER_MAGIC);}
+    public void TriggerMagicAttack() {
+        Trigger(TRIGGER_MAGIC);
+        audioSource.clip = attackMagic;
+        audioSource.PlayDelayed(0.3f);
+
+    }
+
+    public void TriggerDistacia()
+    {
+        audioSource.clip = attackDistance;
+        audioSource.PlayDelayed(0.3f);
+    }
+
     public void TriggerDash() {Trigger(TRIGGER_DASH);}
     public void TriggerDebuff() {Trigger(TRIGGER_DEBUFF);}
     public void TriggerDeath() {anim.SetBool(PARAM_DEATH, true);}

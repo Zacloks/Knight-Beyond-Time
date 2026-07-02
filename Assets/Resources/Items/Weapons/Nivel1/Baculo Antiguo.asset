@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Baculo Antiguo
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Baculo Antiguo
-  precio: 5
+  descripcion: 
+  precio: 20
   sprite: {fileID: -5623299871150871834, guid: 35ac3f2858fff0843bb3839c3d1369f9, type: 3}
   prefab: {fileID: -6190891910962593590, guid: 08f4ee357c51f1847bc9e4eb5f0a5cca, type: 3}
   estrategiaEfecto: {fileID: 0}

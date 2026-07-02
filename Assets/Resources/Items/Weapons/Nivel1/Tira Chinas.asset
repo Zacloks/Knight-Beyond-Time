@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Tira Chinas
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Tira Chinas
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: 1562184868873785327, guid: a4a92b6e96490b64eaa4fe1e646f519c, type: 3}
   prefab: {fileID: 797344937575326492, guid: fad91bd113f42294cb6910142cfe9e1e, type: 3}
   estrategiaEfecto: {fileID: 0}

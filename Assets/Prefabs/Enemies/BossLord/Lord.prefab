@@ -50,7 +50,6 @@ GameObject:
   - component: {fileID: 6417410079352165442}
   - component: {fileID: 6417410079352165443}
   - component: {fileID: 2347656968399829213}
-  - component: {fileID: -8232234040506716564}
   m_Layer: 6
   m_Name: Lord
   m_TagString: Enemy
@@ -71,6 +70,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5131051996825466286}
   - {fileID: 2210073976531537585}
   - {fileID: 3378418122412340587}
   m_Father: {fileID: 0}
@@ -197,10 +197,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementEnemy
   currentState: 0
   movementSpeedBase: 2.5
+  chaseSpeedMultiplier: 1.65
   knockbackDamping: 0.85
+  velocidadMaxKnockback: 4
+  knockbackMultiplicador: 0.55
   attackRange: 1.5
   separationRadius: 1.3
   separationStrength: 1.8
+  separacionAlAtacar: 0.55
+  lookAhead: 0.7
+  lookAheadRadius: 0.25
+  avoidanceStrength: 0.65
+  anguloVariacion: 8
+  intervaloElegirAngulo: 0.4
+  candidatosAngulo: 8
+  pesoContinuidad: 0.6
+  radioEscaneoSurround: 5
 --- !u!114 &7474314269869382093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,11 +228,17 @@ MonoBehaviour:
   monedaPrefab: {fileID: 8316493981599981485, guid: 0695ce1efc56f084eb473ce6bb8e8fcc, type: 3}
   minMonedas: 2
   maxMonedas: 4
-  posiblesValores: 01000000050000000a000000
+  valoresMoneda:
+  - valor: 1
+    peso: 70
+  - valor: 5
+    peso: 25
+  - valor: 10
+    peso: 5
   dropsDeItems: []
   maxItemsPorMuerte: 1
   radioDrop: 0.6
-  maxLife: 12
+  maxLife: 70
   tiempoHastaDestruir: 5.3
   superArmor: 1
   knockbackForce: {x: 0, y: 0}
@@ -237,13 +255,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f352a9fe94cfe438ba174d0a0a7ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBoss
-  probabilidadCritico: 10
+  probabilidadCritico: 15
   multiplicadorCritico: 2
+  "multiplicadorDa\xF1o": 1.5
   bossName: Knight Lord
   hittableLayers:
     serializedVersion: 2
     m_Bits: 8
   globalCooldown: 1.3
+  startDormant: 0
+  invulnerableWhileDormant: 1
   playIntro: 1
   introTrigger: Entry
   introDuration: 1.5
@@ -271,7 +292,7 @@ MonoBehaviour:
   weight: 1
   hitPoint: {fileID: 2210073976531537585}
   radius: 1
-  damage: 20
+  damage: 15
   windup: 0.45
   recovery: 0.4
   animTriggers:
@@ -362,32 +383,153 @@ MonoBehaviour:
   damageReductionPercent: 50
   activationChance: 100
   attemptInterval: 5
---- !u!114 &-8232234040506716564
+--- !u!1 &9161657035814738195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5131051996825466286}
+  - component: {fileID: 5826842642119588619}
+  - component: {fileID: 4268674487764146264}
+  m_Layer: 0
+  m_Name: BossMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5131051996825466286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161657035814738195}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -26.6, y: 8.63, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8794121520241053567}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5826842642119588619
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161657035814738195}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &4268674487764146264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3957789394660334316}
+  m_GameObject: {fileID: 9161657035814738195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2157d4307efed8a4b8f45ef9eca735d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d8bb36e7fe1f014cbc57ff4563a87cf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossSoulsAoE
-  cooldown: 4
-  minRange: 0
-  maxRange: 99
-  weight: 1
-  soulPrefab: {fileID: 0}
-  spawnPoint: {fileID: 0}
-  soulCount: 5
-  damagePerSoul: 10
-  soulSpeed: 7
-  spreadAngle: 60
-  castTime: 1.1
-  betweenSouls: 0.12
-  recovery: 0.7
-  animTrigger: Souls
+  m_EditorClassIdentifier: Assembly-CSharp::BossMusic
+  bossTheme: {fileID: 8300000, guid: 26bae6dd703735b4aaa52ef13a3a799d, type: 3}
+  volume: 0.266
+  fadeOutOnDefeat: 2
+  fadeInOnSpawn: 0.5
+  levelMusic: {fileID: 0}
 --- !u!1001 &1998664795823531973
 PrefabInstance:
   m_ObjectHideFlags: 0

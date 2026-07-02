@@ -126,15 +126,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponMagic
   datos: {fileID: 0}
   enVenta: 1
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: Libro Malvado
-  damage: 10
-  attackRate: 0.5
+  damage: 9
+  attackRate: 0.7
   sprite: {fileID: -4844453588797329882, guid: 51ea30261c3266141aa7f0e5d5ef4ce7, type: 3}
   usaAnimacionJugador: 1
   probabilidadCritico: 5
   multiplicadorCritico: 2
-  maxDurabilidad: 2000
-  durabilidadActual: 2000
+  maxDurabilidad: 25
+  durabilidadActual: 25
   projectilePrefab: {fileID: 4582277519740372724, guid: 53826962f66fd8d4eb653a516a3d23fa, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

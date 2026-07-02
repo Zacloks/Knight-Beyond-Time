@@ -162,8 +162,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.18115255, y: 0.4860972}
-    oldSize: {x: 1.4302881, y: 0.555}
+    pivot: {x: 0.8210957, y: 0.5021357}
+    oldSize: {x: 0.95352536, y: 0.37}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -185,6 +185,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDistance
   datos: {fileID: 0}
   enVenta: 0
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: Ballesta de Guerrero
   damage: 10
   attackRate: 0.5
@@ -192,8 +202,8 @@ MonoBehaviour:
   usaAnimacionJugador: 1
   probabilidadCritico: 10
   multiplicadorCritico: 2
-  maxDurabilidad: 30
-  durabilidadActual: 30
+  maxDurabilidad: 20
+  durabilidadActual: 20
   projectilePrefab: {fileID: 4582277519740372724, guid: 275f609c643846546b6740ad72d80f3f, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

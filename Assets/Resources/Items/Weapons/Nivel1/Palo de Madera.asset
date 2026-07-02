@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Palo de Madera
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Palo de Madera
-  precio: 5
+  descripcion: 
+  precio: 10
   sprite: {fileID: -1498508099637772027, guid: 6a64c677283808444813115457e99d27, type: 3}
   prefab: {fileID: 1324587623003840237, guid: e1613578bd82525408ea6eb811881f5f, type: 3}
   estrategiaEfecto: {fileID: 0}

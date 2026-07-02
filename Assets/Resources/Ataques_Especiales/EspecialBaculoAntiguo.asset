@@ -16,7 +16,7 @@ MonoBehaviour:
   cooldown: 5
   costoDurabilidad: 3
   prefabProyectil: {fileID: 4582277519740372724, guid: 195ce95afd033d2459e2a9d4efa2fda2, type: 3}
-  "da\xF1o": 15
+  "da\xF1o": 7
   velocidad: 9
   rango: 12
   duracionInmovilizar: 2

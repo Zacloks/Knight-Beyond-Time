@@ -58,7 +58,9 @@ public class PlayerCombat : MonoBehaviour
                     Debug.Log($"Ataque confirmado. Arma: {arma.GetType().Name}");
 
                     if (arma is WeaponMelee)
-                        playerAnimator.TriggerMeleeAttack();
+                        playerAnimator.TriggerMeleeAttack(true);
+                    
+                    else playerAnimator.TriggerDistacia();
 
                     StartAttackLock();
                 }
@@ -79,7 +81,7 @@ public class PlayerCombat : MonoBehaviour
         else
         {
             // Sin arma: golpea con la mano (misma animación) y hace daño.
-            playerAnimator.TriggerMeleeAttack();
+            playerAnimator.TriggerMeleeAttack(false);
             StartCoroutine(GolpeSinArma());
             StartAttackLock();
         }
