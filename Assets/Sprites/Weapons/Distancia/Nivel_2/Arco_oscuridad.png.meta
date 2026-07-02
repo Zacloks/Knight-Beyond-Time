@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 4b6986dfcba338d4fa760cce95acdd07
+guid: 71e1bee5b5df4ba469ffcb3ea09cb89f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -245592732129049292
-    second: weapon_36_0
+      213: 2438244884595531469
+    second: Arco_oscuridad_0
+  - first:
+      213: -1628147579993356804
+    second: Arco_oscuridad_1
+  - first:
+      213: -2110168260361879212
+    second: Arco_oscuridad_2
+  - first:
+      213: 4867236618093619981
+    second: Arco_oscuridad_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weapon_36_0
+      name: Arco_oscuridad_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 5
+        y: 5
+        width: 54
+        height: 102
+      alignment: 9
+      pivot: {x: 0.5729838, y: 0.3346044}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 435c70a16ba779cf0800000000000000
-      internalID: -245592732129049292
+      spriteID: dcedabdddc266d120800000000000000
+      internalID: 2438244884595531469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arco_oscuridad_1
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 4
+        width: 46
+        height: 102
+      alignment: 9
+      pivot: {x: 0.65219545, y: 0.34180608}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf5859cf668a769e0800000000000000
+      internalID: -1628147579993356804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arco_oscuridad_2
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 4
+        width: 44
+        height: 102
+      alignment: 9
+      pivot: {x: 0.6440246, y: 0.3532862}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45183d8b52d27b2e0800000000000000
+      internalID: -2110168260361879212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arco_oscuridad_3
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 4
+        width: 52
+        height: 101
+      alignment: 9
+      pivot: {x: 0.59350526, y: 0.33796442}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b6e3b9ae5eb8340800000000000000
+      internalID: 4867236618093619981
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 221a7b43a8217e54799746e3140ebf07
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      weapon_36_0: -245592732129049292
+      Arco_oscuridad_0: 2438244884595531469
+      Arco_oscuridad_1: -1628147579993356804
+      Arco_oscuridad_2: -2110168260361879212
+      Arco_oscuridad_3: 4867236618093619981
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
