@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class InventoryUI : MonoBehaviour
 {
     [Header("Componentes de la UI")]
@@ -10,7 +10,9 @@ public class InventoryUI : MonoBehaviour
     public Color selectedColor;
     public Sprite slotVacioSprite;
     public Sprite slotUsadoSprite; // Una imagen transparente o el fondo vacío
-
+    [Header("Info del arma seleccionada")]
+    public TextMeshProUGUI textoNombreArma;
+    public TextMeshProUGUI textoTipoArma;
     void OnEnable()
     {
         if (GameManager.Instance != null)
@@ -50,5 +52,37 @@ public class InventoryUI : MonoBehaviour
             if (i < fondosSlots.Length && fondosSlots[i] != null)
                 fondosSlots[i].enabled = (i == slotActivo);
         }
+        ActualizarInfoArma(gm, slotActivo);
+    }
+    private void ActualizarInfoArma(GameManager gm, int slotActivo)
+    {
+        // Limpiar si no hay item
+        if (slotActivo >= gm.inventorySlots.Length || gm.inventorySlots[slotActivo] == null)
+        {
+            if (textoNombreArma != null) textoNombreArma.text = "";
+            if (textoTipoArma != null)   textoTipoArma.text = "";
+            return;
+        }
+
+        ItemData item = gm.inventorySlots[slotActivo];
+
+        string nombre = item.itemName;
+        string tipo   = "Ítem";
+
+        if (item.prefab != null)
+        {
+            Weapon arma = item.prefab.GetComponent<Weapon>();
+            if (arma != null)
+            {
+                if (!string.IsNullOrEmpty(arma.weaponName))
+                    nombre = arma.weaponName;
+
+                if      (arma is WeaponMelee)    tipo = "Melee";
+                else if (arma is WeaponMagic)     tipo = "Mágica";
+                else if (arma is WeaponDistance)  tipo = "Largo alcance";
+            }
+        }
+        if (textoNombreArma != null) textoNombreArma.text = nombre;
+        if (textoTipoArma != null)   textoTipoArma.text   = tipo;
     }
 }
