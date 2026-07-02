@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     public ItemData[] inventorySlots = new ItemData[5];
     public int selectedSlot = 0;
 
+    // Durabilidad guardada por slot (-1 = arma fresca / usar durabilidad máxima).
+    [System.NonSerialized] public int[] durabilidadSlots;
+
     [Header("Estado interno")]
     [Tooltip("Se pone a true tras sembrar el estado en la primera escena.")]
     public bool initialized = false;
@@ -50,6 +53,16 @@ public class GameManager : MonoBehaviour
 
         if (inventorySlots == null || inventorySlots.Length == 0)
             inventorySlots = new ItemData[5];
+
+        if (durabilidadSlots == null || durabilidadSlots.Length != inventorySlots.Length)
+            ResetDurabilidad();
+    }
+
+    // Marca todos los slots como "frescos" (arma nueva = durabilidad máxima al equipar).
+    public void ResetDurabilidad()
+    {
+        durabilidadSlots = new int[inventorySlots.Length];
+        for (int i = 0; i < durabilidadSlots.Length; i++) durabilidadSlots[i] = -1;
     }
 
     public void NotifyChanged() => OnStateChanged?.Invoke();
@@ -70,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         coins = 0;
         inventorySlots = new ItemData[5];
+        ResetDurabilidad();
         selectedSlot = 0;
         zonasUsadas.Clear();
         nextSpawnId = null;

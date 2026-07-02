@@ -18,6 +18,7 @@ public class PlayerInventory : MonoBehaviour
     public SPUMEquipmentManager spumEquipment;
 
     private Item itemEnMano;
+    private int slotEnMano = -1;   // slot al que pertenece el arma equipada (para guardar su durabilidad)
 
     void Update()
     {
@@ -117,11 +118,21 @@ public class PlayerInventory : MonoBehaviour
 
     private void UpdateEquippedItem(ItemData itemData)
     {
+        GameManager gm = GameManager.Instance;
+
+        if (itemEnMano is Weapon armaVieja && slotEnMano >= 0 && gm != null &&
+            gm.durabilidadSlots != null && slotEnMano < gm.durabilidadSlots.Length &&
+            slotEnMano < gm.inventorySlots.Length && gm.inventorySlots[slotEnMano] != null)
+        {
+            gm.durabilidadSlots[slotEnMano] = armaVieja.durabilidadActual;
+        }
+
         if (itemEnMano != null)
         {
             Destroy(itemEnMano.gameObject);//destruye el objeto anteriormente puesto
             itemEnMano = null;
         }
+        slotEnMano = -1;
 
         if (useSPUM && spumEquipment != null)
         {
@@ -138,6 +149,18 @@ public class PlayerInventory : MonoBehaviour
         {
             itemEnMano = Instantiate(itemData.prefab, transform);
             itemEnMano.datos = itemData;
+
+            // Cargar la durabilidad persistida de este slot (o dejar la máxima si es fresca).
+            if (itemEnMano is Weapon armaNueva && gm != null && gm.durabilidadSlots != null &&
+                gm.selectedSlot < gm.durabilidadSlots.Length)
+            {
+                int guardada = gm.durabilidadSlots[gm.selectedSlot];
+                if (guardada >= 0)
+                    armaNueva.durabilidadActual = Mathf.Clamp(guardada, 0, armaNueva.maxDurabilidad);
+
+                gm.durabilidadSlots[gm.selectedSlot] = armaNueva.durabilidadActual; // trackear
+                slotEnMano = gm.selectedSlot;
+            }
 
             SpriteRenderer sr = itemEnMano.GetComponent<SpriteRenderer>();
             if (sr != null) sr.enabled = false;

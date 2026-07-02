@@ -31,6 +31,10 @@ public class Inventory : MonoBehaviour
     public void dropItem()
     {
         slots[indexInventario] = null;
+
+        int[] dur = GameManager.Instance.durabilidadSlots;
+        if (dur != null && indexInventario < dur.Length) dur[indexInventario] = -1;
+
         Debug.Log("Botaste el item!");
         GameManager.Instance.NotifyChanged();
     }
