@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     [System.NonSerialized] public string escenaRetorno;
     [System.NonSerialized] public bool volviendoDeTienda;
+    [System.NonSerialized] public TablaDropsNivel tablaTienda;
 
     [System.NonSerialized] public HashSet<string> zonasUsadas = new HashSet<string>();
 
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
         nextSpawnId = null;
         volviendoDeTienda = false;
         escenaRetorno = null;
+        tablaTienda = null;
         NotifyChanged();
     }
 
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
         nextSpawnId = null;
         volviendoDeTienda = false;
         escenaRetorno = null;
+        tablaTienda = null;
         initialized = false;
         NotifyChanged();
     }

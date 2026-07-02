@@ -855,11 +855,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2357800774220402221, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.47
+      value: 17.57
       objectReference: {fileID: 0}
     - target: {fileID: 2357800774220402221, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.36
+      value: -1.36
       objectReference: {fileID: 0}
     - target: {fileID: 3118054166740882397, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -871,22 +871,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8851418964865390578, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.03
+      value: -1.91
       objectReference: {fileID: 0}
     - target: {fileID: 8851418964865390578, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[0].entries.Array.data[0].enemyPrefab
       value: 
-      objectReference: {fileID: 8780429033113255880, guid: 5b41abe20f29bed45870bcf7febff945, type: 3}
+      objectReference: {fileID: 7516956645844277054, guid: 40f503d491e203041b5461a668c0ee40, type: 3}
     - target: {fileID: 9118781380570022196, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       propertyPath: waves.Array.data[0].entries.Array.data[1].enemyPrefab
       value: 
-      objectReference: {fileID: 8780429033113255880, guid: c739d418409c4e043955299f29e2d158, type: 3}
+      objectReference: {fileID: 5968134199598088438, guid: e1402a8b38ccedf46a313eb8ebe0fbb2, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 939139306912705018, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1805419117211574080, guid: c6a1779b77af6e1498f408a2dfab28b1, type: 3}
       insertIndex: 1

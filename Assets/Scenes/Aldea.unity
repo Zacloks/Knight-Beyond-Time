@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 265773632}
   - component: {fileID: 265773631}
   m_Layer: 0
-  m_Name: EntrarBosque
+  m_Name: CaminoCastillo
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -707,7 +707,7 @@ Transform:
   m_GameObject: {fileID: 265773629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 45.07, y: 0.91, z: 0}
+  m_LocalPosition: {x: 45.05, y: -0.11, z: 0}
   m_LocalScale: {x: 1.1510823, y: 1.490705, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -726,9 +726,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZonaCambioEscena
   modo: 0
-  nombreEscena: Nivel2
+  nombreEscena: CaminoCastillo
   tagJugador: Player
-  spawnIdDestino: SalirTienda
+  spawnIdDestino: 
   id: 
   recordarEscenaActual: 0
 --- !u!61 &265773632
@@ -765,7 +765,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.12835848, y: 0.45730788}
+  m_Offset: {x: 0.053604722, y: 0.40110502}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -775,7 +775,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.6009479, y: 1.9146158}
+  m_Size: {x: 2.88682, y: 2.0270212}
   m_EdgeRadius: 0
 --- !u!1 &271822143
 GameObject:
@@ -4689,7 +4689,7 @@ Transform:
   m_GameObject: {fileID: 2113966076}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.60902, y: -2.58123, z: 0}
+  m_LocalPosition: {x: -9.44, y: -2.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

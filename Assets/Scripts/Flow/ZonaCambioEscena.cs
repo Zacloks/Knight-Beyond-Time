@@ -40,7 +40,10 @@ public class ZonaCambioEscena : MonoBehaviour
             gm.MarcarZonaUsada(id);
 
             if (recordarEscenaActual)
+            {
                 gm.escenaRetorno = SceneManager.GetActiveScene().name;
+                gm.tablaTienda = DropsDelNivel.Instancia != null ? DropsDelNivel.Instancia.tabla : null;
+            }
         }
 
         switch (modo)

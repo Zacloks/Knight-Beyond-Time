@@ -18,11 +18,26 @@ public class Manager : MonoBehaviour
     
     void cargarCatalogo()
     {
-        ItemData[] itemsCargados = Resources.LoadAll<ItemData>("Items");
         catalogoCompleto = new List<ItemData>();
-        foreach (ItemData item in itemsCargados)
-            if (item != null && item.EsValido())
-                catalogoCompleto.Add(item);
+
+        TablaDropsNivel tabla = GameManager.Instance != null ? GameManager.Instance.tablaTienda : null;
+        if (tabla != null)
+        {
+            foreach (LifeEnemy.PosibleDrop drop in tabla.drops)
+            {
+                ItemData item = drop != null ? drop.item : null;
+                if (item != null && item.EsValido() && !catalogoCompleto.Contains(item))
+                    catalogoCompleto.Add(item);
+            }
+        }
+
+        if (catalogoCompleto.Count == 0)
+        {
+            ItemData[] itemsCargados = Resources.LoadAll<ItemData>("Items");
+            foreach (ItemData item in itemsCargados)
+                if (item != null && item.EsValido() && !catalogoCompleto.Contains(item))
+                    catalogoCompleto.Add(item);
+        }
     }
 
     void generarTienda()

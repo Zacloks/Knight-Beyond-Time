@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Aldea.unity
     guid: 58da67efea2cbc944be16b6541b9cc18
   - enabled: 1
+    path: Assets/Scenes/CaminoCastillo.unity
+    guid: 333237a065ad86845914497dd52d9081
+  - enabled: 1
     path: Assets/Scenes/InteriorCastillo.unity
     guid: cae503c88190ba54da6694412c0a863e
   m_configObjects: {}
