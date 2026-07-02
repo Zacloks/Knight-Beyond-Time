@@ -42,7 +42,7 @@ public class PlayerCombat : MonoBehaviour
 //-----------ATAQUE----------
     private void EjecutarAtaque()
     {
-      
+
         if (isAtacking) return;
 
         ItemData itemData = playerInventory.GetEquippedItemData();
@@ -78,13 +78,15 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
+            // Sin arma: golpea con la mano (misma animación) y hace daño.
             playerAnimator.TriggerMeleeAttack();
-            Debug.Log("¡Ataque SIN ARMA ejecutado con J!");
-            StartAttackLock();
             StartCoroutine(GolpeSinArma());
+            StartAttackLock();
         }
     }
 
+    // Golpe cuerpo a cuerpo cuando el jugador NO tiene arma. Detecta enemigos en un
+    // cono al frente (igual criterio que WeaponMelee) y escala con los buffs del jugador.
     private IEnumerator GolpeSinArma()
     {
         yield return new WaitForSeconds(unarmedDamageDelay);
@@ -176,7 +178,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-//evitar errores en animacion ataque 
+//evitar errores en animacion ataque
     private void StartAttackLock()
     {
         if (attackLockRoutine != null) StopCoroutine(attackLockRoutine);
@@ -209,7 +211,7 @@ public class PlayerCombat : MonoBehaviour
             AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
             float tiempoMitad = stateInfo.length / 2f;
             yield return new WaitForSeconds(tiempoMitad);
-            anim.CrossFade("0_Idle", 0.05f); 
+            anim.CrossFade("0_Idle", 0.05f);
         }
     }
 }
