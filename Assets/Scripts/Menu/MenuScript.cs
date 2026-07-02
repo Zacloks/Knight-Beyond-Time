@@ -19,7 +19,7 @@ public class MenuScript : MonoBehaviour
     }
     public void jugar()
     {
-        SceneManager.LoadSceneAsync(2);
+        SceneManager.LoadSceneAsync("Inicio");
     }
 
   
