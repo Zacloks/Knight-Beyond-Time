@@ -234,7 +234,7 @@ MonoBehaviour:
   dropsDeItems: []
   maxItemsPorMuerte: 1
   radioDrop: 0.6
-  maxLife: 20
+  maxLife: 40
   tiempoHastaDestruir: 2.8
   superArmor: 1
   knockbackForce: {x: 2, y: 1}
@@ -288,7 +288,7 @@ MonoBehaviour:
   weight: 3
   hitPoint: {fileID: 8399441438735440301}
   radius: 1
-  damage: 20
+  damage: 12
   windup: 0.25
   recovery: 1.35
   animTriggers:

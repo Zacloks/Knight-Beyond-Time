@@ -185,15 +185,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDistance
   datos: {fileID: 0}
   enVenta: 0
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: 'Tira China '
-  damage: 10
+  damage: 5
   attackRate: 0.5
   sprite: {fileID: 1562184868873785327, guid: a4a92b6e96490b64eaa4fe1e646f519c, type: 3}
   usaAnimacionJugador: 1
   probabilidadCritico: 5
   multiplicadorCritico: 2
-  maxDurabilidad: 20
-  durabilidadActual: 20
+  maxDurabilidad: 10
+  durabilidadActual: 10
   projectilePrefab: {fileID: 4582277519740372724, guid: 0d5a71932dbe1014590394afe6736403, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

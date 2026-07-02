@@ -4910,7 +4910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8ab7b0de1dc6c4282eb86347830f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHealthInicial: 140
+  maxHealthInicial: 200
   maxEnergyInicial: 100
   immuneTime: 2
   damageFlashDuration: 0.1
@@ -4953,7 +4953,7 @@ MonoBehaviour:
   unarmedRadius: 1.1
   unarmedAngle: 110
   unarmedCloseRange: 0.6
-  unarmedDamageDelay: 0.12
+  unarmedDamageDelay: 0.5
 --- !u!114 &1124284278540476235
 MonoBehaviour:
   m_ObjectHideFlags: 0

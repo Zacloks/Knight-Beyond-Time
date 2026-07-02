@@ -107,7 +107,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Moneda
   datos: {fileID: 0}
   enVenta: 0
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   value: 10
+  radioIman: 1
+  velocidadIman: 4
 --- !u!58 &-5276323369506130835
 CircleCollider2D:
   m_ObjectHideFlags: 0

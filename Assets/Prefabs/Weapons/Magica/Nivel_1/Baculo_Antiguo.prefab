@@ -126,15 +126,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponMagic
   datos: {fileID: 0}
   enVenta: 1
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: Baculo Antiguo
-  damage: 10
-  attackRate: 0.5
+  damage: 6
+  attackRate: 0.7
   sprite: {fileID: -5623299871150871834, guid: 35ac3f2858fff0843bb3839c3d1369f9, type: 3}
   usaAnimacionJugador: 1
-  probabilidadCritico: 5
+  probabilidadCritico: 10
   multiplicadorCritico: 2
-  maxDurabilidad: 2000
-  durabilidadActual: 2000
+  maxDurabilidad: 20
+  durabilidadActual: 20
   projectilePrefab: {fileID: 4582277519740372724, guid: 97a81278f8836994d958927d5f5cf444, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

@@ -185,15 +185,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponMelee
   datos: {fileID: 0}
   enVenta: 0
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: Espada Oxidada
-  damage: 8
+  damage: 6
   attackRate: 0.5
   sprite: {fileID: -3753825769889500098, guid: 347999628938f5a4eb95549f660b7de4, type: 3}
   usaAnimacionJugador: 1
   probabilidadCritico: 5
   multiplicadorCritico: 2
-  maxDurabilidad: 100
-  durabilidadActual: 100
+  maxDurabilidad: 15
+  durabilidadActual: 15
   attackRadius: 0.8
   attackAngle: 90
   coneOffset: 0

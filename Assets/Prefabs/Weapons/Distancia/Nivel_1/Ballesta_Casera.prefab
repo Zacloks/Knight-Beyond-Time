@@ -185,15 +185,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDistance
   datos: {fileID: 0}
   enVenta: 0
+  globoInfo: {fileID: 0}
+  textoInfo: {fileID: 0}
+  fondoGlobo: {fileID: 0}
+  escalaGlobo: 0.65
+  escalaGloboTienda: 1.3
+  anchoGlobo: 2.2
+  altoMinimo: 0.4
+  altoMaximo: 2.5
+  fondoPadding: {x: 0.1, y: 0.15}
+  margenInferior: 0.1
   weaponName: Ballesta casera
-  damage: 10
-  attackRate: 0.5
+  damage: 7
+  attackRate: 1.1
   sprite: {fileID: -1201772774456808696, guid: a5c20dec4c1e0884c8837c933ce4f4a6, type: 3}
   usaAnimacionJugador: 1
   probabilidadCritico: 10
   multiplicadorCritico: 2
-  maxDurabilidad: 30
-  durabilidadActual: 30
+  maxDurabilidad: 15
+  durabilidadActual: 15
   projectilePrefab: {fileID: 4582277519740372724, guid: 275f609c643846546b6740ad72d80f3f, type: 3}
   shootPoint: {fileID: 3844930245959808967}
   maxChargeTime: 1

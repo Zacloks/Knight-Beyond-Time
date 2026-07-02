@@ -230,12 +230,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementEnemy
   currentState: 0
   movementSpeedBase: 2
+  chaseSpeedMultiplier: 1.65
   knockbackDamping: 0.85
   velocidadMaxKnockback: 4
   knockbackMultiplicador: 0.55
   attackRange: 1
   separationRadius: 1.3
   separationStrength: 1.8
+  separacionAlAtacar: 0.55
   lookAhead: 0.7
   lookAheadRadius: 0.25
   avoidanceStrength: 0.65
@@ -260,18 +262,18 @@ MonoBehaviour:
   minMonedas: 2
   maxMonedas: 4
   posiblesValores: 01000000050000000a000000
-  dropsDeArmas:
-  - arma: {fileID: 11400000, guid: ed0a3c405d999b34c844141510299646, type: 2}
+  dropsDeItems:
+  - item: {fileID: 11400000, guid: ed0a3c405d999b34c844141510299646, type: 2}
     probabilidad: 50
-  - arma: {fileID: 11400000, guid: cdbdb582033645a4593a9cd7976d4ac3, type: 2}
+  - item: {fileID: 11400000, guid: cdbdb582033645a4593a9cd7976d4ac3, type: 2}
     probabilidad: 100
-  - arma: {fileID: 11400000, guid: 90af421643b51490b9de9e4982769854, type: 2}
+  - item: {fileID: 11400000, guid: 90af421643b51490b9de9e4982769854, type: 2}
     probabilidad: 50
-  maxArmasPorMuerte: 1
-  radioDropArmas: 0.6
-  tamanoSombraDrop: 0.3
+  maxItemsPorMuerte: 1
+  radioDrop: 0.6
   maxLife: 20
   tiempoHastaDestruir: 1
+  superArmor: 0
   knockbackForce: {x: 2, y: 1}
   minKnockbackTime: 0.3
 --- !u!114 &5377633792362014178
@@ -286,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a333e5faaaa1954c8adb6ea43240e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyNormal
-  attackDamage: 10
   probabilidadCritico: 10
   multiplicadorCritico: 2
   "multiplicadorDa\xF1o": 1.5
@@ -302,13 +303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884361fdf6689ce42855db8175ba9fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemy
+  attackDamage: 5
+  timeBetweenAttacks: 3
+  attackDuration: 2
+  attackDelay: 0.2
+  staggerAtaque: 0.25
+  tiempoPreparacionPrimerAtaque: 0.3
   attackController: {fileID: 3135439866015947980}
   hittableLayers:
     serializedVersion: 2
     m_Bits: 8
   circleRadius: 0.6
-  attackDamage: 12
-  timeBetweenAttacks: 3
-  staggerAtaque: 0.25
-  attackDuration: 2
-  damageDelay: 0.2
