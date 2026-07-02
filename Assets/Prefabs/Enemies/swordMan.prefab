@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3114882211278280191}
   - component: {fileID: 7310685987548572482}
   m_Layer: 6
-  m_Name: swordMan
+  m_Name: SwordMan
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,0 +1,1820 @@
+fileFormatVersion: 2
+guid: 56e775fd79b5dda4ca8145ddd920f994
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5989882374897837023
+    second: Gameboy UI_0
+  - first:
+      213: 5026722180485181864
+    second: Gameboy UI_1
+  - first:
+      213: 1127881168214793983
+    second: Gameboy UI_2
+  - first:
+      213: -7552977327533239549
+    second: Gameboy UI_3
+  - first:
+      213: -7056702467207993637
+    second: Gameboy UI_4
+  - first:
+      213: 3365313089806084933
+    second: Gameboy UI_5
+  - first:
+      213: -2929662655281137972
+    second: Gameboy UI_6
+  - first:
+      213: -7766993582846985943
+    second: Gameboy UI_7
+  - first:
+      213: -4462000066107024233
+    second: Gameboy UI_8
+  - first:
+      213: -6001014366406568930
+    second: Gameboy UI_9
+  - first:
+      213: 3408602063611848172
+    second: Gameboy UI_10
+  - first:
+      213: 5109900085155627998
+    second: Gameboy UI_11
+  - first:
+      213: -338676950615710130
+    second: Gameboy UI_12
+  - first:
+      213: 3564706483040083827
+    second: Gameboy UI_13
+  - first:
+      213: -10595296436150060
+    second: Gameboy UI_14
+  - first:
+      213: 8735856882096203616
+    second: Gameboy UI_15
+  - first:
+      213: -2696023067325832310
+    second: Gameboy UI_16
+  - first:
+      213: 3191489318217794074
+    second: Gameboy UI_17
+  - first:
+      213: -1666995925344277933
+    second: Gameboy UI_18
+  - first:
+      213: 7583421778521899526
+    second: Gameboy UI_19
+  - first:
+      213: 7943128861326805279
+    second: Gameboy UI_20
+  - first:
+      213: 5079195271299643503
+    second: Gameboy UI_21
+  - first:
+      213: 9141595512621282103
+    second: Gameboy UI_22
+  - first:
+      213: 4012125334678742711
+    second: Gameboy UI_23
+  - first:
+      213: 6424634314322780611
+    second: Gameboy UI_24
+  - first:
+      213: 3166196601254500256
+    second: Gameboy UI_25
+  - first:
+      213: 6863471899248444700
+    second: Gameboy UI_26
+  - first:
+      213: 4042513091079179170
+    second: Gameboy UI_27
+  - first:
+      213: 8939320777866744837
+    second: Gameboy UI_28
+  - first:
+      213: -8317538120241623220
+    second: Gameboy UI_29
+  - first:
+      213: 890209986103127947
+    second: Gameboy UI_30
+  - first:
+      213: 3741778561463604273
+    second: Gameboy UI_31
+  - first:
+      213: 7511135346411289585
+    second: Gameboy UI_32
+  - first:
+      213: 6709327195662543894
+    second: Gameboy UI_33
+  - first:
+      213: 1110758815042456716
+    second: Gameboy UI_34
+  - first:
+      213: -6469400416074059518
+    second: Gameboy UI_35
+  - first:
+      213: -7643972119398415957
+    second: Gameboy UI_36
+  - first:
+      213: -2092019459872106647
+    second: Gameboy UI_37
+  - first:
+      213: -5211957248731985042
+    second: Gameboy UI_38
+  - first:
+      213: -6852141051212671196
+    second: Gameboy UI_39
+  - first:
+      213: -4802125656053608995
+    second: Gameboy UI_40
+  - first:
+      213: 2372441107391226
+    second: Gameboy UI_41
+  - first:
+      213: -7533805809683676611
+    second: Gameboy UI_42
+  - first:
+      213: 7368615286412262796
+    second: Gameboy UI_43
+  - first:
+      213: 4240214378365272723
+    second: Gameboy UI_44
+  - first:
+      213: -8972379028099375087
+    second: Gameboy UI_45
+  - first:
+      213: 6606697256608405119
+    second: Gameboy UI_46
+  - first:
+      213: -6839228582288785389
+    second: Gameboy UI_47
+  - first:
+      213: 4583393419221629208
+    second: Gameboy UI_48
+  - first:
+      213: 4063503842015259425
+    second: Gameboy UI_49
+  - first:
+      213: -4555222037451168767
+    second: Gameboy UI_50
+  - first:
+      213: -3833865835324437811
+    second: Gameboy UI_51
+  - first:
+      213: -6875193670243425440
+    second: Gameboy UI_52
+  - first:
+      213: 7589261756672698375
+    second: Gameboy UI_53
+  - first:
+      213: 684021681048472981
+    second: Gameboy UI_54
+  - first:
+      213: -3546231749072715677
+    second: Gameboy UI_55
+  - first:
+      213: -3308348692271050105
+    second: Gameboy UI_56
+  - first:
+      213: -3156827402648183497
+    second: Gameboy UI_57
+  - first:
+      213: -454468773635483529
+    second: Gameboy UI_58
+  - first:
+      213: -4734555062027733476
+    second: Gameboy UI_59
+  - first:
+      213: 4593505067361021801
+    second: Gameboy UI_60
+  - first:
+      213: -4594625710765823678
+    second: Gameboy UI_61
+  - first:
+      213: -6953401223152682072
+    second: Gameboy UI_62
+  - first:
+      213: 3974217251262389146
+    second: Gameboy UI_63
+  - first:
+      213: 4029504830382322966
+    second: Gameboy UI_64
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Gameboy UI_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 188
+        width: 102
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd3a822c846502350800000000000000
+      internalID: 5989882374897837023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_1
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 223
+        width: 64
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a17560c03182c540800000000000000
+      internalID: 5026722180485181864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 226
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffe9b4c52f907af00800000000000000
+      internalID: 1127881168214793983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_3
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 197
+        width: 64
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3035dc3532f6e2790800000000000000
+      internalID: -7552977327533239549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_4
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 198
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6e17c7e7e811e90800000000000000
+      internalID: -7056702467207993637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_5
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 117
+        width: 107
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54b2ddbcc6ef3be20800000000000000
+      internalID: 3365313089806084933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_6
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 171
+        width: 64
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc67d38465fb757d0800000000000000
+      internalID: -2929662655281137972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_7
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 170
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 929baa9dc78163490800000000000000
+      internalID: -7766993582846985943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_8
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 144
+        width: 64
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79cdbef949ac312c0800000000000000
+      internalID: -4462000066107024233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_9
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 132
+        width: 29
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e14125e7a3d18bca0800000000000000
+      internalID: -6001014366406568930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_10
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 115
+        width: 52
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce56f3e6489cd4f20800000000000000
+      internalID: 3408602063611848172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_11
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 0
+        width: 77
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed38075dd030ae640800000000000000
+      internalID: 5109900085155627998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_12
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4620f89b17cc4bf0800000000000000
+      internalID: -338676950615710130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_13
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37fd222e8a1687130800000000000000
+      internalID: 3564706483040083827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_14
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d022af42ab5adff0800000000000000
+      internalID: -10595296436150060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_15
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 067eef9bc8ffb3970800000000000000
+      internalID: 8735856882096203616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_16
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a83e8cded4dc59ad0800000000000000
+      internalID: -2696023067325832310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_17
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1243dc20a27a4c20800000000000000
+      internalID: 3191489318217794074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_18
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35aa4dbb904add8e0800000000000000
+      internalID: -1666995925344277933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_19
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60242cacde9bd3960800000000000000
+      internalID: 7583421778521899526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_20
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1989886d99ab3e60800000000000000
+      internalID: 7943128861326805279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_21
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f68b8a2403dec7640800000000000000
+      internalID: 5079195271299643503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_22
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 733b81a3fa87dde70800000000000000
+      internalID: 9141595512621282103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_23
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b62fd71cbeeda730800000000000000
+      internalID: 4012125334678742711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_24
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c1aef4aed2e82950800000000000000
+      internalID: 6424634314322780611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_25
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a7d2da980790fb20800000000000000
+      internalID: 3166196601254500256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_26
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1544900453ff3f50800000000000000
+      internalID: 6863471899248444700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_27
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ab04a9fc34e91830800000000000000
+      internalID: 4042513091079179170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_28
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504140a82e8de0c70800000000000000
+      internalID: 8939320777866744837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_29
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f4a39d52b229c80800000000000000
+      internalID: -8317538120241623220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_30
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8fae2d0449aa5c00800000000000000
+      internalID: 890209986103127947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_31
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134d530e6c77de330800000000000000
+      internalID: 3741778561463604273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_32
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fbb9b64dc9ec3860800000000000000
+      internalID: 7511135346411289585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_33
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61c655379815c1d50800000000000000
+      internalID: 6709327195662543894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_34
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c4db9d1453a6f00800000000000000
+      internalID: 1110758815042456716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_35
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 201342219921836a0800000000000000
+      internalID: -6469400416074059518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_36
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 91
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba1844e5bd72be590800000000000000
+      internalID: -7643972119398415957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_37
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 91
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9675e1f9267a7f2e0800000000000000
+      internalID: -2092019459872106647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_38
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6bcec41f786ba7b0800000000000000
+      internalID: -5211957248731985042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_39
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427d893a40e48e0a0800000000000000
+      internalID: -6852141051212671196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_40
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddd8228982c6b5db0800000000000000
+      internalID: -4802125656053608995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_41
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af2e47df8bd680000800000000000000
+      internalID: 2372441107391226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_42
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32c70b288b827790800000000000000
+      internalID: -7533805809683676611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_43
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8dbd19ff84924660800000000000000
+      internalID: 7368615286412262796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_44
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39247f1f28448da30800000000000000
+      internalID: 4240214378365272723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_45
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 110e8f7cfc4bb7380800000000000000
+      internalID: -8972379028099375087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_46
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7611bea624bfab50800000000000000
+      internalID: 6606697256608405119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_47
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3108af617dd2611a0800000000000000
+      internalID: -6839228582288785389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_48
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 819719ae70c7b9f30800000000000000
+      internalID: 4583393419221629208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_49
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12b21c60737746830800000000000000
+      internalID: 4063503842015259425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_50
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10421b801b998c0c0800000000000000
+      internalID: -4555222037451168767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_51
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dca0bf0e55f5bcac0800000000000000
+      internalID: -3833865835324437811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_52
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 063602388c76690a0800000000000000
+      internalID: -6875193670243425440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_53
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 708eee9ab59725960800000000000000
+      internalID: 7589261756672698375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_54
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59d4f8548122e7900800000000000000
+      internalID: 684021681048472981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_55
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3600f41530149cec0800000000000000
+      internalID: -3546231749072715677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_56
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7825e0c84626612d0800000000000000
+      internalID: -3308348692271050105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_57
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73d9fefe332b034d0800000000000000
+      internalID: -3156827402648183497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_58
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77813f9ee0761b9f0800000000000000
+      internalID: -454468773635483529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_59
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c163f4e714b7b4eb0800000000000000
+      internalID: -4734555062027733476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_60
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96fa20675886fbf30800000000000000
+      internalID: 4593505067361021801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_61
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2492de9624c9c30c0800000000000000
+      internalID: -4594625710765823678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_62
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 58
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8abb731ad6e808f90800000000000000
+      internalID: -6953401223152682072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_63
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 58
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9b59b1a881472730800000000000000
+      internalID: 3974217251262389146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameboy UI_64
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 18
+        width: 167
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 615b8a34b4dabe730800000000000000
+      internalID: 4029504830382322966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Gameboy UI_0: 5989882374897837023
+      Gameboy UI_1: 5026722180485181864
+      Gameboy UI_10: 3408602063611848172
+      Gameboy UI_11: 5109900085155627998
+      Gameboy UI_12: -338676950615710130
+      Gameboy UI_13: 3564706483040083827
+      Gameboy UI_14: -10595296436150060
+      Gameboy UI_15: 8735856882096203616
+      Gameboy UI_16: -2696023067325832310
+      Gameboy UI_17: 3191489318217794074
+      Gameboy UI_18: -1666995925344277933
+      Gameboy UI_19: 7583421778521899526
+      Gameboy UI_2: 1127881168214793983
+      Gameboy UI_20: 7943128861326805279
+      Gameboy UI_21: 5079195271299643503
+      Gameboy UI_22: 9141595512621282103
+      Gameboy UI_23: 4012125334678742711
+      Gameboy UI_24: 6424634314322780611
+      Gameboy UI_25: 3166196601254500256
+      Gameboy UI_26: 6863471899248444700
+      Gameboy UI_27: 4042513091079179170
+      Gameboy UI_28: 8939320777866744837
+      Gameboy UI_29: -8317538120241623220
+      Gameboy UI_3: -7552977327533239549
+      Gameboy UI_30: 890209986103127947
+      Gameboy UI_31: 3741778561463604273
+      Gameboy UI_32: 7511135346411289585
+      Gameboy UI_33: 6709327195662543894
+      Gameboy UI_34: 1110758815042456716
+      Gameboy UI_35: -6469400416074059518
+      Gameboy UI_36: -7643972119398415957
+      Gameboy UI_37: -2092019459872106647
+      Gameboy UI_38: -5211957248731985042
+      Gameboy UI_39: -6852141051212671196
+      Gameboy UI_4: -7056702467207993637
+      Gameboy UI_40: -4802125656053608995
+      Gameboy UI_41: 2372441107391226
+      Gameboy UI_42: -7533805809683676611
+      Gameboy UI_43: 7368615286412262796
+      Gameboy UI_44: 4240214378365272723
+      Gameboy UI_45: -8972379028099375087
+      Gameboy UI_46: 6606697256608405119
+      Gameboy UI_47: -6839228582288785389
+      Gameboy UI_48: 4583393419221629208
+      Gameboy UI_49: 4063503842015259425
+      Gameboy UI_5: 3365313089806084933
+      Gameboy UI_50: -4555222037451168767
+      Gameboy UI_51: -3833865835324437811
+      Gameboy UI_52: -6875193670243425440
+      Gameboy UI_53: 7589261756672698375
+      Gameboy UI_54: 684021681048472981
+      Gameboy UI_55: -3546231749072715677
+      Gameboy UI_56: -3308348692271050105
+      Gameboy UI_57: -3156827402648183497
+      Gameboy UI_58: -454468773635483529
+      Gameboy UI_59: -4734555062027733476
+      Gameboy UI_6: -2929662655281137972
+      Gameboy UI_60: 4593505067361021801
+      Gameboy UI_61: -4594625710765823678
+      Gameboy UI_62: -6953401223152682072
+      Gameboy UI_63: 3974217251262389146
+      Gameboy UI_64: 4029504830382322966
+      Gameboy UI_7: -7766993582846985943
+      Gameboy UI_8: -4462000066107024233
+      Gameboy UI_9: -6001014366406568930
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

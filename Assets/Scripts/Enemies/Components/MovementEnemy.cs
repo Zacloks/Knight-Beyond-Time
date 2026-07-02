@@ -25,8 +25,6 @@ public class MovementEnemy : MonoBehaviour
     [Tooltip("Distancia de parada si el enemigo NO tiene componente de ataque (fallback).")]
     public float attackRange = 1.5f;
     private float attackEndTime;
-    // Mientras está activo, el estado Attack se mantiene hasta que se llame a EndSustainedAttack
-    // (lo usa el cerebro del jefe para que sus ataques no se corten solos).
     private bool attackHeld;
 
     [Header("Separación (anti-amontonamiento)")]
@@ -37,16 +35,12 @@ public class MovementEnemy : MonoBehaviour
     private float immobilizeEndTime;
     public bool IsImmobilized => Time.time < immobilizeEndTime;
 
-    // El enemigo está "ocupado" y no puede iniciar otra acción ni moverse libremente.
     public bool IsBusy => currentState == EnemyState.Hurt
                        || currentState == EnemyState.Dead
                        || currentState == EnemyState.Attack;
 
     private void Awake()
     {
-        // En Awake (no Start) para que las referencias estén listas antes de que
-        // otros componentes (p. ej. el cerebro del jefe en su Start) llamen a
-        // BeginSustainedAttack y demás durante la inicialización.
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         attackEnemy = GetComponent<IEnemyAttack>();
@@ -70,8 +64,6 @@ public class MovementEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Mientras esté inmovilizado, se queda totalmente quieto (no corre la
-        // máquina de estados ni la separación). Sigue pudiendo recibir daño.
         if (IsImmobilized)
         {
             moveDirection = Vector2.zero;
