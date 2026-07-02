@@ -110,10 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9e6ca322c0ad14bb66818dd339fa94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemyRanged
-  attackDamage: 5
+  attackDamage: 8
   timeBetweenAttacks: 1.5
   attackDuration: 0.6
   attackDelay: 0.25
+  staggerAtaque: 0.25
+  tiempoPreparacionPrimerAtaque: 0.3
   projectilePrefab: {fileID: 1772346025417411695, guid: a9ab7f2d113db8740a452e2fb1a750b6, type: 3}
   shootPoint: {fileID: 0}
   shootRange: 4
@@ -181,10 +183,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementEnemy
   currentState: 0
   movementSpeedBase: 3
+  chaseSpeedMultiplier: 1.65
   knockbackDamping: 0.85
+  velocidadMaxKnockback: 4
+  knockbackMultiplicador: 0.55
   attackRange: 1.5
   separationRadius: 1.3
   separationStrength: 1.8
+  separacionAlAtacar: 0.55
+  lookAhead: 0.7
+  lookAheadRadius: 0.25
+  avoidanceStrength: 0.65
+  anguloVariacion: 8
+  intervaloElegirAngulo: 0.4
+  candidatosAngulo: 8
+  pesoContinuidad: 0.6
+  radioEscaneoSurround: 5
 --- !u!114 &7400506702065058422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +214,13 @@ MonoBehaviour:
   monedaPrefab: {fileID: 8316493981599981485, guid: 0695ce1efc56f084eb473ce6bb8e8fcc, type: 3}
   minMonedas: 2
   maxMonedas: 4
-  posiblesValores: 01000000050000000a000000
+  valoresMoneda:
+  - valor: 1
+    peso: 70
+  - valor: 5
+    peso: 25
+  - valor: 10
+    peso: 5
   dropsDeItems: []
   maxItemsPorMuerte: 1
   radioDrop: 0.6
@@ -223,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyNormal
   probabilidadCritico: 10
   multiplicadorCritico: 1.5
+  "multiplicadorDa\xF1o": 1.5
 --- !u!70 &2644967010659157609
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -224,11 +224,17 @@ MonoBehaviour:
   monedaPrefab: {fileID: 8316493981599981485, guid: 0695ce1efc56f084eb473ce6bb8e8fcc, type: 3}
   minMonedas: 2
   maxMonedas: 4
-  posiblesValores: 01000000050000000a000000
+  valoresMoneda:
+  - valor: 1
+    peso: 70
+  - valor: 5
+    peso: 25
+  - valor: 10
+    peso: 5
   dropsDeItems: []
   maxItemsPorMuerte: 1
   radioDrop: 0.6
-  maxLife: 21
+  maxLife: 25
   tiempoHastaDestruir: 1
   superArmor: 0
   knockbackForce: {x: 0, y: 0}
@@ -260,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884361fdf6689ce42855db8175ba9fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackEnemy
-  attackDamage: 10
+  attackDamage: 7
   timeBetweenAttacks: 1.5
   attackDuration: 0.6
   attackDelay: 0.2
