@@ -84,9 +84,6 @@ InitTestScene*.unity*
 /[Aa]ssets/StreamingAssets/aa*
 /[Aa]ssets/AddressableAssetsData/link.xml*
 /[Aa]ssets/Addressables_Temp*
-# By default, Addressables content builds will generate addressables_content_state.bin
-# files in platform-specific subfolders, for example:
-# /Assets/AddressableAssetsData/OSX/addressables_content_state.bin
 /[Aa]ssets/AddressableAssetsData/*/*.bin*
 
 # Visual Scripting auto-generated files
@@ -103,5 +100,34 @@ InitTestScene*.unity*
 
 #Mac
 .DS_Store
-
 UpgradeLog.htm
+
+# ---- Agregado ----
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDEs / editores (si no quieren compartir config de VSCode entre el equipo)
+.idea/
+*.csproj.user
+
+# Node (por si usan MCP servers vía npm/npx)
+node_modules/
+
+# Claude Code / MCP - configuración local que no debería subirse
+.claude/settings.local.json
+.claude/projects/
+.mcp.local.json
+
+# Variables de entorno / secretos
+.env
+.env.local
+*.pem
+*.key
+
+docs
+
+.vscode
