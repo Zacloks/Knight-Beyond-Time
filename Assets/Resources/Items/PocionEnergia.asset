@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48031b5978914f08b60358e453aa504, type: 3}
+  m_Name: PocionEnergia
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "Poci\xF3n de Energ\xEDa"
+  descripcion: "Evita el consumo de energ\xEDa durante un tiempo espec\xEDfico."
+  precio: 10
+  sprite: {fileID: -5191961301187347346, guid: c507620be0fed489386b52c4ec5ee119, type: 3}
+  prefab: {fileID: 4475153802008187025, guid: e6d59e35e514a4e7386664d553188ed1, type: 3}
+  estrategiaEfecto: {fileID: 11400000, guid: 395fb5b8d2cad4423a28997d8592c8d9, type: 2}

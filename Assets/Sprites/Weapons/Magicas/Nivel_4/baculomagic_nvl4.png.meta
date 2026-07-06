@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: 17cee5f922583824ea3010f15cf75d93
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2430470094959597431
+    second: baculomagic_nvl4_0
+  - first:
+      213: -8505548477134830197
+    second: baculomagic_nvl4_1
+  - first:
+      213: -7066043010503554431
+    second: baculomagic_nvl4_2
+  - first:
+      213: 6245056481486651482
+    second: baculomagic_nvl4_3
+  - first:
+      213: 370769954579027753
+    second: baculomagic_nvl4_4
+  - first:
+      213: -6688365069611637654
+    second: baculomagic_nvl4_5
+  - first:
+      213: -4420532471564822371
+    second: baculomagic_nvl4_6
+  - first:
+      213: 4987114203507960947
+    second: baculomagic_nvl4_7
+  - first:
+      213: -5594988548538511609
+    second: baculomagic_nvl4_8
+  - first:
+      213: -2525664199168039848
+    second: baculomagic_nvl4_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 280
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: baculomagic_nvl4_0
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 14
+        width: 80
+        height: 281
+      alignment: 9
+      pivot: {x: 0.5, y: 0.17018162}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 777d6479ca3cab120800000000000000
+      internalID: 2430470094959597431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_1
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 14
+        width: 80
+        height: 290
+      alignment: 9
+      pivot: {x: 0.49087793, y: 0.1602863}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b85838079b836f980800000000000000
+      internalID: -8505548477134830197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_2
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 286
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18acd47c15f50fd90800000000000000
+      internalID: -7066043010503554431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_3
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 282
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a50434d38c5eaa650800000000000000
+      internalID: 6245056481486651482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_4
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 15
+        width: 102
+        height: 285
+      alignment: 9
+      pivot: {x: 0.49284512, y: 0.16456875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 927121c2f4d352500800000000000000
+      internalID: 370769954579027753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_5
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 14
+        width: 123
+        height: 293
+      alignment: 9
+      pivot: {x: 0.48220056, y: 0.16127399}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64eaa9d7672e23a0800000000000000
+      internalID: -6688365069611637654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_6
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 265
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d989c4a532d17a2c0800000000000000
+      internalID: -4420532471564822371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_7
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 234
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37ca56af1f9c53540800000000000000
+      internalID: 4987114203507960947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_8
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 234
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70fcbf10f8b9a52b0800000000000000
+      internalID: -5594988548538511609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: baculomagic_nvl4_9
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 223
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 854eaaadac903fcd0800000000000000
+      internalID: -2525664199168039848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 548c80d6ad742304b89bc8222e4b7bc9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      baculomagic_nvl4_0: 2430470094959597431
+      baculomagic_nvl4_1: -8505548477134830197
+      baculomagic_nvl4_2: -7066043010503554431
+      baculomagic_nvl4_3: 6245056481486651482
+      baculomagic_nvl4_4: 370769954579027753
+      baculomagic_nvl4_5: -6688365069611637654
+      baculomagic_nvl4_6: -4420532471564822371
+      baculomagic_nvl4_7: 4987114203507960947
+      baculomagic_nvl4_8: -5594988548538511609
+      baculomagic_nvl4_9: -2525664199168039848
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

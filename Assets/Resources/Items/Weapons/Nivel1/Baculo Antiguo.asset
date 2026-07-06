@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48031b5978914f08b60358e453aa504, type: 3}
+  m_Name: Baculo Antiguo
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Baculo Antiguo
+  descripcion: 
+  precio: 20
+  sprite: {fileID: -5623299871150871834, guid: 35ac3f2858fff0843bb3839c3d1369f9, type: 3}
+  prefab: {fileID: -6190891910962593590, guid: 08f4ee357c51f1847bc9e4eb5f0a5cca, type: 3}
+  estrategiaEfecto: {fileID: 0}

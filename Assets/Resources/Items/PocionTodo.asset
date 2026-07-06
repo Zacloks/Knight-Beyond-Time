@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572eb54d1eb75405fb741897a322f2fc, type: 3}
+  m_Name: PocionTodo
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumibleData
+  itemName: "Poci\xF3n Absoluta"
+  descripcion: Genera todo los efectos beneficiosos.
+  precio: 20
+  sprite: {fileID: -3744795073344325380, guid: c9060fef2900546b3b9d59acfbcf67d5, type: 3}
+  prefab: {fileID: 4475153802008187025, guid: e6d59e35e514a4e7386664d553188ed1, type: 3}
+  estrategiaEfecto: {fileID: 11400000, guid: 57de2097ee2484ca882f9f36e3b1cf3b, type: 2}
+  triggerConsumir: 2_Attack
